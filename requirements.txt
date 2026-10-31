@@ -1,0 +1,13 @@
+# Beyond Likes Discourse Intelligence Engine
+# Core Production Dependencies
+torch>=2.2.0
+transformers>=4.38.0
+onnxruntime>=1.17.0
+onnx>=1.15.0
+numpy>=1.26.0
+requests>=2.31.0
+PyYAML>=6.0.1
+Jinja2>=3.1.3
+sentencepiece>=0.2.0
+safetensors>=0.4.2
+tokenizers>=0.15.0

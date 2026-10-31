@@ -1,0 +1,21 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Large Neural Model Weights (>100MB)
+models/*.pt
+models/*.onnx.data
+models/beyond_likes_deberta-v3-large/
+
+# Local databases and logs
+storage/*.db
+storage/*.log
+storage/social_campaign_state.json
+
+# Environment and OS
+.env
+.DS_Store
+*.swp
+*.bak
+zif*

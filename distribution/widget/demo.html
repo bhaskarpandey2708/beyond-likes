@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Beyond Likes — Universal In-Composer Widget Demo</title>
+  <style>
+    :root {
+      --bg: #0d1117;
+      --card-bg: #161b22;
+      --border: #30363d;
+      --text: #c9d1d9;
+      --text-bright: #f0f6fc;
+      --text-muted: #8b949e;
+      --accent: #58a6ff;
+      --green: #3fb950;
+      --red: #f85149;
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      margin: 0;
+      padding: 24px;
+      line-height: 1.5;
+    }
+    .header {
+      max-width: 900px;
+      margin: 0 auto 24px auto;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 16px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 20px;
+      color: var(--text-bright);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .badge-live {
+      background: rgba(63, 185, 80, 0.15);
+      border: 1px solid rgba(63, 185, 80, 0.4);
+      color: var(--green);
+      font-size: 11px;
+      padding: 2px 8px;
+      border-radius: 12px;
+      font-weight: 600;
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 340px;
+      gap: 24px;
+    }
+    .article-preview {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 20px;
+    }
+    .article-tag {
+      font-size: 11px;
+      text-transform: uppercase;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: 0.05em;
+    }
+    .article-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: var(--text-bright);
+      margin: 6px 0 10px 0;
+    }
+    .article-body {
+      font-size: 13px;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+    .comment-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+    }
+    .composer-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-bright);
+      margin-bottom: 8px;
+      display: block;
+    }
+    textarea.bl-composer {
+      width: 100%;
+      min-height: 110px;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text-bright);
+      padding: 12px;
+      font-size: 14px;
+      font-family: inherit;
+      resize: vertical;
+      transition: border-color 0.2s;
+    }
+    textarea.bl-composer:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+    .composer-actions {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+      gap: 8px;
+    }
+    .btn {
+      padding: 7px 14px;
+      border-radius: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      cursor: pointer;
+      border: 1px solid var(--border);
+      background: #21262d;
+      color: var(--text-bright);
+      transition: background 0.15s;
+    }
+    .btn:hover { background: #30363d; }
+    .btn-primary {
+      background: #238636;
+      border-color: #2ea043;
+      color: #fff;
+    }
+    .btn-primary:hover { background: #2ea043; }
+    
+    .sidebar-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 16px;
+    }
+    .sidebar-title {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-bright);
+      margin-top: 0;
+      margin-bottom: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 6px;
+    }
+    .preset-btn {
+      width: 100%;
+      text-align: left;
+      padding: 8px 10px;
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      color: var(--text);
+      font-size: 12px;
+      margin-bottom: 8px;
+      cursor: pointer;
+      transition: border-color 0.15s, background 0.15s;
+    }
+    .preset-btn:hover {
+      border-color: var(--accent);
+      background: #161b22;
+      color: var(--text-bright);
+    }
+    .preset-tag {
+      font-size: 10px;
+      padding: 1px 5px;
+      border-radius: 4px;
+      font-weight: 600;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    .tag-green { background: rgba(46,160,67,0.2); color: var(--green); }
+    .tag-red { background: rgba(248,81,73,0.2); color: var(--red); }
+    .tag-amber { background: rgba(210,153,34,0.2); color: #d29922; }
+    
+    pre {
+      background: #0d1117;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 10px;
+      font-size: 11px;
+      color: #79c0ff;
+      overflow-x: auto;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <div class="header">
+    <h1>
+      <span>⚡ Beyond Likes</span>
+      <span style="font-weight: 400; font-size: 14px; color: var(--text-muted);">| In-Composer Prosocial Widget Demo</span>
+    </h1>
+    <span class="badge-live">Live Engine &bull; Port 8888</span>
+  </div>
+
+  <div class="container">
+    <div>
+      <div class="article-preview">
+        <span class="article-tag">Tech & Energy Analysis</span>
+        <div class="article-title">The Geopolitics of Next-Gen Grid Batteries</div>
+        <div class="article-body">
+          Grid-scale storage costs have historically limited renewable energy adoption. Recent sodium-ion breakthroughs offer viable alternatives to lithium chemistries, though cycle degradation under heavy load remains an active engineering dispute.
+        </div>
+      </div>
+
+      <div class="comment-card">
+        <label class="composer-label">Leave a Perspective (Monitored by Beyond Likes)</label>
+        <textarea id="demo-textarea" class="bl-composer" placeholder="Type a comment or pick a test scenario on the right..."></textarea>
+        <div class="composer-actions">
+          <button class="btn" onclick="document.getElementById('demo-textarea').value=''; document.getElementById('demo-textarea').dispatchEvent(new Event('input'));">Clear</button>
+          <button class="btn btn-primary" onclick="alert('Comment submitted for publication with verified normative scores!');">Submit Comment</button>
+        </div>
+      </div>
+    </div>
+
+    <div>
+      <div class="sidebar-card">
+        <div class="sidebar-title">🎯 Instant Test Scenarios</div>
+        <button class="preset-btn" onclick="applyPreset('constructive')">
+          <span class="preset-tag tag-green">Empirical Evidence</span>
+          <div>According to 2026 IEEE survey data, utility storage dropped 18% in cost...</div>
+        </button>
+        <button class="preset-btn" onclick="applyPreset('toxic')">
+          <span class="preset-tag tag-red">Ad-Hominem Attack</span>
+          <div>You are an absolute clown and anyone buying this is a moron.</div>
+        </button>
+        <button class="preset-btn" onclick="applyPreset('adversarial')">
+          <span class="preset-tag tag-red">Stealth Evasion (Zero-Width)</span>
+          <div>Shut up you f&#8203;u&#8203;c&#8203;k&#8203;i&#8203;n&#8203;g moron and g&#8203;t&#8203;f&#8203;o.</div>
+        </button>
+        <button class="preset-btn" onclick="applyPreset('whatabout')">
+          <span class="preset-tag tag-amber">Whataboutism Deflection</span>
+          <div>Why aren't you talking about the corruption in the mining sector? What about that?</div>
+        </button>
+      </div>
+
+      <div class="sidebar-card">
+        <div class="sidebar-title">📦 Embed Code (Publishers)</div>
+        <p style="font-size: 11px; color: var(--text-muted); margin-top:0;">Add to any forum, WordPress, Ghost, or Substack site:</p>
+        <pre>&lt;script src="http://localhost:8888/widget/beyond-likes.js"
+        data-api="http://localhost:8888"
+        data-policy="newsroom"&gt;&lt;/script&gt;</pre>
+      </div>
+    </div>
+  </div>
+
+  <!-- Injected Universal Beyond Likes Widget -->
+  <script src="/widget/beyond-likes.js" data-api="http://localhost:8888" data-policy="newsroom"></script>
+
+  <script>
+    const PRESETS = {
+      constructive: "According to the 2026 IEEE battery benchmark, sodium-ion cathode costs declined 18.4% across pilot facilities. Furthermore, synthesizing this with modular thermal storage yields a viable grid alternative.",
+      toxic: "You are an absolute clown and anyone who believes this garbage article is a brainless idiot.",
+      adversarial: "Shut up you f\u200bu\u200bc\u200bk\u200bi\u200bn\u200bg moron and a complete c\u200bl\u200bo\u200bw\u200bn.",
+      whatabout: "Why aren't you talking about the massive human rights violations in the cobalt supply chain? What about that? Total hypocrites."
+    };
+
+    function applyPreset(key) {
+      const ta = document.getElementById("demo-textarea");
+      ta.value = PRESETS[key];
+      ta.dispatchEvent(new Event("input"));
+    }
+  </script>
+</body>
+</html>

@@ -1,0 +1,867 @@
+openapi: 3.1.0
+info:
+  title: Beyond Likes Discourse Intelligence API
+  version: 2.8.0-enterprise-edge
+  description: |
+    Production-grade prosocial discourse intelligence platform and 1:1 drop-in successor to the Google Perspective API (sunset December 31, 2026).
+    Commercialization of UC Berkeley EECS-2025-55 research on normative multidimensional feedback on digital platforms.
+  contact:
+    name: Beyond Likes Engineering Team
+    email: support@beyondlikes.io
+
+servers:
+  - url: http://localhost:8888
+    description: Local / Edge Gateway
+
+paths:
+  /v1/score:
+    post:
+      summary: Evaluate single comment
+      description: Evaluates text across 4 prosocial dimensions with sentence-level syntactic breakdowns and adversarial evasion defense.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text:
+                  type: string
+                  example: "According to 2026 data, utility solar prices declined 18% in western states."
+                context:
+                  type: string
+                  example: "Thread discussing renewable grid battery investments."
+                policy:
+                  type: string
+                  enum: [newsroom, academic, tech_community, casual_social]
+                  default: newsroom
+                backend:
+                  type: string
+                  enum: [heuristic, hybrid, neural]
+                  default: heuristic
+      responses:
+        '200':
+          description: Detailed prosocial evaluation payload
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ScoreResult'
+
+  /v1/batch-score:
+    post:
+      summary: Batch score comment corpus
+      description: Evaluates an array of comments and computes the aggregate Community Health Index.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [comments]
+              properties:
+                comments:
+                  type: array
+                  items:
+                    type: string
+                policy:
+                  type: string
+                  default: newsroom
+                backend:
+                  type: string
+                  default: heuristic
+      responses:
+        '200':
+          description: Batch summary and itemized results
+
+  /v1/rephrase:
+    post:
+      summary: Prosocial rephrase advisor
+      description: Generates constructive revisions and git-style unified diffs for unconstructive submissions.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text:
+                  type: string
+                policy:
+                  type: string
+                  default: newsroom
+      responses:
+        '200':
+          description: Rephrasing suggestions and unified diff
+
+  /v1/comments:analyze:
+    post:
+      summary: Google Perspective API Drop-in Replacement
+      description: 1:1 drop-in replacement endpoint conforming to Google Perspective v1 schema with calibrated logistic sigmoid probability.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [comment]
+              properties:
+                comment:
+                  type: object
+                  properties:
+                    text:
+                      type: string
+                requestedAttributes:
+                  type: object
+      responses:
+        '200':
+          description: Google Perspective compatible response with Beyond Likes prosocial enrichment
+
+  /v1/thread:analyze:
+    post:
+      summary: Multi-turn conversational thread & flame war analysis
+      description: Analyzes parent-child conversational trajectories, calculating Thread Escalation Index (TEI), de-escalator recognition, and automated thread routing.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [comments]
+              properties:
+                topic:
+                  type: string
+                comments:
+                  type: array
+                  items:
+                    type: object
+                    required: [id, author, text]
+                    properties:
+                      id:
+                        type: string
+                      author:
+                        type: string
+                      reply_to:
+                        type: string
+                      text:
+                        type: string
+                policy:
+                  type: string
+                backend:
+                  type: string
+      responses:
+        '200':
+          description: Thread trajectory metrics, TEI score, key actors, and action routing
+
+  /v1/proposals/generate:
+    post:
+      summary: Executive TCO / ROI business case proposal generator
+      description: Computes quantitative labor savings, payback period, and generates executive business case documents in Markdown and HTML.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                client_name:
+                  type: string
+                monthly_volume:
+                  type: integer
+                hourly_wage:
+                  type: number
+                plan:
+                  type: string
+      responses:
+        '200':
+          description: Proposal metrics and rendered Markdown/HTML documents
+
+  /v1/shadow-mirror:
+    post:
+      summary: Dual-run shadow comparison against Perspective API
+      description: Evaluates single or batch comments through both Perspective and Beyond Likes, tracking false positive rescues and stealth attack interceptions.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                text:
+                  type: string
+                comments:
+                  type: array
+                  items:
+                    type: string
+                policy:
+                  type: string
+                  default: newsroom
+                backend:
+                  type: string
+                  default: heuristic
+      responses:
+        '200':
+          description: Side-by-side comparison, discrepancy category, and latency advantage factor
+
+  /v1/shadow-mirror/stats:
+    get:
+      summary: Real-time shadow cutover readiness statistics
+      description: Returns aggregate parity %, cutover readiness %, and counts of false positives salvaged vs stealth attacks intercepted.
+      responses:
+        '200':
+          description: Cutover readiness metrics
+
+  /v1/shadow-mirror/logs:
+    get:
+      summary: Recent shadow discrepancy audit logs
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: List of recent dual-run comparison records
+
+  /v1/webhooks/subscriptions:
+    get:
+      summary: List registered outbound webhook subscriptions
+      responses:
+        '200':
+          description: List of active and inactive webhook subscriptions
+    post:
+      summary: Register outbound webhook subscription
+      description: Subscribes a target URL to HMAC-SHA256 signed moderation events (comment_quarantined, flame_war_detected, etc.)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [url]
+              properties:
+                url:
+                  type: string
+                  example: "https://my-community.com/api/moderation-events"
+                events:
+                  type: array
+                  items:
+                    type: string
+                  example: ["comment_quarantined", "flame_war_detected"]
+                secret:
+                  type: string
+                  example: "my_hmac_secret_key"
+      responses:
+        '200':
+          description: Webhook subscription registered confirmation
+    delete:
+      summary: Delete outbound webhook subscription
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Subscription deleted confirmation
+
+  /v1/webhooks/deliveries:
+    get:
+      summary: Outbound webhook delivery history logs
+      parameters:
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: List of delivery attempts, status codes, and latencies
+
+  /v1/webhooks/test:
+    post:
+      summary: Test dispatch outbound webhook probe
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [subscription_id]
+              properties:
+                subscription_id:
+                  type: string
+                event:
+                  type: string
+                  default: ping
+      responses:
+        '200':
+          description: Delivery probe verification result
+
+  /v1/compliance/dsa-report:
+    get:
+      summary: EU Digital Services Act (DSA Articles 15, 20 & 24) Transparency Report
+      description: Returns quantitative content actions, automated vs human breakdown, and Article 20 internal complaint-handling resolution times.
+      parameters:
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [json, markdown, html]
+            default: json
+      responses:
+        '200':
+          description: Statutory compliance disclosure in requested format
+
+  /v1/audit/export:
+    get:
+      summary: Export raw moderation audit logs and appeals (CSV / JSONL)
+      parameters:
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [csv, jsonl]
+            default: csv
+        - name: type
+          in: query
+          schema:
+            type: string
+            enum: [evaluations, appeals]
+            default: evaluations
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 1000
+        - name: anonymize
+          in: query
+          schema:
+            type: boolean
+            default: false
+      responses:
+        '200':
+          description: Export stream file attachment
+
+  /v1/appeals:submit:
+    post:
+      summary: Submit user moderation appeal (DSA Article 20)
+      description: Accepts user appeal reason and optional revised constructive text with automated re-scoring.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [reason]
+              properties:
+                user_id:
+                  type: string
+                reason:
+                  type: string
+                evaluation_id:
+                  type: integer
+                original_text:
+                  type: string
+                revised_text:
+                  type: string
+      responses:
+        '200':
+          description: Appeal registration with automated reversal determination
+
+  /v1/appeals:
+    get:
+      summary: List moderation appeals in review queue
+      parameters:
+        - name: status
+          in: query
+          schema:
+            type: string
+            enum: [PENDING, REVERSED_CONSTRUCTIVE, ACCEPTED_MODERATOR, REJECTED]
+        - name: limit
+          in: query
+          schema:
+            type: integer
+            default: 50
+      responses:
+        '200':
+          description: List of appeal objects
+
+  /v1/appeals:resolve:
+    post:
+      summary: Resolve moderation appeal (Moderator Action)
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [appeal_id, decision]
+              properties:
+                appeal_id:
+                  type: integer
+                decision:
+                  type: string
+                  enum: [ACCEPTED_MODERATOR, REJECTED, REVERSED_CONSTRUCTIVE]
+                moderator_notes:
+                  type: string
+      responses:
+        '200':
+          description: Determination confirmation
+
+  /v1/ensemble:analyze:
+    post:
+      summary: Dynamic latency-aware multi-tier ensemble evaluation
+      description: Routes discourse through Tier 1 (Heuristic Gate), Tier 2 (DeBERTa-v3), or Tier 3 (Frontier Normative Synthesis).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text]
+              properties:
+                text:
+                  type: string
+                context:
+                  type: string
+                policy:
+                  type: string
+                  default: newsroom
+                force_tier:
+                  type: integer
+                  enum: [1, 2, 3]
+      responses:
+        '200':
+          description: Multi-tier diagnostic routing, latency, and composite score payload
+
+  /v1/policies:
+    get:
+      summary: List all community policies
+      description: Returns active built-in and dynamic custom community policies.
+      responses:
+        '200':
+          description: Map of policy profiles
+    post:
+      summary: Register custom community policy
+      description: Creates and persists a custom weighting rubric to SQLite.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [id, name, weights, thresholds]
+              properties:
+                id:
+                  type: string
+                name:
+                  type: string
+                description:
+                  type: string
+                weights:
+                  type: object
+                thresholds:
+                  type: object
+      responses:
+        '200':
+          description: Policy registration confirmation
+    delete:
+      summary: Delete custom community policy
+      parameters:
+        - name: id
+          in: query
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Policy deleted
+
+  /v1/reports:
+    get:
+      summary: Executive discourse audit report
+      parameters:
+        - name: format
+          in: query
+          schema:
+            type: string
+            enum: [json, markdown, html]
+            default: json
+        - name: hourly_wage
+          in: query
+          schema:
+            type: number
+            default: 35.0
+      responses:
+        '200':
+          description: Report payload in requested format
+
+  /v1/stream:
+    get:
+      summary: Real-time Server-Sent Events (SSE) feed
+      description: Streams newly evaluated comments and webhook events to live moderation consoles.
+      responses:
+        '200':
+          description: Continuous text/event-stream connection
+          content:
+            text/event-stream:
+              schema:
+                type: string
+
+  /v1/tenants:
+    get:
+      summary: List all enterprise workspace tenants
+      description: Returns all registered enterprise tenants with monthly quota consumption metrics.
+      responses:
+        '200':
+          description: List of tenants
+    post:
+      summary: Provision new enterprise tenant
+      description: Provisions a workspace tenant with isolated quota metering and rate limits.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [name]
+              properties:
+                name: { type: string }
+                tier: { type: string, enum: [starter, growth, enterprise] }
+                monthly_quota: { type: integer }
+      responses:
+        '201':
+          description: Tenant provisioned
+
+  /v1/tenants/keys:
+    get:
+      summary: List tenant API keys
+      parameters:
+        - name: tenant_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Active keys for tenant
+    post:
+      summary: Generate scoped tenant API key
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tenant_id]
+              properties:
+                tenant_id: { type: string }
+                key_name: { type: string }
+                scopes: { type: array, items: { type: string } }
+      responses:
+        '201':
+          description: Key generated
+    delete:
+      summary: Revoke tenant API key
+      parameters:
+        - name: key
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Key revoked
+
+  /v1/shadow-mirror/replay:
+    post:
+      summary: Execute historical corpus replay benchmark
+      description: Replays comments against legacy Perspective scores to quantify verdict parity and false-positive rescue.
+      requestBody:
+        required: false
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                corpus: { type: array, items: { type: object } }
+                name: { type: string }
+                tenant_id: { type: string }
+      responses:
+        '200':
+          description: Empirical replay benchmark results
+
+  /v1/shadow-mirror/replay/runs:
+    get:
+      summary: List historical replay benchmark runs
+      parameters:
+        - name: limit
+          in: query
+          schema: { type: integer, default: 20 }
+      responses:
+        '200':
+          description: Previous benchmark runs
+
+  /v1/shadow-mirror/replay/sample-corpus:
+    get:
+      summary: Retrieve gold benchmark corpus
+      description: Returns 10 gold benchmark comments with subtle attacks and false-positive traps.
+      responses:
+        '200':
+          description: Gold benchmark corpus
+
+  /v1/metrics:
+    get:
+      summary: Prometheus / OpenMetrics scrape endpoint
+      description: Returns real-time metrics, histograms, and counters in OpenMetrics text format.
+      responses:
+        '200':
+          description: OpenMetrics telemetry text
+          content:
+            text/plain:
+              schema: { type: string }
+
+  /v1/cutover/certificate:
+    get:
+      summary: Generate Google Perspective sunset cutover certificate
+      description: Runs automated verification battery and generates cryptographically signed cutover readiness certificate.
+      parameters:
+        - name: org
+          in: query
+          schema: { type: string, default: "Enterprise Partner" }
+        - name: format
+          in: query
+          schema: { type: string, enum: [json, html], default: "json" }
+      responses:
+        '200':
+          description: Cutover certificate (JSON or HTML)
+
+  /v1/billing/plans:
+    get:
+      summary: Commercial subscription plans catalog
+      description: Returns commercial tiers, pricing, evaluation quotas, rate limits, overage rates, and Perspective cutover migration credits.
+      responses:
+        '200':
+          description: Commercial plans catalog
+
+  /v1/billing/checkout:
+    post:
+      summary: Create Stripe hosted checkout session
+      description: Generates a self-serve Stripe checkout session and hosted payment URL for tenant tier upgrades.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tenant_id, plan_id]
+              properties:
+                tenant_id:
+                  type: string
+                plan_id:
+                  type: string
+                  enum: [starter, growth, enterprise]
+                billing_cycle:
+                  type: string
+                  enum: [monthly, annual]
+                  default: monthly
+                customer_email:
+                  type: string
+                success_url:
+                  type: string
+                cancel_url:
+                  type: string
+      responses:
+        '200':
+          description: Hosted checkout session details
+
+  /v1/billing/webhook:
+    post:
+      summary: Stripe inbound webhook dispatcher
+      description: Receives cryptographically verified Stripe webhook events (checkout.session.completed, invoice.payment_succeeded, customer.subscription.deleted).
+      parameters:
+        - name: stripe-signature
+          in: header
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: Webhook received and processed
+
+  /v1/billing/status:
+    get:
+      summary: Real-time tenant billing and quota status
+      description: Returns consumption metrics, remaining monthly evaluation quota, rate limits, and Stripe customer associations.
+      parameters:
+        - name: tenant_id
+          in: query
+          required: true
+          schema: { type: string }
+      responses:
+        '200':
+          description: Tenant billing status and quota
+
+  /v1/billing/simulate-upgrade:
+    post:
+      summary: Sandbox instant plan upgrade simulator
+      description: Dispatches an instantaneous simulated webhook event to test subscription upgrades without live credit cards.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [tenant_id]
+              properties:
+                tenant_id:
+                  type: string
+                plan_id:
+                  type: string
+                  default: enterprise
+                email:
+                  type: string
+                  default: billing@partner.org
+      responses:
+        '200':
+          description: Upgrade simulation response
+
+  /v1/proposals/packets:
+    get:
+      summary: Target enterprise client proposal packets catalog
+      description: Returns pre-compiled and on-demand executive proposal packets for prioritized prospective cutover clients.
+      responses:
+        '200':
+          description: Catalog of proposal packets
+
+  /v1/proposals/packet:
+    get:
+      summary: Personalized executive commercial proposal packet
+      description: Generates or retrieves a high-design printable HTML packet or structured JSON with Stripe checkout link and cutover certificate.
+      parameters:
+        - name: client
+          in: query
+          required: false
+          schema: { type: string, default: 'ars-technica' }
+        - name: format
+          in: query
+          required: false
+          schema: { type: string, enum: [html, json], default: html }
+      responses:
+        '200':
+          description: High-design HTML document or structured JSON packet
+
+  /v1/outreach/pipeline:
+    get:
+      summary: Enterprise GTM outreach pipeline and conversion CRM
+      description: Returns target organizations, stage funnel counts (Identified -> Pitch Drafted -> Outreach Sent -> Call Scheduled -> Pilot Active -> Closed Won), and pipeline ARR metrics.
+      parameters:
+        - name: status
+          in: query
+          required: false
+          schema: { type: string }
+      responses:
+        '200':
+          description: GTM sales pipeline CRM metrics and target details
+
+  /v1/outreach/status:
+    post:
+      summary: Update client outreach stage, contact, and notes
+      description: Advances client stage transition in the sales CRM, records meeting notes, contact info, and timestamps.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [slug]
+              properties:
+                slug:
+                  type: string
+                status:
+                  type: string
+                  enum: [IDENTIFIED, PITCH_DRAFTED, OUTREACH_SENT, CALL_SCHEDULED, PILOT_ACTIVE, CLOSED_WON, ON_HOLD]
+                notes:
+                  type: string
+                contact_name:
+                  type: string
+                contact_email:
+                  type: string
+                last_contact_date:
+                  type: string
+      responses:
+        '200':
+          description: Successfully updated target record
+        '400':
+          description: Missing required field slug
+        '404':
+          description: Client target not found
+
+  /v1/downloads:
+    get:
+      summary: Integration distributions and client packages catalog
+      description: Lists available production integration bundles (Chrome Extension, WordPress Plugin, Discourse Plugin, Embeddable Widget) with file sizes and install guides.
+      responses:
+        '200':
+          description: Package catalog list
+
+  /v1/downloads/{pkg_id}:
+    get:
+      summary: Download integration distribution zip bundle
+      description: Streams binary .zip archive for the specified integration package.
+      parameters:
+        - name: pkg_id
+          in: path
+          required: true
+          schema:
+            type: string
+            enum: [chrome-extension, wordpress-plugin, discourse-plugin, widget]
+      responses:
+        '200':
+          description: Binary zip file stream
+          content:
+            application/zip:
+              schema:
+                type: string
+                format: binary
+        '404':
+          description: Package not found
+
+  /v1/health:
+    get:
+      summary: Service health check
+      responses:
+        '200':
+          description: Health and registered endpoints
+
+components:
+  schemas:
+    ScoreResult:
+      type: object
+      properties:
+        composite_score:
+          type: number
+        status:
+          type: string
+        summary:
+          type: string
+        backend:
+          type: string
+        dimensions:
+          type: object
+          properties:
+            constructiveness:
+              type: number
+            civility:
+              type: number
+            persuasiveness:
+              type: number
+            relevance:
+              type: number
+        substance_breakdown:
+          type: object
+        metrics:
+          type: object
+        flags:
+          type: object

@@ -1,0 +1,20 @@
+# Render.com Blueprint Infrastructure-as-Code for Beyond Likes
+# Deploy in 1-click via Render Dashboard or Render CLI (`render blueprints launch`)
+
+services:
+  - type: web
+    name: beyond-likes-platform
+    runtime: python
+    region: oregon
+    plan: free
+    buildCommand: "pip install -r requirements.txt"
+    startCommand: "python3 api/server.py"
+    healthCheckPath: /v1/analytics/trends
+    autoDeploy: true
+    envVars:
+      - key: BEYOND_LIKES_HOST
+        value: "0.0.0.0"
+      - key: PYTHONUNBUFFERED
+        value: "1"
+      - key: ENVIRONMENT
+        value: "production"
