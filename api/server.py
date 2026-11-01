@@ -314,6 +314,40 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
                 self._send_json(404, {"error": "Horizontal logo file not found"})
                 return
 
+        # 1j. Serve Empirical Benchmark Report & Technical Whitepaper
+        elif path in ["/benchmarks", "/benchmarks/", "/whitepaper", "/whitepaper/", "/whitepaper.html"]:
+            paper_file = os.path.join(BASE_DIR, "benchmarks", "whitepaper.html")
+            if os.path.exists(paper_file):
+                with open(paper_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            else:
+                self._send_json(404, {"error": "Benchmark whitepaper not found"})
+                return
+
+        # 1k. Serve Raw Empirical Benchmark Results (JSON)
+        elif path in ["/v1/benchmarks/results", "/benchmarks/results.json"]:
+            json_file = os.path.join(BASE_DIR, "benchmarks", "benchmark_results.json")
+            if os.path.exists(json_file):
+                with open(json_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            else:
+                self._send_json(404, {"error": "Benchmark results JSON not found"})
+                return
+
         # 2. Health check
         elif path == "/v1/health":
             self._send_json(200, {

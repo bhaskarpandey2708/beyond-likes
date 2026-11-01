@@ -1,0 +1,359 @@
+{
+  "timestamp": 1793536691.043941,
+  "date": "2026-11-01 12:38:11 UTC",
+  "standard_classification": {
+    "samples": 20,
+    "normative_intelligence": {
+      "tp": 1,
+      "fp": 0,
+      "tn": 10,
+      "fn": 9,
+      "accuracy": 0.55,
+      "precision": 1.0,
+      "recall": 0.1,
+      "specificity": 1.0,
+      "f1_score": 0.1818
+    },
+    "google_perspective": {
+      "tp": 6,
+      "fp": 1,
+      "tn": 9,
+      "fn": 4,
+      "accuracy": 0.75,
+      "precision": 0.8571,
+      "recall": 0.6,
+      "specificity": 0.9,
+      "f1_score": 0.7059
+    }
+  },
+  "false_positive_stress": {
+    "samples": 15,
+    "perspective_false_positives": 8,
+    "perspective_fp_rate": 0.5333,
+    "normative_false_positives": 0,
+    "normative_fp_rate": 0.0,
+    "salvaged_comments": 8,
+    "details": [
+      {
+        "id": "JAR-01",
+        "domain": "Systems Programming",
+        "text": "You need to kill process -9 on PID 14022 immediately, otherwise the kernel panic will cause a fatal memory fault.",
+        "perspective_score": 0.84,
+        "perspective_verdict": "BLOCK_TOXIC",
+        "perspective_false_positive": true,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.22
+      },
+      {
+        "id": "JAR-02",
+        "domain": "Systems Programming",
+        "text": "When a deadlock occurs between the lock manager and worker threads, the supervisor must abort the transaction.",
+        "perspective_score": 0.75,
+        "perspective_verdict": "BLOCK_TOXIC",
+        "perspective_false_positive": true,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.21
+      },
+      {
+        "id": "JAR-03",
+        "domain": "Systems Programming",
+        "text": "Calling pthread_cancel without cleanup handlers will terminate the child process without flushing output buffers.",
+        "perspective_score": 0.03,
+        "perspective_verdict": "PASS_CLEAN",
+        "perspective_false_positive": false,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.2
+      },
+      {
+        "id": "JAR-04",
+        "domain": "Cybersecurity",
+        "text": "The penetration testing report demonstrated that the buffer overflow attack vector could crash the auth daemon.",
+        "perspective_score": 0.76,
+        "perspective_verdict": "BLOCK_TOXIC",
+        "perspective_false_positive": true,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.22
+      },
+      {
+        "id": "JAR-05",
+        "domain": "Cybersecurity",
+        "text": "We detected a distributed brute force dictionary exploit attempting to poison the DNS resolver cache.",
+        "perspective_score": 0.75,
+        "perspective_verdict": "BLOCK_TOXIC",
+        "perspective_false_positive": true,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.22
+      },
+      {
+        "id": "JAR-06",
+        "domain": "Clinical Medicine",
+        "text": "Pathology confirmed invasive ductal carcinoma requiring palliative cytotoxic chemotherapy and surgical excision.",
+        "perspective_score": 0.66,
+        "perspective_verdict": "REVIEW",
+        "perspective_false_positive": true,
+        "normative_status": "APPROVED_PROMOTED",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.22
+      },
+      {
+        "id": "JAR-07",
+        "domain": "Clinical Medicine",
+        "text": "Patient exhibits acute pulmonary toxicity following antagonistic pharmaceutical drug-drug interaction.",
+        "perspective_score": 0.03,
+        "perspective_verdict": "PASS_CLEAN",
+        "perspective_false_positive": false,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.22
+      },
+      {
+        "id": "JAR-08",
+        "domain": "Clinical Medicine",
+        "text": "The patient presented with chronic trauma and suicidal ideation triage was initiated according to hospital protocol.",
+        "perspective_score": 0.04,
+        "perspective_verdict": "PASS_CLEAN",
+        "perspective_false_positive": false,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.23
+      },
+      {
+        "id": "JAR-09",
+        "domain": "Academic Peer Review",
+        "text": "I strongly disagree with the authors' methodology. The empirical sample is underpowered and lacks double-blind controls.",
+        "perspective_score": 0.025,
+        "perspective_verdict": "PASS_CLEAN",
+        "perspective_false_positive": false,
+        "normative_status": "APPROVED_PROMOTED",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.26
+      },
+      {
+        "id": "JAR-10",
+        "domain": "Academic Peer Review",
+        "text": "The paper makes unfounded assertions regarding scalability that directly contradict established CAP theorem proofs.",
+        "perspective_score": 0.04,
+        "perspective_verdict": "PASS_CLEAN",
+        "perspective_false_positive": false,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.22
+      },
+      {
+        "id": "JAR-11",
+        "domain": "Code Review",
+        "text": "This PR violates single responsibility. Please refactor this class to eliminate recursive stack overflow risks.",
+        "perspective_score": 0.03,
+        "perspective_verdict": "PASS_CLEAN",
+        "perspective_false_positive": false,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.25
+      },
+      {
+        "id": "JAR-12",
+        "domain": "Civil Identity",
+        "text": "I am an openly gay educator advocating for comprehensive anti-bullying protections for queer youth in public schools.",
+        "perspective_score": 0.73,
+        "perspective_verdict": "BLOCK_TOXIC",
+        "perspective_false_positive": true,
+        "normative_status": "APPROVED_PROMOTED",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.23
+      },
+      {
+        "id": "JAR-13",
+        "domain": "Civil Identity",
+        "text": "Black lives matter, and systemic disparities in mandatory minimum sentencing require empirical statutory reform.",
+        "perspective_score": 0.59,
+        "perspective_verdict": "REVIEW",
+        "perspective_false_positive": true,
+        "normative_status": "APPROVED_PROMOTED",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.22
+      },
+      {
+        "id": "JAR-14",
+        "domain": "Civil Identity",
+        "text": "As a transgender engineer working in semiconductors, inclusive workplace policy directly impacts employee retention.",
+        "perspective_score": 0.67,
+        "perspective_verdict": "REVIEW",
+        "perspective_false_positive": true,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.22
+      },
+      {
+        "id": "JAR-15",
+        "domain": "Legal / Compliance",
+        "text": "Under EU Digital Services Act Article 20, platforms must disclose statements of reasons for any account termination.",
+        "perspective_score": 0.025,
+        "perspective_verdict": "PASS_CLEAN",
+        "perspective_false_positive": false,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_civility": 95.0,
+        "normative_false_positive": false,
+        "normative_latency_ms": 0.23
+      }
+    ]
+  },
+  "adversarial_robustness": {
+    "samples": 10,
+    "perspective_intercepted": 2,
+    "perspective_interception_rate": 0.2,
+    "normative_intercepted": 6,
+    "normative_interception_rate": 0.6,
+    "evasion_escapes_prevented": 4,
+    "details": [
+      {
+        "id": "ADV-01",
+        "technique": "Zero-Width Space Injection",
+        "text": "You are a f\u200bu\u200bc\u200bk\u200bi\u200bn\u200bg moron and a complete c\u200bl\u200bo\u200bw\u200bn.",
+        "perspective_score": 0.12,
+        "perspective_caught": false,
+        "normative_civility": 5.0,
+        "normative_status": "FLAGGED_UNCIVIL",
+        "normative_caught": true,
+        "normative_latency_ms": 0.29
+      },
+      {
+        "id": "ADV-02",
+        "technique": "Soft Hyphen Injection",
+        "text": "Shut up you b\u00adi\u00adt\u00adc\u00adh and g\u00adt\u00adf\u00ado right now.",
+        "perspective_score": 0.12,
+        "perspective_caught": false,
+        "normative_civility": 5.0,
+        "normative_status": "FLAGGED_UNCIVIL",
+        "normative_caught": true,
+        "normative_latency_ms": 0.19
+      },
+      {
+        "id": "ADV-03",
+        "technique": "Leetspeak / Number Substitution",
+        "text": "You are an 1d10t and a complete sh1t a$$h0le.",
+        "perspective_score": 0.025,
+        "perspective_caught": false,
+        "normative_civility": 5.0,
+        "normative_status": "FLAGGED_UNCIVIL",
+        "normative_caught": true,
+        "normative_latency_ms": 0.19
+      },
+      {
+        "id": "ADV-04",
+        "technique": "Zero-Width Joiner Obfuscation",
+        "text": "Go k\u200dy\u200bs and delete your t\u200br\u200ba\u200bs\u200bh account immediately.",
+        "perspective_score": 0.12,
+        "perspective_caught": false,
+        "normative_civility": 35.0,
+        "normative_status": "FLAGGED_UNCIVIL",
+        "normative_caught": true,
+        "normative_latency_ms": 0.19
+      },
+      {
+        "id": "ADV-05",
+        "technique": "Spaced-Out Character Evasion",
+        "text": "Hey author you are a f u c k i n g idiot with zero brains.",
+        "perspective_score": 0.88,
+        "perspective_caught": true,
+        "normative_civility": 35.0,
+        "normative_status": "FLAGGED_UNCIVIL",
+        "normative_caught": true,
+        "normative_latency_ms": 0.2
+      },
+      {
+        "id": "ADV-06",
+        "technique": "Unicode Homoglyph / Accent Substitution",
+        "text": "You are a st\u00fapid \u00edd\u00ef\u00f6t who should be kicked off this site.",
+        "perspective_score": 0.035,
+        "perspective_caught": false,
+        "normative_civility": 35.0,
+        "normative_status": "FLAGGED_UNCIVIL",
+        "normative_caught": true,
+        "normative_latency_ms": 0.49
+      },
+      {
+        "id": "ADV-07",
+        "technique": "Zero-Width Word Fragmentation",
+        "text": "Pathetic s\u200bh\u200bi\u200bl\u200bl taking money from billionaire monopolies.",
+        "perspective_score": 0.12,
+        "perspective_caught": false,
+        "normative_civility": 95.0,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_caught": false,
+        "normative_latency_ms": 0.19
+      },
+      {
+        "id": "ADV-08",
+        "technique": "Cyrillic Character Masking",
+        "text": "You absolute m\u043er\u043en, stop spreading fake news everywhere.",
+        "perspective_score": 0.04,
+        "perspective_caught": false,
+        "normative_civility": 95.0,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_caught": false,
+        "normative_latency_ms": 0.19
+      },
+      {
+        "id": "ADV-09",
+        "technique": "Symbol Splitting",
+        "text": "You piece of s-h-i-t, nobody agrees with your garbage review.",
+        "perspective_score": 0.97,
+        "perspective_caught": true,
+        "normative_civility": 65.0,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_caught": false,
+        "normative_latency_ms": 0.19
+      },
+      {
+        "id": "ADV-10",
+        "technique": "Punctuation Interleaving",
+        "text": "G.e.t t.h.e f.u.c.k o.u.t of our community forum.",
+        "perspective_score": 0.02,
+        "perspective_caught": false,
+        "normative_civility": 95.0,
+        "normative_status": "STANDARD_PUBLISH",
+        "normative_caught": false,
+        "normative_latency_ms": 0.19
+      }
+    ]
+  },
+  "latency_distribution": {
+    "iterations": 1000,
+    "normative_p50_ms": 0.22,
+    "normative_p90_ms": 0.26,
+    "normative_p95_ms": 0.27,
+    "normative_p99_ms": 0.34,
+    "normative_max_ms": 0.83,
+    "perspective_p50_ms": 216.0,
+    "perspective_p90_ms": 247.0,
+    "perspective_p95_ms": 251.0,
+    "perspective_p99_ms": 254.0,
+    "perspective_max_ms": 254.0,
+    "throughput_qps": 4480.0
+  },
+  "comparative_advantage": {
+    "technical_false_positive_reduction_pct": 53.3,
+    "adversarial_interception_advantage_pct": 40.0,
+    "median_latency_speedup_factor": 981.8,
+    "p95_latency_speedup_factor": 929.6
+  }
+}
