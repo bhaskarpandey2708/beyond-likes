@@ -77,7 +77,7 @@ When a user writes a heated or low-effort reply, the engine suggests a Git-style
 3️⃣ 100% Bitwise Drop-in Compatibility:
 We designed this so no engineering team has to rewrite their comment ingestion pipeline:
 • Old: POST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze
-• New: POST https://api.beyondlikes.io/v1/comments:analyze
+• New: POST https://beyond-likes-platform.onrender.com/v1/comments:analyze
 All downstream parsers reading attributeScores.TOXICITY continue working with zero code modifications.
 
 4️⃣ Open Distribution & Ecosystem:
@@ -110,7 +110,7 @@ If your team is currently preparing for the Perspective API sunset, or if you ca
             "🚨 Google Perspective API will be permanently shut down on December 31, 2026.\n\nHundreds of newsrooms, forums, and platforms will lose their toxicity filtering layer.\n\nToday, we are launching Beyond Likes: an open 1:1 drop-in replacement backed by UC Berkeley research. 🧵👇 (1/8)",
             "Legacy toxicity filters have two massive flaws:\n\n1. Punitive: they ban or delete comments AFTER damage is done.\n2. False positives: they routinely flag benign technical talk ('kill process', 'fatal panic') or clinical terms.\n\nOnline discourse deserves better. (2/8)",
             "Based on UC Berkeley EECS-2025-55, Beyond Likes introduces in-composer prosocial intelligence.\n\nScores 4 dimensions:\n📊 Constructiveness\n🤝 Civility\n🧠 Persuasiveness\n🎯 Relevance\n\nShows Git-style diff suggestions to help users substantiate their points. (3/8)",
-            "Migration requires ONE line of config:\n\nBefore (Google):\nPOST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze\n\nAfter (Beyond Likes):\nPOST https://api.beyondlikes.io/v1/comments:analyze\n\nIdentical schema. Identical attributeScores JSON. Zero client rewrites. (4/8)",
+            "Migration requires ONE line of config:\n\nBefore (Google):\nPOST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze\n\nAfter (Beyond Likes):\nPOST https://beyond-likes-platform.onrender.com/v1/comments:analyze\n\nIdentical schema & attributeScores. Zero rewrites. (4/8)",
             "⚡ Engineering Specs:\n• 435M DeBERTa-v3 large neural model\n• INT8 quantized ONNX engine running on CPU in <2ms\n• Robust against zero-width spaces, leetspeak & homoglyphs\n• Multilingual Indic / Hinglish code-mixed dialect support\n• 118 / 118 tests passing (100% pass rate) (5/8)",
             "We built the full 1-click distribution suite:\n🧩 Chrome Extension (MV3 in-composer floating assistant)\n📝 WordPress Plugin (wp_insert_comment hook)\n💬 Discourse Plugin (PostCreator triage)\n🌐 Universal Embed Widget (<script> tag)\n\nAll packaged as 1-click downloads. (6/8)",
             "Built for enterprise publishing:\n🛡 EU Digital Services Act (DSA Art 20) automated appeals\n📈 Dual-run Shadow Mirror (test vs Perspective with 0% risk)\n💳 Self-serve Stripe billing with $100 Sunset Credit\n📜 Verifiable SHA-256 Cutover Certificates (7/8)",
@@ -123,10 +123,10 @@ If your team is currently preparing for the Perspective API sunset, or if you ca
         "category": "Show HN",
         "audience": "Hacker News Community, Technical Founders, Senior Engineers",
         "title": "Show HN: Beyond Likes – 1:1 Prosocial Drop-In Replacement for Google Perspective API",
-        "demo_url": "https://beyondlikes.io",
+        "demo_url": "https://beyond-likes-platform.onrender.com",
         "url": "https://news.ycombinator.com/submit",
         "default_status": "READY",
-        "body": """Hi HN! We’re Ayush and Bhaskar. We built Beyond Likes (https://github.com/beyond-likes/beyond-likes), an open, 100% bitwise drop-in replacement for the Google Perspective API, which is permanently shutting down on December 31, 2026.
+        "body": """Hi HN! We’re Ayush and Bhaskar. We built Beyond Likes (https://github.com/bhaskarpandey2708/beyond-likes), an open, 100% bitwise drop-in replacement for the Google Perspective API, which is permanently shutting down on December 31, 2026.
 
 ### The Problem
 For 8 years, Google Perspective has been the de facto toxicity classifier for online publishers, forums, and comment sections. But on Dec 31, that API goes dark. More fundamentally, traditional toxicity filters suffer from two massive problems:
@@ -145,7 +145,7 @@ Instead of silently censoring, our in-composer assistant generates Git-style dif
 ### 100% Bitwise Drop-in Compatibility
 We designed the API so that zero engineering teams have to rewrite their comment ingestion pipeline:
 Old: POST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze
-New: POST https://api.beyondlikes.io/v1/comments:analyze
+New: POST https://beyond-likes-platform.onrender.com/v1/comments:analyze
 
 The JSON request and response (attributeScores.TOXICITY.summaryScore.value) are bitwise compatible.
 
@@ -189,7 +189,7 @@ We modeled this as a multi-task continuous regression problem across 4 normative
 - 10/10 Edge Cases Passing: Zero false positives on clinical oncology, distributed microgrids, or peer-review language that trips legacy Perspective.
 - Multilingual Support: Evaluates romanized Indic and Hinglish code-mixed dialects without degradation.
 
-Full open-source repo, ONNX export pipeline, and benchmark harness: https://github.com/beyond-likes/beyond-likes
+Full open-source repo, ONNX export pipeline, and benchmark harness: https://github.com/bhaskarpandey2708/beyond-likes
 Paper: arXiv:2505.09583 / UCB/EECS-2025-55"""
     },
     {
@@ -211,7 +211,7 @@ Key engineering decisions:
 3. Sub-2ms CPU Execution: 435M parameter DeBERTa backbone quantized to INT8 ONNX, allowing publishers to run locally without expensive GPU clusters.
 4. Pre-Compiled Integrations: Manifest V3 Chrome Extension, WordPress wp_insert_comment hook plugin, and Discourse Ruby plugin.
 
-Code, Docker images, and benchmarks: https://github.com/beyond-likes/beyond-likes"""
+Code, Docker images, and benchmarks: https://github.com/bhaskarpandey2708/beyond-likes"""
     },
     {
         "id": "reddit_webdev",
@@ -229,7 +229,7 @@ With Google Perspective API shutting down this December, comment sections are ab
 1. Zero-dependency Vanilla JS Embed:
 ```html
 <script src="https://cdn.beyondlikes.io/v1/widget.js" 
-        data-api-endpoint="https://api.beyondlikes.io/v1" 
+        data-api-endpoint="https://beyond-likes-platform.onrender.com/v1" 
         data-theme="dark" 
         data-selector="textarea.comment-box"></script>
 ```
@@ -238,7 +238,7 @@ Attaches an accessible floating badge, scores constructiveness in real time, and
 2. Chrome Extension (Manifest V3): Works out of the box across YouTube, Reddit, Hacker News, and Substack comment fields.
 3. Open plugins for WordPress and Discourse.
 
-Feedback on the UX and bundle footprint is very welcome! Live demo & source: https://github.com/beyond-likes/beyond-likes"""
+Feedback on the UX and bundle footprint is very welcome! Live demo & source: https://github.com/bhaskarpandey2708/beyond-likes"""
     },
     {
         "id": "reddit_selfhosted",
@@ -265,7 +265,7 @@ docker run -d -p 8888:8888 \
 - Full 1:1 Perspective JSON endpoint compatibility
 - 0 telemetry or external cloud pings
 
-Check it out on GitHub: https://github.com/beyond-likes/beyond-likes"""
+Check it out on GitHub: https://github.com/bhaskarpandey2708/beyond-likes"""
     },
     {
         "id": "product_hunt",
@@ -309,7 +309,7 @@ Would you be interested in an early look or brief briefing on what the sunset of
 Best regards,
 Ayush Pandey & Bhaskar Pandey
 Beyond Likes Commercial Engineering Team
-https://api.beyondlikes.io"""
+https://beyond-likes-platform.onrender.com"""
     }
 ]
 
