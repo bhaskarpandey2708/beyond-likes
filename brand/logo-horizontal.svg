@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 48" width="320" height="48" fill="none">
+  <!-- Icon Mark -->
+  <rect width="48" height="48" rx="10" fill="#0F172A"/>
+  <path d="M14 34V14L22 28V34H14Z" fill="#1D4ED8"/>
+  <path d="M34 14V34L26 20V14H34Z" fill="#3B82F6"/>
+  <circle cx="24" cy="24" r="3" fill="#60A5FA"/>
+  <circle cx="14" cy="14" r="2.5" fill="#93C5FD"/>
+  <circle cx="34" cy="34" r="2.5" fill="#93C5FD"/>
+
+  <!-- Wordmark -->
+  <text x="62" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#0F172A" letter-spacing="-0.03em">Normative<tspan fill="#1D4ED8">.</tspan>AI</text>
+  <text x="62" y="39" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="9.5" font-weight="600" fill="#64748B" letter-spacing="0.06em" text-transform="uppercase">Discourse Intelligence &bull; UC Berkeley</text>
+</svg>

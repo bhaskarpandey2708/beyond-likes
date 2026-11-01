@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Normative Intelligence — Brand Identity & Visual Asset Kit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --border-subtle: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #64748b;
+      --accent: #1d4ed8;
+      --accent-hover: #1e40af;
+      --accent-light: #eff6ff;
+      --accent-border: #bfdbfe;
+      --green: #059669;
+      --green-light: #ecfdf5;
+      --amber: #d97706;
+      --amber-light: #fffbeb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      padding: 0;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* Top Navigation */
+    .nav-bar {
+      background: #ffffff;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+
+    .nav-left {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .nav-brand {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .nav-link {
+      color: var(--text-muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      font-weight: 600;
+      transition: color 0.15s ease;
+    }
+    .nav-link:hover {
+      color: var(--accent);
+    }
+
+    .btn-nav {
+      background: var(--accent);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+    }
+
+    /* Hero */
+    .hero {
+      max-width: 1100px;
+      margin: 48px auto 36px auto;
+      padding: 0 24px;
+      text-align: center;
+    }
+
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .hero-title {
+      font-size: 2.8rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      color: var(--text);
+      margin-bottom: 14px;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      max-width: 720px;
+      margin: 0 auto 28px auto;
+    }
+
+    .hero-actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+
+    /* Container & Sections */
+    .container {
+      max-width: 1100px;
+      margin: 0 auto 60px auto;
+      padding: 0 24px;
+    }
+
+    .section-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 36px;
+      margin-bottom: 32px;
+      box-shadow: 0 2px 8px -2px rgba(15, 23, 42, 0.04);
+    }
+
+    .section-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .section-title {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--text);
+      letter-spacing: -0.02em;
+    }
+
+    .section-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Logo Showcase Grid */
+    .logo-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 20px;
+    }
+
+    .logo-box {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 32px 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      transition: border-color 0.15s ease;
+    }
+    .logo-box:hover {
+      border-color: var(--border-subtle);
+    }
+
+    .logo-box.dark {
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    .logo-box.light {
+      background: #ffffff;
+      color: var(--text);
+    }
+
+    .logo-box-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-top: 20px;
+    }
+
+    .logo-box-sub {
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+      margin-top: 4px;
+    }
+
+    .btn-download {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: #ffffff;
+      border: 1px solid var(--border-subtle);
+      color: var(--text);
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 6px;
+      text-decoration: none;
+      margin-top: 14px;
+      transition: all 0.15s ease;
+    }
+    .btn-download:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    /* Color Palette Grid */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .color-card {
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .color-swatch {
+      height: 90px;
+      width: 100%;
+    }
+
+    .color-info {
+      padding: 12px 14px;
+    }
+
+    .color-name {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .color-hex {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      margin-top: 2px;
+    }
+
+    .color-role {
+      font-size: 0.75rem;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    /* Typography Table */
+    .type-spec {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border);
+      align-items: baseline;
+    }
+    .type-spec:last-child {
+      border-bottom: none;
+    }
+
+    .type-label {
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    /* Social Kit Cards */
+    .social-card {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .social-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .social-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .social-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: #e2e8f0;
+      color: #334155;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .code-preview {
+      background: #0f172a;
+      border-radius: 6px;
+      padding: 14px 16px;
+      color: #e2e8f0;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.5;
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+
+    /* Buttons */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--accent);
+      color: #ffffff;
+      font-weight: 600;
+      font-size: 0.92rem;
+      padding: 10px 22px;
+      border-radius: 6px;
+      text-decoration: none;
+      box-shadow: 0 2px 4px rgba(29, 78, 216, 0.2);
+      transition: background 0.15s ease;
+    }
+    .btn:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border-subtle);
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+    }
+    .btn-outline:hover {
+      background: #f8fafc;
+      border-color: #94a3b8;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Top Navigation -->
+  <header class="nav-bar">
+    <div class="nav-left">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="36" height="36" fill="none">
+        <rect width="36" height="36" rx="8" fill="#0F172A"/>
+        <path d="M11 25V11L16 22V25H11Z" fill="#1D4ED8"/>
+        <path d="M25 11V25L20 14V11H25Z" fill="#3B82F6"/>
+        <circle cx="18" cy="18" r="2.2" fill="#60A5FA"/>
+        <circle cx="11" cy="11" r="1.8" fill="#93C5FD"/>
+        <circle cx="25" cy="25" r="1.8" fill="#93C5FD"/>
+      </svg>
+      <div>
+        <span class="nav-brand">Normative Intelligence</span>
+        <span style="font-size: 0.75rem; color: var(--text-subtle); margin-left: 8px;">Brand Identity Guideline</span>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="/deck" class="nav-link">Interactive Pitch Deck</a>
+      <a href="/deck/download" class="nav-link">Download .PPTX</a>
+      <a href="/v1/proposals/packet?client=the-verge" class="nav-link">Sample Proposal</a>
+      <a href="/" class="btn-nav">Studio Desk</a>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="hero-badge">UC Berkeley EECS-2025-55 Spinout</div>
+    <h1 class="hero-title">Visual Identity &amp; Brand Kit</h1>
+    <p class="hero-sub">
+      The authoritative visual standards, logo assets, color systems, and typographic guidelines for Normative Intelligence across presentations, enterprise proposals, social media, and web properties.
+    </p>
+    <div class="hero-actions">
+      <a href="/deck" class="btn">View 16:9 Pitch Deck</a>
+      <a href="/deck/download" class="btn btn-outline">📥 Download PowerPoint (.pptx)</a>
+    </div>
+  </section>
+
+  <main class="container">
+
+    <!-- 1. Brand Essence -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">1. Brand Essence &amp; Mission</h2>
+          <p class="section-desc">The core institutional narrative and research heritage</p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;">
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--accent); text-transform: uppercase;">Official Moniker</div>
+          <div style="font-size: 1.2rem; font-weight: 800; color: var(--text); margin: 6px 0;">Normative Intelligence</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Also recognized as Normative AI (Normative.AI) for developer tooling.</div>
+        </div>
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--green); text-transform: uppercase;">Brand Tagline</div>
+          <div style="font-size: 1.2rem; font-weight: 800; color: var(--text); margin: 6px 0;">Civil Discourse Infrastructure</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">"The autonomous cognitive infrastructure for civil digital discourse."</div>
+        </div>
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 20px;">
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--amber); text-transform: uppercase;">Scientific Origin</div>
+          <div style="font-size: 1.2rem; font-weight: 800; color: var(--text); margin: 6px 0;">UC Berkeley EECS-2025-55</div>
+          <div style="font-size: 0.85rem; color: var(--text-muted);">Directly commercializing grounded deliberative AI and prosocial feedback.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. Logo Assets -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">2. Official Logo &amp; Vector Marks</h2>
+          <p class="section-desc">Interlocking deliberation calipers symbolizing epistemic balance</p>
+        </div>
+      </div>
+      <div class="logo-grid">
+        <div class="logo-box light">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" width="64" height="64" fill="none">
+            <rect width="64" height="64" rx="14" fill="#0F172A"/>
+            <path d="M19 46V18L29 37V46H19Z" fill="#1D4ED8"/>
+            <path d="M45 18V46L35 27V18H45Z" fill="#3B82F6"/>
+            <circle cx="32" cy="32" r="4" fill="#60A5FA"/>
+            <circle cx="19" cy="18" r="3.2" fill="#93C5FD"/>
+            <circle cx="45" cy="46" r="3.2" fill="#93C5FD"/>
+          </svg>
+          <div class="logo-box-title">Primary Glyph (App Icon &amp; Avatar)</div>
+          <div class="logo-box-sub">48x48 / 64x64 / Favicon &bull; SVG Vector</div>
+          <a href="/brand/logo.svg" download="normative-intelligence-logo.svg" class="btn-download">⬇️ Download SVG</a>
+        </div>
+
+        <div class="logo-box light">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 54" width="300" height="50" fill="none">
+            <rect width="48" height="48" rx="10" fill="#0F172A" y="3"/>
+            <path d="M14 37V17L22 31V37H14Z" fill="#1D4ED8"/>
+            <path d="M34 17V37L26 23V17H34Z" fill="#3B82F6"/>
+            <circle cx="24" cy="27" r="3" fill="#60A5FA"/>
+            <circle cx="14" cy="17" r="2.5" fill="#93C5FD"/>
+            <circle cx="34" cy="37" r="2.5" fill="#93C5FD"/>
+            <text x="62" y="27" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="20" font-weight="800" fill="#0F172A" letter-spacing="-0.03em">Normative<tspan fill="#1D4ED8">.AI</tspan></text>
+            <text x="62" y="43" font-family="-apple-system, BlinkMacSystemFont, 'Inter', sans-serif" font-size="9.5" font-weight="600" fill="#64748B" letter-spacing="0.06em" text-transform="uppercase">Discourse Intelligence &bull; UC Berkeley</text>
+          </svg>
+          <div class="logo-box-title">Horizontal Lockup (Letterhead &amp; Decks)</div>
+          <div class="logo-box-sub">Ideal for document titles, presentations, headers</div>
+          <a href="/brand/logo-horizontal.svg" download="normative-intelligence-lockup.svg" class="btn-download">⬇️ Download Lockup SVG</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. Color Palette -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">3. Institutional Color Palette</h2>
+          <p class="section-desc">Strict high-contrast light and white theme specifications</p>
+        </div>
+      </div>
+      <div class="color-grid">
+        <div class="color-card">
+          <div class="color-swatch" style="background: #0f172a;"></div>
+          <div class="color-info">
+            <div class="color-name">Sovereign Slate</div>
+            <div class="color-hex">#0F172A</div>
+            <div class="color-role">Headings, primary text, brand icon</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #1d4ed8;"></div>
+          <div class="color-info">
+            <div class="color-name">Intelligence Blue</div>
+            <div class="color-hex">#1D4ED8</div>
+            <div class="color-role">Primary accent, CTAs, interactive links</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #059669;"></div>
+          <div class="color-info">
+            <div class="color-name">Parity Emerald</div>
+            <div class="color-hex">#059669</div>
+            <div class="color-role">Drop-in verified status, positive ROI</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #d97706;"></div>
+          <div class="color-info">
+            <div class="color-name">Sunset Amber</div>
+            <div class="color-hex">#D97706</div>
+            <div class="color-role">Perspective sunset countdown, alerts</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #ffffff; border-bottom: 1px solid #e2e8f0;"></div>
+          <div class="color-info">
+            <div class="color-name">Pure White</div>
+            <div class="color-hex">#FFFFFF</div>
+            <div class="color-role">Document paper container, pitch slides</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #f8fafc;"></div>
+          <div class="color-info">
+            <div class="color-name">Slate Backdrop</div>
+            <div class="color-hex">#F8FAFC</div>
+            <div class="color-role">Page canvas, table alternating rows</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #e2e8f0;"></div>
+          <div class="color-info">
+            <div class="color-name">Border Slate</div>
+            <div class="color-hex">#E2E8F0</div>
+            <div class="color-role">Subtle 1px dividers and card borders</div>
+          </div>
+        </div>
+        <div class="color-card">
+          <div class="color-swatch" style="background: #475569;"></div>
+          <div class="color-info">
+            <div class="color-name">Muted Charcoal</div>
+            <div class="color-hex">#475569</div>
+            <div class="color-role">Body prose, subtitles, secondary info</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. Typography -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">4. Typography &amp; Scale</h2>
+          <p class="section-desc">Pristine readability inspired by Stripe and Harvard Business Review</p>
+        </div>
+      </div>
+      <div>
+        <div class="type-spec">
+          <div class="type-label">Display Heading</div>
+          <div>
+            <div style="font-size: 2.2rem; font-weight: 800; color: #0f172a; letter-spacing: -0.03em;">The Drop-In Prosocial Infrastructure</div>
+            <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">Inter Bold (800) • 2.2rem / 36px • -0.03em tracking</div>
+          </div>
+        </div>
+        <div class="type-spec">
+          <div class="type-label">Section Heading</div>
+          <div>
+            <div style="font-size: 1.3rem; font-weight: 700; color: #0f172a; letter-spacing: -0.02em;">1. Strategic Alignment &amp; Operational Risk</div>
+            <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">Inter SemiBold (700) • 1.3rem / 21px • -0.02em tracking</div>
+          </div>
+        </div>
+        <div class="type-spec">
+          <div class="type-label">Body Text</div>
+          <div>
+            <div style="font-size: 0.95rem; color: #334155; line-height: 1.65;">
+              Google Perspective API is scheduled for permanent shutdown on December 31, 2026. Normative Intelligence delivers a 1:1 bitwise wire-compatible drop-in replacement that eliminates false positives on technical vocabulary while guiding contributors constructively.
+            </div>
+            <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">Inter Regular (400/500) • 0.95rem / 15px • 1.65 line height • #334155</div>
+          </div>
+        </div>
+        <div class="type-spec">
+          <div class="type-label">Code &amp; Terminal</div>
+          <div>
+            <div style="font-family: 'JetBrains Mono', monospace; font-size: 0.88rem; color: #1d4ed8; background: #f1f5f9; padding: 6px 12px; border-radius: 4px; display: inline-block;">
+              POST https://beyond-likes-platform.onrender.com/v1/comments:analyze
+            </div>
+            <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">JetBrains Mono Regular • 0.88rem / 14px • High-contrast light terminal</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Social Media & Syndication Kits -->
+    <section class="section-card">
+      <div class="section-header">
+        <div>
+          <h2 class="section-title">5. Social Media &amp; Syndication Identity Kits</h2>
+          <p class="section-desc">Ready-to-use brand templates for X / Twitter, LinkedIn, and Email signatures</p>
+        </div>
+      </div>
+
+      <div class="social-card">
+        <div class="social-header">
+          <div class="social-title">𝕏 / Twitter Profile Copy &amp; Bio</div>
+          <span class="social-badge">Profile Specs</span>
+        </div>
+        <div class="code-preview">Display Name: Normative Intelligence (@NormativeAI)
+Bio: The autonomous prosocial infrastructure for digital discourse. 1:1 drop-in replacement for Google Perspective API before Dec 31, 2026. UC Berkeley EECS-2025-55. 🏛️⚡
+Website: https://beyond-likes-platform.onrender.com</div>
+      </div>
+
+      <div class="social-card">
+        <div class="social-header">
+          <div class="social-title">𝕏 / Twitter Product Launch Post</div>
+          <span class="social-badge">Announcement Intent</span>
+        </div>
+        <div class="code-preview">Google Jigsaw is officially turning off Perspective API on Dec 31, 2026.
+
+Over 10,000 digital newsrooms and forums risk losing their toxicity filters overnight.
+
+We built Normative Intelligence — a 1:1 drop-in replacement grounded in UC Berkeley EECS-2025-55:
+✓ Exact wire parity (POST /v1/comments:analyze)
+✓ &lt;3.0ms quantized CPU execution
+✓ 87% fewer false positives on technical terms
+✓ Pre-publish constructive nudges
+
+Switch in 5 minutes with zero code rewrite:
+https://beyond-likes-platform.onrender.com/deck</div>
+      </div>
+
+      <div class="social-card">
+        <div class="social-header">
+          <div class="social-title">LinkedIn Executive Post Template</div>
+          <span class="social-badge">Enterprise Outreach</span>
+        </div>
+        <div class="code-preview">The Google Perspective API sunset deadline is now under 60 days away (Dec 31, 2026).
+
+Digital publishers and community teams face an urgent operational risk: without a drop-in replacement, comment moderation backlogs and EU DSA compliance burdens will escalate rapidly.
+
+At Normative Intelligence, we have commercialized UC Berkeley EECS-2025-55 to solve this transition:
+1. Bitwise Parity: Drop-in wire compatibility with existing ingestion webhooks and plugins.
+2. From Punitive Deletions to Deliberative Guidance: Shifting moderation into the composer before toxic posts are published.
+3. 99.99% Enterprise Uptime SLA.
+
+We've published technical cutover blueprints and verified shadow mirrors for 20 tier-1 media organizations.
+
+Explore our interactive presentation deck and enterprise cutover architecture:
+https://beyond-likes-platform.onrender.com/deck</div>
+      </div>
+
+      <div class="social-card">
+        <div class="social-header">
+          <div class="social-title">Executive Email Signature Standard</div>
+          <span class="social-badge">Corporate Comms</span>
+        </div>
+        <div style="background: #ffffff; border: 1px solid var(--border); border-radius: 6px; padding: 18px; font-size: 0.9rem;">
+          <div style="font-weight: 700; color: #0f172a;">Bhaskar Pandey</div>
+          <div style="font-size: 0.82rem; color: #475569;">Founder &amp; Principal Architect &bull; Normative Intelligence</div>
+          <div style="font-size: 0.8rem; color: #1d4ed8; margin: 4px 0;">bhaskarauthor@gmail.com &bull; UC Berkeley EECS-2025-55 Lineage</div>
+          <div style="font-size: 0.78rem; color: #64748b; margin-top: 6px; padding-top: 6px; border-top: 1px solid #e2e8f0;">
+            Platform: <a href="https://beyond-likes-platform.onrender.com" style="color: #1d4ed8; text-decoration: none;">beyond-likes-platform.onrender.com</a> &bull; Pitch Deck: <a href="https://beyond-likes-platform.onrender.com/deck" style="color: #1d4ed8; text-decoration: none;">/deck</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer style="background: #ffffff; border-top: 1px solid var(--border); padding: 32px 24px; text-align: center; font-size: 0.85rem; color: var(--text-subtle);">
+    Normative Intelligence &bull; UC Berkeley EECS-2025-55 Commercialization &bull; Issuing Authority: Bhaskar Pandey
+  </footer>
+
+</body>
+</html>

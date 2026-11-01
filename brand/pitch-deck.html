@@ -1,0 +1,861 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Normative Intelligence — Enterprise Startup Pitch Deck</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #f1f5f9;
+      --slide-bg: #ffffff;
+      --text: #0f172a;
+      --text-muted: #475569;
+      --text-subtle: #64748b;
+      --border: #e2e8f0;
+      --accent: #1d4ed8;
+      --accent-light: #eff6ff;
+      --accent-hover: #1e40af;
+      --green: #059669;
+      --green-light: #f0fdf4;
+      --amber: #d97706;
+      --amber-light: #fffbeb;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+    }
+
+    /* Deck Controls Header */
+    .controls-header {
+      width: 100%;
+      max-width: 1100px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .brand-tag {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .brand-icon {
+      width: 28px;
+      height: 28px;
+      background: var(--text);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      font-size: 0.85rem;
+      font-weight: 800;
+    }
+
+    .deck-nav-btns {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .btn {
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: all 0.15s ease;
+      box-shadow: 0 1px 2px rgba(0,0,0,0.04);
+    }
+
+    .btn:hover {
+      background: #f8fafc;
+      border-color: #cbd5e1;
+    }
+
+    .btn-primary {
+      background: var(--text);
+      color: #ffffff;
+      border-color: var(--text);
+    }
+
+    .btn-primary:hover {
+      background: #1e293b;
+    }
+
+    .slide-counter {
+      font-size: 0.88rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      min-width: 90px;
+      text-align: center;
+    }
+
+    /* Slide Frame (16:9 Aspect Ratio) */
+    .deck-stage {
+      width: 100%;
+      max-width: 1100px;
+      background: var(--slide-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
+      aspect-ratio: 16 / 9;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .slide {
+      display: none;
+      width: 100%;
+      height: 100%;
+      padding: 56px 64px;
+      flex-direction: column;
+      justify-content: space-between;
+      animation: fadeIn 0.2s ease-in-out;
+    }
+
+    .slide.active {
+      display: flex;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(4px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Slide Elements */
+    .slide-top-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-subtle);
+    }
+
+    .slide-badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+    }
+
+    .badge-blue { background: var(--accent-light); color: var(--accent); border: 1px solid #bfdbfe; }
+    .badge-amber { background: var(--amber-light); color: var(--amber); border: 1px solid #fde68a; }
+    .badge-green { background: var(--green-light); color: var(--green); border: 1px solid #bbf7d0; }
+
+    .slide-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      margin: 20px 0;
+    }
+
+    .slide-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .slide-subtitle {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.5;
+      max-width: 820px;
+      margin-bottom: 24px;
+    }
+
+    .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+    .grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; }
+
+    .card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 22px;
+    }
+
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .card-desc {
+      font-size: 0.86rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .metric-num {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text);
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    .metric-lbl {
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-subtle);
+    }
+
+    table.deck-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+    }
+
+    table.deck-table th, table.deck-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      text-align: left;
+    }
+
+    table.deck-table th {
+      background: #f8fafc;
+      color: var(--text-muted);
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 0.72rem;
+      letter-spacing: 0.05em;
+    }
+
+    code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: var(--text);
+    }
+
+    pre {
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 14px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      color: var(--text);
+      overflow-x: auto;
+      line-height: 1.45;
+    }
+
+    .slide-footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-top: 1px solid #f1f5f9;
+      padding-top: 12px;
+      font-size: 0.74rem;
+      color: var(--text-subtle);
+      font-weight: 500;
+    }
+
+    /* Print Styles (One 16:9 Slide Per Page) */
+    @media print {
+      body { background: #fff !important; padding: 0 !important; }
+      .controls-header, .no-print { display: none !important; }
+      .deck-stage {
+        max-width: 100% !important;
+        border: none !important;
+        box-shadow: none !important;
+        border-radius: 0 !important;
+      }
+      .slide {
+        display: flex !important;
+        page-break-after: always;
+        height: 100vh !important;
+        padding: 40px !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Controls Header -->
+  <div class="controls-header no-print">
+    <div class="brand-tag">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" fill="none">
+        <rect width="32" height="32" rx="7" fill="#0F172A"/>
+        <path d="M10 22V10L14 20V22H10Z" fill="#1D4ED8"/>
+        <path d="M22 10V22L18 12V10H22Z" fill="#3B82F6"/>
+        <circle cx="16" cy="16" r="2" fill="#60A5FA"/>
+      </svg>
+      <span>Normative Intelligence</span>
+      <span style="font-weight: 500; color: var(--text-subtle); font-size: 0.85rem;">• 16:9 Master Pitch Deck</span>
+    </div>
+    <div class="deck-nav-btns">
+      <button class="btn" onclick="prevSlide()" title="Previous slide (Left Arrow)">← Prev</button>
+      <span class="slide-counter" id="slideCounter">Slide 1 of 12</span>
+      <button class="btn" onclick="nextSlide()" title="Next slide (Right Arrow)">Next →</button>
+      <a class="btn" href="/deck/download" download="Normative_Intelligence_Pitch_Deck.pptx" title="Download PowerPoint .pptx presentation">📥 Download .PPTX</a>
+      <button class="btn btn-primary" onclick="window.print()" title="Export complete deck to PDF">🖨️ Export PDF</button>
+    </div>
+  </div>
+
+  <!-- Deck Stage -->
+  <div class="deck-stage" id="deckStage">
+
+    <!-- SLIDE 1: Title & Academic Pedigree -->
+    <div class="slide active">
+      <div class="slide-top-meta">
+        <span>UC Berkeley EECS-2025-55 Spinout</span>
+        <span class="slide-badge badge-blue">Enterprise Infrastructure</span>
+      </div>
+      <div class="slide-body" style="text-align: center; max-width: 820px; margin: 0 auto;">
+        <div style="display: inline-flex; align-items: center; gap: 8px; margin-bottom: 20px;">
+          <div class="brand-icon" style="width: 38px; height: 38px; font-size: 1.1rem;">N</div>
+          <span style="font-size: 1.6rem; font-weight: 800; letter-spacing: -0.03em;">Normative<span style="color: var(--accent);">.AI</span></span>
+        </div>
+        <h1 class="slide-title" style="font-size: 2.7rem;">The Drop-In Prosocial Infrastructure for Digital Discourse</h1>
+        <p class="slide-subtitle" style="margin: 0 auto 30px auto;">
+          The 1:1 bitwise successor to Google Perspective API. Moving digital journalism and enterprise forums from binary censorship to normative epistemic intelligence.
+        </p>
+        <div style="font-size: 0.85rem; color: var(--text-subtle);">
+          Presented by: <strong>Bhaskar Pandey</strong> &bull; Executive Contact: <code>bhaskarauthor@gmail.com</code>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Normative Intelligence &bull; Confidential Board &amp; Investor Deck</span>
+        <span>Perspective Sunset: Dec 31, 2026</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 2: The Catalyst (Perspective Sunset) -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>Market Urgency</span>
+        <span class="slide-badge badge-amber">Hard Sunset: Dec 31, 2026</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Google Is Turning Off the Perspective API in 60 Days</h2>
+        <p class="slide-subtitle">
+          On December 31, 2026, Google Jigsaw will decommission Perspective API. Over 1,000+ digital publishers, newsrooms, and online communities face an immediate operational cliff.
+        </p>
+        <div class="grid-3">
+          <div class="card" style="border-left: 4px solid var(--amber);">
+            <div class="metric-num" style="color: var(--amber);">60 Days</div>
+            <div class="metric-lbl">Remaining Until Outage</div>
+            <p class="card-desc" style="margin-top: 10px;">
+              Publishers that fail to cut over will see automated moderation fail, swamping editorial desks with unreviewed queues.
+            </p>
+          </div>
+          <div class="card" style="border-left: 4px solid var(--accent);">
+            <div class="metric-num" style="color: var(--accent);">Zero Refactor</div>
+            <div class="metric-lbl">Engineering Requirement</div>
+            <p class="card-desc" style="margin-top: 10px;">
+              Newsrooms lack 6 months to rebuild pipelines. They require an immediate, bitwise drop-in replacement that takes 5 minutes.
+            </p>
+          </div>
+          <div class="card" style="border-left: 4px solid var(--green);">
+            <div class="metric-num" style="color: var(--green);">100% Ready</div>
+            <div class="metric-lbl">Normative Drop-in Gateway</div>
+            <p class="card-desc" style="margin-top: 10px;">
+              Normative Intelligence consumes exact Perspective JSON schemas and responds with identical fields.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>The Market Catalyst &bull; Perspective API Deprecation</span>
+        <span>Slide 2 / 12</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 3: The Deeper Crisis (Binary Toxicity Failure) -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>Structural Failure of Legacy Tools</span>
+        <span class="slide-badge badge-blue">The Core Problem</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Keyword &amp; Toxicity Filters Broke Online Discourse</h2>
+        <p class="slide-subtitle">
+          Legacy classifiers (2017–2025) measured only one negative dimension: crude toxicity. This created four critical points of failure across digital publishers:
+        </p>
+        <div class="grid-4">
+          <div class="card">
+            <div class="card-title">1. False Positive Bans</div>
+            <p class="card-desc">Bans benign technical syntax (<code>kill -9</code>, <code>fatal error</code>) and medical discussions, alienating high-IQ subscribers.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">2. Low-Effort Snark</div>
+            <p class="card-desc">Permits passive-aggressive, zero-value cynicism as long as no explicit slurs are used, destroying discussion signal.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">3. Censorship Backlash</div>
+            <p class="card-desc">Silent deletions anger paying subscribers. Readers feel treated like children rather than intellectual peers.</p>
+          </div>
+          <div class="card">
+            <div class="card-title">4. Moderator Queue Burnout</div>
+            <p class="card-desc">Publishers spend hundreds of thousands in human moderator hours manually resolving false flags and escalated appeals.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>The Problem &bull; Why Legacy Toxicity Classifiers Failed</span>
+        <span>Slide 3 / 12</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 4: The Solution (4D Normative Intelligence) -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>UC Berkeley EECS Foundation</span>
+        <span class="slide-badge badge-green">The Solution</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Normative 4D Intelligence: Prosocial Governance</h2>
+        <p class="slide-subtitle">
+          Instead of binary censorship, we evaluate discourse across four normative dimensions grounded in UC Berkeley communication science:
+        </p>
+        <div class="grid-4">
+          <div class="card" style="border-top: 4px solid #1d4ed8;">
+            <div style="font-size: 1.25rem; font-weight: 800; color: #1d4ed8; margin-bottom: 4px;">Constructiveness</div>
+            <div style="font-weight: 600; font-size: 0.76rem; color: #64748b; margin-bottom: 8px;">35% WEIGHT</div>
+            <p class="card-desc">Does the comment substantiate claims with evidence, benchmarks, or actionable solutions?</p>
+          </div>
+          <div class="card" style="border-top: 4px solid #059669;">
+            <div style="font-size: 1.25rem; font-weight: 800; color: #059669; margin-bottom: 4px;">Civility</div>
+            <div style="font-weight: 600; font-size: 0.76rem; color: #64748b; margin-bottom: 8px;">25% WEIGHT</div>
+            <p class="card-desc">Evaluates tone, respect, and mutual intellectual tolerance without choking intense technical debate.</p>
+          </div>
+          <div class="card" style="border-top: 4px solid #7c3aed;">
+            <div style="font-size: 1.25rem; font-weight: 800; color: #7c3aed; margin-bottom: 4px;">Persuasiveness</div>
+            <div style="font-weight: 600; font-size: 0.76rem; color: #64748b; margin-bottom: 8px;">20% WEIGHT</div>
+            <p class="card-desc">Epistemic grounding, logical consistency, and coherence rather than emotive hyperbole.</p>
+          </div>
+          <div class="card" style="border-top: 4px solid #ea580c;">
+            <div style="font-size: 1.25rem; font-weight: 800; color: #ea580c; margin-bottom: 4px;">Relevance</div>
+            <div style="font-weight: 600; font-size: 0.76rem; color: #64748b; margin-bottom: 8px;">20% WEIGHT</div>
+            <p class="card-desc">Topical alignment to article context, filtering out spam, off-topic derails, and promotional links.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>The Solution &bull; 4D Normative Evaluation Rubric</span>
+        <span>Slide 4 / 12</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 5: Technical Parity & Cutover Architecture -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>Architecture &amp; Parity</span>
+        <span class="slide-badge badge-blue">1:1 Drop-in Ready</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Zero-Code Engineering Cutover: 5 Minutes</h2>
+        <div class="grid-2">
+          <div>
+            <p class="card-desc" style="font-size: 0.95rem; margin-bottom: 16px;">
+              Publishers switch one endpoint URL. Existing ingestion webhooks, background queues, and administrative tools keep running with 100% bitwise parity.
+            </p>
+            <div class="card" style="margin-bottom: 12px; background: #f8fafc;">
+              <div style="font-size: 0.78rem; font-weight: 700; color: #64748b; margin-bottom: 6px;">BEFORE: Google Perspective (Deprecating Dec 31, 2026)</div>
+              <code style="font-size: 0.78rem; color: #b91c1c;">POST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze</code>
+            </div>
+            <div class="card" style="background: #f0fdf4; border-color: #bbf7d0;">
+              <div style="font-size: 0.78rem; font-weight: 700; color: #15803D; margin-bottom: 6px;">AFTER: Normative Intelligence (Drop-in Gateway)</div>
+              <code style="font-size: 0.78rem; color: #15803D;">POST https://beyond-likes-platform.onrender.com/v1/comments:analyze</code>
+            </div>
+          </div>
+          <div>
+            <div class="card" style="height: 100%;">
+              <div class="card-title">Engineering SLA Guarantee</div>
+              <ul style="list-style: none; font-size: 0.88rem; color: var(--text-muted); line-height: 2;">
+                <li>⚡ <strong>&lt; 3.0 ms Latency:</strong> Local quantized CPU engine (vs 195ms WAN).</li>
+                <li>🔒 <strong>100% Schema Parity:</strong> Returns identical <code>attributeScores.TOXICITY</code>.</li>
+                <li>🛡️ <strong>Anti-Evasion:</strong> Intercepts leetspeak, zero-width, and stealth slurs.</li>
+                <li>⚖️ <strong>DSA Art. 20 Ready:</strong> Built-in algorithmic transparency portal.</li>
+                <li>🟢 <strong>99.99% Uptime:</strong> Enterprise SLA backing with financial credits.</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Technical Architecture &bull; 100% Bitwise Perspective Wire Parity</span>
+        <span>Slide 5 / 12</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 6: Product Suite (In-Composer Nudge & Appeals) -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>Full Ecosystem</span>
+        <span class="slide-badge badge-blue">Complete Enterprise Suite</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Beyond Filtering: The Prosocial Triad</h2>
+        <div class="grid-3">
+          <div class="card">
+            <div class="metric-num" style="color: var(--accent); font-size: 1.8rem;">In-Composer</div>
+            <div class="metric-lbl">Pre-submission Nudges</div>
+            <p class="card-desc" style="margin-top: 10px;">
+              Git-style inline diff suggestions guide commenters to substantiate heated claims before submitting, reducing moderator queues by ~35%.
+            </p>
+          </div>
+          <div class="card">
+            <div class="metric-num" style="color: var(--green); font-size: 1.8rem;">Shadow Mirror</div>
+            <div class="metric-lbl">Dual-Run Parallel Mode</div>
+            <p class="card-desc" style="margin-top: 10px;">
+              Run side-by-side with Perspective on live production traffic with zero DNS risk to verify parity before formal cutover.
+            </p>
+          </div>
+          <div class="card">
+            <div class="metric-num" style="color: #7c3aed; font-size: 1.8rem;">DSA Portal</div>
+            <div class="metric-lbl">Statutory Article 20 Appeals</div>
+            <p class="card-desc" style="margin-top: 10px;">
+              Automated Statement-of-Reasons generation and internal complaint management satisfying European Union Digital Services Act mandates.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Product Suite &bull; Real-time Nudges, Parity Mirror &amp; Compliance</span>
+        <span>Slide 6 / 12</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 7: Commercial Traction & Sales Funnel -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>GTM Pipeline Traction</span>
+        <span class="slide-badge badge-green">$109.5k Active Pipeline ARR</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">20 Tier-1 Publishing &amp; Community Targets</h2>
+        <div class="grid-4" style="margin-bottom: 20px;">
+          <div class="card">
+            <div class="metric-num" style="color: var(--green);">1</div>
+            <div class="metric-lbl">Closed Won</div>
+            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">Ars Technica ($5,988/yr)</p>
+          </div>
+          <div class="card">
+            <div class="metric-num" style="color: var(--accent);">1</div>
+            <div class="metric-lbl">Contract Review</div>
+            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">The Verge ($17,988/yr)</p>
+          </div>
+          <div class="card">
+            <div class="metric-num" style="color: #7c3aed;">2</div>
+            <div class="metric-lbl">Pilots Active</div>
+            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">Dev.to &amp; Substack</p>
+          </div>
+          <div class="card">
+            <div class="metric-num" style="color: var(--text);">2</div>
+            <div class="metric-lbl">Calls Scheduled</div>
+            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">Linus Tech Tips &amp; Discourse</p>
+          </div>
+        </div>
+        <p class="card-desc" style="text-align: center; font-size: 0.9rem;">
+          Additional 14 accounts in outreach: Stack Overflow, The Atlantic, Medium, 9to5Mac, Kaggle, Hashnode, The Guardian, IGN, Politico, Hacker News.
+        </p>
+      </div>
+      <div class="slide-footer">
+        <span>GTM Commercial Traction &bull; 20 Enterprise Publishing Targets</span>
+        <span>Slide 7 / 12</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 8: Business Model & Pricing Tiers -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>Business Model</span>
+        <span class="slide-badge badge-blue">Predictable B2B SaaS</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Subscription Economics &amp; Tiered Pricing</h2>
+        <div class="grid-3">
+          <div class="card">
+            <div class="card-title">Starter</div>
+            <div class="metric-num" style="font-size: 2rem;">$99<span style="font-size: 0.9rem; color: var(--text-subtle);">/mo</span></div>
+            <div class="metric-lbl">Boutique &amp; Creator Blogs</div>
+            <ul style="list-style: none; font-size: 0.82rem; color: var(--text-muted); margin-top: 14px; line-height: 1.8;">
+              <li>&bull; Up to 50k comments/month</li>
+              <li>&bull; Perspective Drop-in Gateway</li>
+              <li>&bull; WordPress Plugin Included</li>
+              <li>&bull; Community Support</li>
+            </ul>
+          </div>
+          <div class="card" style="border: 2px solid var(--accent); background: #fafcff;">
+            <div class="card-title" style="color: var(--accent);">Growth (Most Popular)</div>
+            <div class="metric-num" style="font-size: 2rem; color: var(--accent);">$499<span style="font-size: 0.9rem; color: var(--text-subtle);">/mo</span></div>
+            <div class="metric-lbl">Mid-Market Newsrooms</div>
+            <ul style="list-style: none; font-size: 0.82rem; color: var(--text-muted); margin-top: 14px; line-height: 1.8;">
+              <li>&bull; Up to 250k comments/month</li>
+              <li>&bull; 1:1 Perspective Drop-in SLA</li>
+              <li>&bull; In-Composer Nudge Widget</li>
+              <li>&bull; Dual-Run Shadow Mirror</li>
+              <li>&bull; Standard 99.9% Uptime SLA</li>
+            </ul>
+          </div>
+          <div class="card">
+            <div class="card-title">Enterprise</div>
+            <div class="metric-num" style="font-size: 2rem;">$1,499<span style="font-size: 0.9rem; color: var(--text-subtle);">/mo</span></div>
+            <div class="metric-lbl">Tier-1 Publishing Networks</div>
+            <ul style="list-style: none; font-size: 0.82rem; color: var(--text-muted); margin-top: 14px; line-height: 1.8;">
+              <li>&bull; Unlimited Volume / Custom Quotas</li>
+              <li>&bull; Sub-3.0ms Latency SLA Guarantee</li>
+              <li>&bull; 99.99% Uptime Contract (MSA)</li>
+              <li>&bull; Dedicated Cutover Engineers</li>
+              <li>&bull; Full EU DSA Article 20 Portal</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Business Model &bull; Predictable Annual Recurring SaaS</span>
+        <span>Slide 8 / 12</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 9: Gross Margin & Infrastructure Economics -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>Unit Economics</span>
+        <span class="slide-badge badge-green">94% Gross Margin</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Quantized CPU Engine vs. Cloud LLM Inflation</h2>
+        <div class="grid-2">
+          <div class="card">
+            <div class="card-title">The Cloud LLM Margin Trap</div>
+            <p class="card-desc" style="margin-bottom: 12px;">
+              Competitors routing every comment to OpenAI/Anthropic pay ~$0.005 per evaluation, blowing up latency (>800ms) and destroying margins.
+            </p>
+            <div class="metric-num" style="color: #b91c1c; font-size: 1.8rem;">$500 per 100k</div>
+            <div class="metric-lbl">LLM Cloud Inference Cost</div>
+          </div>
+          <div class="card" style="border: 2px solid var(--green); background: #f0fdf4;">
+            <div class="card-title" style="color: var(--green);">Normative Local Quantization</div>
+            <p class="card-desc" style="margin-bottom: 12px;">
+              Our quantized DeBERTa + heuristic gate runs locally on commodity CPU cores with zero external GPU API fees.
+            </p>
+            <div class="metric-num" style="color: var(--green); font-size: 1.8rem;">&lt; $0.05 per 100k</div>
+            <div class="metric-lbl">Normative Infrastructure Cost (94%+ Margin)</div>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Unit Economics &bull; Scalable High-Margin Infrastructure</span>
+        <span>Slide 9 / 12</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 10: Competitive Differentiation Matrix -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>Competitive Landscape</span>
+        <span class="slide-badge badge-blue">Unmatched Position</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">How Normative Intelligence Compares</h2>
+        <table class="deck-table">
+          <thead>
+            <tr>
+              <th>Evaluation Dimension</th>
+              <th>Google Perspective</th>
+              <th>OpenAI Moderation</th>
+              <th>Hive / Automod</th>
+              <th style="color: var(--accent);">Normative AI</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Status Post-2026</strong></td>
+              <td style="color: #b91c1c;">Dead (Dec 31, 2026)</td>
+              <td>Active</td>
+              <td>Active</td>
+              <td style="color: var(--accent); font-weight: 700;">Drop-in Successor</td>
+            </tr>
+            <tr>
+              <td><strong>Wire Compatibility</strong></td>
+              <td>Original Schema</td>
+              <td>New Schema Needed</td>
+              <td>New Schema Needed</td>
+              <td style="color: var(--accent); font-weight: 700;">100% Bitwise Parity</td>
+            </tr>
+            <tr>
+              <td><strong>Latency</strong></td>
+              <td>195 ms (WAN)</td>
+              <td>400–900 ms</td>
+              <td>150–300 ms</td>
+              <td style="color: var(--accent); font-weight: 700;">&lt; 3.0 ms CPU</td>
+            </tr>
+            <tr>
+              <td><strong>Intervention Mode</strong></td>
+              <td>Post-publish Delete</td>
+              <td>Post-publish Flag</td>
+              <td>Keyword Deletion</td>
+              <td style="color: var(--accent); font-weight: 700;">Pre-submission Nudges</td>
+            </tr>
+            <tr>
+              <td><strong>EU DSA Compliance</strong></td>
+              <td>None</td>
+              <td>None</td>
+              <td>None</td>
+              <td style="color: var(--accent); font-weight: 700;">Full Article 20 Portal</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="slide-footer">
+        <span>Competitive Landscape &bull; Direct Differentiation</span>
+        <span>Slide 10 / 12</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 11: Academic Research Pedigree -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>Research Foundation</span>
+        <span class="slide-badge badge-blue">UC Berkeley EECS</span>
+      </div>
+      <div class="slide-body">
+        <h2 class="slide-title">Rooted in UC Berkeley EECS-2025-55</h2>
+        <p class="slide-subtitle">
+          Commercialized from breakthrough research on normative multidimensional feedback systems on digital platforms:
+        </p>
+        <div class="grid-3">
+          <div class="card">
+            <div class="metric-num" style="font-size: 2rem; color: var(--accent);">+17.6%</div>
+            <div class="metric-lbl">Constructive Engagement Lift</div>
+            <p class="card-desc" style="margin-top: 8px;">Dual constructive feedback yields a 17.6% increase in empirical evidence sharing.</p>
+          </div>
+          <div class="card">
+            <div class="metric-num" style="font-size: 2rem; color: var(--green);">-34.8%</div>
+            <div class="metric-lbl">Ad Hominem Derailment</div>
+            <p class="card-desc" style="margin-top: 8px;">In-composer nudges de-escalate emotional hostility prior to thread propagation.</p>
+          </div>
+          <div class="card">
+            <div class="metric-num" style="font-size: 2rem; color: #7c3aed;">100%</div>
+            <div class="metric-lbl">Open Standard Compliance</div>
+            <p class="card-desc" style="margin-top: 8px;">OpenAPI 3.0.3, W3C ActivityPub, and European Commission DSA compliance.</p>
+          </div>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Research Pedigree &bull; UC Berkeley EECS-2025-55 Commercialization</span>
+        <span>Slide 11 / 12</span>
+      </div>
+    </div>
+
+    <!-- SLIDE 12: Executive Cutover Invitation & Call to Action -->
+    <div class="slide">
+      <div class="slide-top-meta">
+        <span>Next Steps</span>
+        <span class="slide-badge badge-green">Activate 30-Day Sandbox</span>
+      </div>
+      <div class="slide-body" style="text-align: center; max-width: 800px; margin: 0 auto;">
+        <h2 class="slide-title" style="font-size: 2.4rem;">Secure Your Perspective EOL Cutover Today</h2>
+        <p class="slide-subtitle" style="margin: 0 auto 24px auto;">
+          Do not wait for Google's December 31, 2026 sunset. Activate a zero-risk 30-day dual-run shadow mirror on your live traffic with zero DNS impact.
+        </p>
+        <div style="background: #f8fafc; border: 1px solid var(--border); border-radius: 8px; padding: 24px; margin-bottom: 24px;">
+          <div style="font-weight: 700; font-size: 1.1rem; color: var(--text); margin-bottom: 6px;">
+            Executive Technical Briefing &amp; Sandbox Setup
+          </div>
+          <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+            15-minute architecture briefing with dedicated onboarding engineers.
+          </p>
+          <a class="btn btn-primary" href="mailto:bhaskarauthor@gmail.com?subject=Executive%20Briefing%3A%20Normative%20Perspective%20Cutover&body=Hi%20Bhaskar%2C%0A%0AWe%20would%20like%20to%20schedule%20a%2015-minute%20technical%20briefing%20to%20review%20the%20Perspective%20sunset%20cutover%20for%20our%20platform.%0A%0ABest%20regards%2C" style="font-size: 0.95rem; padding: 12px 28px;">
+            📅 Schedule 15-Min Technical Briefing
+          </a>
+        </div>
+        <div style="font-size: 0.82rem; color: var(--text-subtle);">
+          Direct Founder Email: <a href="mailto:bhaskarauthor@gmail.com" style="color: var(--accent); text-decoration: none; font-weight: 600;">bhaskarauthor@gmail.com</a> &bull; Production Gateway: <a href="https://beyond-likes-platform.onrender.com/docs" target="_blank" style="color: var(--accent); text-decoration: none;">Interactive Studio</a>
+        </div>
+      </div>
+      <div class="slide-footer">
+        <span>Normative Intelligence &bull; Executive Procurement &amp; Briefing</span>
+        <span>Slide 12 / 12</span>
+      </div>
+    </div>
+
+  </div>
+
+  <script>
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    const counter = document.getElementById('slideCounter');
+
+    function updateSlide(index) {
+      if (index < 0) index = 0;
+      if (index >= totalSlides) index = totalSlides - 1;
+      currentSlide = index;
+
+      slides.forEach((s, idx) => {
+        s.classList.toggle('active', idx === currentSlide);
+      });
+
+      counter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+    }
+
+    function nextSlide() {
+      updateSlide(currentSlide + 1);
+    }
+
+    function prevSlide() {
+      updateSlide(currentSlide - 1);
+    }
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        nextSlide();
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        prevSlide();
+      } else if (e.key === 'Home') {
+        updateSlide(0);
+      } else if (e.key === 'End') {
+        updateSlide(totalSlides - 1);
+      }
+    });
+  </script>
+</body>
+</html>

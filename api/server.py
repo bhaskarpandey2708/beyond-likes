@@ -230,6 +230,90 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
                 self._send_json(404, {"error": "OpenAPI JSON spec not found"})
                 return
 
+        # 1f. Serve Interactive Startup Pitch Deck
+        elif path in ["/deck", "/deck/", "/pitch", "/pitch/", "/pitch-deck", "/slides"]:
+            deck_file = os.path.join(BASE_DIR, "brand", "pitch-deck.html")
+            if os.path.exists(deck_file):
+                with open(deck_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            else:
+                self._send_json(404, {"error": "Pitch deck template not found"})
+                return
+
+        # 1g. Serve Native PowerPoint Pitch Deck Download
+        elif path in ["/deck/download", "/pitch/download", "/brand/Normative_Intelligence_Pitch_Deck.pptx", "/brand/deck.pptx"]:
+            pptx_file = os.path.join(BASE_DIR, "brand", "Normative_Intelligence_Pitch_Deck.pptx")
+            if os.path.exists(pptx_file):
+                with open(pptx_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/vnd.openxmlformats-officedocument.presentationml.presentation")
+                self.send_header("Content-Disposition", 'attachment; filename="Normative_Intelligence_Pitch_Deck.pptx"')
+                self.send_header("Content-Length", str(len(content)))
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            else:
+                self._send_json(404, {"error": "Pitch deck presentation file not found"})
+                return
+
+        # 1h. Serve Brand Identity & Visual Asset Kit
+        elif path in ["/brand", "/brand/", "/brand-kit", "/brand/index.html"]:
+            brand_file = os.path.join(BASE_DIR, "brand", "index.html")
+            if os.path.exists(brand_file):
+                with open(brand_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            else:
+                self._send_json(404, {"error": "Brand guide not found"})
+                return
+
+        # 1i. Serve Vector Logos
+        elif path == "/brand/logo.svg":
+            logo_file = os.path.join(BASE_DIR, "brand", "logo.svg")
+            if os.path.exists(logo_file):
+                with open(logo_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "image/svg+xml; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            else:
+                self._send_json(404, {"error": "Logo file not found"})
+                return
+
+        elif path == "/brand/logo-horizontal.svg":
+            logo_file = os.path.join(BASE_DIR, "brand", "logo-horizontal.svg")
+            if os.path.exists(logo_file):
+                with open(logo_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "image/svg+xml; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            else:
+                self._send_json(404, {"error": "Horizontal logo file not found"})
+                return
+
         # 2. Health check
         elif path == "/v1/health":
             self._send_json(200, {

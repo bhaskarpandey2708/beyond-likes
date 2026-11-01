@@ -20,12 +20,12 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Official Perspective Sunset Cutover Certificate
-* **Certificate ID:** `CERT-BL-9C36EE99744D`
+* **Certificate ID:** `CERT-BL-3CE0E57DB665`
 * **Audit Verdict:** `CERTIFIED_CUTOVER_READY` (Verified 100% Drop-in Parity)
-* **Cryptographic Fingerprint (SHA-256):** `9c36ee99744d56e0586d579ab38032385e54031b4a5ac722d08fe9b3543fba74`
+* **Cryptographic Fingerprint (SHA-256):** `3ce0e57db6651b3f52819378dd4475bc4eab7724a6168b3dfd4096e236fca104`
 * **Verification Battery Results:**
-  * Heuristic Gate SLA: **0.2 ms** (SLA < 1.0 ms)
-  * Hybrid Neural Engine SLA: **0.17 ms** (SLA < 25.0 ms)
+  * Heuristic Gate SLA: **0.27 ms** (SLA < 1.0 ms)
+  * Hybrid Neural Engine SLA: **0.23 ms** (SLA < 25.0 ms)
   * Perspective Attribute Parity: **PASS** (100% Wire Schema Conformity)
   * False Positive Salvage: **PASS** (Constructive critiques preserved)
   * EU DSA Compliance: **PASS** (Articles 15 & 20 appeals operational)
