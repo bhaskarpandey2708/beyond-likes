@@ -104,6 +104,12 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
         self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, x-api-key")
         self.end_headers()
 
+    def do_HEAD(self):
+        self.send_response(200)
+        self.send_header("Access-Control-Allow-Origin", "*")
+        self.send_header("Content-Type", "text/html; charset=utf-8")
+        self.end_headers()
+
     def do_GET(self):
         parsed = urllib.parse.urlparse(self.path)
         path = parsed.path
@@ -175,7 +181,7 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
                 return
 
         # 1d. Serve Interactive API Docs
-        elif path == "/docs" or path == "/docs/index.html":
+        elif path in ["/docs", "/docs/", "/docs/index.html"]:
             docs_file = os.path.join(BASE_DIR, "docs", "index.html")
             if os.path.exists(docs_file):
                 with open(docs_file, "rb") as f:
@@ -183,6 +189,7 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
                 self.send_response(200)
                 self.send_header("Content-Type", "text/html; charset=utf-8")
                 self.send_header("Content-Length", str(len(content)))
+                self.send_header("Access-Control-Allow-Origin", "*")
                 self.end_headers()
                 self.wfile.write(content)
                 return
@@ -190,8 +197,8 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
                 self._send_json(404, {"error": "Docs template not found"})
                 return
 
-        # 1e. Serve OpenAPI Specification
-        elif path == "/docs/openapi.yaml":
+        # 1e. Serve OpenAPI Specification (YAML and JSON)
+        elif path in ["/docs/openapi.yaml", "/docs/openapi.yml"]:
             yaml_file = os.path.join(BASE_DIR, "docs", "openapi.yaml")
             if os.path.exists(yaml_file):
                 with open(yaml_file, "rb") as f:
@@ -205,6 +212,22 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
                 return
             else:
                 self._send_json(404, {"error": "OpenAPI spec not found"})
+                return
+
+        elif path == "/docs/openapi.json":
+            json_file = os.path.join(BASE_DIR, "docs", "openapi.json")
+            if os.path.exists(json_file):
+                with open(json_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "application/json; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.send_header("Access-Control-Allow-Origin", "*")
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            else:
+                self._send_json(404, {"error": "OpenAPI JSON spec not found"})
                 return
 
         # 2. Health check
@@ -479,12 +502,14 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
             wage = float(query.get("hourly_wage", [30.0])[0])
             plan = query.get("plan", ["growth"])[0]
             prop = ProposalGenerator.generate(client_name=client_name, monthly_volume=monthly_vol, hourly_wage=wage, plan=plan)
-            html_content = prop["documents"]["html"].encode("utf-8")
+            html_content = prop.get("documents", {}).get("html", "<h1>Technical Migration Assessment</h1>")
+            html_bytes = html_content.encode("utf-8")
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
-            self.send_header("Content-Length", str(len(html_content)))
+            self.send_header("Content-Length", str(len(html_bytes)))
+            self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
-            self.wfile.write(html_content)
+            self.wfile.write(html_bytes)
             return
 
         # 5c. View Comprehensive Commercial Proposal Packet (HTML or JSON)
@@ -510,6 +535,7 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
             self.send_response(200)
             self.send_header("Content-Type", "text/html; charset=utf-8")
             self.send_header("Content-Length", str(len(content)))
+            self.send_header("Access-Control-Allow-Origin", "*")
             self.end_headers()
             self.wfile.write(content)
             return

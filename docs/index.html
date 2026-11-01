@@ -1,16 +1,597 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <title>Beyond Likes API Reference & Documentation</title>
-  <meta charset="utf-8"/>
+  <meta charset="UTF-8">
+  <title>Beyond Likes API Reference &amp; Developer Studio</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,700|Roboto:300,400,700" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
-    body { margin: 0; padding: 0; background: #0d1117; }
+    :root {
+      --bg: #090d16;
+      --sidebar-bg: #0f172a;
+      --card-bg: #111827;
+      --card-border: #1e293b;
+      --text: #e2e8f0;
+      --text-muted: #94a3b8;
+      --accent: #38bdf8;
+      --accent-hover: #0ea5e9;
+      --code-bg: #030712;
+      --method-post: #10b981;
+      --method-get: #38bdf8;
+      --method-delete: #ef4444;
+      --border-focus: #3b82f6;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      display: flex;
+      min-height: 100vh;
+      line-height: 1.5;
+    }
+
+    /* Sidebar Navigation */
+    #sidebar {
+      width: 320px;
+      background: var(--sidebar-bg);
+      border-right: 1px solid var(--card-border);
+      position: sticky;
+      top: 0;
+      height: 100vh;
+      overflow-y: auto;
+      padding: 24px 18px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--card-border);
+    }
+    .brand-icon {
+      width: 32px;
+      height: 32px;
+      background: linear-gradient(135deg, #38bdf8, #2563eb);
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      color: #fff;
+    }
+    .brand-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f8fafc;
+      letter-spacing: -0.01em;
+    }
+    .brand-version {
+      font-size: 0.72rem;
+      background: #1e293b;
+      padding: 2px 6px;
+      border-radius: 4px;
+      color: #38bdf8;
+      margin-left: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+
+    .search-box {
+      margin-bottom: 20px;
+    }
+    .search-input {
+      width: 100%;
+      background: #030712;
+      border: 1px solid var(--card-border);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+    .search-input:focus { border-color: var(--border-focus); }
+
+    .nav-group-title {
+      font-size: 0.72rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin: 18px 0 8px 8px;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 10px;
+      border-radius: 6px;
+      color: #cbd5e1;
+      text-decoration: none;
+      font-size: 0.82rem;
+      margin-bottom: 2px;
+      transition: background 0.15s, color 0.15s;
+    }
+    .nav-item:hover, .nav-item.active {
+      background: rgba(56, 189, 248, 0.1);
+      color: #38bdf8;
+    }
+
+    .badge-method {
+      font-size: 0.65rem;
+      font-weight: 700;
+      padding: 2px 5px;
+      border-radius: 3px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .badge-post { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .badge-get { background: rgba(56, 189, 248, 0.15); color: #38bdf8; }
+    .badge-delete { background: rgba(239, 68, 68, 0.15); color: #f87171; }
+
+    .sidebar-footer {
+      margin-top: auto;
+      padding-top: 16px;
+      border-top: 1px solid var(--card-border);
+      font-size: 0.76rem;
+      color: var(--text-muted);
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .sidebar-footer a {
+      color: #38bdf8;
+      text-decoration: none;
+    }
+    .sidebar-footer a:hover { text-decoration: underline; }
+
+    /* Main Content Area */
+    #content {
+      flex: 1;
+      padding: 40px 48px;
+      max-width: 1100px;
+      overflow-y: auto;
+    }
+
+    .top-banner {
+      background: linear-gradient(135deg, rgba(37, 99, 235, 0.15), rgba(16, 185, 129, 0.15));
+      border: 1px solid rgba(56, 189, 248, 0.3);
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 36px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .banner-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 4px;
+    }
+    .banner-desc {
+      font-size: 0.88rem;
+      color: #94a3b8;
+    }
+    .banner-links {
+      display: flex;
+      gap: 10px;
+    }
+    .btn-link {
+      background: #1e293b;
+      color: #e2e8f0;
+      border: 1px solid var(--card-border);
+      padding: 8px 14px;
+      border-radius: 6px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.2s;
+    }
+    .btn-link:hover { background: #334155; }
+
+    /* Endpoint Card */
+    .endpoint-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 12px;
+      margin-bottom: 40px;
+      overflow: hidden;
+      box-shadow: 0 10px 25px -5px rgba(0,0,0,0.4);
+    }
+    .endpoint-header {
+      padding: 24px 28px;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 16px;
+    }
+    .endpoint-route {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 8px;
+    }
+    .endpoint-path {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #f8fafc;
+    }
+    .endpoint-summary {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #f8fafc;
+      margin-bottom: 6px;
+    }
+    .endpoint-desc {
+      font-size: 0.9rem;
+      color: #94a3b8;
+      max-width: 750px;
+    }
+
+    .badge-perspective {
+      background: rgba(245, 158, 11, 0.15);
+      color: #fbbf24;
+      border: 1px solid rgba(245, 158, 11, 0.3);
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 4px 10px;
+      border-radius: 4px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      white-space: nowrap;
+    }
+
+    /* Live Studio Interactive Split */
+    .endpoint-body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--card-border);
+    }
+    @media (max-width: 900px) {
+      .endpoint-body { grid-template-columns: 1fr; }
+    }
+
+    .panel-req {
+      padding: 24px;
+      border-right: 1px solid var(--card-border);
+    }
+    .panel-res {
+      padding: 24px;
+      background: rgba(3, 7, 18, 0.5);
+    }
+
+    .panel-title {
+      font-size: 0.76rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--text-muted);
+      font-weight: 700;
+      margin-bottom: 12px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .code-editor {
+      width: 100%;
+      height: 180px;
+      background: var(--code-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px;
+      color: #38bdf8;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      outline: none;
+      resize: vertical;
+    }
+    .code-editor:focus { border-color: var(--border-focus); }
+
+    .code-block {
+      background: var(--code-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 8px;
+      padding: 12px;
+      color: #34d399;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      overflow-x: auto;
+      max-height: 260px;
+      overflow-y: auto;
+    }
+
+    .btn-send {
+      background: #2563eb;
+      color: #fff;
+      border: none;
+      padding: 10px 18px;
+      border-radius: 6px;
+      font-weight: 600;
+      font-size: 0.85rem;
+      cursor: pointer;
+      margin-top: 14px;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      transition: background 0.15s;
+    }
+    .btn-send:hover { background: #1d4ed8; }
+    .btn-send:disabled { background: #334155; cursor: not-allowed; }
+
+    .btn-copy {
+      background: transparent;
+      border: 1px solid var(--card-border);
+      color: var(--text-muted);
+      font-size: 0.72rem;
+      padding: 3px 8px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .btn-copy:hover { color: var(--text); border-color: var(--text-muted); }
+
+    .status-badge {
+      display: inline-block;
+      font-size: 0.72rem;
+      font-weight: 700;
+      font-family: 'JetBrains Mono', monospace;
+      padding: 2px 6px;
+      border-radius: 4px;
+    }
+    .status-200 { background: rgba(16, 185, 129, 0.2); color: #34d399; }
+    .status-err { background: rgba(239, 68, 68, 0.2); color: #f87171; }
+
+    /* Code Snippets Section */
+    .endpoint-footer {
+      padding: 18px 24px;
+      background: #0f172a;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+    }
+    .curl-preview {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.78rem;
+      color: #94a3b8;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      max-width: 700px;
+    }
   </style>
 </head>
 <body>
-  <redoc spec-url="/docs/openapi.yaml" theme='{"colors":{"primary":{"main":"#58a6ff"}},"sidebar":{"backgroundColor":"#161b22","textColor":"#c9d1d9"},"rightPanel":{"backgroundColor":"#0d1117"}}'></redoc>
-  <script src="https://cdn.redoc.ly/redoc/latest/bundles/redoc.standalone.js"></script>
+
+  <!-- Left Navigation Sidebar -->
+  <aside id="sidebar">
+    <div class="brand">
+      <div class="brand-icon">B</div>
+      <div>
+        <div class="brand-name">Beyond Likes <span class="brand-version">v2.8.0</span></div>
+        <div style="font-size: 0.74rem; color: #64748b;">Discourse Intelligence API</div>
+      </div>
+    </div>
+
+    <div class="search-box">
+      <input type="text" id="searchInput" class="search-input" placeholder="Search endpoints (e.g. analyze, score)..." oninput="filterEndpoints()">
+    </div>
+
+    <nav id="navItems" style="flex: 1;">
+      <!-- Dynamic Nav Groups populated below -->
+    </nav>
+
+    <div class="sidebar-footer">
+      <div><strong>OpenAPI Specifications:</strong></div>
+      <div style="display: flex; gap: 12px;">
+        <a href="/docs/openapi.yaml" download>📄 openapi.yaml</a>
+        <a href="/docs/openapi.json" download>📦 openapi.json</a>
+      </div>
+      <div style="margin-top: 6px; color: #64748b; font-size: 0.7rem;">
+        UC Berkeley EECS-2025-55 &bull; Drop-in Perspective API Replacement
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main API Reference Content -->
+  <main id="content">
+    
+    <div class="top-banner">
+      <div>
+        <div class="banner-title">Beyond Likes Developer Reference &amp; Interactive Studio</div>
+        <div class="banner-desc">
+          Official REST API documentation and live drop-in sandbox for Google Perspective API sunset cutover.
+        </div>
+      </div>
+      <div class="banner-links">
+        <a class="btn-link" href="/" target="_blank">Workstation Desk</a>
+        <a class="btn-link" href="/landing" target="_blank">Studio Demo</a>
+        <a class="btn-link" href="/widget/demo" target="_blank">Widget Test</a>
+      </div>
+    </div>
+
+    <div id="endpointContainer">
+      <!-- Dynamic Endpoint Cards populated below -->
+    </div>
+
+  </main>
+
+  <script>
+    const ENDPOINTS = [{"category": "Google Perspective API Drop-in", "id": "perspective-dropin", "method": "POST", "path": "/v1/comments:analyze", "summary": "1:1 Google Perspective Drop-in Replacement", "desc": "Bitwise drop-in replacement for Google Perspective API (sunset December 31, 2026). Consumes exact Perspective JSON payloads and returns identical schema with attributeScores.TOXICITY.", "request_body": {"comment": {"text": "This article presents interesting arguments regarding generative AI moderation."}, "requestedAttributes": {"TOXICITY": {}}}, "response_sample": {"attributeScores": {"TOXICITY": {"summaryScore": {"value": 0.023, "type": "PROBABILITY"}}}, "languages": ["en"], "detectedLanguages": ["en"]}}, {"category": "Core Normative Scoring", "id": "score-single", "method": "POST", "path": "/v1/score", "summary": "Evaluate Single Comment (4D Normative Rubric)", "desc": "Evaluates text across 4 prosocial dimensions: Constructiveness (35%), Civility (25%), Persuasiveness (20%), and Relevance (20%). Returns composite score (0-100), automated triage status, and syntactic analysis.", "request_body": {"text": "While I respect the author's viewpoint, the empirical benchmarks from the 2026 IEEE study show that solid-state batteries reduced thermal runaway by 32%.", "policy": "newsroom", "backend": "hybrid"}, "response_sample": {"composite_score": 78.4, "status": "APPROVED_PROMOTED", "dimensions": {"constructiveness": 84.0, "civility": 92.0, "persuasiveness": 75.0, "relevance": 65.0}, "perspective_compatibility": {"inferred_toxicity": 0.035, "toxicity_status": "CLEAN"}, "latency_ms": 1.2}}, {"category": "Core Normative Scoring", "id": "score-batch", "method": "POST", "path": "/v1/batch-score", "summary": "Batch Score Comment Corpus", "desc": "High-throughput batch evaluation of multiple comments in a single HTTP request with parallel CPU execution.", "request_body": {"comments": [{"id": "c1", "text": "Solid-state electrolytes improved efficiency by 14.8% in testing."}, {"id": "c2", "text": "You are a complete clown and your article is garbage."}], "policy": "newsroom"}, "response_sample": {"results": [{"id": "c1", "composite_score": 76.5, "status": "APPROVED_PROMOTED", "toxicity": 0.02}, {"id": "c2", "composite_score": 24.1, "status": "FLAGGED_UNCIVIL", "toxicity": 0.94}], "count": 2, "total_latency_ms": 2.8}}, {"category": "Prosocial In-Composer Feedback", "id": "rephrase-advisor", "method": "POST", "path": "/v1/rephrase", "summary": "In-Composer Constructive Rephrase Advisor", "desc": "Generates real-time, non-punitive Git-style diff suggestions that coach heated or low-effort commenters to substantiate their points before posting.", "request_body": {"text": "Your benchmarks are completely broken and make zero sense."}, "response_sample": {"original_text": "Your benchmarks are completely broken and make zero sense.", "suggestions": ["Could you clarify the methodology used in these benchmarks? The throughput measurements seem inconsistent with standard baseline configurations."], "lift_estimate": {"original_civility": 42.0, "suggested_civility": 88.0, "civility_gain": 46.0}}}, {"category": "Conversational Thread Analysis", "id": "thread-analyze", "method": "POST", "path": "/v1/thread:analyze", "summary": "Multi-Turn Thread & Flamewar Trajectory Analysis", "desc": "Evaluates a sequence of comments in a thread to calculate conversational velocity, polarization indices, and early derailment warnings.", "request_body": {"comments": [{"author": "alice", "text": "I think this implementation has memory leak risks."}, {"author": "bob", "text": "Shut up, you don't even know what malloc is."}, {"author": "alice", "text": "Here is the valgrind trace showing the leak on line 42."}]}, "response_sample": {"thread_health_score": 58.2, "flamewar_risk": "MODERATE", "polarization_index": 0.45, "recommended_action": "ISSUE_IN_LINE_NUDGE"}}, {"category": "Dual-Run Shadow Mirror", "id": "shadow-mirror", "method": "POST", "path": "/v1/shadow-mirror", "summary": "Dual-Run Shadow Evaluation (Perspective vs Beyond Likes)", "desc": "Runs simultaneous dual-evaluation against Google Perspective and Beyond Likes, categorizing discrepancies into Parity, False Positive Salvages, and Stealth Harassment Interceptions.", "request_body": {"text": "You need to kill process -9 on PID 14022 immediately to resolve the memory leak.", "policy": "newsroom"}, "response_sample": {"perspective": {"toxicity_score": 0.02, "verdict": "PASS_CLEAN", "latency_ms": 195.0}, "beyond_likes": {"composite_score": 62.4, "status": "STANDARD_PUBLISH", "latency_ms": 0.22}, "comparison": {"verdict_agreement": true, "discrepancy_category": "PARITY", "latency_advantage_factor": "390.4x faster"}}}, {"category": "Dual-Run Shadow Mirror", "id": "shadow-stats", "method": "GET", "path": "/v1/shadow-mirror/stats", "summary": "Real-time Shadow Cutover Readiness Statistics", "desc": "Returns aggregate dual-run shadow statistics, agreement rates, false positive rescue counts, and average latency speedup metrics.", "request_body": null, "response_sample": {"total_dual_runs": 142, "agreement_rate_pct": 94.2, "false_positives_salvaged": 18, "stealth_evasions_intercepted": 9, "average_speedup": "342.5x faster"}}, {"category": "EU DSA Statutory Compliance", "id": "dsa-report", "method": "GET", "path": "/v1/compliance/dsa-report", "summary": "EU Digital Services Act Transparency Report (Articles 15, 20 & 24)", "desc": "Generates a certified statutory transparency audit report detailing total automated interventions, statement-of-reasons compliance, and internal appeal resolution metrics.", "request_body": null, "response_sample": {"regulation": "EU Digital Services Act (Regulation EU 2022/2065)", "reporting_period": "Past 30 Days", "article_15_statements_issued": 1840, "article_20_internal_complaints_received": 42, "article_20_complaints_resolved": 42, "reversal_rate_pct": 4.8, "statutory_compliance_status": "FULLY_COMPLIANT"}}, {"category": "EU DSA Statutory Compliance", "id": "appeals-submit", "method": "POST", "path": "/v1/appeals:submit", "summary": "Submit Moderation Appeal (DSA Article 20)", "desc": "Submits a formal user appeal contesting an automated moderation triage decision, with algorithmic re-review and audit tracking.", "request_body": {"evaluation_id": "eval_8892a01", "author_id": "user_491", "justification": "The comment cited an oncology study and was mistakenly flagged due to medical terminology."}, "response_sample": {"appeal_id": "apl_37af8129", "status": "UNDER_REVIEW", "sla_hours_remaining": 48.0, "re_review_timestamp": 1793524800}}, {"category": "Enterprise Proposals & Pilots", "id": "proposals-packets", "method": "GET", "path": "/v1/proposals/packets", "summary": "List All 20 Client Proposal & Cutover Packets", "desc": "Retrieves the master catalog of all 20 qualified prospective publishers with links to their personalized technical migration briefs and Cutover Certificates.", "request_body": null, "response_sample": {"total": 20, "packets": [{"slug": "the-verge", "name": "The Verge / Vox Media", "plan": "enterprise", "packet_url": "/v1/proposals/packet?client=the-verge"}, {"slug": "ars-technica", "name": "Ars Technica", "plan": "growth", "packet_url": "/v1/proposals/packet?client=ars-technica"}]}}, {"category": "Enterprise Proposals & Pilots", "id": "proposals-packet", "method": "GET", "path": "/v1/proposals/packet", "summary": "View Client Proposal & Cutover Packet (HTML or JSON)", "desc": "Retrieves the complete technical cutover packet for a specific publisher (e.g. ?client=the-verge or ?client=ars-technica). Add &format=json for raw schema metadata.", "request_body": null, "response_sample": {"client_name": "The Verge / Vox Media", "slug": "the-verge", "plan": "enterprise", "certificate_id": "CERT-BL-A3E2BA890100", "sha256_fingerprint": "a3e2ba890100...", "checkout_url": "https://checkout.stripe.com/c/pay/cs_live_..."}}, {"category": "Webhooks & Outbound Dispatch", "id": "webhooks-sub", "method": "POST", "path": "/v1/webhooks/subscriptions", "summary": "Register Outbound Webhook Subscription", "desc": "Subscribes an external endpoint to real-time HMAC-SHA256 cryptographically signed webhook alerts (e.g. comment.flagged, appeal.created, contract.signed).", "request_body": {"url": "https://api.yourdomain.com/webhooks/beyond-likes", "events": ["comment.flagged", "appeal.created"], "secret": "your_hmac_signing_secret"}, "response_sample": {"status": "REGISTERED", "subscription_id": "wh_sub_47afc091ac49c272", "url": "https://api.yourdomain.com/webhooks/beyond-likes", "events": ["comment.flagged", "appeal.created"]}}, {"category": "Client Integration Packages", "id": "downloads-catalog", "method": "GET", "path": "/v1/downloads", "summary": "List Downloadable Integration Packages", "desc": "Returns catalog of pre-packaged, zero-dependency client integration bundles (Chrome Extension, WordPress Plugin, Discourse Plugin, Universal Script Widget).", "request_body": null, "response_sample": {"packages": [{"id": "chrome-extension", "name": "In-Composer Chrome Extension (MV3)", "download_url": "/v1/downloads/chrome-extension"}, {"id": "wordpress-plugin", "name": "WordPress Moderation Plugin", "download_url": "/v1/downloads/wordpress-plugin"}, {"id": "discourse-plugin", "name": "Discourse AI Moderation Plugin", "download_url": "/v1/downloads/discourse-plugin"}, {"id": "widget", "name": "Universal Script Widget", "download_url": "/v1/downloads/widget"}]}}, {"category": "Platform Telemetry & Health", "id": "analytics-trends", "method": "GET", "path": "/v1/analytics/trends", "summary": "Real-time Discourse Trends & Health Telemetry", "desc": "Returns rolling timeseries metrics, discourse health index (0-100), constructiveness lift, toxicity rates, and health trend trajectory.", "request_body": null, "response_sample": {"window_hours": 24, "total_buckets": 6, "summary": {"current_health_index": 78.4, "current_toxicity_rate": 2.1, "current_promotion_rate": 34.0, "health_trend": "HEALTHY"}}}];
+
+    function renderNav() {
+      const nav = document.getElementById("navItems");
+      let currentCategory = "";
+      let html = "";
+
+      ENDPOINTS.forEach((ep, idx) => {
+        if (ep.category !== currentCategory) {
+          currentCategory = ep.category;
+          html += `<div class="nav-group-title">${currentCategory}</div>`;
+        }
+        const methodClass = ep.method === "POST" ? "badge-post" : (ep.method === "GET" ? "badge-get" : "badge-delete");
+        html += `
+          <a class="nav-item" href="#${ep.id}" id="nav-${ep.id}">
+            <span class="badge-method ${methodClass}">${ep.method}</span>
+            <span style="overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${ep.path}</span>
+          </a>
+        `;
+      });
+
+      nav.innerHTML = html;
+    }
+
+    function renderCards() {
+      const container = document.getElementById("endpointContainer");
+      let html = "";
+
+      ENDPOINTS.forEach((ep) => {
+        const methodClass = ep.method === "POST" ? "badge-post" : (ep.method === "GET" ? "badge-get" : "badge-delete");
+        const isPerspective = ep.path.includes("comments:analyze");
+        const hasReqBody = ep.request_body !== null;
+        const initialReqBody = hasReqBody ? JSON.stringify(ep.request_body, null, 2) : "";
+        const initialResBody = JSON.stringify(ep.response_sample, null, 2);
+
+        html += `
+          <div class="endpoint-card" id="${ep.id}">
+            <div class="endpoint-header">
+              <div>
+                <div class="endpoint-route">
+                  <span class="badge-method ${methodClass}">${ep.method}</span>
+                  <span class="endpoint-path">${ep.path}</span>
+                </div>
+                <div class="endpoint-summary">${ep.summary}</div>
+                <div class="endpoint-desc">${ep.desc}</div>
+              </div>
+              ${isPerspective ? '<span class="badge-perspective">1:1 Perspective Parity</span>' : ''}
+            </div>
+
+            <div class="endpoint-body">
+              <div class="panel-req">
+                <div class="panel-title">
+                  <span>Interactive Request</span>
+                  ${hasReqBody ? '<button class="btn-copy" onclick="copySnippet(\'req-' + ep.id + '\')">Copy JSON</button>' : ''}
+                </div>
+                ${hasReqBody ? 
+                  `<textarea id="req-${ep.id}" class="code-editor">${initialReqBody}</textarea>` : 
+                  '<div style="font-size: 0.85rem; color: #64748b; font-style: italic; padding: 20px 0;">This endpoint takes no request body. Query parameters may apply.</div>'
+                }
+                <button class="btn-send" id="btn-${ep.id}" onclick="sendLiveRequest('${ep.id}', '${ep.method}', '${ep.path}')">
+                  ⚡ Send Live Request
+                </button>
+              </div>
+
+              <div class="panel-res">
+                <div class="panel-title">
+                  <span>Live Response</span>
+                  <div style="display: flex; gap: 8px; align-items: center;">
+                    <span id="status-${ep.id}" class="status-badge status-200">200 OK (Sample)</span>
+                    <button class="btn-copy" onclick="copySnippet(\'res-' + ep.id + '\')">Copy</button>
+                  </div>
+                </div>
+                <pre class="code-block" id="res-${ep.id}">${initialResBody}</pre>
+              </div>
+            </div>
+
+            <div class="endpoint-footer">
+              <div class="curl-preview">
+                <strong>cURL:</strong> curl -X ${ep.method} https://beyond-likes-platform.onrender.com${ep.path} ${hasReqBody ? "-H 'Content-Type: application/json' -d '...'" : ""}
+              </div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    async function sendLiveRequest(id, method, path) {
+      const btn = document.getElementById("btn-" + id);
+      const statusBadge = document.getElementById("status-" + id);
+      const resBlock = document.getElementById("res-" + id);
+      const reqTextarea = document.getElementById("req-" + id);
+
+      btn.disabled = true;
+      btn.innerText = "⏳ Executing...";
+      statusBadge.innerText = "Connecting...";
+
+      let headers = {};
+      let body = undefined;
+
+      if (reqTextarea && method !== "GET") {
+        try {
+          body = reqTextarea.value.trim();
+          headers["Content-Type"] = "application/json";
+        } catch (e) {
+          alert("Invalid JSON format in request body!");
+          btn.disabled = false;
+          btn.innerText = "⚡ Send Live Request";
+          return;
+        }
+      }
+
+      const t0 = performance.now();
+      try {
+        const res = await fetch(path, { method: method, headers: headers, body: body });
+        const t1 = performance.now();
+        const duration = Math.round(t1 - t0);
+        
+        let data;
+        const contentType = res.headers.get("content-type") || "";
+        if (contentType.includes("application/json")) {
+          data = await res.json();
+          resBlock.innerText = JSON.stringify(data, null, 2);
+        } else {
+          const text = await res.text();
+          resBlock.innerText = text.slice(0, 1500) + (text.length > 1500 ? "... [truncated]" : "");
+        }
+
+        statusBadge.innerText = `${res.status} ${res.statusText} (${duration}ms)`;
+        statusBadge.className = res.ok ? "status-badge status-200" : "status-badge status-err";
+      } catch (err) {
+        statusBadge.innerText = "Fetch Error";
+        statusBadge.className = "status-badge status-err";
+        resBlock.innerText = "Network / CORS Error: " + err.message;
+      } finally {
+        btn.disabled = false;
+        btn.innerText = "⚡ Send Live Request";
+      }
+    }
+
+    function copySnippet(elementId) {
+      const el = document.getElementById(elementId);
+      const text = el.value || el.innerText;
+      navigator.clipboard.writeText(text).then(() => {
+        alert("Copied to clipboard!");
+      });
+    }
+
+    function filterEndpoints() {
+      const query = document.getElementById("searchInput").value.toLowerCase();
+      ENDPOINTS.forEach((ep) => {
+        const card = document.getElementById(ep.id);
+        const navItem = document.getElementById("nav-" + ep.id);
+        const match = ep.path.toLowerCase().includes(query) || 
+                      ep.summary.toLowerCase().includes(query) || 
+                      ep.category.toLowerCase().includes(query);
+        if (card) card.style.display = match ? "block" : "none";
+        if (navItem) navItem.style.display = match ? "flex" : "none";
+      });
+    }
+
+    // Initialize UI
+    renderNav();
+    renderCards();
+  </script>
 </body>
 </html>
