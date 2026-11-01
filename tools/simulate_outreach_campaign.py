@@ -26,7 +26,7 @@ def generate_email_for_target(target: Dict[str, Any], origin: str = None) -> Dic
     Format a high-conversion, professional discovery email for a target.
     """
     if origin is None:
-        origin = os.environ.get("DISCOVERY_ORIGIN", "https://entry-ours-fabric-zus.trycloudflare.com")
+        origin = os.environ.get("DISCOVERY_ORIGIN", "https://beyond-likes-platform.onrender.com")
     contact_name = target.get("contact_name") or target.get("contact_role") or "Editorial & Community Lead"
     org_name = target.get("name") or target.get("client_name") or target["slug"]
     slug = target["slug"]
