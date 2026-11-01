@@ -1,7 +1,7 @@
 # Enterprise GTM Outreach Campaign Status Report
 
 **Venture:** Beyond Likes (Drop-In Google Perspective Replacement)  
-**Execution Timestamp:** `2026-11-01 14:33:50`  
+**Execution Timestamp:** `2026-11-01 15:35:10`  
 **Campaign Mode:** `DISPATCH`  
 **Target Accounts Processed:** `20`  
 **Google Perspective Sunset Deadline:** `December 31, 2026`
@@ -16,7 +16,7 @@
 | **PITCH_DRAFTED** | `0` | 0.0% | Tailored hooks & ROI models pre-compiled |
 | **OUTREACH_SENT** | `14` | 70.0% | Contacted via editorial/community lead |
 | **CALL_SCHEDULED** | `2` | 10.0% | Technical demo & shadow mirror briefing |
-| **PILOT_ACTIVE** | `3` | 15.0% | 30-day dual-run shadow evaluation |
+| **PILOT_ACTIVE** | `2` | 10.0% | 30-day dual-run shadow evaluation |
 | **CLOSED_WON** | `1` | 5.0% | Contract signed / Stripe active subscription |
 
 ---
@@ -26,7 +26,7 @@
 | # | Organization | Category | Monthly Vol | Plan | Stage | Key Decision Maker | Packet Verified |
 | :-: | :--- | :--- | :-: | :---: | :---: | :--- | :-: |
 | 1 | **Ars Technica** | Tech Journalism (OpenForum) | 150,000/mo | `growth` | `CLOSED_WON` | Managing Editor & Director of Community | ⚠️ Missing |
-| 2 | **The Verge / Vox Media** | Digital Media & Consumer Tech | 350,000/mo | `enterprise` | `PILOT_ACTIVE` | VP of Audience Engagement & Community Operations Lead | ⚠️ Missing |
+| 2 | **The Verge / Vox Media** | Digital Media & Consumer Tech | 350,000/mo | `enterprise` | `CONTRACT_REVIEW` | VP of Audience Engagement & Community Operations Lead | ⚠️ Missing |
 | 3 | **Dev.to / Forem** | Developer Community | 80,000/mo | `growth` | `PILOT_ACTIVE` | Head of Trust & Safety | ⚠️ Missing |
 | 4 | **Linus Tech Tips Forum** | Hardware Community & Benchmarking | 200,000/mo | `growth` | `CALL_SCHEDULED` | Community Lead & Senior Forum Moderator | ⚠️ Missing |
 | 5 | **Substack Independent Publications** | Subscription Publishing & Creator Journalism | 50,000/mo | `starter` | `PILOT_ACTIVE` | Independent Publisher & Editorial Director | ⚠️ Missing |
@@ -85,7 +85,7 @@ https://beyond-likes-platform.onrender.com
 ---
 ### The Verge / Vox Media (`the-verge`)
 * **Decision Maker:** VP of Audience Engagement & Community Operations Lead
-* **Stage:** `PILOT_ACTIVE` | **Last Contact:** `2026-11-01`
+* **Stage:** `CONTRACT_REVIEW` | **Last Contact:** `2026-11-01`
 * **Proposal Packet Link:** [https://beyond-likes-platform.onrender.com/v1/proposals/packet?client=the-verge](https://beyond-likes-platform.onrender.com/v1/proposals/packet?client=the-verge)
 * **Subject Line:** `The Verge comment queues & prosocial feedback research`
 
