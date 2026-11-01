@@ -75,7 +75,7 @@ CLIENT_PROFILES = {
         "hourly_wage": 35.0,
         "plan": "starter",
         "contact_role": "Independent Publisher & Editorial Director",
-        "editorial_hook": "For premium subscriber communities ($10–$20/mo), low-effort hostility directly inflates reader churn. Beyond Likes protects subscriber retention by providing constructive nudges to paid members.",
+        "editorial_hook": "For premium subscriber communities ($10–$20/mo), low-effort hostility directly inflates reader churn. Normative Intelligence protects subscriber retention by providing constructive nudges to paid members.",
         "pitch_subject": "Subscriber comment retention for independent publications"
     }
 }
@@ -119,7 +119,7 @@ def build_client_packet(client_key: str) -> Dict[str, Any]:
             "hourly_wage": 30.0,
             "plan": "growth",
             "contact_role": "Head of Community / Managing Editor",
-            "editorial_hook": "Transitioning from Google Perspective API to Beyond Likes prosocial intelligence.",
+            "editorial_hook": "Transitioning from Google Perspective API to Normative Intelligence prosocial governance.",
             "pitch_subject": "Comment quality & Google Perspective sunset cutover"
         }
 
@@ -163,7 +163,7 @@ def build_client_packet(client_key: str) -> Dict[str, Any]:
     markdown_packet = f"""# Technical Migration Blueprint & Perspective API EOL Contingency Plan
 **Client Partner:** {profile['client_name']} ({profile['contact_role']})  
 **Publication Category:** {profile['category']}  
-**Issuing Authority:** Beyond Likes Discourse Intelligence Venture (UC Berkeley EECS-2025-55)  
+**Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
 **Date of Issuance:** {date_str}  
 **Perspective Sunset Deadline:** December 31, 2026 ({proposal['days_until_perspective_sunset']} days remaining)  
 
@@ -174,7 +174,7 @@ def build_client_packet(client_key: str) -> Dict[str, Any]:
 
 Google Jigsaw has announced that the **Google Perspective API will be permanently shut down on December 31, 2026**. Continued reliance on legacy toxicity classifiers introduces immediate operational risk, service outage, and moderation queue failure.
 
-Beyond Likes provides a **1:1 bitwise drop-in replacement**:
+Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 * **Zero Engineering Rewrites:** Consumes identical `POST /comments:analyze` JSON payloads and returns identical Perspective response schemas (`attributeScores.TOXICITY.summaryScore.value`).
 * **From Reactive Censorship to Prosocial Guidance:** Moves beyond crude keyword filtering by evaluating Constructiveness, Epistemic Grounding, Civility, and Relevance in real time.
 * **Dialect & Technical Precision:** Eliminates false-positive bans on benign technical syntax ('kill process -9', 'fatal error') and clinical terminology.
@@ -196,7 +196,7 @@ Beyond Likes provides a **1:1 bitwise drop-in replacement**:
 
 ## 3. Core Operational & Engineering SLA Metrics
 
-| Dimension | Legacy Google Perspective | Beyond Likes Engine | Production SLA Commitment |
+| Dimension | Legacy Google Perspective | Normative Intelligence Engine | Production SLA Commitment |
 | :--- | :--- | :--- | :--- |
 | **API Schema Parity** | v1alpha1 Schema | **100% Bitwise Parity** | Zero parser or client rewrites |
 | **Inference Latency** | 180ms – 320ms WAN roundtrip | **< 3.0 ms CPU Execution** | Sub-25ms SLA guarantee |
@@ -214,7 +214,7 @@ Beyond Likes provides a **1:1 bitwise drop-in replacement**:
 POST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=AIzaSy...
 ```
 
-### Beyond Likes Drop-in Endpoint
+### Normative Intelligence Drop-in Endpoint
 ```bash
 POST https://beyond-likes-platform.onrender.com/v1/comments:analyze
 Header: X-API-Key: {tenant_id}_live_key
@@ -436,7 +436,7 @@ Header: X-API-Key: {tenant_id}_live_key
       <div>
         <h1 class="brand-title">Technical Migration Blueprint &amp; EOL Brief</h1>
         <div class="brand-sub">Client: <strong>{profile['client_name']}</strong> &bull; Prepared: {date_str}</div>
-        <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">Issuing Authority: Beyond Likes Discourse Intelligence (UC Berkeley EECS-2025-55)</div>
+        <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">Issuing Authority: Normative Intelligence (UC Berkeley EECS-2025-55)</div>
       </div>
       <div style="text-align: right;">
         <span class="badge badge-green">100% PARITY CERTIFIED</span>
@@ -472,7 +472,7 @@ Header: X-API-Key: {tenant_id}_live_key
     <h3>1. Strategic Alignment &amp; Operational Risk Assessment</h3>
     <p>{profile['editorial_hook']}</p>
     <p>Google Jigsaw has formally confirmed that the <strong>Google Perspective API will be permanently shut down on December 31, 2026</strong>. For digital newsrooms and forums with high-velocity community sections, losing this moderation layer introduces severe operational risk and unmanageable manual queue backlogs.</p>
-    <p>Beyond Likes provides a <strong>1:1 bitwise drop-in replacement</strong> backed by UC Berkeley research that preserves existing ingestion infrastructure while introducing in-composer prosocial intelligence.</p>
+    <p>Normative Intelligence provides a <strong>1:1 bitwise drop-in replacement</strong> backed by UC Berkeley research that preserves existing ingestion infrastructure while introducing in-composer prosocial intelligence.</p>
 
     <!-- Certificate Box -->
     <h3>2. Official Cryptographic Parity Certification</h3>
@@ -500,7 +500,7 @@ Header: X-API-Key: {tenant_id}_live_key
         <tr>
           <th>Architecture Dimension</th>
           <th>Legacy Google Perspective</th>
-          <th>Beyond Likes Engine</th>
+          <th>Normative Intelligence Engine</th>
           <th>Editorial &amp; SLA Benefit</th>
         </tr>
       </thead>
@@ -549,7 +549,7 @@ Header: X-API-Key: {tenant_id}_live_key
     <pre><code># Legacy Google Perspective Endpoint
 POST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=AIzaSy...
 
-# Beyond Likes 1:1 Drop-in Replacement
+# Normative Intelligence 1:1 Drop-in Replacement
 POST https://beyond-likes-platform.onrender.com/v1/comments:analyze
 Header: X-API-Key: {tenant_id}_live_key</code></pre>
     <p style="font-size: 0.86rem; color: #94a3b8;">
@@ -574,7 +574,7 @@ Header: X-API-Key: {tenant_id}_live_key</code></pre>
         Verify parity against your own production traffic using our zero-risk dual-run shadow mirror. Run side-by-side with Perspective with zero DNS impact.
       </p>
       <div>
-        <a class="btn" href="mailto:engineering@beyondlikes.io?subject=Technical%20Briefing%3A%20{profile['client_name']}%20Perspective%20Cutover&body=Hi%20Beyond%20Likes%20Engineering%2C%0A%0AWe%20would%20like%20to%20schedule%20a%2015-minute%20technical%20briefing%20and%20request%20sandbox%20API%20keys%20to%20test%20the%20Perspective%20dual-run%20shadow%20mirror%20for%20{profile['client_name']}.%0A%0ABest%20regards%2C">
+        <a class="btn" href="mailto:bhaskarauthor@gmail.com?subject=Technical%20Briefing%3A%20{profile['client_name']}%20Perspective%20Cutover&body=Hi%20Normative%20Intelligence%20Engineering%2C%0A%0AWe%20would%20like%20to%20schedule%20a%2015-minute%20technical%20briefing%20and%20request%20sandbox%20API%20keys%20to%20test%20the%20Perspective%20dual-run%20shadow%20mirror%20for%20{profile['client_name']}.%0A%0ABest%20regards%2C">
           📅 Schedule Architecture Briefing
         </a>
         <a class="btn btn-secondary" href="https://beyond-likes-platform.onrender.com/landing" target="_blank">

@@ -203,7 +203,7 @@ class ProposalGenerator:
       <div>
         <h1 class="brand-title">Technical Migration Blueprint &amp; EOL Brief</h1>
         <div class="brand-sub">Client: <strong>{client_name}</strong> &bull; Prepared: {date_str}</div>
-        <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">Issuing Authority: Beyond Likes Discourse Intelligence (UC Berkeley EECS-2025-55)</div>
+        <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">Issuing Authority: Normative Intelligence (UC Berkeley EECS-2025-55)</div>
       </div>
       <div style="text-align: right;">
         <span class="badge">100% PARITY CERTIFIED</span>
@@ -240,7 +240,7 @@ class ProposalGenerator:
       For media and community operators handling tens of thousands of daily comments, reliance on deprecating infrastructure exposes operations to sudden availability cliffs, heightened moderation backlogs, and downstream SLA penalties under regulatory frameworks such as EU DSA Article 20.
     </p>
     <p>
-      Beyond Likes provides bitwise drop-in compatibility for <code>POST /v1/comments:analyze</code>, delivering instantaneous cutover without modifying existing payload schemas, ingestion webhooks, or moderation dashboards.
+      Normative Intelligence provides bitwise drop-in compatibility for <code>POST /v1/comments:analyze</code>, delivering instantaneous cutover without modifying existing payload schemas, ingestion webhooks, or moderation dashboards.
     </p>
 
     <h3>2. Technical Specification &amp; Service SLA Comparison</h3>
@@ -249,7 +249,7 @@ class ProposalGenerator:
         <tr>
           <th>Evaluation Dimension</th>
           <th>Google Perspective (Legacy)</th>
-          <th>Beyond Likes Engine</th>
+          <th>Normative Intelligence Engine</th>
           <th>Contractual SLA Commitment</th>
         </tr>
       </thead>
@@ -303,7 +303,7 @@ curl -X POST https://beyond-likes-platform.onrender.com/v1/comments:analyze \\
 
         markdown_memo = f"""# Technical Migration Blueprint & Perspective API EOL Brief
 **Client:** {client_name}  
-**Issuing Authority:** Beyond Likes Discourse Intelligence (UC Berkeley EECS-2025-55)  
+**Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
 **Date:** {date_str}  
 **Perspective Sunset Deadline:** December 31, 2026 ({days_until_sunset} days remaining)  
 

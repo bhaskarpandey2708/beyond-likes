@@ -1,7 +1,7 @@
 # Technical Migration Blueprint & Perspective API EOL Contingency Plan
 **Client Partner:** The Verge / Vox Media (VP of Audience Engagement & Community Operations Lead)  
 **Publication Category:** Digital Media & Consumer Tech  
-**Issuing Authority:** Beyond Likes Discourse Intelligence Venture (UC Berkeley EECS-2025-55)  
+**Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
 **Date of Issuance:** November 01, 2026  
 **Perspective Sunset Deadline:** December 31, 2026 (60 days remaining)  
 
@@ -12,7 +12,7 @@ The Verge's comment sections see intense daily volume across mobile ecosystems a
 
 Google Jigsaw has announced that the **Google Perspective API will be permanently shut down on December 31, 2026**. Continued reliance on legacy toxicity classifiers introduces immediate operational risk, service outage, and moderation queue failure.
 
-Beyond Likes provides a **1:1 bitwise drop-in replacement**:
+Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 * **Zero Engineering Rewrites:** Consumes identical `POST /comments:analyze` JSON payloads and returns identical Perspective response schemas (`attributeScores.TOXICITY.summaryScore.value`).
 * **From Reactive Censorship to Prosocial Guidance:** Moves beyond crude keyword filtering by evaluating Constructiveness, Epistemic Grounding, Civility, and Relevance in real time.
 * **Dialect & Technical Precision:** Eliminates false-positive bans on benign technical syntax ('kill process -9', 'fatal error') and clinical terminology.
@@ -20,12 +20,12 @@ Beyond Likes provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Official Perspective Sunset Cutover Certificate
-* **Certificate ID:** `CERT-BL-A3E2BA890100`
+* **Certificate ID:** `CERT-BL-65F402AE122B`
 * **Audit Verdict:** `CERTIFIED_CUTOVER_READY` (Verified 100% Drop-in Parity)
-* **Cryptographic Fingerprint (SHA-256):** `a3e2ba8901001b29dfe1a40aa74b03d956e100bfbe7a4fed3bac1df4c84afaf9`
+* **Cryptographic Fingerprint (SHA-256):** `65f402ae122bebb784c09374af758cd521f16a7dfc036e14bbe39e2129dfcf48`
 * **Verification Battery Results:**
-  * Heuristic Gate SLA: **0.26 ms** (SLA < 1.0 ms)
-  * Hybrid Neural Engine SLA: **0.52 ms** (SLA < 25.0 ms)
+  * Heuristic Gate SLA: **0.23 ms** (SLA < 1.0 ms)
+  * Hybrid Neural Engine SLA: **0.19 ms** (SLA < 25.0 ms)
   * Perspective Attribute Parity: **PASS** (100% Wire Schema Conformity)
   * False Positive Salvage: **PASS** (Constructive critiques preserved)
   * EU DSA Compliance: **PASS** (Articles 15 & 20 appeals operational)
@@ -34,7 +34,7 @@ Beyond Likes provides a **1:1 bitwise drop-in replacement**:
 
 ## 3. Core Operational & Engineering SLA Metrics
 
-| Dimension | Legacy Google Perspective | Beyond Likes Engine | Production SLA Commitment |
+| Dimension | Legacy Google Perspective | Normative Intelligence Engine | Production SLA Commitment |
 | :--- | :--- | :--- | :--- |
 | **API Schema Parity** | v1alpha1 Schema | **100% Bitwise Parity** | Zero parser or client rewrites |
 | **Inference Latency** | 180ms – 320ms WAN roundtrip | **< 3.0 ms CPU Execution** | Sub-25ms SLA guarantee |
@@ -52,7 +52,7 @@ Beyond Likes provides a **1:1 bitwise drop-in replacement**:
 POST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=AIzaSy...
 ```
 
-### Beyond Likes Drop-in Endpoint
+### Normative Intelligence Drop-in Endpoint
 ```bash
 POST https://beyond-likes-platform.onrender.com/v1/comments:analyze
 Header: X-API-Key: org_the_verge_live_key

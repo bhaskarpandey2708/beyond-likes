@@ -1,6 +1,6 @@
 """
 Production-Grade Zero-Dependency REST API & Interactive Dashboard Server
-Beyond Likes Discourse Intelligence Platform (Port 8888)
+Normative Intelligence Platform (Port 8888)
 """
 import os
 import sys
@@ -234,7 +234,7 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
         elif path == "/v1/health":
             self._send_json(200, {
                 "status": "HEALTHY",
-                "service": "Beyond Likes Discourse Engine",
+                "service": "Normative Intelligence Platform",
                 "version": "2.8.0-enterprise-edge",
                 "timestamp": time.time(),
                 "endpoints": [
@@ -656,7 +656,7 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
 
             client_queue = broadcaster.subscribe()
             try:
-                init_msg = f"event: connected\ndata: {json.dumps({'message': 'Connected to Beyond Likes live discourse stream'})}\n\n"
+                init_msg = f"event: connected\ndata: {json.dumps({'message': 'Connected to Normative Intelligence live stream'})}\n\n"
                 self.wfile.write(init_msg.encode("utf-8"))
                 self.wfile.flush()
 
@@ -1169,7 +1169,7 @@ def run_server():
     server_address = (HOST, PORT)
     httpd = ThreadingHTTPServer(server_address, BeyondLikesAPIHandler)
     print("\n" + "="*70)
-    print(f"🚀 Beyond Likes Advanced Discourse Intelligence Server")
+    print(f"🚀 Normative Intelligence Platform (Port {PORT})")
     print(f"📡 Dashboard & UI/UX Studio: http://localhost:{PORT}/")
     print(f"🔌 Single Score API:         POST http://localhost:{PORT}/v1/score")
     print(f"🔌 Batch Corpus Analysis:    POST http://localhost:{PORT}/v1/batch-score")

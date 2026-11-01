@@ -1,8 +1,8 @@
 openapi: 3.0.3
 info:
-  title: Beyond Likes Discourse Intelligence API
+  title: Normative Intelligence API
   version: 2.8.0-enterprise-edge
-  description: 'Production-grade prosocial discourse intelligence platform and 1:1
+  description: 'Production-grade normative discourse intelligence platform and 1:1
     drop-in successor to the Google Perspective API (sunset December 31, 2026).
 
     Commercialization of UC Berkeley EECS-2025-55 research on normative multidimensional
@@ -10,8 +10,8 @@ info:
 
     '
   contact:
-    name: Beyond Likes Engineering Team
-    email: support@beyondlikes.io
+    name: Normative Intelligence Engineering Team
+    email: bhaskarauthor@gmail.com
 servers:
 - url: https://beyond-likes-platform.onrender.com
   description: Permanent Production Cloud Gateway

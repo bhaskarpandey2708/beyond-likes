@@ -1,7 +1,7 @@
 # Technical Migration Blueprint & Perspective API EOL Contingency Plan
 **Client Partner:** CoinDesk / Decrypt (Managing Editor)  
 **Publication Category:** Web3 & Financial Media  
-**Issuing Authority:** Beyond Likes Discourse Intelligence Venture (UC Berkeley EECS-2025-55)  
+**Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
 **Date of Issuance:** November 01, 2026  
 **Perspective Sunset Deadline:** December 31, 2026 (60 days remaining)  
 
@@ -12,7 +12,7 @@ Aggressive promotional spam and hostile token price debates.
 
 Google Jigsaw has announced that the **Google Perspective API will be permanently shut down on December 31, 2026**. Continued reliance on legacy toxicity classifiers introduces immediate operational risk, service outage, and moderation queue failure.
 
-Beyond Likes provides a **1:1 bitwise drop-in replacement**:
+Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 * **Zero Engineering Rewrites:** Consumes identical `POST /comments:analyze` JSON payloads and returns identical Perspective response schemas (`attributeScores.TOXICITY.summaryScore.value`).
 * **From Reactive Censorship to Prosocial Guidance:** Moves beyond crude keyword filtering by evaluating Constructiveness, Epistemic Grounding, Civility, and Relevance in real time.
 * **Dialect & Technical Precision:** Eliminates false-positive bans on benign technical syntax ('kill process -9', 'fatal error') and clinical terminology.
@@ -20,11 +20,11 @@ Beyond Likes provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Official Perspective Sunset Cutover Certificate
-* **Certificate ID:** `CERT-BL-9C7D477F1C1B`
+* **Certificate ID:** `CERT-BL-81315730C266`
 * **Audit Verdict:** `CERTIFIED_CUTOVER_READY` (Verified 100% Drop-in Parity)
-* **Cryptographic Fingerprint (SHA-256):** `9c7d477f1c1b8f14e37342369a99f39e7c59f86831c80e8f18abdcf73c2840ac`
+* **Cryptographic Fingerprint (SHA-256):** `81315730c2663f89803cc4478babba00f48e5b397abdd181aba967f0da9485c4`
 * **Verification Battery Results:**
-  * Heuristic Gate SLA: **0.3 ms** (SLA < 1.0 ms)
+  * Heuristic Gate SLA: **0.24 ms** (SLA < 1.0 ms)
   * Hybrid Neural Engine SLA: **0.21 ms** (SLA < 25.0 ms)
   * Perspective Attribute Parity: **PASS** (100% Wire Schema Conformity)
   * False Positive Salvage: **PASS** (Constructive critiques preserved)
@@ -34,7 +34,7 @@ Beyond Likes provides a **1:1 bitwise drop-in replacement**:
 
 ## 3. Core Operational & Engineering SLA Metrics
 
-| Dimension | Legacy Google Perspective | Beyond Likes Engine | Production SLA Commitment |
+| Dimension | Legacy Google Perspective | Normative Intelligence Engine | Production SLA Commitment |
 | :--- | :--- | :--- | :--- |
 | **API Schema Parity** | v1alpha1 Schema | **100% Bitwise Parity** | Zero parser or client rewrites |
 | **Inference Latency** | 180ms – 320ms WAN roundtrip | **< 3.0 ms CPU Execution** | Sub-25ms SLA guarantee |
@@ -52,7 +52,7 @@ Beyond Likes provides a **1:1 bitwise drop-in replacement**:
 POST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=AIzaSy...
 ```
 
-### Beyond Likes Drop-in Endpoint
+### Normative Intelligence Drop-in Endpoint
 ```bash
 POST https://beyond-likes-platform.onrender.com/v1/comments:analyze
 Header: X-API-Key: org_coindesk_live_key
