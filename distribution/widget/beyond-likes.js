@@ -1,5 +1,5 @@
 /**
- * Beyond Likes Universal Embeddable Discourse Widget (v1.0)
+ * Normative Intelligence Universal Embeddable Discourse Widget (v1.0)
  * Drop-in <script> tag for any comment box, forum, or CMS.
  * Usage: <script src="http://localhost:8888/widget/beyond-likes.js" data-api="http://localhost:8888"></script>
  */
@@ -112,7 +112,7 @@
     container.className = "bl-widget-container";
     container.innerHTML = `
       <div class="bl-header">
-        <span class="bl-title">Beyond Likes Discourse Score</span>
+        <span class="bl-title">Normative Intelligence Score</span>
         <span class="bl-score-badge bl-badge-blue" id="bl-score">--</span>
       </div>
       <div class="bl-bars">
@@ -191,7 +191,7 @@
             sugBox.style.display = "none";
           }
         } catch (err) {
-          console.warn("Beyond Likes widget error:", err);
+          console.warn("Normative Intelligence widget error:", err);
         }
       }, 400);
     });

@@ -1,5 +1,5 @@
 /**
- * Beyond Likes In-Composer Discourse Assistant (Content Script)
+ * Normative Intelligence In-Composer Discourse Assistant (Content Script)
  * Attaches a floating prosocial score pill to textareas and contenteditable inputs.
  */
 
@@ -30,7 +30,7 @@ function createBadgeForInput(target) {
     transition: all 0.2s ease;
     display: none;
   `;
-  badge.innerText = "Beyond Likes: Ready";
+  badge.innerText = "Normative Intelligence: Ready";
 
   // Position relative to parent
   const parent = target.parentElement;
@@ -106,7 +106,7 @@ function createBadgeForInput(target) {
         tooltip.innerHTML = tipHtml;
 
       } catch (err) {
-        badge.innerText = "Beyond Likes: Offline";
+        badge.innerText = "Normative Intelligence: Offline";
         badge.style.color = "#8b949e";
       }
     }, 450);
@@ -120,4 +120,4 @@ function attachListeners() {
 
 setInterval(attachListeners, 2000);
 attachListeners();
-console.log("Beyond Likes Discourse Assistant Active.");
+console.log("Normative Intelligence Assistant Active.");

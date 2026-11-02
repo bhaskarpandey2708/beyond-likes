@@ -185,7 +185,7 @@
         },
         "responses": {
           "200": {
-            "description": "Google Perspective compatible response with Beyond Likes prosocial enrichment"
+            "description": "Google Perspective compatible response with Normative Intelligence prosocial enrichment"
           }
         }
       }
@@ -288,7 +288,7 @@
     "/v1/shadow-mirror": {
       "post": {
         "summary": "Dual-run shadow comparison against Perspective API",
-        "description": "Evaluates single or batch comments through both Perspective and Beyond Likes, tracking false positive rescues and stealth attack interceptions.",
+        "description": "Evaluates single or batch comments through both Perspective and Normative Intelligence, tracking false positive rescues and stealth attack interceptions.",
         "requestBody": {
           "required": true,
           "content": {

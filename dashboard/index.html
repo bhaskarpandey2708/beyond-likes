@@ -361,7 +361,7 @@
   <div class="topbar">
     <div class="brand">
       <i data-lucide="shield-check" style="color: var(--git-green-text);"></i>
-      <span>Normative AI</span>
+      <span>Normative Intelligence</span>
       <span class="brand-tag">v2.2-enterprise</span>
     </div>
 
@@ -582,7 +582,7 @@
                   <div style="font-size: 0.75rem; color: var(--text-muted);">Flat toxicity score; no normative guidance.</div>
                 </div>
                 <div style="background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 12px;">
-                  <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted);">New Beyond Likes Engine</div>
+                  <div style="font-size: 0.72rem; text-transform: uppercase; color: var(--text-muted);">Normative Intelligence Engine</div>
                   <div id="beyondlikes-val" style="font-size: 1.4rem; font-weight: 700; color: var(--git-green-text); margin: 4px 0;">--</div>
                   <div style="font-size: 0.75rem; color: var(--text-muted);">Prosocial guidance + 4-factor epistemic audit.</div>
                 </div>
@@ -1071,7 +1071,7 @@
               </div>
 
               <p style="font-size: 0.82rem; color: var(--text-muted); line-height: 1.4;">
-                Benchmark assumption: A human moderator manually reviews 45 comments per hour. Beyond Likes automatically approves safe/constructive replies and pre-filters toxic submissions, removing 65% of manual review fatigue.
+                Benchmark assumption: A human moderator manually reviews 45 comments per hour. Normative Intelligence automatically approves safe/constructive replies and pre-filters toxic submissions, removing 65% of manual review fatigue.
               </p>
             </div>
 
@@ -1170,7 +1170,7 @@
           <div>
             <div style="font-weight: 700; color: #fff; font-size: 1rem;">Google Perspective API Sunset: Permanent Shutdown on December 31, 2026</div>
             <div style="font-size: 0.82rem; color: var(--text-muted); margin-top: 2px;">
-              Run Beyond Likes in dual-run shadow mode alongside your production Perspective traffic. Validate 1:1 verdict parity, rescue false positives, and cutover with zero downtime.
+              Run Normative Intelligence in dual-run shadow mode alongside your production Perspective traffic. Validate 1:1 verdict parity, rescue false positives, and cutover with zero downtime.
             </div>
           </div>
         </div>
@@ -1219,7 +1219,7 @@
           <textarea id="shadow-input-text" style="width: 100%; height: 90px; background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 10px; color: #fff; font-family: inherit; font-size: 0.88rem; resize: vertical; margin-bottom: 12px;"></textarea>
           
           <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-            <span style="font-size: 0.75rem; color: var(--text-muted);">Simulates live execution across both Google Perspective API and Beyond Likes 4D Normative Engine.</span>
+            <span style="font-size: 0.75rem; color: var(--text-muted);">Simulates live execution across both Google Perspective API and Normative Intelligence Engine.</span>
             <button class="btn-action" style="padding: 8px 18px;" onclick="runShadowEvaluation()">
               <i data-lucide="play" style="width: 14px; height: 14px;"></i>
               <span>Run Dual-Run Shadow Evaluation</span>
@@ -1253,11 +1253,11 @@
                 </div>
               </div>
 
-              <!-- Beyond Likes 4D Normative Card -->
+              <!-- Normative Intelligence Card -->
               <div style="background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 16px;">
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
                   <div style="display: flex; align-items: center; gap: 8px;">
-                    <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">Beyond Likes 4D Normative</span>
+                    <span style="font-weight: 700; color: #fff; font-size: 0.95rem;">Normative Intelligence</span>
                     <span class="badge badge-green">Production</span>
                   </div>
                   <span id="shadow-beyond-verdict" class="badge badge-green">--</span>
@@ -1338,7 +1338,7 @@
         </div>
         <div class="panel-body">
           <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 16px;">
-            Beyond Likes provides a 100% schema-compatible drop-in adapter for Perspective API clients. You only need to update your endpoint URL — no JSON payload changes or SDK rewrites required.
+            Normative Intelligence provides a 100% schema-compatible drop-in adapter for Perspective API clients. You only need to update your endpoint URL — no JSON payload changes or SDK rewrites required.
           </p>
           <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px;">
             <div>
@@ -1350,8 +1350,8 @@ curl -X POST \
   -d '{"comment": {"text": "Hello"}, "requestedAttributes": {"TOXICITY": {}}}'</code></pre>
             </div>
             <div>
-              <div style="font-size: 0.75rem; font-weight: 700; color: var(--git-green-text); margin-bottom: 6px;">✅ AFTER: Beyond Likes Drop-in Endpoint (Sub-5ms Local)</div>
-              <pre style="background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-size: 0.78rem; color: #7ee787; overflow-x: auto;"><code># Beyond Likes Drop-in Endpoint (Zero Payload Change)
+              <div style="font-size: 0.75rem; font-weight: 700; color: var(--git-green-text); margin-bottom: 6px;">✅ AFTER: Normative Intelligence Drop-in Endpoint (Sub-5ms Local)</div>
+              <pre style="background: #0d1117; border: 1px solid var(--border); border-radius: 6px; padding: 12px; font-size: 0.78rem; color: #7ee787; overflow-x: auto;"><code># Normative Intelligence Drop-in Endpoint (Zero Payload Change)
 curl -X POST \
   "http://localhost:8888/v1/comments:analyze" \
   -H "Content-Type: application/json" \
@@ -1763,7 +1763,7 @@ curl -X POST \
         </div>
         <div class="panel-body">
           <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 14px;">
-            Replays historical comment corpora with legacy Google Perspective toxicity scores against the Beyond Likes multi-tier pipeline to quantify verdict parity, false-positive salvage %, stealth bad-faith catches, and estimated moderator hours saved.
+            Replays historical comment corpora with legacy Google Perspective toxicity scores against the Normative Intelligence multi-tier pipeline to quantify verdict parity, false-positive salvage %, stealth bad-faith catches, and estimated moderator hours saved.
           </p>
 
           <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 16px; margin-bottom: 14px;">
@@ -3491,7 +3491,7 @@ curl -X POST \
         pVerdictBadge.innerText = data.perspective.verdict;
         pVerdictBadge.className = 'badge ' + (data.perspective.verdict === 'BLOCK_TOXIC' ? 'badge-red' : (data.perspective.verdict === 'REVIEW' ? 'badge-amber' : 'badge-green'));
 
-        // Beyond Likes
+        // Normative Intelligence
         document.getElementById('shadow-beyond-comp').innerText = data.beyond_likes.composite_score;
         document.getElementById('shadow-beyond-civ').innerText = data.beyond_likes.civility;
         document.getElementById('shadow-beyond-const').innerText = data.beyond_likes.constructiveness;
@@ -4691,7 +4691,7 @@ I am writing regarding ${target.name}'s community architecture and the upcoming 
 
 ${target.editorial_hook}
 
-We have developed Beyond Likes (based on UC Berkeley EECS-2025-55 research), an in-composer prosocial intelligence engine and drop-in Perspective replacement:
+We have developed Normative Intelligence (based on UC Berkeley EECS-2025-55 research), an in-composer prosocial intelligence engine and drop-in Perspective replacement:
 • 1:1 API compatibility with the Perspective format (zero client code changes)
 • Replaces crude keyword censorship with constructive, normative feedback
 • Calibrated to handle ${volFormatted} comments/month on our ${planUpper} tier
@@ -4703,7 +4703,7 @@ ${packetUrl}
 Are you available for a brief 15-minute briefing next Tuesday or Wednesday to review your migration timeline and test the dual-run shadow mirror?
 
 Best regards,
-Beyond Likes Commercial Engineering Team`;
+Normative Intelligence Commercial Engineering Team`;
     }
 
     function copyComposerSubject() {

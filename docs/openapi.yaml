@@ -133,7 +133,7 @@ paths:
                   type: object
       responses:
         '200':
-          description: Google Perspective compatible response with Beyond Likes prosocial
+          description: Google Perspective compatible response with Normative Intelligence prosocial
             enrichment
   /v1/thread:analyze:
     post:
@@ -204,7 +204,7 @@ paths:
     post:
       summary: Dual-run shadow comparison against Perspective API
       description: Evaluates single or batch comments through both Perspective and
-        Beyond Likes, tracking false positive rescues and stealth attack interceptions.
+        Normative Intelligence, tracking false positive rescues and stealth attack interceptions.
       requestBody:
         required: true
         content:

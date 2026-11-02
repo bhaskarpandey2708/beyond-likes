@@ -1,20 +1,20 @@
 # Google Perspective API Drop-in Migration Guide
 
 > **Sunset Notice:** Google Perspective API will be completely shut down on **December 31, 2026**.  
-> Beyond Likes provides a 100% schema-compatible drop-in endpoint with zero code changes required in your parsing logic.
+> Normative Intelligence provides a 100% schema-compatible drop-in endpoint with zero code changes required in your parsing logic.
 
 ---
 
 ## ⚡ The 1-Line Migration
 
-Replace the Google endpoint URL with the Beyond Likes endpoint:
+Replace the Google endpoint URL with the Normative Intelligence endpoint:
 
 ### Before (Google Perspective API)
 ```text
 POST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=YOUR_GOOGLE_KEY
 ```
 
-### After (Beyond Likes Engine)
+### After (Normative Intelligence Engine)
 ```text
 POST https://api.beyondlikes.io/v1/comments:analyze (or http://localhost:8888/v1/comments:analyze)
 ```
@@ -31,7 +31,7 @@ import requests
 # OLD:
 # url = "https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=AIzaSy..."
 
-# NEW (Beyond Likes Drop-in):
+# NEW (Normative Intelligence Drop-in):
 url = "http://localhost:8888/v1/comments:analyze"
 
 payload = {
@@ -50,9 +50,9 @@ response = requests.post(url, json=payload).json()
 toxicity = response["attributeScores"]["TOXICITY"]["summaryScore"]["value"]
 print(f"Toxicity Probability: {toxicity * 100:.1f}%")
 
-# BONUS: Access Beyond Likes Prosocial Guidance Metadata:
+# BONUS: Access Normative Intelligence Prosocial Guidance Metadata:
 meta = response.get("_beyond_likes_metadata", {})
-print(f"Beyond Likes Quality Score: {meta.get('composite_quality_score')}/100")
+print(f"Normative Intelligence Quality Score: {meta.get('composite_quality_score')}/100")
 ```
 
 ---
@@ -60,7 +60,7 @@ print(f"Beyond Likes Quality Score: {meta.get('composite_quality_score')}/100")
 ### 2. Node.js / JavaScript (`fetch`)
 
 ```javascript
-// NEW (Beyond Likes Drop-in):
+// NEW (Normative Intelligence Drop-in):
 const res = await fetch("http://localhost:8888/v1/comments:analyze", {
   method: "POST",
   headers: { "Content-Type": "application/json" },
@@ -91,7 +91,7 @@ curl -X POST http://localhost:8888/v1/comments:analyze \
 
 ## 🎯 What You Gain Beyond Google Perspective
 
-| Feature | Google Perspective (Legacy) | Beyond Likes Engine |
+| Feature | Google Perspective (Legacy) | Normative Intelligence Engine |
 | :--- | :--- | :--- |
 | **API Availability** | ❌ Sunsetting Dec 31, 2026 | ✅ Supported & Actively Maintained |
 | **Moderation Type** | Purely Punitive (Flag & Delete) | Normative & Elevating (Guidance) |

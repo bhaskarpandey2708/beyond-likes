@@ -1,10 +1,10 @@
 <?php
 /**
- * Plugin Name: Beyond Likes Discourse Intelligence
+ * Plugin Name: Normative Intelligence Discourse Intelligence
  * Plugin URI: https://beyondlikes.io
  * Description: Replaces legacy Perspective API with prosocial normative discourse scoring and constructive feedback.
  * Version: 1.0.0
- * Author: Beyond Likes Team
+ * Author: Normative Intelligence Team
  * License: GPLv2 or later
  */
 

@@ -63,7 +63,7 @@ LIVE_STREAM_POOL = [
     {"source": "Substack", "author": "economic_analyst", "text": "Why aren't you mentioning the mining labor in Chile? What about that?"}
 ]
 
-class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
+class NormativeIntelligenceAPIHandler(BaseHTTPRequestHandler):
 
     def _send_json(self, status_code: int, data: dict):
         body = json.dumps(data, indent=2).encode("utf-8")
@@ -604,7 +604,7 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
             manual_hours_needed = monthly_comments / 45.0
             manual_cost_usd = manual_hours_needed * mod_wage_usd
 
-            # Beyond Likes auto-processes 70% of comments cleanly
+            # Normative Intelligence auto-processes 70% of comments cleanly
             hours_saved = manual_hours_needed * 0.65
             dollars_saved = hours_saved * mod_wage_usd
 
@@ -1315,11 +1315,11 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
             self._send_json(404, {"error": f"Path '{path}' not found"})
 
     def log_message(self, format, *args):
-        sys.stderr.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] BeyondLikesAPI {args[0]} {args[1]}\n")
+        sys.stderr.write(f"[{time.strftime('%Y-%m-%d %H:%M:%S')}] NormativeIntelligenceAPI {args[0]} {args[1]}\n")
 
 def run_server():
     server_address = (HOST, PORT)
-    httpd = ThreadingHTTPServer(server_address, BeyondLikesAPIHandler)
+    httpd = ThreadingHTTPServer(server_address, NormativeIntelligenceAPIHandler)
     print("\n" + "="*70)
     print(f"🚀 Normative Intelligence Platform (Port {PORT})")
     print(f"📡 Dashboard & UI/UX Studio: http://localhost:{PORT}/")

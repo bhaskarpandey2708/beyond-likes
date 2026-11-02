@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Beyond Likes: Discourse Assistant",
+  "name": "Normative Intelligence Assistant",
   "version": "1.0.0",
   "description": "Real-time prosocial discourse evaluation and constructive rephrasing for comment boxes.",
   "permissions": [
@@ -18,6 +18,6 @@
   ],
   "action": {
     "default_popup": "popup.html",
-    "default_title": "Beyond Likes Discourse Assistant"
+    "default_title": "Normative Intelligence Assistant"
   }
 }

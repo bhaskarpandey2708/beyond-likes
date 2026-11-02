@@ -1,6 +1,6 @@
 # Normative Intelligence — Master Pitch Deck & Presentation Guide
 
-**Company:** Normative Intelligence (Normative AI)  
+**Company:** Normative Intelligence  
 **Pedigree:** UC Berkeley EECS-2025-55 Spinout  
 **Presentation Mode:** 12 Widescreen Slides (16:9)  
 **Interactive Viewer:** [https://beyond-likes-platform.onrender.com/deck](https://beyond-likes-platform.onrender.com/deck)  

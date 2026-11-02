@@ -1,7 +1,7 @@
 # name: discourse-beyond-likes
 # about: Prosocial discourse scoring and normative in-composer guidance for Discourse forums
 # version: 1.0.0
-# authors: Beyond Likes Team
+# authors: Normative Intelligence Team
 # url: https://github.com/beyond-likes/discourse-plugin
 
 enabled_site_setting :beyond_likes_enabled
@@ -10,7 +10,7 @@ after_initialize do
   on(:post_created) do |post, opts, user|
     return unless SiteSetting.beyond_likes_enabled
 
-    # Call Beyond Likes Webhook
+    # Call Normative Intelligence Webhook
     begin
       uri = URI.parse(SiteSetting.beyond_likes_api_url || "http://localhost:8888/v1/webhooks/discourse")
       http = Net::HTTP.new(uri.host, uri.port)
@@ -29,7 +29,7 @@ after_initialize do
         post.save_custom_fields
       end
     rescue => e
-      Rails.logger.warn("Beyond Likes Discourse error: #{e.message}")
+      Rails.logger.warn("Normative Intelligence Discourse error: #{e.message}")
     end
   end
 end
