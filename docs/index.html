@@ -427,7 +427,451 @@
   </main>
 
   <script>
-    const ENDPOINTS = [{"category": "Google Perspective API Drop-in", "id": "perspective-dropin", "method": "POST", "path": "/v1/comments:analyze", "summary": "1:1 Google Perspective Drop-in Replacement", "desc": "Bitwise drop-in replacement for Google Perspective API (sunset December 31, 2026). Consumes exact Perspective JSON payloads and returns identical schema with attributeScores.TOXICITY.", "request_body": {"comment": {"text": "This article presents interesting arguments regarding generative AI moderation."}, "requestedAttributes": {"TOXICITY": {}}}, "response_sample": {"attributeScores": {"TOXICITY": {"summaryScore": {"value": 0.023, "type": "PROBABILITY"}}}, "languages": ["en"], "detectedLanguages": ["en"]}}, {"category": "Core Normative Scoring", "id": "score-single", "method": "POST", "path": "/v1/score", "summary": "Evaluate Single Comment (4D Normative Rubric)", "desc": "Evaluates text across 4 prosocial dimensions: Constructiveness (35%), Civility (25%), Persuasiveness (20%), and Relevance (20%). Returns composite score (0-100), automated triage status, and syntactic analysis.", "request_body": {"text": "While I respect the author's viewpoint, the empirical benchmarks from the 2026 IEEE study show that solid-state batteries reduced thermal runaway by 32%.", "policy": "newsroom", "backend": "hybrid"}, "response_sample": {"composite_score": 78.4, "status": "APPROVED_PROMOTED", "dimensions": {"constructiveness": 84.0, "civility": 92.0, "persuasiveness": 75.0, "relevance": 65.0}, "perspective_compatibility": {"inferred_toxicity": 0.035, "toxicity_status": "CLEAN"}, "latency_ms": 1.2}}, {"category": "Core Normative Scoring", "id": "score-batch", "method": "POST", "path": "/v1/batch-score", "summary": "Batch Score Comment Corpus", "desc": "High-throughput batch evaluation of multiple comments in a single HTTP request with parallel CPU execution.", "request_body": {"comments": [{"id": "c1", "text": "Solid-state electrolytes improved efficiency by 14.8% in testing."}, {"id": "c2", "text": "You are a complete clown and your article is garbage."}], "policy": "newsroom"}, "response_sample": {"results": [{"id": "c1", "composite_score": 76.5, "status": "APPROVED_PROMOTED", "toxicity": 0.02}, {"id": "c2", "composite_score": 24.1, "status": "FLAGGED_UNCIVIL", "toxicity": 0.94}], "count": 2, "total_latency_ms": 2.8}}, {"category": "Prosocial In-Composer Feedback", "id": "rephrase-advisor", "method": "POST", "path": "/v1/rephrase", "summary": "In-Composer Constructive Rephrase Advisor", "desc": "Generates real-time, non-punitive Git-style diff suggestions that coach heated or low-effort commenters to substantiate their points before posting.", "request_body": {"text": "Your benchmarks are completely broken and make zero sense."}, "response_sample": {"original_text": "Your benchmarks are completely broken and make zero sense.", "suggestions": ["Could you clarify the methodology used in these benchmarks? The throughput measurements seem inconsistent with standard baseline configurations."], "lift_estimate": {"original_civility": 42.0, "suggested_civility": 88.0, "civility_gain": 46.0}}}, {"category": "Conversational Thread Analysis", "id": "thread-analyze", "method": "POST", "path": "/v1/thread:analyze", "summary": "Multi-Turn Thread & Flamewar Trajectory Analysis", "desc": "Evaluates a sequence of comments in a thread to calculate conversational velocity, polarization indices, and early derailment warnings.", "request_body": {"comments": [{"author": "alice", "text": "I think this implementation has memory leak risks."}, {"author": "bob", "text": "Shut up, you don't even know what malloc is."}, {"author": "alice", "text": "Here is the valgrind trace showing the leak on line 42."}]}, "response_sample": {"thread_health_score": 58.2, "flamewar_risk": "MODERATE", "polarization_index": 0.45, "recommended_action": "ISSUE_IN_LINE_NUDGE"}}, {"category": "Dual-Run Shadow Mirror", "id": "shadow-mirror", "method": "POST", "path": "/v1/shadow-mirror", "summary": "Dual-Run Shadow Evaluation (Perspective vs Beyond Likes)", "desc": "Runs simultaneous dual-evaluation against Google Perspective and Beyond Likes, categorizing discrepancies into Parity, False Positive Salvages, and Stealth Harassment Interceptions.", "request_body": {"text": "You need to kill process -9 on PID 14022 immediately to resolve the memory leak.", "policy": "newsroom"}, "response_sample": {"perspective": {"toxicity_score": 0.02, "verdict": "PASS_CLEAN", "latency_ms": 195.0}, "beyond_likes": {"composite_score": 62.4, "status": "STANDARD_PUBLISH", "latency_ms": 0.22}, "comparison": {"verdict_agreement": true, "discrepancy_category": "PARITY", "latency_advantage_factor": "390.4x faster"}}}, {"category": "Dual-Run Shadow Mirror", "id": "shadow-stats", "method": "GET", "path": "/v1/shadow-mirror/stats", "summary": "Real-time Shadow Cutover Readiness Statistics", "desc": "Returns aggregate dual-run shadow statistics, agreement rates, false positive rescue counts, and average latency speedup metrics.", "request_body": null, "response_sample": {"total_dual_runs": 142, "agreement_rate_pct": 94.2, "false_positives_salvaged": 18, "stealth_evasions_intercepted": 9, "average_speedup": "342.5x faster"}}, {"category": "EU DSA Statutory Compliance", "id": "dsa-report", "method": "GET", "path": "/v1/compliance/dsa-report", "summary": "EU Digital Services Act Transparency Report (Articles 15, 20 & 24)", "desc": "Generates a certified statutory transparency audit report detailing total automated interventions, statement-of-reasons compliance, and internal appeal resolution metrics.", "request_body": null, "response_sample": {"regulation": "EU Digital Services Act (Regulation EU 2022/2065)", "reporting_period": "Past 30 Days", "article_15_statements_issued": 1840, "article_20_internal_complaints_received": 42, "article_20_complaints_resolved": 42, "reversal_rate_pct": 4.8, "statutory_compliance_status": "FULLY_COMPLIANT"}}, {"category": "EU DSA Statutory Compliance", "id": "appeals-submit", "method": "POST", "path": "/v1/appeals:submit", "summary": "Submit Moderation Appeal (DSA Article 20)", "desc": "Submits a formal user appeal contesting an automated moderation triage decision, with algorithmic re-review and audit tracking.", "request_body": {"evaluation_id": "eval_8892a01", "author_id": "user_491", "justification": "The comment cited an oncology study and was mistakenly flagged due to medical terminology."}, "response_sample": {"appeal_id": "apl_37af8129", "status": "UNDER_REVIEW", "sla_hours_remaining": 48.0, "re_review_timestamp": 1793524800}}, {"category": "Enterprise Proposals & Pilots", "id": "proposals-packets", "method": "GET", "path": "/v1/proposals/packets", "summary": "List All 20 Client Proposal & Cutover Packets", "desc": "Retrieves the master catalog of all 20 qualified prospective publishers with links to their personalized technical migration briefs and Cutover Certificates.", "request_body": null, "response_sample": {"total": 20, "packets": [{"slug": "the-verge", "name": "The Verge / Vox Media", "plan": "enterprise", "packet_url": "/v1/proposals/packet?client=the-verge"}, {"slug": "ars-technica", "name": "Ars Technica", "plan": "growth", "packet_url": "/v1/proposals/packet?client=ars-technica"}]}}, {"category": "Enterprise Proposals & Pilots", "id": "proposals-packet", "method": "GET", "path": "/v1/proposals/packet", "summary": "View Client Proposal & Cutover Packet (HTML or JSON)", "desc": "Retrieves the complete technical cutover packet for a specific publisher (e.g. ?client=the-verge or ?client=ars-technica). Add &format=json for raw schema metadata.", "request_body": null, "response_sample": {"client_name": "The Verge / Vox Media", "slug": "the-verge", "plan": "enterprise", "certificate_id": "CERT-BL-A3E2BA890100", "sha256_fingerprint": "a3e2ba890100...", "checkout_url": "https://checkout.stripe.com/c/pay/cs_live_..."}}, {"category": "Webhooks & Outbound Dispatch", "id": "webhooks-sub", "method": "POST", "path": "/v1/webhooks/subscriptions", "summary": "Register Outbound Webhook Subscription", "desc": "Subscribes an external endpoint to real-time HMAC-SHA256 cryptographically signed webhook alerts (e.g. comment.flagged, appeal.created, contract.signed).", "request_body": {"url": "https://api.yourdomain.com/webhooks/beyond-likes", "events": ["comment.flagged", "appeal.created"], "secret": "your_hmac_signing_secret"}, "response_sample": {"status": "REGISTERED", "subscription_id": "wh_sub_47afc091ac49c272", "url": "https://api.yourdomain.com/webhooks/beyond-likes", "events": ["comment.flagged", "appeal.created"]}}, {"category": "Client Integration Packages", "id": "downloads-catalog", "method": "GET", "path": "/v1/downloads", "summary": "List Downloadable Integration Packages", "desc": "Returns catalog of pre-packaged, zero-dependency client integration bundles (Chrome Extension, WordPress Plugin, Discourse Plugin, Universal Script Widget).", "request_body": null, "response_sample": {"packages": [{"id": "chrome-extension", "name": "In-Composer Chrome Extension (MV3)", "download_url": "/v1/downloads/chrome-extension"}, {"id": "wordpress-plugin", "name": "WordPress Moderation Plugin", "download_url": "/v1/downloads/wordpress-plugin"}, {"id": "discourse-plugin", "name": "Discourse AI Moderation Plugin", "download_url": "/v1/downloads/discourse-plugin"}, {"id": "widget", "name": "Universal Script Widget", "download_url": "/v1/downloads/widget"}]}}, {"category": "Platform Telemetry & Health", "id": "analytics-trends", "method": "GET", "path": "/v1/analytics/trends", "summary": "Real-time Discourse Trends & Health Telemetry", "desc": "Returns rolling timeseries metrics, discourse health index (0-100), constructiveness lift, toxicity rates, and health trend trajectory.", "request_body": null, "response_sample": {"window_hours": 24, "total_buckets": 6, "summary": {"current_health_index": 78.4, "current_toxicity_rate": 2.1, "current_promotion_rate": 34.0, "health_trend": "HEALTHY"}}}];
+    const ENDPOINTS = [
+  {
+    "category": "Google Perspective API Drop-in",
+    "id": "perspective-dropin",
+    "method": "POST",
+    "path": "/v1/comments:analyze",
+    "summary": "1:1 Google Perspective Drop-in Replacement",
+    "desc": "Bitwise drop-in replacement for Google Perspective API (sunset December 31, 2026). Consumes exact Perspective JSON payloads and returns identical schema with attributeScores.TOXICITY.",
+    "request_body": {
+      "comment": {
+        "text": "This article presents interesting arguments regarding generative AI moderation."
+      },
+      "requestedAttributes": {
+        "TOXICITY": {}
+      }
+    },
+    "response_sample": {
+      "attributeScores": {
+        "TOXICITY": {
+          "summaryScore": {
+            "value": 0.023,
+            "type": "PROBABILITY"
+          }
+        }
+      },
+      "languages": [
+        "en"
+      ],
+      "detectedLanguages": [
+        "en"
+      ]
+    }
+  },
+  {
+    "category": "Core Normative Scoring",
+    "id": "score-single",
+    "method": "POST",
+    "path": "/v1/score",
+    "summary": "Evaluate Single Comment (4D Normative Rubric)",
+    "desc": "Evaluates text across 4 prosocial dimensions: Constructiveness (35%), Civility (25%), Persuasiveness (20%), and Relevance (20%). Returns composite score (0-100), automated triage status, and syntactic analysis.",
+    "request_body": {
+      "text": "While I respect the author's viewpoint, the empirical benchmarks from the 2026 IEEE study show that solid-state batteries reduced thermal runaway by 32%.",
+      "policy": "newsroom",
+      "backend": "hybrid"
+    },
+    "response_sample": {
+      "composite_score": 78.4,
+      "status": "APPROVED_PROMOTED",
+      "dimensions": {
+        "constructiveness": 84.0,
+        "civility": 92.0,
+        "persuasiveness": 75.0,
+        "relevance": 65.0
+      },
+      "perspective_compatibility": {
+        "inferred_toxicity": 0.035,
+        "toxicity_status": "CLEAN"
+      },
+      "latency_ms": 1.2
+    }
+  },
+  {
+    "category": "Core Normative Scoring",
+    "id": "score-batch",
+    "method": "POST",
+    "path": "/v1/batch-score",
+    "summary": "Batch Score Comment Corpus",
+    "desc": "High-throughput batch evaluation of multiple comments in a single HTTP request with parallel CPU execution.",
+    "request_body": {
+      "comments": [
+        {
+          "id": "c1",
+          "text": "Solid-state electrolytes improved efficiency by 14.8% in testing."
+        },
+        {
+          "id": "c2",
+          "text": "You are a complete clown and your article is garbage."
+        }
+      ],
+      "policy": "newsroom"
+    },
+    "response_sample": {
+      "results": [
+        {
+          "id": "c1",
+          "composite_score": 76.5,
+          "status": "APPROVED_PROMOTED",
+          "toxicity": 0.02
+        },
+        {
+          "id": "c2",
+          "composite_score": 24.1,
+          "status": "FLAGGED_UNCIVIL",
+          "toxicity": 0.94
+        }
+      ],
+      "count": 2,
+      "total_latency_ms": 2.8
+    }
+  },
+  {
+    "category": "Prosocial In-Composer Feedback",
+    "id": "rephrase-advisor",
+    "method": "POST",
+    "path": "/v1/rephrase",
+    "summary": "In-Composer Constructive Rephrase Advisor",
+    "desc": "Generates real-time, non-punitive Git-style diff suggestions that coach heated or low-effort commenters to substantiate their points before posting.",
+    "request_body": {
+      "text": "Your benchmarks are completely broken and make zero sense."
+    },
+    "response_sample": {
+      "original_text": "Your benchmarks are completely broken and make zero sense.",
+      "suggestions": [
+        "Could you clarify the methodology used in these benchmarks? The throughput measurements seem inconsistent with standard baseline configurations."
+      ],
+      "lift_estimate": {
+        "original_civility": 42.0,
+        "suggested_civility": 88.0,
+        "civility_gain": 46.0
+      }
+    }
+  },
+  {
+    "category": "Conversational Thread Analysis",
+    "id": "thread-analyze",
+    "method": "POST",
+    "path": "/v1/thread:analyze",
+    "summary": "Multi-Turn Thread & Flamewar Trajectory Analysis",
+    "desc": "Evaluates a sequence of comments in a thread to calculate conversational velocity, polarization indices, and early derailment warnings.",
+    "request_body": {
+      "comments": [
+        {
+          "author": "alice",
+          "text": "I think this implementation has memory leak risks."
+        },
+        {
+          "author": "bob",
+          "text": "Shut up, you don't even know what malloc is."
+        },
+        {
+          "author": "alice",
+          "text": "Here is the valgrind trace showing the leak on line 42."
+        }
+      ]
+    },
+    "response_sample": {
+      "thread_health_score": 58.2,
+      "flamewar_risk": "MODERATE",
+      "polarization_index": 0.45,
+      "recommended_action": "ISSUE_IN_LINE_NUDGE"
+    }
+  },
+  {
+    "category": "Dual-Run Shadow Mirror",
+    "id": "shadow-mirror",
+    "method": "POST",
+    "path": "/v1/shadow-mirror",
+    "summary": "Dual-Run Shadow Evaluation (Perspective vs Beyond Likes)",
+    "desc": "Runs simultaneous dual-evaluation against Google Perspective and Beyond Likes, categorizing discrepancies into Parity, False Positive Salvages, and Stealth Harassment Interceptions.",
+    "request_body": {
+      "text": "You need to kill process -9 on PID 14022 immediately to resolve the memory leak.",
+      "policy": "newsroom"
+    },
+    "response_sample": {
+      "perspective": {
+        "toxicity_score": 0.02,
+        "verdict": "PASS_CLEAN",
+        "latency_ms": 195.0
+      },
+      "beyond_likes": {
+        "composite_score": 62.4,
+        "status": "STANDARD_PUBLISH",
+        "latency_ms": 0.22
+      },
+      "comparison": {
+        "verdict_agreement": true,
+        "discrepancy_category": "PARITY",
+        "latency_advantage_factor": "390.4x faster"
+      }
+    }
+  },
+  {
+    "category": "Dual-Run Shadow Mirror",
+    "id": "shadow-stats",
+    "method": "GET",
+    "path": "/v1/shadow-mirror/stats",
+    "summary": "Real-time Shadow Cutover Readiness Statistics",
+    "desc": "Returns aggregate dual-run shadow statistics, agreement rates, false positive rescue counts, and average latency speedup metrics.",
+    "request_body": null,
+    "response_sample": {
+      "total_dual_runs": 142,
+      "agreement_rate_pct": 94.2,
+      "false_positives_salvaged": 18,
+      "stealth_evasions_intercepted": 9,
+      "average_speedup": "342.5x faster"
+    }
+  },
+  {
+    "category": "EU DSA Statutory Compliance",
+    "id": "dsa-report",
+    "method": "GET",
+    "path": "/v1/compliance/dsa-report",
+    "summary": "EU Digital Services Act Transparency Report (Articles 15, 20 & 24)",
+    "desc": "Generates a certified statutory transparency audit report detailing total automated interventions, statement-of-reasons compliance, and internal appeal resolution metrics.",
+    "request_body": null,
+    "response_sample": {
+      "regulation": "EU Digital Services Act (Regulation EU 2022/2065)",
+      "reporting_period": "Past 30 Days",
+      "article_15_statements_issued": 1840,
+      "article_20_internal_complaints_received": 42,
+      "article_20_complaints_resolved": 42,
+      "reversal_rate_pct": 4.8,
+      "statutory_compliance_status": "FULLY_COMPLIANT"
+    }
+  },
+  {
+    "category": "EU DSA Statutory Compliance",
+    "id": "appeals-submit",
+    "method": "POST",
+    "path": "/v1/appeals:submit",
+    "summary": "Submit Moderation Appeal (DSA Article 20)",
+    "desc": "Submits a formal user appeal contesting an automated moderation triage decision, with algorithmic re-review and audit tracking.",
+    "request_body": {
+      "evaluation_id": "eval_8892a01",
+      "author_id": "user_491",
+      "reason": "The comment cited an oncology study and was mistakenly flagged due to medical terminology."
+    },
+    "response_sample": {
+      "appeal_id": "apl_37af8129",
+      "status": "UNDER_REVIEW",
+      "sla_hours_remaining": 48.0,
+      "re_review_timestamp": 1793524800
+    }
+  },
+  {
+    "category": "Enterprise Proposals & Pilots",
+    "id": "proposals-packets",
+    "method": "GET",
+    "path": "/v1/proposals/packets",
+    "summary": "List All 20 Client Proposal & Cutover Packets",
+    "desc": "Retrieves the master catalog of all 20 qualified prospective publishers with links to their personalized technical migration briefs and Cutover Certificates.",
+    "request_body": null,
+    "response_sample": {
+      "total": 20,
+      "packets": [
+        {
+          "slug": "the-verge",
+          "name": "The Verge / Vox Media",
+          "plan": "enterprise",
+          "packet_url": "/v1/proposals/packet?client=the-verge"
+        },
+        {
+          "slug": "ars-technica",
+          "name": "Ars Technica",
+          "plan": "growth",
+          "packet_url": "/v1/proposals/packet?client=ars-technica"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Enterprise Proposals & Pilots",
+    "id": "proposals-packet",
+    "method": "GET",
+    "path": "/v1/proposals/packet?client=the-verge&format=json",
+    "summary": "View Client Proposal Packet (JSON / Cutover Certificate)",
+    "desc": "Retrieves machine-readable JSON metadata for the client cutover packet, including cryptographic certificate, SLA benchmarks, and Stripe checkout URL.",
+    "request_body": null,
+    "response_sample": {
+      "client_name": "The Verge / Vox Media",
+      "slug": "the-verge",
+      "plan": "enterprise",
+      "certificate_id": "CERT-BL-A3E2BA890100",
+      "sha256_fingerprint": "a3e2ba890100...",
+      "checkout_url": "https://checkout.stripe.com/c/pay/cs_live_..."
+    }
+  },
+  {
+    "category": "Webhooks & Outbound Dispatch",
+    "id": "webhooks-sub",
+    "method": "POST",
+    "path": "/v1/webhooks/subscriptions",
+    "summary": "Register Outbound Webhook Subscription",
+    "desc": "Subscribes an external endpoint to real-time HMAC-SHA256 cryptographically signed webhook alerts (e.g. comment.flagged, appeal.created, contract.signed).",
+    "request_body": {
+      "url": "https://api.yourdomain.com/webhooks/beyond-likes",
+      "events": [
+        "comment.flagged",
+        "appeal.created"
+      ],
+      "secret": "your_hmac_signing_secret"
+    },
+    "response_sample": {
+      "status": "REGISTERED",
+      "subscription_id": "wh_sub_47afc091ac49c272",
+      "url": "https://api.yourdomain.com/webhooks/beyond-likes",
+      "events": [
+        "comment.flagged",
+        "appeal.created"
+      ]
+    }
+  },
+  {
+    "category": "Client Integration Packages",
+    "id": "downloads-catalog",
+    "method": "GET",
+    "path": "/v1/downloads",
+    "summary": "List Downloadable Integration Packages",
+    "desc": "Returns catalog of pre-packaged, zero-dependency client integration bundles (Chrome Extension, WordPress Plugin, Discourse Plugin, Universal Script Widget).",
+    "request_body": null,
+    "response_sample": {
+      "packages": [
+        {
+          "id": "chrome-extension",
+          "name": "In-Composer Chrome Extension (MV3)",
+          "download_url": "/v1/downloads/chrome-extension"
+        },
+        {
+          "id": "wordpress-plugin",
+          "name": "WordPress Moderation Plugin",
+          "download_url": "/v1/downloads/wordpress-plugin"
+        },
+        {
+          "id": "discourse-plugin",
+          "name": "Discourse AI Moderation Plugin",
+          "download_url": "/v1/downloads/discourse-plugin"
+        },
+        {
+          "id": "widget",
+          "name": "Universal Script Widget",
+          "download_url": "/v1/downloads/widget"
+        }
+      ]
+    }
+  },
+  {
+    "category": "Platform Telemetry & Health",
+    "id": "analytics-trends",
+    "method": "GET",
+    "path": "/v1/analytics/trends",
+    "summary": "Real-time Discourse Trends & Health Telemetry",
+    "desc": "Returns rolling timeseries metrics, discourse health index (0-100), constructiveness lift, toxicity rates, and health trend trajectory.",
+    "request_body": null,
+    "response_sample": {
+      "window_hours": 24,
+      "total_buckets": 6,
+      "summary": {
+        "current_health_index": 78.4,
+        "current_toxicity_rate": 2.1,
+        "current_promotion_rate": 34.0,
+        "health_trend": "HEALTHY"
+      }
+    }
+  },
+  {
+    "category": "Enterprise Proposals & Pilots",
+    "id": "proposals-generate",
+    "method": "POST",
+    "path": "/v1/proposals/generate",
+    "summary": "Generate Dynamic Architecture & TCO Proposal",
+    "desc": "Calculates real-time moderator labor savings, ROI, and payback days, generating complete Markdown and HTML migration packets.",
+    "request_body": {
+      "client_name": "The Verge / Vox Media",
+      "monthly_volume": 350000,
+      "hourly_wage": 32.0,
+      "plan": "enterprise"
+    },
+    "response_sample": {
+      "client_name": "The Verge / Vox Media",
+      "plan": "enterprise",
+      "metrics": {
+        "annual_net_savings_usd": 23172.0,
+        "roi_percentage": 129.0,
+        "payback_days": 159.5
+      }
+    }
+  },
+  {
+    "category": "Empirical Benchmarks & Parity",
+    "id": "benchmarks-results",
+    "method": "GET",
+    "path": "/v1/benchmarks/results",
+    "summary": "Empirical Benchmark Results (Document NI-TR-2026-B01)",
+    "desc": "Returns raw empirical comparative evaluation matrix against Google Perspective API across 45 corpora and 1,000 latency distribution rounds.",
+    "request_body": null,
+    "response_sample": {
+      "document_id": "NI-TR-2026-B01",
+      "summary": {
+        "technical_fpr_delta": "-53.3%",
+        "normative_technical_fpr": 0.0,
+        "perspective_technical_fpr": 0.533,
+        "latency_median_speedup": 981.8
+      }
+    }
+  },
+  {
+    "category": "Platform Telemetry & Health",
+    "id": "roi-calculator",
+    "method": "GET",
+    "path": "/v1/roi-calculator",
+    "summary": "Publisher Moderation ROI Calculator",
+    "desc": "Calculates operational savings and payback timeframes based on volume.",
+    "request_body": null,
+    "response_sample": {
+      "status": "success",
+      "calculated_at": 1793524800,
+      "default_scenario": {
+        "monthly_volume": 100000,
+        "net_annual_savings_usd": 23172.0
+      }
+    }
+  },
+  {
+    "category": "Platform Telemetry & Health",
+    "id": "policies-list",
+    "method": "GET",
+    "path": "/v1/policies",
+    "summary": "List Active Moderation Policies",
+    "desc": "Returns standard and custom policy rubric profiles with dimensional weights (constructiveness, civility, epistemic grounding, relevance).",
+    "request_body": null,
+    "response_sample": {
+      "policies": [
+        "newsroom",
+        "academic",
+        "gaming",
+        "technical_forum"
+      ],
+      "total_policies": 4
+    }
+  },
+  {
+    "category": "Platform Telemetry & Health",
+    "id": "health-check",
+    "method": "GET",
+    "path": "/v1/health",
+    "summary": "Platform Health & Parity Verification",
+    "desc": "Verifies uptime, database connection, Perspective drop-in adapter readiness, and system components.",
+    "request_body": null,
+    "response_sample": {
+      "status": "healthy",
+      "engine": "Normative Intelligence v2.8.0",
+      "perspective_adapter": "ACTIVE_DROP_IN"
+    }
+  }
+];
 
     function renderNav() {
       const nav = document.getElementById("navItems");
@@ -525,7 +969,7 @@
       btn.innerText = "⏳ Executing...";
       statusBadge.innerText = "Connecting...";
 
-      let headers = {};
+      let headers = { 'Accept': 'application/json' };
       let body = undefined;
 
       if (reqTextarea && method !== "GET") {

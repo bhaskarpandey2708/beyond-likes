@@ -91,9 +91,14 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
         content_len = int(self.headers.get("Content-Length", 0))
         if content_len == 0:
             return {}
-        raw = self.rfile.read(content_len).decode("utf-8")
         try:
-            return json.loads(raw)
+            raw = self.rfile.read(content_len).decode("utf-8", errors="replace")
+            parsed = json.loads(raw)
+            if isinstance(parsed, dict):
+                return parsed
+            elif isinstance(parsed, list):
+                return {"_list": parsed, "items": parsed, "comments": parsed}
+            return {}
         except Exception:
             return {}
 
@@ -632,8 +637,11 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
 
         # 5c. View Comprehensive Commercial Proposal Packet (HTML or JSON)
         elif path == "/v1/proposals/packet":
-            client_slug = query.get("client", query.get("slug", ["ars-technica"]))[0]
+            client_slug = query.get("client", query.get("slug", ["the-verge"]))[0]
             fmt = query.get("format", ["html"])[0].lower()
+            accept_header = self.headers.get("Accept", "").lower()
+            if "application/json" in accept_header and "text/html" not in accept_header:
+                fmt = "json" 
 
             proposals_dir = os.path.join(BASE_DIR, "proposals")
             html_file = os.path.join(proposals_dir, f"{client_slug}_executive_packet.html")
@@ -897,16 +905,37 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
             status_counts = {}
 
             for c in comments:
-                res = evaluator.evaluate(c, policy=policy, backend=backend)
-                rephrase = RephraseAdvisor.generate_suggestions(res, c)
-                res["guidance"] = rephrase
-                batch_results.append(res)
-                scores.append(res["composite_score"])
-                st = res["status"]
-                status_counts[st] = status_counts.get(st, 0) + 1
+                if isinstance(c, dict):
+                    c_text = c.get("text", "")
+                    c_id = c.get("id")
+                elif isinstance(c, str):
+                    c_text = c
+                    c_id = None
+                else:
+                    c_text = str(c)
+                    c_id = None
+
+                try:
+                    res = evaluator.evaluate(c_text, policy=policy, backend=backend)
+                    rephrase = RephraseAdvisor.generate_suggestions(res, c_text)
+                    res["guidance"] = rephrase
+                    if c_id:
+                        res["id"] = c_id
+                    batch_results.append(res)
+                    scores.append(res.get("composite_score", 50.0))
+                    st = res.get("status", "NEEDS_IMPROVEMENT")
+                    status_counts[st] = status_counts.get(st, 0) + 1
+                except Exception as eval_err:
+                    batch_results.append({
+                        "id": c_id,
+                        "text": str(c_text)[:120],
+                        "error": str(eval_err),
+                        "composite_score": 50.0,
+                        "status": "EVALUATION_ERROR"
+                    })
 
             avg_score = round(sum(scores) / len(scores), 1) if scores else 0.0
-            health_index = round(sum(1 for s in batch_results if s["composite_score"] >= 60.0) / len(batch_results) * 100, 1)
+            health_index = round(sum(1 for s in batch_results if s.get("composite_score", 0) >= 60.0) / len(batch_results) * 100, 1) if batch_results else 0.0
 
             self._send_json(200, {
                 "total_analyzed": len(batch_results),
@@ -1130,6 +1159,11 @@ class BeyondLikesAPIHandler(BaseHTTPRequestHandler):
 
         # 14. Submit DSA Article 20 Appeal
         elif path in ["/v1/appeals:submit", "/v1/appeals/submit"]:
+            reason = body.get("reason") or body.get("justification") or body.get("explanation")
+            if reason and "reason" not in body:
+                body["reason"] = reason
+            if not body.get("user_id") and body.get("author_id"):
+                body["user_id"] = body.get("author_id")
             if not body.get("reason") and not body.get("revised_text"):
                 self._send_json(400, {"error": "Appeal requires at least a 'reason' or a 'revised_text'."})
                 return
