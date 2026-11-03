@@ -214,6 +214,15 @@ class NormativeIntelligenceAPIHandler(BaseHTTPRequestHandler):
             self._send_file(os.path.join(BASE_DIR, "benchmarks", "benchmark_results.json"), "application/json; charset=utf-8")
             return
 
+        # 1l. Serve Demo Walkthrough Video & Poster
+        elif path in ["/brand/Normative_Intelligence_Demo_Walkthrough.mp4", "/demo-video", "/video", "/walkthrough"]:
+            self._send_file(os.path.join(BASE_DIR, "brand", "Normative_Intelligence_Demo_Walkthrough.mp4"), "video/mp4")
+            return
+
+        elif path in ["/brand/demo_video_poster.jpg", "/demo-poster"]:
+            self._send_file(os.path.join(BASE_DIR, "brand", "demo_video_poster.jpg"), "image/jpeg")
+            return
+
         # 2. Health check
         elif path == "/v1/health":
             self._send_json(200, {
