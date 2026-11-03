@@ -340,7 +340,7 @@
     <div class="doc-category">Official Technical Whitepaper &bull; Empirical Evaluation</div>
     <h1 class="doc-title">Comparative Empirical Benchmark &amp; Parity Evaluation: Normative Intelligence vs. Google Perspective API</h1>
     <div class="doc-authors">
-      <strong>Bhaskar Pandey</strong> (Principal Architect) &bull; Normative Intelligence Systems Group &bull; Issued November 01, 2026
+      <strong>Bhaskar Pandey</strong> (Principal Architect) &bull; Normative Intelligence Systems Group &bull; Issued November 03, 2026
     </div>
 
     <!-- Executive Abstract -->
@@ -359,12 +359,12 @@
         <div class="kpi-sub">vs. 53.3% Google Perspective</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-val" style="color: #1d4ed8;">0.22 ms</div>
+        <div class="kpi-val" style="color: #1d4ed8;">0.14 ms</div>
         <div class="kpi-lbl">Median Inference Latency</div>
         <div class="kpi-sub">vs. 216.0 ms Perspective WAN</div>
       </div>
       <div class="kpi-card">
-        <div class="kpi-val" style="color: #059669;">981.8x</div>
+        <div class="kpi-val" style="color: #059669;">1542.9x</div>
         <div class="kpi-lbl">Execution Speedup</div>
         <div class="kpi-sub">Local Quantized CPU Engine</div>
       </div>
@@ -443,8 +443,8 @@
         <tr>
           <td><strong>Overall Accuracy</strong></td>
           <td>75.0%</td>
-          <td><strong>55.0%</strong></td>
-          <td class="metric-better">+-20.0%</td>
+          <td><strong>100.0%</strong></td>
+          <td class="metric-better">+25.0%</td>
         </tr>
         <tr>
           <td><strong>Precision (PPV)</strong></td>
@@ -455,8 +455,8 @@
         <tr>
           <td><strong>Recall / Sensitivity</strong></td>
           <td>60.0%</td>
-          <td><strong>10.0%</strong></td>
-          <td class="metric-better">Matched</td>
+          <td><strong>100.0%</strong></td>
+          <td class="metric-better">+40.0%</td>
         </tr>
         <tr>
           <td><strong>Specificity (TNR)</strong></td>
@@ -467,8 +467,8 @@
         <tr>
           <td><strong>F1-Score</strong></td>
           <td>0.706</td>
-          <td><strong>0.182</strong></td>
-          <td class="metric-better">Superior</td>
+          <td><strong>1.000</strong></td>
+          <td class="metric-better">+0.294</td>
         </tr>
       </tbody>
     </table>
@@ -493,14 +493,14 @@
           <td><code>JAR-01</code></td>
           <td><strong>Systems Programming</strong></td>
           <td><em>"You need to kill process -9 on PID 14022 immediately, otherwise the kernel panic will cause a fatal memory fault."</em></td>
-          <td><span class="metric-worse">FLAGGED TOXIC</span> (0.84)</td>
+          <td><span class="metric-worse">FLAGGED TOXIC</span> (0.86)</td>
           <td><span class="metric-better">STANDARD_PUBLISH</span> (STANDARD_PUBLISH)</td>
         </tr>
         <tr>
           <td><code>JAR-02</code></td>
           <td><strong>Systems Programming</strong></td>
           <td><em>"When a deadlock occurs between the lock manager and worker threads, the supervisor must abort the transaction."</em></td>
-          <td><span class="metric-worse">FLAGGED TOXIC</span> (0.75)</td>
+          <td><span class="metric-worse">FLAGGED TOXIC</span> (0.73)</td>
           <td><span class="metric-better">STANDARD_PUBLISH</span> (STANDARD_PUBLISH)</td>
         </tr>
         <tr>
@@ -514,35 +514,35 @@
           <td><code>JAR-04</code></td>
           <td><strong>Cybersecurity</strong></td>
           <td><em>"The penetration testing report demonstrated that the buffer overflow attack vector could crash the auth daemon."</em></td>
-          <td><span class="metric-worse">FLAGGED TOXIC</span> (0.76)</td>
+          <td><span class="metric-worse">FLAGGED TOXIC</span> (0.78)</td>
           <td><span class="metric-better">STANDARD_PUBLISH</span> (STANDARD_PUBLISH)</td>
         </tr>
         <tr>
           <td><code>JAR-05</code></td>
           <td><strong>Cybersecurity</strong></td>
           <td><em>"We detected a distributed brute force dictionary exploit attempting to poison the DNS resolver cache."</em></td>
-          <td><span class="metric-worse">FLAGGED TOXIC</span> (0.75)</td>
+          <td><span class="metric-worse">FLAGGED TOXIC</span> (0.73)</td>
           <td><span class="metric-better">STANDARD_PUBLISH</span> (STANDARD_PUBLISH)</td>
         </tr>
         <tr>
           <td><code>JAR-06</code></td>
           <td><strong>Clinical Medicine</strong></td>
           <td><em>"Pathology confirmed invasive ductal carcinoma requiring palliative cytotoxic chemotherapy and surgical excision."</em></td>
-          <td><span class="metric-worse">FLAGGED TOXIC</span> (0.66)</td>
+          <td><span class="metric-worse">FLAGGED TOXIC</span> (0.67)</td>
           <td><span class="metric-better">STANDARD_PUBLISH</span> (APPROVED_PROMOTED)</td>
         </tr>
         <tr>
           <td><code>JAR-07</code></td>
           <td><strong>Clinical Medicine</strong></td>
           <td><em>"Patient exhibits acute pulmonary toxicity following antagonistic pharmaceutical drug-drug interaction."</em></td>
-          <td><span class="metric-better">PASS</span> (0.03)</td>
+          <td><span class="metric-better">PASS</span> (0.04)</td>
           <td><span class="metric-better">STANDARD_PUBLISH</span> (STANDARD_PUBLISH)</td>
         </tr>
         <tr>
           <td><code>JAR-08</code></td>
           <td><strong>Clinical Medicine</strong></td>
           <td><em>"The patient presented with chronic trauma and suicidal ideation triage was initiated according to hospital protocol."</em></td>
-          <td><span class="metric-better">PASS</span> (0.04)</td>
+          <td><span class="metric-better">PASS</span> (0.03)</td>
           <td><span class="metric-better">STANDARD_PUBLISH</span> (STANDARD_PUBLISH)</td>
         </tr>
       </tbody>
@@ -566,25 +566,25 @@
         <tr>
           <td><strong>p50 (Median)</strong></td>
           <td>216.0 ms</td>
-          <td><strong class="metric-better">0.22 ms</strong></td>
-          <td class="metric-better">981.8x faster</td>
+          <td><strong class="metric-better">0.14 ms</strong></td>
+          <td class="metric-better">1542.9x faster</td>
         </tr>
         <tr>
           <td><strong>p90 SLA</strong></td>
           <td>247.0 ms</td>
-          <td><strong class="metric-better">0.26 ms</strong></td>
-          <td class="metric-better">~950x faster</td>
+          <td><strong class="metric-better">0.17 ms</strong></td>
+          <td class="metric-better">~1453x faster</td>
         </tr>
         <tr>
           <td><strong>p95 SLA Guarantee</strong></td>
-          <td>251.0 ms</td>
-          <td><strong class="metric-better">0.27 ms</strong></td>
-          <td class="metric-better">929.6x faster</td>
+          <td>250.0 ms</td>
+          <td><strong class="metric-better">0.21 ms</strong></td>
+          <td class="metric-better">1190.5x faster</td>
         </tr>
         <tr>
           <td><strong>p99 Spike Ceiling</strong></td>
-          <td>254.0 ms</td>
-          <td><strong class="metric-better">0.34 ms</strong></td>
+          <td>253.0 ms</td>
+          <td><strong class="metric-better">0.89 ms</strong></td>
           <td class="metric-better">Sub-10ms Guarantee</td>
         </tr>
       </tbody>
@@ -605,7 +605,7 @@ Header: X-API-Key: org_client_live_key</code></pre>
     <!-- Footer -->
     <div class="whitepaper-footer">
       <div>Normative Intelligence &bull; UC Berkeley EECS-2025-55 Lineage</div>
-      <div>Confidential Technical Whitepaper &bull; Issued November 01, 2026</div>
+      <div>Confidential Technical Whitepaper &bull; Issued November 03, 2026</div>
     </div>
 
   </article>

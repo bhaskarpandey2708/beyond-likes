@@ -2,8 +2,8 @@
 **Client Partner:** IGN Forums (Community Director)  
 **Publication Category:** Gaming & Pop Culture  
 **Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 01, 2026  
-**Perspective Sunset Deadline:** December 31, 2026 (60 days remaining)  
+**Date of Issuance:** November 03, 2026  
+**Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
 
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-85FF2CCEE791`
+* **Audit Certificate ID:** `CERT-BL-3C3E2CFB18DB`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `85ff2ccee79100f131330161cbd93675dd7cc75a38bf356f372b956abc17c0df`
+* **Cryptographic Fingerprint (SHA-256):** `3c3e2cfb18dbd5cd9a824ff41d777ccf381cfff69678d702dc7b6888e993aafb`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |

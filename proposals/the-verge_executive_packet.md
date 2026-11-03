@@ -2,8 +2,8 @@
 **Client Partner:** The Verge / Vox Media (VP of Audience Engagement & Community Operations Lead)  
 **Publication Category:** Digital Media & Consumer Tech  
 **Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 02, 2026  
-**Perspective Sunset Deadline:** December 31, 2026 (59 days remaining)  
+**Date of Issuance:** November 03, 2026  
+**Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
 
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-60AD7C6FDB88`
+* **Audit Certificate ID:** `CERT-BL-5B7ED113366E`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `60ad7c6fdb88c02bde856143fb0e826573f98786a335b8871931f469832a35ae`
+* **Cryptographic Fingerprint (SHA-256):** `5b7ed113366e9a1e03c9f5cc62007cd963ecb35501097429d8381044e72ccf65`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |

@@ -2,8 +2,8 @@
 **Client Partner:** Product Hunt Discussions (Community Lead)  
 **Publication Category:** Tech Product Community  
 **Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 01, 2026  
-**Perspective Sunset Deadline:** December 31, 2026 (60 days remaining)  
+**Date of Issuance:** November 03, 2026  
+**Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
 
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-7137A79ADF91`
+* **Audit Certificate ID:** `CERT-BL-69032960E457`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `7137a79adf912e5d46bdac03a5f7db50a945d8e8beaad25fe7ec03c5c1ba0bd5`
+* **Cryptographic Fingerprint (SHA-256):** `69032960e4574cb325dac392bc222a289b67751bb4cefd379b1bc120daaef129`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |

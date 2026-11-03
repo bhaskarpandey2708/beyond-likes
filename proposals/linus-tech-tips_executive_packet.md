@@ -2,8 +2,8 @@
 **Client Partner:** Linus Tech Tips Forum (Community Lead & Senior Forum Moderator)  
 **Publication Category:** Hardware Community & Benchmarking  
 **Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 01, 2026  
-**Perspective Sunset Deadline:** December 31, 2026 (60 days remaining)  
+**Date of Issuance:** November 03, 2026  
+**Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
 
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-B113755B2C4F`
+* **Audit Certificate ID:** `CERT-BL-2F442DA2FF86`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `b113755b2c4f8c63ccbf5c6194dba728bb664c4885334b835a5f786ede9c0613`
+* **Cryptographic Fingerprint (SHA-256):** `2f442da2ff864ed7599e8b633ea550b4fd2b977eed07b809530d47ea9b7adf27`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |

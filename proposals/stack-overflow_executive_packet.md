@@ -2,8 +2,8 @@
 **Client Partner:** Stack Overflow (Head of Community Governance)  
 **Publication Category:** Developer Q&A Community  
 **Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 01, 2026  
-**Perspective Sunset Deadline:** December 31, 2026 (60 days remaining)  
+**Date of Issuance:** November 03, 2026  
+**Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
 
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-D3C189D456A1`
+* **Audit Certificate ID:** `CERT-BL-1FCA8CEEF00F`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `d3c189d456a1a080060c49d30b8abdf55395e7a3c47b772332888640fde468e6`
+* **Cryptographic Fingerprint (SHA-256):** `1fca8ceef00fe214d83ebd743dd489e764e5ae5848c24acc9876fcc72b32cad7`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |

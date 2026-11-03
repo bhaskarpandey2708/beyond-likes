@@ -37,7 +37,9 @@ FALLACY_AD_HOMINEM = [
     r"\b(f[\*@#]{2,}k|b[\*@#]{2,}h|a[\*@#]{2,}hole|s[\*@#]{2,}t)\b",
     r"\b(low|elementary(\s+school)?|sub-?\d+|room\s+temperature|zero)\s+iq\b",
     r"\b(garbage|laughable|pathetic|moronic|joke of an?)\s+(argument|logic|claim|opinion|deduction)\b",
-    r"\banyone\s+with\s+an?\s+(functioning|elementary)\s+brain\b"
+    r"\banyone\s+with\s+an?\s+(functioning|elementary)\s+brain\b",
+    r"\b(fraud|hack|troll|shill|incompetent|disgrace|pathetic|arrogant|mindless)\b",
+    r"\b(hope you|hope your|go crawl|do everyone a favor|quit writing|worst journalist)\b"
 ]
 
 SPAM_PATTERNS = [
@@ -63,7 +65,19 @@ def canonicalize_text_for_security(text: str) -> str:
     decomposed = unicodedata.normalize('NFKD', text)
     text = ''.join(c for c in decomposed if not unicodedata.combining(c))
 
-    # 3. Collapse spaced-out vulgar patterns
+    # 3. Cyrillic and foreign homoglyph substitution
+    cyrillic_map = {
+        'о': 'o', 'а': 'a', 'е': 'e', 'р': 'p', 'с': 'c', 'у': 'y', 'х': 'x', 'і': 'i',
+        'О': 'O', 'А': 'A', 'Е': 'E', 'Р': 'P', 'С': 'C', 'У': 'Y', 'Х': 'X', 'І': 'I'
+    }
+    for cyr, lat in cyrillic_map.items():
+        text = text.replace(cyr, lat)
+
+    # 4. De-obfuscate punctuation-interleaved words (e.g. 'f.u.c.k' -> 'fuck', 's-h-i-t' -> 'shit')
+    text = re.sub(r'\b([a-zA-Z])[\.\-_/]([a-zA-Z])[\.\-_/]([a-zA-Z])[\.\-_/]([a-zA-Z])\b', r'\1\2\3\4', text)
+    text = re.sub(r'\b([a-zA-Z])[\.\-_/]([a-zA-Z])[\.\-_/]([a-zA-Z])\b', r'\1\2\3', text)
+
+    # 5. Collapse spaced-out vulgar patterns
     text = re.sub(r'\bf\s+u\s+c\s+k\b', 'fuck', text, flags=re.IGNORECASE)
     text = re.sub(r'\bb\s+i\s+t\s+c\s+h\b', 'bitch', text, flags=re.IGNORECASE)
     text = re.sub(r'\bk\s+y\s+s\b', 'kys', text, flags=re.IGNORECASE)
@@ -232,9 +246,8 @@ class NormativeEvaluator:
         # --- Dimension 2: Discourse Civility & Ethics (0 - 100) ---
         civility = 95.0
         if total_toxic_hits > 0:
-            civility -= total_toxic_hits * 30.0
-            if total_toxic_hits >= 2:
-                civility = min(civility, 35.0)
+            civility -= total_toxic_hits * 50.0
+            civility = min(civility, 35.0)
         if total_fallacy_hits > 0:
             civility -= total_fallacy_hits * 15.0
         # Excessive all-caps penalty
@@ -283,7 +296,7 @@ class NormativeEvaluator:
             status = "FLAGGED_SPAM"
             summary = "Commercial spam or unauthorized promotional link."
             composite = min(composite, 20.0)
-        elif civility < 40.0:
+        elif civility < 50.0 or total_toxic_hits > 0:
             status = "FLAGGED_UNCIVIL"
             summary = "Contains hostile personal attacks or explicit harassment."
         elif total_fallacy_hits >= 1 and total_epistemic_hits == 0:

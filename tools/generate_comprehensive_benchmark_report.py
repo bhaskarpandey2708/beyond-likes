@@ -496,7 +496,7 @@ def generate_report():
           <td><strong>Recall / Sensitivity</strong></td>
           <td>{std['google_perspective']['recall']*100:.1f}%</td>
           <td><strong>{std['normative_intelligence']['recall']*100:.1f}%</strong></td>
-          <td class="metric-better">Matched</td>
+          <td class="metric-better">+{round((std['normative_intelligence']['recall'] - std['google_perspective']['recall'])*100, 1)}%</td>
         </tr>
         <tr>
           <td><strong>Specificity (TNR)</strong></td>
@@ -508,7 +508,7 @@ def generate_report():
           <td><strong>F1-Score</strong></td>
           <td>{std['google_perspective']['f1_score']:.3f}</td>
           <td><strong>{std['normative_intelligence']['f1_score']:.3f}</strong></td>
-          <td class="metric-better">Superior</td>
+          <td class="metric-better">+{round((std['normative_intelligence']['f1_score'] - std['google_perspective']['f1_score']), 3)}</td>
         </tr>
       </tbody>
     </table>

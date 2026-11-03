@@ -2,8 +2,8 @@
 **Client Partner:** The Atlantic (Community Editor)  
 **Publication Category:** Editorial Journalism  
 **Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 01, 2026  
-**Perspective Sunset Deadline:** December 31, 2026 (60 days remaining)  
+**Date of Issuance:** November 03, 2026  
+**Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
 
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-3A2748C48103`
+* **Audit Certificate ID:** `CERT-BL-6500AC3C4E3E`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `3a2748c48103f6e876bb2e362c33de2974b1366218fb14d41a03c27699be1a3c`
+* **Cryptographic Fingerprint (SHA-256):** `6500ac3c4e3e0e2f48c034519233954ac83bb338b5ec66ea6b94f487a074ec51`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |

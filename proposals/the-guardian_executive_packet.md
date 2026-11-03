@@ -2,8 +2,8 @@
 **Client Partner:** The Guardian (US Digital) (Moderation Operations Manager)  
 **Publication Category:** News Organization  
 **Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 01, 2026  
-**Perspective Sunset Deadline:** December 31, 2026 (60 days remaining)  
+**Date of Issuance:** November 03, 2026  
+**Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
 
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-0A21F66D947B`
+* **Audit Certificate ID:** `CERT-BL-B6B540599DE0`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `0a21f66d947b3f42c35655a4227918a67ae5800f11cc7e7fb59a6c5be6203174`
+* **Cryptographic Fingerprint (SHA-256):** `b6b540599de00a0d596376861c7b775a3a72833e06bf8b1728a2308634082b83`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |

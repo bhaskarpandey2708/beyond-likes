@@ -2,8 +2,8 @@
 **Client Partner:** Politico (Audience Engagement Director)  
 **Publication Category:** Policy & Government  
 **Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 01, 2026  
-**Perspective Sunset Deadline:** December 31, 2026 (60 days remaining)  
+**Date of Issuance:** November 03, 2026  
+**Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
 
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-88AEFF9DC55B`
+* **Audit Certificate ID:** `CERT-BL-66869D53F349`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `88aeff9dc55b7ff43baa5a0e540f6bf7da2569e8a03907b70b425e3fc0153967`
+* **Cryptographic Fingerprint (SHA-256):** `66869d53f349192f41f1060c5fc636d2a78bae84efa505d437bd98638e00ecb9`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |

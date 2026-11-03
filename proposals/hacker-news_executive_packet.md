@@ -2,8 +2,8 @@
 **Client Partner:** Hacker News (Y Combinator) (Moderation Team)  
 **Publication Category:** Tech Aggregator  
 **Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 01, 2026  
-**Perspective Sunset Deadline:** December 31, 2026 (60 days remaining)  
+**Date of Issuance:** November 03, 2026  
+**Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
 
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-6C8D33FFE145`
+* **Audit Certificate ID:** `CERT-BL-E8B8B7E2BEB4`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `6c8d33ffe145b66c4fdb984cf289897af9b7d8f1a5c55c142085f42dad1e89ef`
+* **Cryptographic Fingerprint (SHA-256):** `e8b8b7e2beb45d6243bbaefc73f836729c7761a55752051ea78b3bb225c433b0`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |
