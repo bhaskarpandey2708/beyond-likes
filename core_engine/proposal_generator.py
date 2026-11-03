@@ -77,21 +77,21 @@ class ProposalGenerator:
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     :root {{
-      --bg: #f8fafc;
+      --bg: #faf8f5;
       --card-bg: #ffffff;
-      --border: #e2e8f0;
-      --border-subtle: #cbd5e1;
-      --text: #0f172a;
-      --text-muted: #475569;
-      --text-subtle: #64748b;
-      --accent: #1d4ed8;
-      --accent-hover: #1e40af;
-      --accent-light: #eff6ff;
-      --accent-border: #bfdbfe;
-      --green: #059669;
-      --green-light: #ecfdf5;
-      --green-border: #a7f3d0;
-      --amber: #d97706;
+      --border: #e8e3d8;
+      --border-subtle: #d5cebf;
+      --text: #18181b;
+      --text-muted: #4a4a50;
+      --text-subtle: #71717a;
+      --accent: #c8441b;
+      --accent-hover: #b13712;
+      --accent-light: #fdf2ee;
+      --accent-border: #f8c9bc;
+      --green: #0d5c4e;
+      --green-light: #edf7f4;
+      --green-border: #bce3db;
+      --amber: #b45309;
       --amber-light: #fffbeb;
       --amber-border: #fde68a;
     }}
@@ -404,7 +404,7 @@ class ProposalGenerator:
         </svg>
         <div class="letterhead-text">
           <span class="brand-name">Normative Intelligence</span>
-          <span class="brand-subline">UC Berkeley EECS-2025-55 Lineage &bull; Technical Migration Brief</span>
+          <span class="brand-subline">Enterprise Discourse Infrastructure &bull; Technical Migration Brief</span>
         </div>
       </div>
       <div class="no-print">
@@ -421,7 +421,7 @@ class ProposalGenerator:
           Empirical Benchmark Verification, Wire Parity Audit, and Enterprise Service Level Agreement
         </div>
         <div class="doc-meta" style="margin-top: 6px;">Client: <strong>{client_name}</strong> &bull; Prepared: {date_str}</div>
-        <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px; font-family: 'JetBrains Mono', monospace;">Doc ID: NI-PROP-2026 &bull; UC Berkeley EECS-2025-55 Lineage</div>
+        <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px; font-family: 'JetBrains Mono', monospace;">Doc ID: NI-PROP-2026 &bull; Certified Enterprise Production Standard</div>
       </div>
       <div class="badge-group">
         <span class="badge badge-green">✓ CERTIFIED DROP-IN READY</span>
@@ -519,7 +519,7 @@ class ProposalGenerator:
 
         markdown_memo = f"""# Technical Migration Blueprint & Perspective API EOL Brief
 **Client:** {client_name}  
-**Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
+**Issuing Authority:** Normative Intelligence Systems &bull; Founder: Bhaskar Pandey  
 **Date:** {date_str}  
 **Perspective Sunset Deadline:** December 31, 2026 ({days_until_sunset} days remaining)  
 

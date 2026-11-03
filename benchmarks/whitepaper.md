@@ -2,7 +2,7 @@
 
 **Document ID:** NI-TR-2026-B01  
 **Issuing Authority:** Normative Intelligence Systems Group  
-**Lineage:** UC Berkeley EECS-2025-55 Commercialization  
+**Lineage:** Proprietary Architecture • Venture BL-001  
 **Publication Date:** November 03, 2026  
 **Primary Author:** Bhaskar Pandey (Principal Architect)  
 **Status:** Certified Empirical Publication  

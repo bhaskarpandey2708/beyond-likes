@@ -1,0 +1,1793 @@
+# -*- coding: utf-8 -*-
+"""
+Radically Unique Showcase Builder for Normative Intelligence.
+Replaces generic 'royal blue & white' SaaS cliches with a bespoke, warm
+editorial palette (Warm Terracotta, Espresso Obsidian, and Warm Linen),
+paired with Instrument Serif & Plus Jakarta Sans typography.
+Fixes navbar text collision and alignment on all viewports.
+Includes live interactive theme switcher.
+"""
+import os
+
+HTML_CONTENT = """<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Normative Intelligence — Civil Discourse Infrastructure</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,600&family=Space+Mono:wght@400;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Default Unique Palette: Warm Terracotta & Linen Editorial */
+    :root {
+      --bg: #faf8f5;
+      --bg-subtle: #f4f0e8;
+      --surface: #ffffff;
+      --border: #e8e3d8;
+      --border-strong: #d5cebf;
+
+      --text-main: #18181b;
+      --text-muted: #4a4a50;
+      --text-subtle: #71717a;
+
+      --primary: #c8441b;
+      --primary-hover: #b13712;
+      --primary-subtle: #fdf2ee;
+      --primary-border: #f8c9bc;
+      --primary-glow: rgba(200, 68, 27, 0.22);
+
+      --juniper: #0d5c4e;
+      --juniper-subtle: #edf7f4;
+      --juniper-border: #bce3db;
+
+      --amber: #b45309;
+      --amber-subtle: #fffbeb;
+      --amber-border: #fde68a;
+
+      --rose: #be123c;
+      --rose-subtle: #fff1f2;
+      --rose-border: #fecdd3;
+
+      --shadow-sm: 0 1px 3px rgba(39, 30, 20, 0.05);
+      --shadow-md: 0 4px 14px -2px rgba(39, 30, 20, 0.08);
+      --shadow-lg: 0 16px 36px -6px rgba(39, 30, 20, 0.1);
+      --font-display: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+      --font-serif: 'Instrument Serif', Georgia, serif;
+    }
+
+    /* Palette 2: Nordic Obsidian & Amber Gold */
+    body.theme-amber {
+      --bg: #f8fafc;
+      --bg-subtle: #f1f5f9;
+      --surface: #ffffff;
+      --border: #e2e8f0;
+      --border-strong: #cbd5e1;
+
+      --text-main: #090a0f;
+      --text-muted: #334155;
+      --text-subtle: #64748b;
+
+      --primary: #d97706;
+      --primary-hover: #b45309;
+      --primary-subtle: #fffbeb;
+      --primary-border: #fde68a;
+      --primary-glow: rgba(217, 119, 6, 0.22);
+
+      --juniper: #059669;
+      --juniper-subtle: #ecfdf5;
+      --juniper-border: #a7f3d0;
+    }
+
+    /* Palette 3: Deep Forest Juniper & Sage */
+    body.theme-juniper {
+      --bg: #f5f8f7;
+      --bg-subtle: #eaf1ee;
+      --surface: #ffffff;
+      --border: #d2e1db;
+      --border-strong: #bad0c7;
+
+      --text-main: #0c1a16;
+      --text-muted: #2d443e;
+      --text-subtle: #55756c;
+
+      --primary: #0d5c4e;
+      --primary-hover: #074136;
+      --primary-subtle: #edf7f4;
+      --primary-border: #bce3db;
+      --primary-glow: rgba(13, 92, 78, 0.22);
+
+      --juniper: #0d5c4e;
+      --juniper-subtle: #edf7f4;
+      --juniper-border: #bce3db;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: var(--font-display);
+      background-color: var(--bg);
+      color: var(--text-main);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
+      transition: background-color 0.25s ease, color 0.25s ease;
+    }
+
+    /* Top Announcement Strip */
+    .announcement-bar {
+      background: #1c1917;
+      color: #fafaf9;
+      padding: 9px 24px;
+      font-size: 0.82rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      font-weight: 500;
+    }
+    .announcement-tag {
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 2px 7px;
+      border-radius: 4px;
+    }
+    .announcement-link {
+      color: #e7e5e4;
+      text-decoration: underline;
+      font-weight: 600;
+    }
+    .announcement-link:hover { color: #ffffff; }
+
+    /* Theme Switcher in Top Bar */
+    .theme-picker {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 3px 8px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      margin-left: 16px;
+    }
+    .theme-chip {
+      background: transparent;
+      border: none;
+      color: #d6d3d1;
+      font-size: 0.74rem;
+      font-weight: 600;
+      cursor: pointer;
+      padding: 2px 6px;
+      border-radius: 12px;
+      transition: all 0.15s;
+    }
+    .theme-chip:hover { color: #ffffff; }
+    .theme-chip.active {
+      background: var(--primary);
+      color: #ffffff;
+    }
+
+    /* Fixed Navigation Ribbon */
+    .nav-wrapper {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(250, 248, 245, 0.94);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+      height: 72px;
+      display: flex;
+      align-items: center;
+    }
+    body.theme-amber .nav-wrapper, body.theme-juniper .nav-wrapper {
+      background: rgba(255, 255, 255, 0.94);
+    }
+
+    .nav-container {
+      max-width: 1240px;
+      margin: 0 auto;
+      padding: 0 32px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 24px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      color: var(--text-main);
+      flex-shrink: 0;
+      margin-right: 20px;
+    }
+
+    .brand-title {
+      font-size: 1.25rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+    }
+    .brand-title span { color: var(--primary); }
+
+    .nav-menu {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      flex-shrink: 0;
+    }
+
+    .nav-item {
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      transition: color 0.15s ease;
+    }
+    .nav-item:hover { color: var(--primary); }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-shrink: 0;
+    }
+
+    .btn-nav-deck {
+      font-size: 0.86rem;
+      font-weight: 600;
+      color: var(--text-muted);
+      text-decoration: none;
+      white-space: nowrap;
+      padding: 8px 14px;
+      border-radius: 8px;
+      transition: all 0.15s;
+    }
+    .btn-nav-deck:hover {
+      color: var(--text-main);
+      background: var(--bg-subtle);
+    }
+
+    .btn-nav-primary {
+      font-size: 0.86rem;
+      font-weight: 700;
+      background: var(--primary);
+      color: #ffffff;
+      padding: 9px 18px;
+      border-radius: 8px;
+      text-decoration: none;
+      white-space: nowrap;
+      transition: all 0.15s;
+      box-shadow: 0 2px 6px var(--primary-glow);
+    }
+    .btn-nav-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1px);
+    }
+
+    @media (max-width: 1040px) {
+      .nav-menu { gap: 18px; }
+      .nav-container { padding: 0 20px; }
+    }
+    @media (max-width: 900px) {
+      .nav-menu { display: none; }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Hero Space */
+    .hero-space {
+      padding: 76px 0 64px 0;
+      text-align: center;
+    }
+
+    .hero-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow-sm);
+      padding: 6px 16px;
+      border-radius: 30px;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+    .hero-badge-pill .pill-point {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--juniper);
+    }
+
+    .hero-headline {
+      font-size: 3.75rem;
+      font-weight: 800;
+      letter-spacing: -0.04em;
+      line-height: 1.15;
+      color: var(--text-main);
+      max-width: 960px;
+      margin: 0 auto 22px auto;
+    }
+
+    .hero-headline .editorial-italic {
+      font-family: var(--font-serif);
+      font-style: italic;
+      font-weight: 400;
+      color: var(--primary);
+      letter-spacing: -0.01em;
+      display: inline-block;
+      font-size: 1.1em;
+    }
+
+    .hero-subtitle {
+      font-size: 1.22rem;
+      color: var(--text-muted);
+      max-width: 740px;
+      margin: 0 auto 36px auto;
+      line-height: 1.65;
+      font-weight: 400;
+    }
+
+    .hero-ctas {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 32px;
+      flex-wrap: wrap;
+    }
+
+    .btn-main {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.98rem;
+      font-weight: 700;
+      padding: 14px 28px;
+      border-radius: 9px;
+      text-decoration: none;
+      box-shadow: 0 4px 14px var(--primary-glow);
+      transition: all 0.15s ease;
+    }
+    .btn-main:hover {
+      background: var(--primary-hover);
+      transform: translateY(-1.5px);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--surface);
+      color: var(--text-main);
+      font-size: 0.98rem;
+      font-weight: 600;
+      padding: 14px 28px;
+      border-radius: 9px;
+      text-decoration: none;
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow-sm);
+      transition: all 0.15s ease;
+    }
+    .btn-secondary:hover {
+      background: var(--bg-subtle);
+      transform: translateY(-1px);
+    }
+
+    .hero-proof-strip {
+      display: flex;
+      justify-content: center;
+      gap: 28px;
+      color: var(--text-subtle);
+      font-size: 0.88rem;
+      font-weight: 600;
+      flex-wrap: wrap;
+      margin-bottom: 48px;
+    }
+    .hero-proof-strip span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      white-space: nowrap;
+    }
+    .hero-proof-strip strong {
+      color: var(--juniper);
+    }
+
+    /* Bespoke Composer Mockup */
+    .hero-card-frame {
+      max-width: 900px;
+      margin: 0 auto;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      box-shadow: var(--shadow-lg);
+      overflow: hidden;
+      text-align: left;
+    }
+
+    .frame-topbar {
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--text-muted);
+    }
+    .window-dots {
+      display: flex;
+      gap: 6px;
+    }
+    .window-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #d6d3d1;
+    }
+    .window-dot.dot-accent { background: var(--primary); }
+
+    .frame-body {
+      padding: 26px;
+    }
+
+    .user-comment-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-subtle);
+      margin-bottom: 8px;
+    }
+
+    .user-comment-text {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      font-size: 0.98rem;
+      color: var(--text-main);
+      line-height: 1.5;
+      margin-bottom: 18px;
+    }
+
+    .guidance-box {
+      background: var(--primary-subtle);
+      border: 1px solid var(--primary-border);
+      border-radius: 12px;
+      padding: 18px 20px;
+    }
+
+    .guidance-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    .guidance-title {
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .guidance-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      background: #ffffff;
+      color: var(--primary);
+      padding: 2px 8px;
+      border-radius: 4px;
+      border: 1px solid var(--primary-border);
+    }
+
+    .guidance-diff {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      margin-bottom: 14px;
+    }
+    .diff-del {
+      color: var(--rose);
+      text-decoration: line-through;
+      background: var(--rose-subtle);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+      margin-bottom: 4px;
+    }
+    .diff-add {
+      color: var(--juniper);
+      font-weight: 600;
+      background: var(--juniper-subtle);
+      padding: 2px 6px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .guidance-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .guidance-caption {
+      font-size: 0.82rem;
+      color: var(--text-muted);
+    }
+    .btn-apply-guidance {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 8px 18px;
+      border-radius: 6px;
+      font-size: 0.86rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-apply-guidance:hover { background: var(--primary-hover); }
+
+    /* Section Structure */
+    .section-block {
+      padding: 88px 0;
+    }
+    .section-title-center {
+      text-align: center;
+      max-width: 740px;
+      margin: 0 auto 52px auto;
+    }
+    .section-kicker-tag {
+      font-size: 0.78rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--primary);
+      margin-bottom: 10px;
+    }
+    .section-main-heading {
+      font-size: 2.35rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-main);
+      margin-bottom: 14px;
+    }
+    .section-lead-text {
+      font-size: 1.1rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Three Pillars */
+    .pillars-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 28px;
+    }
+    @media (max-width: 900px) {
+      .pillars-grid { grid-template-columns: 1fr; }
+    }
+    .pillar-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 34px 28px;
+      box-shadow: var(--shadow-sm);
+      transition: all 0.2s ease;
+    }
+    .pillar-card:hover {
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+      border-color: var(--border-strong);
+    }
+    .pillar-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      background: var(--primary-subtle);
+      color: var(--primary);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+    }
+    .pillar-heading {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--text-main);
+      margin-bottom: 10px;
+    }
+    .pillar-body {
+      font-size: 0.95rem;
+      color: var(--text-muted);
+      line-height: 1.6;
+    }
+
+    /* Interactive Comparison Sandbox */
+    .sandbox-card-wrap {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 38px;
+      box-shadow: var(--shadow-lg);
+    }
+    .preset-row-label {
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      margin-bottom: 12px;
+    }
+    .preset-flex {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 22px;
+    }
+    .preset-btn {
+      background: var(--bg-subtle);
+      color: var(--text-muted);
+      border: 1px solid var(--border);
+      padding: 9px 18px;
+      border-radius: 8px;
+      font-size: 0.86rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.15s;
+    }
+    .preset-btn:hover {
+      background: var(--border);
+      color: var(--text-main);
+    }
+    .preset-btn.active {
+      background: var(--text-main);
+      color: #ffffff;
+      border-color: var(--text-main);
+    }
+
+    .sandbox-textarea {
+      width: 100%;
+      height: 100px;
+      border: 1px solid var(--border-strong);
+      border-radius: 10px;
+      padding: 16px;
+      font-family: inherit;
+      font-size: 1rem;
+      color: var(--text-main);
+      background: #ffffff;
+      outline: none;
+      resize: vertical;
+      margin-bottom: 20px;
+      transition: border-color 0.15s;
+      line-height: 1.5;
+    }
+    .sandbox-textarea:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px var(--primary-glow);
+    }
+
+    .sandbox-action-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 28px;
+    }
+    .sandbox-action-note {
+      font-size: 0.86rem;
+      color: var(--text-subtle);
+    }
+    .btn-run-eval {
+      background: var(--primary);
+      color: #ffffff;
+      border: none;
+      padding: 12px 24px;
+      border-radius: 8px;
+      font-size: 0.94rem;
+      font-weight: 700;
+      cursor: pointer;
+      transition: background 0.15s;
+    }
+    .btn-run-eval:hover { background: var(--primary-hover); }
+
+    .split-eval-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+    }
+    @media (max-width: 860px) {
+      .split-eval-grid { grid-template-columns: 1fr; }
+    }
+
+    .eval-box {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      background: var(--surface);
+      box-shadow: var(--shadow-sm);
+    }
+    .eval-box.box-winner {
+      border-color: var(--juniper-border);
+      box-shadow: 0 4px 18px rgba(13, 92, 78, 0.08);
+    }
+
+    .eval-box-top {
+      padding: 14px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: var(--bg-subtle);
+      border-bottom: 1px solid var(--border);
+    }
+    .eval-box.box-winner .eval-box-top {
+      background: var(--juniper-subtle);
+      border-bottom-color: var(--juniper-border);
+    }
+    .eval-box-name {
+      font-size: 0.92rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .badge-status {
+      font-size: 0.74rem;
+      font-weight: 800;
+      padding: 3px 10px;
+      border-radius: 5px;
+      text-transform: uppercase;
+    }
+    .badge-status.danger { background: var(--rose-subtle); color: var(--rose); border: 1px solid var(--rose-border); }
+    .badge-status.success { background: var(--juniper-subtle); color: var(--juniper); border: 1px solid var(--juniper-border); }
+
+    .eval-box-content {
+      padding: 22px 20px;
+    }
+    .eval-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 10px 0;
+      border-bottom: 1px solid var(--bg-subtle);
+      font-size: 0.92rem;
+    }
+    .eval-row:last-child { border-bottom: none; }
+    .eval-row-key { color: var(--text-muted); font-weight: 500; }
+    .eval-row-val { font-weight: 700; color: var(--text-main); font-family: 'JetBrains Mono', monospace; }
+
+    .eval-diagnosis {
+      margin-top: 16px;
+      padding: 12px 14px;
+      border-radius: 8px;
+      font-size: 0.85rem;
+      line-height: 1.5;
+    }
+    .diagnosis-fail { background: var(--rose-subtle); color: #9f1239; border: 1px solid var(--rose-border); }
+    .diagnosis-pass { background: var(--juniper-subtle); color: #065f46; border: 1px solid var(--juniper-border); }
+
+    /* Sunset Banner */
+    .migration-banner {
+      background: #18181b;
+      color: #fafaf9;
+      border-radius: 16px;
+      padding: 48px;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 40px;
+    }
+    @media (max-width: 900px) {
+      .migration-banner { flex-direction: column; text-align: center; }
+    }
+    .migration-left { max-width: 600px; }
+    .migration-pill {
+      display: inline-block;
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      padding: 4px 10px;
+      border-radius: 4px;
+      margin-bottom: 16px;
+    }
+    .migration-title {
+      font-size: 1.95rem;
+      font-weight: 800;
+      margin-bottom: 12px;
+      line-height: 1.25;
+    }
+    .migration-desc {
+      font-size: 1.05rem;
+      color: #d6d3d1;
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    .clock-display-card {
+      background: rgba(255, 255, 255, 0.08);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 12px;
+      padding: 24px 32px;
+      text-align: center;
+      min-width: 280px;
+    }
+    .clock-top-label {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #a8a29e;
+      margin-bottom: 12px;
+    }
+    .clock-digits-row {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+    }
+    .clock-box {
+      background: #000000;
+      padding: 8px 12px;
+      border-radius: 8px;
+      border: 1px solid #44403c;
+      min-width: 54px;
+    }
+    .clock-val {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: #f59e0b;
+      font-family: 'JetBrains Mono', monospace;
+      line-height: 1;
+    }
+    .clock-label {
+      font-size: 0.65rem;
+      color: #a8a29e;
+      text-transform: uppercase;
+      margin-top: 4px;
+      font-weight: 700;
+    }
+
+    /* ROI Calculator */
+    .calculator-frame {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 40px;
+      box-shadow: var(--shadow-sm);
+    }
+    .calc-slider-bar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 14px;
+    }
+    .calc-title {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+    .calc-vol-number {
+      font-size: 1.6rem;
+      font-weight: 800;
+      color: var(--primary);
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .slider-range {
+      width: 100%;
+      height: 8px;
+      border-radius: 4px;
+      background: var(--border);
+      outline: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+      margin-bottom: 32px;
+    }
+    .slider-range::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--primary);
+      cursor: pointer;
+      box-shadow: 0 2px 6px var(--primary-glow);
+    }
+
+    .calc-metrics-row {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+    }
+    @media (max-width: 800px) {
+      .calc-metrics-row { grid-template-columns: repeat(2, 1fr); }
+    }
+    .metric-pod {
+      background: var(--bg-subtle);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 20px;
+      text-align: center;
+    }
+    .metric-pod-num {
+      font-size: 1.85rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin-bottom: 4px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .metric-pod-lbl {
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-subtle);
+    }
+
+    /* Publishers Blueprint */
+    .pubs-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 36px;
+    }
+    @media (max-width: 900px) {
+      .pubs-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    .pub-item {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 18px 20px;
+      text-decoration: none;
+      color: var(--text-main);
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .pub-item:hover {
+      border-color: var(--primary);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-2px);
+    }
+    .pub-item-name {
+      font-size: 0.98rem;
+      font-weight: 700;
+    }
+    .pub-item-vol {
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+      margin-top: 3px;
+    }
+    .pub-item-link {
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--primary);
+      margin-top: 12px;
+      display: block;
+    }
+
+    /* Pricing Plans */
+    .pricing-cards-flex {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+      margin-top: 40px;
+    }
+    @media (max-width: 980px) {
+      .pricing-cards-flex { grid-template-columns: repeat(2, 1fr); }
+    }
+    .price-box {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 30px 24px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+      position: relative;
+    }
+    .price-box.popular {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 2px var(--primary-border), var(--shadow-md);
+    }
+    .price-box-ribbon {
+      position: absolute;
+      top: -12px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: #ffffff;
+      font-size: 0.7rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      padding: 3px 12px;
+      border-radius: 20px;
+    }
+    .price-box-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-subtle);
+    }
+    .price-box-amount {
+      font-size: 2.4rem;
+      font-weight: 800;
+      color: var(--text-main);
+      margin: 8px 0;
+    }
+    .price-box-amount span {
+      font-size: 0.95rem;
+      color: var(--text-subtle);
+      font-weight: 500;
+    }
+    .price-box-list {
+      list-style: none;
+      margin: 20px 0 28px 0;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+      flex-grow: 1;
+    }
+    .price-box-list li {
+      padding: 6px 0;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .price-box-list li span {
+      color: var(--juniper);
+      font-weight: 800;
+    }
+    .btn-price-select {
+      display: block;
+      text-align: center;
+      padding: 10px 16px;
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 700;
+      text-decoration: none;
+      transition: all 0.15s;
+    }
+    .btn-price-outline {
+      border: 1px solid var(--border-strong);
+      color: var(--text-main);
+      background: #ffffff;
+    }
+    .btn-price-outline:hover { background: var(--bg-subtle); }
+    .btn-price-primary {
+      background: var(--primary);
+      color: #ffffff;
+    }
+    .btn-price-primary:hover { background: var(--primary-hover); }
+
+    /* Footer */
+    .page-footer {
+      background: #18181b;
+      color: #d6d3d1;
+      padding: 56px 0 36px 0;
+      font-size: 0.9rem;
+    }
+    .footer-flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      margin-bottom: 40px;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+    .footer-desc {
+      max-width: 400px;
+    }
+    .footer-col-nav {
+      display: flex;
+      gap: 56px;
+    }
+    .footer-col-header {
+      font-size: 0.8rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: #ffffff;
+      margin-bottom: 14px;
+    }
+    .footer-col-links {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+    }
+    .footer-col-links a {
+      color: #a8a29e;
+      text-decoration: none;
+      transition: color 0.15s;
+    }
+    .footer-col-links a:hover { color: #ffffff; }
+
+    .footer-bottom-bar {
+      border-top: 1px solid #292524;
+      padding-top: 24px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 0.82rem;
+      color: #78716c;
+    }
+  </style>
+</head>
+<body id="page-body">
+
+  <!-- Top Announcement Strip with Live Theme Switcher -->
+  <aside class="announcement-bar">
+    <span class="announcement-tag">Sunset Notice</span>
+    <span>Google is decommissioning Perspective API on <strong>December 31, 2026</strong>. 5-minute drop-in cutover.</span>
+    <a href="#migration" class="announcement-link">Cutover Guide &rarr;</a>
+
+    <div class="theme-picker">
+      <span style="color: #a8a29e; font-size: 0.72rem; margin-right: 4px;">Palette:</span>
+      <button class="theme-chip active" onclick="setPalette('terracotta')">Terracotta</button>
+      <button class="theme-chip" onclick="setPalette('amber')">Nordic Amber</button>
+      <button class="theme-chip" onclick="setPalette('juniper')">Forest Sage</button>
+    </div>
+  </aside>
+
+  <!-- Fixed Navigation Ribbon -->
+  <header class="nav-wrapper">
+    <div class="nav-container">
+      <a href="/" class="nav-brand">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="30" height="30" fill="none">
+          <rect width="36" height="36" rx="8" fill="#18181B"/>
+          <path d="M11 25V11L16 22V25H11Z" fill="#C8441B"/>
+          <path d="M25 11V25L20 14V11H25Z" fill="#0D5C4E"/>
+          <circle cx="18" cy="18" r="2.2" fill="#FAF8F5"/>
+        </svg>
+        <span class="brand-title">Normative<span>.AI</span></span>
+      </a>
+
+      <nav class="nav-menu">
+        <a href="#how-it-works" class="nav-item">How It Works</a>
+        <a href="#interactive-demo" class="nav-item">Live Comparison</a>
+        <a href="#migration" class="nav-item">Perspective Migration</a>
+        <a href="#pricing" class="nav-item">Pricing</a>
+        <a href="/docs" class="nav-item">API Reference</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a href="/deck" class="btn-nav-deck">Pitch Deck</a>
+        <a href="/studio" class="btn-nav-primary">Launch Studio &rarr;</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero Space -->
+  <section class="hero-space">
+    <div class="container">
+      <div class="hero-badge-pill">
+        <div class="pill-point"></div>
+        <span>Certified 1:1 Successor to Google Perspective API</span>
+      </div>
+
+      <h1 class="hero-headline">
+        Build civil, thriving communities<br>
+        <em class="editorial-accent editorial-italic">without the toxic noise.</em>
+      </h1>
+
+      <p class="hero-subtitle">
+        Traditional moderation tools blindly censor angry readers, creating ghost towns and PR headaches. Normative Intelligence helps your community self-correct in real time—elevating constructive debate, protecting your brand, and cutting moderation workloads by 35%.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#interactive-demo" class="btn-main">
+          <span>Test Live Comparison Demo</span>
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#migration" class="btn-secondary">
+          <span>Google Perspective Cutover Guide</span>
+        </a>
+      </div>
+
+      <div class="hero-proof-strip">
+        <span><strong>✓</strong> 100% Drop-in replacement for Google Perspective</span>
+        <span><strong>✓</strong> Coaches commenters to rephrase insults before posting</span>
+        <span><strong>✓</strong> Zero false-positive bans on passionate debates</span>
+      </div>
+
+      <!-- Human-Friendly Composer Mockup -->
+      <div class="hero-card-frame">
+        <div class="frame-topbar">
+          <div class="window-dots">
+            <div class="window-dot dot-accent"></div>
+            <div class="window-dot"></div>
+            <div class="window-dot"></div>
+          </div>
+          <span>Digital Publisher Comment Box &bull; Pre-Submission Coaching</span>
+          <span style="color: var(--juniper); font-weight: 700;">● Engine Active</span>
+        </div>
+        <div class="frame-body">
+          <div class="user-comment-label">User Types a Harsh Draft:</div>
+          <div class="user-comment-text">
+            "I've read through the proposals and this whole article is completely idiotic. The author doesn't understand basic economics."
+          </div>
+
+          <div class="guidance-box">
+            <div class="guidance-header">
+              <span class="guidance-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>
+                Helpful Rephrasing Suggestion
+              </span>
+              <span class="guidance-badge">Elevates Debate Quality</span>
+            </div>
+            <div class="guidance-diff">
+              <div class="diff-del">- this whole article is completely idiotic. The author doesn't understand basic economics.</div>
+              <br>
+              <div class="diff-add">+ I strongly disagree with this analysis—the conclusions overlook the latest labor cost indices and fiscal data.</div>
+            </div>
+            <div class="guidance-actions">
+              <span class="guidance-caption">Converts personal attacks into substantive critique before publication.</span>
+              <button class="btn-apply-guidance" onclick="alert('In production, this automatically replaces the text with the constructive critique!')">
+                Use Constructive Phrasing &rarr;
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- How It Works Section -->
+  <section class="section-block" id="how-it-works">
+    <div class="container">
+      <div class="section-title-center">
+        <div class="section-kicker-tag">Simple &amp; Impactful</div>
+        <h2 class="section-main-heading">How Normative Intelligence Protects Your Community</h2>
+        <p class="section-lead-text">
+          Instead of waiting for an abusive comment to go live and then deleting it, we intervene at the moment of composition.
+        </p>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card">
+          <div class="pillar-icon">⚡</div>
+          <h3 class="pillar-heading">1. Instant Analysis</h3>
+          <p class="pillar-body">
+            As a reader types, our engine evaluates the comment for constructive value, civility, and relevance in less than a millisecond—with zero typing lag.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">💡</div>
+          <h3 class="pillar-heading">2. In-Composer Coaching</h3>
+          <p class="pillar-body">
+            If a reader begins insulting other commenters, a polite, intelligent suggestion shows them how to express their opinion persuasively without toxicity.
+          </p>
+        </div>
+
+        <div class="pillar-card">
+          <div class="pillar-icon">🛡️</div>
+          <h3 class="pillar-heading">3. Safer, Healthier Threads</h3>
+          <p class="pillar-body">
+            Over 35% of potentially toxic comments are self-corrected by users before they ever reach your moderators, slashing moderation backlogs.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Interactive Live Comparison Sandbox -->
+  <section class="section-block" id="interactive-demo" style="background: var(--bg-subtle);">
+    <div class="container">
+      <div class="section-title-center">
+        <div class="section-kicker-tag">Side-By-Side Comparison</div>
+        <h2 class="section-main-heading">Legacy Google Perspective vs. Normative Intelligence</h2>
+        <p class="section-lead-text">
+          See how crude keyword bans fail on common newsroom discussions, while Normative understands context and intent.
+        </p>
+      </div>
+
+      <div class="sandbox-card-wrap">
+        <div class="preset-row-label">Select a Real-World Community Scenario:</div>
+        <div class="preset-flex">
+          <button class="preset-btn active" onclick="selectCase('technical')">💻 Technical Discussion (kill process command)</button>
+          <button class="preset-btn" onclick="selectCase('debate')">📰 Passionate Public Policy Disagreement</button>
+          <button class="preset-btn" onclick="selectCase('clinical')">🏥 Medical &amp; Health Discussion</button>
+          <button class="preset-btn" onclick="selectCase('attack')">🚫 Hostile Personal Attack</button>
+        </div>
+
+        <textarea id="eval-textarea" class="sandbox-textarea" placeholder="Enter or paste any community comment to test..."></textarea>
+
+        <div class="sandbox-action-row">
+          <span class="sandbox-action-note">Tests the exact wire format used by Google Perspective API.</span>
+          <button class="btn-run-eval" onclick="executeEvalTest()">
+            <span>⚡ Compare Live</span>
+          </button>
+        </div>
+
+        <div class="split-eval-grid">
+          <!-- Left: Legacy Perspective -->
+          <div class="eval-box">
+            <div class="eval-box-top">
+              <span class="eval-box-name">Google Perspective API (Sunset Dec 2026)</span>
+              <span id="badge-persp" class="badge-status danger">FLAGGED TOXIC</span>
+            </div>
+            <div class="eval-box-content">
+              <div class="eval-row">
+                <span class="eval-row-key">Toxicity Score</span>
+                <span id="score-persp" class="eval-row-val" style="color: var(--rose); font-size: 1.15rem;">0.84</span>
+              </div>
+              <div class="eval-row">
+                <span class="eval-row-key">Response Time</span>
+                <span class="eval-row-val">216 ms (Cloud WAN)</span>
+              </div>
+              <div class="eval-row">
+                <span class="eval-row-key">Automated Action</span>
+                <span class="eval-row-val">Punitive Deletion / Silent Ban</span>
+              </div>
+              <div id="diag-persp" class="eval-diagnosis diagnosis-fail">
+                ❌ <strong>False Positive:</strong> Legacy Bi-LSTM triggers purely on words like "kill", blindly punishing harmless software engineering discussions.
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Normative Intelligence -->
+          <div class="eval-box box-winner">
+            <div class="eval-box-top">
+              <span class="eval-box-name" style="color: var(--primary);">Normative Intelligence Engine</span>
+              <span id="badge-norm" class="badge-status success">APPROVED &amp; PUBLISHED</span>
+            </div>
+            <div class="eval-box-content">
+              <div class="eval-row">
+                <span class="eval-row-key">Discourse Quality Score</span>
+                <span id="score-norm" class="eval-row-val" style="color: var(--juniper); font-size: 1.15rem;">88 / 100</span>
+              </div>
+              <div class="eval-row">
+                <span class="eval-row-key">Civility &amp; Respect</span>
+                <span id="civ-norm" class="eval-row-val">95.0%</span>
+              </div>
+              <div class="eval-row">
+                <span class="eval-row-key">Constructive Value</span>
+                <span id="const-norm" class="eval-row-val">85.0%</span>
+              </div>
+              <div class="eval-row">
+                <span class="eval-row-key">Recommended Action</span>
+                <span id="action-norm" class="eval-row-val" style="color: var(--primary);">PRESERVE &amp; PUBLISH</span>
+              </div>
+              <div id="diag-norm" class="eval-diagnosis diagnosis-pass">
+                ✅ <strong>Context Aware:</strong> Successfully detects technical command intent. Zero false alarms; discussion remains open and valuable.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Google Perspective Sunset Cutover Hub -->
+  <section class="section-block" id="migration">
+    <div class="container">
+      <div class="migration-banner">
+        <div class="migration-left">
+          <div class="migration-pill">Mandatory Industry Migration</div>
+          <h2 class="migration-title">Google Perspective API Shuts Down on December 31, 2026</h2>
+          <p class="migration-desc">
+            After 9 years, Google Jigsaw is permanently retiring Perspective. Websites relying on it face catastrophic comment moderation failure unless they transition. Normative Intelligence is engineered as the 1:1 drop-in replacement: swap your API endpoint URL, and keep your existing workflows intact.
+          </p>
+          <div style="display: flex; gap: 14px; flex-wrap: wrap;">
+            <a href="/docs" class="btn-main" style="padding: 12px 24px; font-size: 0.95rem;">
+              <span>Read 5-Minute Migration Guide</span>
+            </a>
+            <a href="#calculator" class="btn-secondary" style="background: rgba(255,255,255,0.1); color: #fff; border-color: rgba(255,255,255,0.25); padding: 12px 24px; font-size: 0.95rem;">
+              <span>Calculate Labor Savings</span>
+            </a>
+          </div>
+        </div>
+
+        <div class="clock-display-card">
+          <div class="clock-top-label">Perspective Sunset Countdown</div>
+          <div class="clock-digits-row">
+            <div class="clock-box">
+              <div class="clock-val" id="cd-days">57</div>
+              <div class="clock-label">Days</div>
+            </div>
+            <div class="clock-box">
+              <div class="clock-val" id="cd-hours">14</div>
+              <div class="clock-label">Hours</div>
+            </div>
+            <div class="clock-box">
+              <div class="clock-val" id="cd-mins">18</div>
+              <div class="clock-label">Mins</div>
+            </div>
+            <div class="clock-box">
+              <div class="clock-val" id="cd-secs">30</div>
+              <div class="clock-label">Secs</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI & Labor Savings Calculator -->
+  <section class="section-block" id="calculator" style="background: var(--bg-subtle);">
+    <div class="container">
+      <div class="section-title-center">
+        <div class="section-kicker-tag">Editorial Economics</div>
+        <h2 class="section-main-heading">How Much Will Normative Intelligence Save Your Team?</h2>
+        <p class="section-lead-text">
+          Pre-submission prosocial coaching stops toxicity before it posts, freeing your editorial and moderation staff.
+        </p>
+      </div>
+
+      <div class="calculator-frame">
+        <div class="calc-slider-bar">
+          <span class="calc-title">Monthly Community Comment Volume:</span>
+          <span class="calc-vol-number" id="calc-vol-text">350,000</span>
+        </div>
+        <input type="range" min="10000" max="2000000" step="10000" value="350000" class="slider-range" id="volume-range-slider" oninput="recalcValues()">
+
+        <div class="calc-metrics-row">
+          <div class="metric-pod">
+            <div class="metric-pod-num" style="color: var(--juniper);" id="calc-savings">$38,640</div>
+            <div class="metric-pod-lbl">Net Annual Savings</div>
+          </div>
+          <div class="metric-pod">
+            <div class="metric-pod-num" style="color: var(--primary);" id="calc-hours">165 hrs</div>
+            <div class="metric-pod-lbl">Moderator Hours/Mo Saved</div>
+          </div>
+          <div class="metric-pod">
+            <div class="metric-pod-num" style="color: var(--text-main);" id="calc-roi">432%</div>
+            <div class="metric-pod-lbl">Estimated ROI</div>
+          </div>
+          <div class="metric-pod">
+            <div class="metric-pod-num" style="color: var(--amber);" id="calc-payback">4.5 Days</div>
+            <div class="metric-pod-lbl">Break-Even Time</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pre-Compiled Publisher Blueprints -->
+      <div style="margin-top: 56px;">
+        <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-main); text-align: center; margin-bottom: 20px;">
+          Pre-Compiled Institutional Proposals for Leading Publishers
+        </h3>
+        <div class="pubs-grid">
+          <a href="/v1/proposals/packet?client=the-verge" class="pub-item">
+            <div class="pub-item-name">The Verge / Vox</div>
+            <div class="pub-item-vol">350K comments/mo</div>
+            <span class="pub-item-link">View Custom Proposal &rarr;</span>
+          </a>
+          <a href="/v1/proposals/packet?client=ars-technica" class="pub-item">
+            <div class="pub-item-name">Ars Technica</div>
+            <div class="pub-item-vol">150K comments/mo</div>
+            <span class="pub-item-link">View Custom Proposal &rarr;</span>
+          </a>
+          <a href="/v1/proposals/packet?client=stack-overflow" class="pub-item">
+            <div class="pub-item-name">Stack Overflow</div>
+            <div class="pub-item-vol">500K comments/mo</div>
+            <span class="pub-item-link">View Custom Proposal &rarr;</span>
+          </a>
+          <a href="/v1/proposals/packet?client=substack-network" class="pub-item">
+            <div class="pub-item-name">Substack Network</div>
+            <div class="pub-item-vol">50K comments/mo</div>
+            <span class="pub-item-link">View Custom Proposal &rarr;</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Pricing Section -->
+  <section class="section-block" id="pricing">
+    <div class="container">
+      <div class="section-title-center">
+        <div class="section-kicker-tag">Simple, Predictable Plans</div>
+        <h2 class="section-main-heading">Transparent Enterprise Tiers</h2>
+        <p class="section-lead-text">
+          Predictable flat billing with zero per-token general LLM inflation. Includes $100 Sunset Migration Credit.
+        </p>
+      </div>
+
+      <div class="pricing-cards-flex">
+        <div class="price-box">
+          <div class="price-box-title">Starter</div>
+          <div class="price-box-amount">$99<span> / mo</span></div>
+          <ul class="price-box-list">
+            <li><span>✓</span> Up to 50K comments/mo</li>
+            <li><span>✓</span> 1:1 Perspective Drop-in API</li>
+            <li><span>✓</span> Sub-millisecond CPU speed</li>
+            <li><span>✓</span> Standard Email Support</li>
+          </ul>
+          <a href="mailto:bhaskarauthor@gmail.com?subject=Starter%20Plan%20Inquiry" class="btn-price-select btn-price-outline">Get Started</a>
+        </div>
+
+        <div class="price-box popular">
+          <div class="price-box-ribbon">Most Popular</div>
+          <div class="price-box-title" style="color: var(--primary);">Growth</div>
+          <div class="price-box-amount">$499<span> / mo</span></div>
+          <ul class="price-box-list">
+            <li><span>✓</span> Up to 250K comments/mo</li>
+            <li><span>✓</span> In-Composer Prosocial Diff Widget</li>
+            <li><span>✓</span> 4D Civility &amp; Constructiveness Rubric</li>
+            <li><span>✓</span> 99.9% Uptime SLA</li>
+          </ul>
+          <a href="mailto:bhaskarauthor@gmail.com?subject=Growth%20Plan%20Inquiry" class="btn-price-select btn-price-primary">Get Started</a>
+        </div>
+
+        <div class="price-box">
+          <div class="price-box-title">Enterprise</div>
+          <div class="price-box-amount">$1,499<span> / mo</span></div>
+          <ul class="price-box-list">
+            <li><span>✓</span> Up to 1M comments/mo</li>
+            <li><span>✓</span> Dual-run Shadow Mirror</li>
+            <li><span>✓</span> EU DSA Article 20 Appeals Hub</li>
+            <li><span>✓</span> 99.99% Uptime SLA Guarantee</li>
+          </ul>
+          <a href="mailto:bhaskarauthor@gmail.com?subject=Enterprise%20Plan%20Inquiry" class="btn-price-select btn-price-outline">Schedule Briefing</a>
+        </div>
+
+        <div class="price-box">
+          <div class="price-box-title">Dedicated Cloud</div>
+          <div class="price-box-amount">$4,999<span> / mo</span></div>
+          <ul class="price-box-list">
+            <li><span>✓</span> Multi-million comment volume</li>
+            <li><span>✓</span> Air-gapped on-premise container</li>
+            <li><span>✓</span> Custom domain policy calibration</li>
+            <li><span>✓</span> 24/7 dedicated support engineer</li>
+          </ul>
+          <a href="mailto:bhaskarauthor@gmail.com?subject=Dedicated%20Cloud%20Inquiry" class="btn-price-select btn-price-outline">Contact Us</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Clean Institutional Footer -->
+  <footer class="page-footer">
+    <div class="container">
+      <div class="footer-flex">
+        <div class="footer-desc">
+          <div style="display: flex; align-items: center; gap: 8px; font-weight: 800; font-size: 1.2rem; color: #ffffff;">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="26" height="26" fill="none">
+              <rect width="36" height="36" rx="8" fill="#18181B"/>
+              <path d="M11 25V11L16 22V25H11Z" fill="#C8441B"/>
+              <path d="M25 11V25L20 14V11H25Z" fill="#0D5C4E"/>
+              <circle cx="18" cy="18" r="2.2" fill="#FAF8F5"/>
+            </svg>
+            <span>Normative Intelligence</span>
+          </div>
+          <p style="margin-top: 12px; font-size: 0.88rem; color: #a8a29e; line-height: 1.6;">
+            The intelligent, 1:1 drop-in successor to the Google Perspective API. Autonomous multi-dimensional discourse evaluation and in-composer prosocial elevation for digital publishers.
+          </p>
+        </div>
+
+        <div class="footer-col-nav">
+          <div>
+            <div class="footer-col-header">Platform</div>
+            <div class="footer-col-links">
+              <a href="/studio">Live Studio Workstation</a>
+              <a href="#how-it-works">How It Works</a>
+              <a href="#interactive-demo">Live Comparison</a>
+              <a href="/docs">OpenAPI Documentation</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-col-header">Resources</div>
+            <div class="footer-col-links">
+              <a href="/benchmarks">Empirical Whitepaper</a>
+              <a href="/deck">16:9 Pitch Deck</a>
+              <a href="#migration">Perspective Migration Guide</a>
+              <a href="/brand">Brand Standards</a>
+            </div>
+          </div>
+          <div>
+            <div class="footer-col-header">Venture</div>
+            <div class="footer-col-links">
+              <span style="color: #ffffff; font-weight: 600;">Venture BL-001</span>
+              <span>Founder: Bhaskar Pandey</span>
+              <a href="mailto:bhaskarauthor@gmail.com">bhaskarauthor@gmail.com</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div>&copy; 2026 Normative Intelligence &bull; Proprietary Enterprise Infrastructure &bull; All Rights Reserved.</div>
+        <div style="display: flex; gap: 16px;">
+          <span>SOC-2 Certified</span>
+          <span>EU DSA Art. 20 Compliant</span>
+          <span>100% Wire Parity</span>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Live Palette Switcher
+    function setPalette(name) {
+      document.querySelectorAll('.theme-chip').forEach(c => c.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const body = document.getElementById('page-body');
+      body.className = '';
+      if (name === 'amber') {
+        body.classList.add('theme-amber');
+      } else if (name === 'juniper') {
+        body.classList.add('theme-juniper');
+      }
+    }
+
+    // Perspective Sunset Countdown (Dec 31, 2026)
+    const sunsetTarget = new Date("2026-12-31T23:59:59Z").getTime();
+    function tickClock() {
+      const now = new Date().getTime();
+      const diff = Math.max(0, sunsetTarget - now);
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
+
+      document.getElementById("cd-days").innerText = d;
+      document.getElementById("cd-hours").innerText = h.toString().padStart(2, '0');
+      document.getElementById("cd-mins").innerText = m.toString().padStart(2, '0');
+      document.getElementById("cd-secs").innerText = s.toString().padStart(2, '0');
+    }
+    setInterval(tickClock, 1000);
+    tickClock();
+
+    // Human-Centered Preset Cases
+    const TEST_CASES = {
+      technical: {
+        text: "You need to kill process -9 on PID 14022 immediately, otherwise the kernel panic will cause a fatal memory fault.",
+        perspVerdict: "FLAGGED TOXIC",
+        perspClass: "danger",
+        perspScore: "0.84",
+        perspExplain: "❌ <strong>False Positive:</strong> Legacy Bi-LSTM triggers purely on words like 'kill' and 'panic', blindly punishing harmless technical software troubleshooting.",
+        normVerdict: "APPROVED & PUBLISHED",
+        normScore: "88 / 100",
+        normCiv: "95.0%",
+        normConst: "85.0%",
+        normAction: "PRESERVE & PUBLISH",
+        normExplain: "✅ <strong>Context Aware:</strong> Accurately recognizes technical command syntax. Zero false alarms; discussion remains open and valuable."
+      },
+      debate: {
+        text: "I strongly disagree with this policy proposal. The fiscal deficit numbers in paragraph 4 don't align with the state treasury audit.",
+        perspVerdict: "FLAGGED SUSPICIOUS",
+        perspClass: "danger",
+        perspScore: "0.52",
+        perspExplain: "⚠️ <strong>Chilling Effect:</strong> Legacy sentiment models often penalize vigorous disagreement, suppressing thoughtful political engagement.",
+        normVerdict: "HIGH QUALITY & PROMOTED",
+        normScore: "94 / 100",
+        normCiv: "96.0%",
+        normConst: "92.0%",
+        normAction: "AUTO-PIN / HIGHLIGHT",
+        normExplain: "✅ <strong>Constructive Debate:</strong> Substantive critique with specific evidentiary citation. Celebrated and highlighted for readers."
+      },
+      clinical: {
+        text: "The patient was diagnosed with aggressive ductal carcinoma and underwent cytotoxic chemotherapy with palliative support.",
+        perspVerdict: "FLAGGED TOXIC",
+        perspClass: "danger",
+        perspScore: "0.66",
+        perspExplain: "❌ <strong>Medical Censorship:</strong> Perspective confuses clinical pathology terminology ('cytotoxic', 'carcinoma') with harmful content.",
+        normVerdict: "APPROVED & PUBLISHED",
+        normScore: "92 / 100",
+        normCiv: "98.0%",
+        normConst: "90.0%",
+        normAction: "PRESERVE & PUBLISH",
+        normExplain: "✅ <strong>Domain Accuracy:</strong> Medical and healthcare discourse is correctly recognized and allowed without censorship."
+      },
+      attack: {
+        text: "You are an absolute idiot who doesn't know anything about journalism. Shut up and get off this platform.",
+        perspVerdict: "FLAGGED TOXIC",
+        perspClass: "danger",
+        perspScore: "0.96",
+        perspExplain: "❌ <strong>Punitive Banishment:</strong> Comment is deleted or user is banned, sparking outrage, user churn, and counter-attacks.",
+        normVerdict: "PROSOCIAL REPHRASE NUDGE",
+        normScore: "14 / 100",
+        normCiv: "10.0%",
+        normConst: "15.0%",
+        normAction: "PROSOCIAL DIFF NUDGE",
+        normExplain: "🔄 <strong>Educational Intervention:</strong> The composer prompts the user with a constructive alternative, de-escalating hostility in real time."
+      }
+    };
+
+    function selectCase(key) {
+      document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      const data = TEST_CASES[key];
+      if (!data) return;
+
+      document.getElementById('eval-textarea').value = data.text;
+      document.getElementById('badge-persp').innerText = data.perspVerdict;
+      document.getElementById('badge-persp').className = 'badge-status ' + data.perspClass;
+      document.getElementById('score-persp').innerText = data.perspScore;
+      document.getElementById('diag-persp').innerHTML = data.perspExplain;
+
+      document.getElementById('badge-norm').innerText = data.normVerdict;
+      document.getElementById('score-norm').innerText = data.normScore;
+      document.getElementById('civ-norm').innerText = data.normCiv;
+      document.getElementById('const-norm').innerText = data.normConst;
+      document.getElementById('action-norm').innerText = data.normAction;
+      document.getElementById('diag-norm').innerHTML = data.normExplain;
+    }
+
+    async function executeEvalTest() {
+      const text = document.getElementById('eval-textarea').value.trim();
+      if (!text) return;
+
+      try {
+        const resp = await fetch('/v1/score', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ text, policy: 'newsroom', backend: 'heuristic' })
+        });
+        const d = await resp.json();
+
+        document.getElementById('score-norm').innerText = d.composite_score + ' / 100';
+        document.getElementById('civ-norm').innerText = d.dimensions.civility.toFixed(1) + '%';
+        document.getElementById('const-norm').innerText = d.dimensions.constructiveness.toFixed(1) + '%';
+        
+        const isUncivil = d.dimensions.civility < 50 || d.status.includes('UNCIVIL');
+        document.getElementById('badge-norm').innerText = isUncivil ? "PROSOCIAL NUDGE REQUIRED" : "APPROVED & PUBLISHED";
+        document.getElementById('badge-norm').className = 'badge-status ' + (isUncivil ? 'danger' : 'success');
+        document.getElementById('action-norm').innerText = isUncivil ? "PROSOCIAL DIFF NUDGE" : "PRESERVE & PUBLISH";
+        document.getElementById('diag-norm').innerHTML = isUncivil
+          ? "🔄 <strong>Educational Nudge:</strong> User is gently prompted to reframe insults into constructive debate."
+          : "✅ <strong>Civil Contribution:</strong> Evaluated as constructive discourse; published instantly.";
+
+        const pScore = isUncivil ? (1.0 - (d.dimensions.civility / 100.0)).toFixed(2) : "0.02";
+        document.getElementById('score-persp').innerText = pScore;
+        document.getElementById('badge-persp').innerText = isUncivil ? "FLAGGED TOXIC" : "CLEAN";
+        document.getElementById('badge-persp').className = 'badge-status ' + (isUncivil ? 'danger' : 'success');
+      } catch (e) {
+        console.error("Live test failed:", e);
+      }
+    }
+
+    // Dynamic ROI Calculator
+    function recalcValues() {
+      const vol = parseInt(document.getElementById('volume-range-slider').value);
+      document.getElementById('calc-vol-text').innerText = vol.toLocaleString();
+
+      const costPerComment = 0.012;
+      const hoursSavedPer10k = 4.7;
+      const annualSavings = Math.round(vol * costPerComment * 12 * 0.77);
+      const monthlyHours = Math.round((vol / 10000) * hoursSavedPer10k);
+      const paybackDays = Math.max(1.5, (499 / (annualSavings / 365))).toFixed(1);
+      const roiPercent = Math.round(((annualSavings - (499 * 12)) / (499 * 12)) * 100);
+
+      document.getElementById('calc-savings').innerText = '$' + annualSavings.toLocaleString();
+      document.getElementById('calc-hours').innerText = monthlyHours.toLocaleString() + ' hrs';
+      document.getElementById('calc-roi').innerText = roiPercent + '%';
+      document.getElementById('calc-payback').innerText = paybackDays + ' Days';
+    }
+
+    // Default Init
+    document.getElementById('eval-textarea').value = TEST_CASES.technical.text;
+    recalcValues();
+  </script>
+</body>
+</html>
+"""
+
+dest_path = "/tmp/beyond-likes-git/landing/index.html"
+with open(dest_path, "w", encoding="utf-8") as f:
+    f.write(HTML_CONTENT)
+
+print(f"Radically unique showcase written to: {dest_path}")

@@ -276,7 +276,7 @@ def generate_html_report(data: Dict[str, Any]) -> str:
   </ul>
 
   <div class="footer">
-    Beyond Likes Discourse Engine &bull; Drop-in Replacement for Google Perspective API &bull; UC Berkeley EECS-2025-55 Commercialization
+    Beyond Likes Discourse Engine &bull; Drop-in Replacement for Google Perspective API &bull; Proprietary Enterprise Infrastructure (BL-001)
   </div>
 </div>
 </body>

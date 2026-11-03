@@ -9,5 +9,5 @@
 
   <!-- Wordmark -->
   <text x="62" y="24" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="19" font-weight="700" fill="#0F172A" letter-spacing="-0.03em">Normative<tspan fill="#1D4ED8">.</tspan>AI</text>
-  <text x="62" y="39" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="9.5" font-weight="600" fill="#64748B" letter-spacing="0.06em" text-transform="uppercase">Discourse Intelligence &bull; UC Berkeley</text>
+  <text x="62" y="39" font-family="-apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif" font-size="9.5" font-weight="600" fill="#64748B" letter-spacing="0.06em" text-transform="uppercase">Autonomous Discourse Infrastructure</text>
 </svg>

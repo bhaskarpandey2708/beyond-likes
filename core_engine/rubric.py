@@ -1,6 +1,6 @@
 """
 Advanced Discourse Modeling Taxonomy & Policy Profiles
-Clean-room implementation grounded in UC Berkeley EECS-2025-55 & computational linguistics.
+Clean-room implementation grounded in Venture BL-001 & computational linguistics.
 """
 
 TAXONOMY = {

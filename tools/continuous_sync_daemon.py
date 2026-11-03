@@ -41,7 +41,7 @@ TARGET_PROJECT_MEMORY = os.path.join(BASE_DIR, "PROJECT_MEMORY.md")
 VENTURE_KEYWORDS = [
     "RESEARCH_TO_PRODUCT_VENTURE",
     "Beyond Likes",
-    "EECS-2025-55",
+    "Normative Intelligence",
     "Perspective",
     "deberta-v3-large",
     "Ayush Pandey",

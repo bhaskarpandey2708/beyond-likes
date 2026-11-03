@@ -3,7 +3,7 @@
 **Document Version:** 1.0.0-institutional  
 **Release Date:** November 2026  
 **Identity System:** Academic Rigor &bull; Enterprise Infrastructure &bull; Prosocial Governance  
-**Lineage:** UC Berkeley EECS-2025-55 Commercialization Venture  
+**Lineage:** Proprietary Deep-Tech Venture (BL-001)  
 
 ---
 
@@ -11,9 +11,9 @@
 
 Normative Intelligence builds enterprise editorial and Trust & Safety infrastructure. We are the **1:1 drop-in successor to the Google Perspective API** (which shuts down permanently on December 31, 2026).
 
-* **Who We Are:** Editorial infrastructure and Trust & Safety middleware backed by academic research from UC Berkeley EECS.
+* **Who We Are:** Editorial infrastructure and Trust & Safety middleware backed by academic research from Proprietary Architecture.
 * **Who We Are NOT:** We are not a social media like-counter, an ad-tech analytics tracker, or a crude keyword blacklisting engine.
-* **Visual Tone:** Pristine, institutional, authoritative, crisp, and restrained. Think **Anthropic / Stripe / McKinsey Technology Practice / MIT Lincoln Lab**. We design exclusively on crisp, high-contrast light and white canvases with deep obsidian slate typography and Berkeley Tech Blue accents.
+* **Visual Tone:** Pristine, institutional, authoritative, crisp, and restrained. Think **Anthropic / Stripe / McKinsey Technology Practice / MIT Lincoln Lab**. We design exclusively on crisp, high-contrast light and white canvases with deep obsidian slate typography and Cobalt Tech Blue accents.
 
 ---
 
@@ -35,33 +35,34 @@ The logo mark consists of a rounded obsidian square containing two directional p
 * **Prohibited Modifications:** Never rotate the mark, never apply drop shadows, never place on noisy photographic backgrounds, and never recolor in non-brand hues.
 
 ### Wordmark Lockup (`brand/logo-horizontal.svg`)
-The horizontal lockup pairs the primary mark with `Normative.AI` in bold obsidian sans-serif (`#0F172A`) with a blue period accent (`#1D4ED8`), underlined by `DISCOURSE INTELLIGENCE • UC BERKELEY` in uppercase tracked slate (`#64748B`).
+The horizontal lockup pairs the primary mark with `Normative.AI` in bold obsidian sans-serif (`#0F172A`) with a blue period accent (`#1D4ED8`), underlined by `AUTONOMOUS DISCOURSE INFRASTRUCTURE` in uppercase tracked slate (`#64748B`).
 
 ---
 
-## 3. Official Color System (Institutional Light Theme)
+## 3. Official Color System (Editorial Warm Palette)
 
-All customer-facing materials—including executive proposals, slide decks, PDFs, and website documentation—must follow this strict, high-contrast light palette.
+All customer-facing materials—including executive proposals, slide decks, PDFs, and website documentation—follow this distinctive, intellectual warm palette:
 
 | Role | Color Name | Hex Code | RGB | Usage & Guidelines |
 | :--- | :--- | :--- | :--- | :--- |
-| **Canvas Primary** | Pristine White | `#FFFFFF` | `255, 255, 255` | Primary background for all documents, proposals, cards, and slides. |
-| **Canvas Secondary** | Warm Platinum | `#F8FAFC` | `248, 250, 252` | Page backdrop, table headers, callout boxes, and code block containers. |
-| **Surface Subtle** | Slate Wash | `#F1F5F9` | `241, 245, 249` | Hover states, pill badges, and secondary table rows. |
-| **Border / Rule** | Crisp Slate | `#E2E8F0` | `226, 232, 240` | 1px clean dividers, card borders, table gridlines, and form inputs. |
-| **Text Primary** | Obsidian Navy | `#0F172A` | `15, 23, 42` | Document titles, main headers (H1/H2), bold metrics, and primary body text (WCAG AAA 15.8:1 contrast). |
-| **Text Secondary** | Muted Charcoal | `#475569` | `71, 85, 105` | Body paragraphs, explanatory copy, and metadata labels. |
-| **Text Tertiary** | Steel Slate | `#64748B` | `100, 116, 139` | Captions, footnotes, timestamps, and table column titles. |
-| **Primary Brand** | Berkeley Tech Blue | `#1D4ED8` | `29, 78, 216` | Primary action buttons, active links, chart highlights, and certification stamps. |
-| **Brand Accent** | Electric Cobalt | `#2563EB` | `37, 99, 235` | Secondary highlights and hover accents on interactive controls. |
-| **Success / Parity** | Forest Jade | `#059669` | `5, 150, 105` | Parity Pass badges, SLA guarantees, and Closed-Won indicators. |
-| **Alert / Sunset** | Deep Amber | `#D97706` | `217, 119, 6` | Perspective sunset countdowns, latency warnings, and EOL milestones. |
+| **Canvas Primary** | Warm Linen / Alabaster | `#FAF8F5` | `250, 248, 245` | Primary warm background for all website surfaces, proposals, and slides. |
+| **Surface Elevated** | Pure Surface White | `#FFFFFF` | `255, 255, 255` | Elevated cards, interactive composer frames, and callout boxes. |
+| **Surface Subtle** | Warm Sand Wash | `#F4F0E8` | `244, 240, 232` | Secondary containers, table headers, and pill badges. |
+| **Border / Rule** | Warm Stone | `#E8E3D8` | `232, 227, 216` | 1px clean dividers, card borders, and table gridlines. |
+| **Text Primary** | Espresso Obsidian | `#18181B` | `24, 24, 27` | Document titles, main headers (H1/H2), bold metrics, and primary text (WCAG AAA). |
+| **Text Secondary** | Muted Graphite | `#4A4A50` | `74, 74, 80` | Body paragraphs, explanatory copy, and metadata labels. |
+| **Primary Brand** | Warm Terracotta | `#C8441B` | `200, 68, 27` | Signature action buttons, italicized editorial display accents, and primary brand marks. |
+| **Success / Parity** | Forest Juniper | `#0D5C4E` | `13, 92, 78` | Parity Pass badges, prosocial diff additions, and SLA guarantees. |
+| **Alert / Sunset** | Sandstone Amber | `#B45309` | `180, 83, 9` | Perspective sunset countdowns, latency warnings, and EOL milestones. |
 
 ---
 
 ## 4. Typography System
 
-We use a high-legibility, dual-font hierarchy pairing modern institutional sans-serif with a monospaced data font for cryptographic hashes and code samples.
+We use a distinctive, intellectual typography pairing combining contemporary luxury editorial serif with high-legibility geometric sans:
+* **Display Serif (Headlines & Accents):** `Instrument Serif` (Italic, warm terracotta).
+* **Primary Sans (Headings & UI):** `Plus Jakarta Sans` (Weight 600, 700, 800).
+* **Data & Monospace:** `Space Mono` / `JetBrains Mono` for cryptographic hashes, code samples, and latency scores.
 
 ### Font Families
 * **Display & Headings:** `Inter`, `-apple-system`, `BlinkMacSystemFont`, `"Plus Jakarta Sans"`, sans-serif.
@@ -134,7 +135,7 @@ For executive briefings, board reviews, and investor presentations:
 * **Background:** Soft Platinum White `#F8FAFC` with fine grid lines (`#E2E8F0`).
 * **Left Alignment (at 100px):** Official mark + `Normative Intelligence`.
 * **Headline:** `The Drop-in Prosocial Successor to Google Perspective API.`
-* **Supporting Tag:** `100% Wire Parity • < 3.0 ms Latency SLA • UC Berkeley EECS-2025-55`
+* **Supporting Tag:** `100% Wire Parity • < 3.0 ms Latency SLA • Venture BL-001`
 * **Right Accent:** Geometric waveform illustration in `#1D4ED8` and `#3B82F6`.
 
 ### LinkedIn Company Banner (1584 x 396 px)

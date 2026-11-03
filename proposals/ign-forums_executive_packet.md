@@ -1,8 +1,8 @@
 # Technical Migration Blueprint & Perspective API EOL Contingency Plan
 **Client Partner:** IGN Forums (Community Director)  
 **Publication Category:** Gaming & Pop Culture  
-**Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 03, 2026  
+**Issuing Authority:** Normative Intelligence Systems &bull; Founder: Bhaskar Pandey  
+**Date of Issuance:** November 04, 2026  
 **Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-3C3E2CFB18DB`
+* **Audit Certificate ID:** `CERT-BL-FCF9BD6D922A`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `3c3e2cfb18dbd5cd9a824ff41d777ccf381cfff69678d702dc7b6888e993aafb`
+* **Cryptographic Fingerprint (SHA-256):** `fcf9bd6d922a2e28b2c7daf35bbafd8d3826cd987a66a6ac11196abd5cba574f`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |

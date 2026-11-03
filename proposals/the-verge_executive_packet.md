@@ -1,8 +1,8 @@
 # Technical Migration Blueprint & Perspective API EOL Contingency Plan
 **Client Partner:** The Verge / Vox Media (VP of Audience Engagement & Community Operations Lead)  
 **Publication Category:** Digital Media & Consumer Tech  
-**Issuing Authority:** Normative Intelligence (UC Berkeley EECS-2025-55)  
-**Date of Issuance:** November 03, 2026  
+**Issuing Authority:** Normative Intelligence Systems &bull; Founder: Bhaskar Pandey  
+**Date of Issuance:** November 04, 2026  
 **Perspective Sunset Deadline:** December 31, 2026 (58 days remaining)  
 
 ---
@@ -20,9 +20,9 @@ Normative Intelligence provides a **1:1 bitwise drop-in replacement**:
 ---
 
 ## 2. Empirical Benchmark Verification & Cryptographic Parity
-* **Audit Certificate ID:** `CERT-BL-5B7ED113366E`
+* **Audit Certificate ID:** `CERT-BL-53C85D86926E`
 * **Empirical Technical Whitepaper:** Document ID `NI-TR-2026-B01` ([View Live Empirical Benchmark Report](https://beyond-likes-platform.onrender.com/benchmarks))
-* **Cryptographic Fingerprint (SHA-256):** `5b7ed113366e9a1e03c9f5cc62007cd963ecb35501097429d8381044e72ccf65`
+* **Cryptographic Fingerprint (SHA-256):** `53c85d86926ef9bc9af584010c84bee40cd91ab9a318f8237fa2f98a835dd8e5`
 
 ### Comparative Benchmark vs. Google Perspective API (v1alpha1)
 | Evaluation Metric | Legacy Google Perspective | Normative Intelligence | Verified Delta |

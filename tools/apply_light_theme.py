@@ -518,7 +518,7 @@ new_html_packet = '''html_packet = f"""<!DOCTYPE html>
         </svg>
         <div class="letterhead-text">
           <span class="brand-name">Normative Intelligence</span>
-          <span class="brand-subline">UC Berkeley EECS-2025-55 Lineage &bull; Enterprise Cutover</span>
+          <span class="brand-subline">Proprietary Enterprise Standard &bull; Enterprise Cutover</span>
         </div>
       </div>
       <div class="no-print">
@@ -536,7 +536,7 @@ new_html_packet = '''html_packet = f"""<!DOCTYPE html>
           Client: <strong>{profile['client_name']}</strong> &bull; Prepared: {date_str}
         </div>
         <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">
-          Venture Code: BL-001 &bull; UC Berkeley EECS-2025-55 Commercialization
+          Venture Code: BL-001 &bull; Proprietary Deep-Tech Venture
         </div>
       </div>
       <div class="badge-group">
@@ -586,7 +586,7 @@ new_html_packet = '''html_packet = f"""<!DOCTYPE html>
       Google Jigsaw has formally announced that the <strong>Google Perspective API will be permanently shut down on December 31, 2026</strong>. For digital newsrooms and forums with high-velocity community sections, losing this moderation layer introduces severe operational risk and unmanageable manual queue backlogs.
     </p>
     <p>
-      Normative Intelligence provides a <strong>1:1 bitwise drop-in replacement</strong> backed by UC Berkeley research that preserves existing ingestion infrastructure while introducing in-composer prosocial intelligence.
+      Normative Intelligence provides a <strong>1:1 bitwise drop-in replacement</strong> backed by Enterprise research that preserves existing ingestion infrastructure while introducing in-composer prosocial intelligence.
     </p>
 
     <!-- 2. Official Cryptographic Parity Certification -->
@@ -1068,7 +1068,7 @@ new_html_memo = '''html_memo = f"""<!DOCTYPE html>
         </svg>
         <div class="letterhead-text">
           <span class="brand-name">Normative Intelligence</span>
-          <span class="brand-subline">UC Berkeley EECS-2025-55 Lineage &bull; Technical Migration Brief</span>
+          <span class="brand-subline">Proprietary Enterprise Standard &bull; Technical Migration Brief</span>
         </div>
       </div>
       <div class="no-print">
@@ -1082,7 +1082,7 @@ new_html_memo = '''html_memo = f"""<!DOCTYPE html>
       <div>
         <h1 class="doc-title">Executive Proposal &amp; Cutover Packet</h1>
         <div class="doc-meta">Client: <strong>{client_name}</strong> &bull; Prepared: {date_str}</div>
-        <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">Venture Code: BL-001 &bull; UC Berkeley EECS-2025-55 Commercialization</div>
+        <div style="font-size: 0.8rem; color: #64748b; margin-top: 4px;">Venture Code: BL-001 &bull; Proprietary Deep-Tech Venture</div>
       </div>
       <div class="badge-group">
         <span class="badge badge-green">✓ CERTIFIED DROP-IN READY</span>

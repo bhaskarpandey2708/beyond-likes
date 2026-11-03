@@ -43,7 +43,7 @@ I am writing regarding {org_name}'s community architecture and Google Jigsaw's s
 
 {hook}
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).

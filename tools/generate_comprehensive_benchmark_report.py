@@ -367,7 +367,7 @@ def generate_report():
         </svg>
         <div>
           <div class="brand-title">Normative Intelligence</div>
-          <div class="brand-meta">UC Berkeley EECS-2025-55 Lineage &bull; Technical Report NI-TR-2026-B01</div>
+          <div class="brand-meta">Proprietary Autonomous Infrastructure &bull; Technical Report NI-TR-2026-B01</div>
         </div>
       </div>
       <div class="no-print" style="display: flex; gap: 10px;">
@@ -387,7 +387,7 @@ def generate_report():
     <div class="abstract-box">
       <div class="abstract-title">Executive Abstract</div>
       <div class="abstract-text">
-        With Google Jigsaw's formal decommission of the Google Perspective API on <strong>December 31, 2026</strong>, digital publishing platforms, forums, and comment ecosystems face an urgent infrastructure cutover. This technical report presents an empirical evaluation comparing the legacy Google Perspective API (v1alpha1) against the <strong>Normative Intelligence Engine</strong> (commercializing UC Berkeley EECS-2025-55). Evaluating over 1,000 queries across standard discourse, systems engineering jargon, adversarial obfuscation, and hardware latency distributions, we demonstrate that Normative Intelligence delivers <strong>100% wire drop-in schema parity</strong> while eliminating false-positive bans on technical syntax (<strong>0.0% vs. 53.3%</strong>), intercepting Unicode evasion attacks, and reducing execution latency from 216ms (cloud WAN) to <strong>0.18ms</strong> on local CPU.
+        With Google Jigsaw's formal decommission of the Google Perspective API on <strong>December 31, 2026</strong>, digital publishing platforms, forums, and comment ecosystems face an urgent infrastructure cutover. This technical report presents an empirical evaluation comparing the legacy Google Perspective API (v1alpha1) against the <strong>Normative Intelligence Engine</strong> (proprietary autonomous architecture). Evaluating over 1,000 queries across standard discourse, systems engineering jargon, adversarial obfuscation, and hardware latency distributions, we demonstrate that Normative Intelligence delivers <strong>100% wire drop-in schema parity</strong> while eliminating false-positive bans on technical syntax (<strong>0.0% vs. 53.3%</strong>), intercepting Unicode evasion attacks, and reducing execution latency from 216ms (cloud WAN) to <strong>0.18ms</strong> on local CPU.
       </div>
     </div>
 
@@ -429,9 +429,9 @@ def generate_report():
     </ul>
 
     <!-- Section 2 -->
-    <h2>2. Architectural Foundations: UC Berkeley EECS-2025-55 Lineage</h2>
+    <h2>2. Architectural Foundations: Proprietary Architecture &bull; Venture BL-001</h2>
     <p>
-      Normative Intelligence addresses these challenges by commercializing research originating in <strong>UC Berkeley EECS Technical Report EECS-2025-55</strong>. While legacy systems rely on token-level negative sentiment heuristics, Normative Intelligence implements a <strong>4-Dimensional Discourse Rubric</strong>:
+      Normative Intelligence addresses these challenges by commercializing research originating in <strong>foundational prosocial communication theory</strong>. While legacy systems rely on token-level negative sentiment heuristics, Normative Intelligence implements a <strong>4-Dimensional Discourse Rubric</strong>:
     </p>
     <table>
       <thead>
@@ -601,7 +601,7 @@ Header: X-API-Key: org_client_live_key</code></pre>
 
     <!-- Footer -->
     <div class="whitepaper-footer">
-      <div>Normative Intelligence &bull; UC Berkeley EECS-2025-55 Lineage</div>
+      <div>Normative Intelligence &bull; Proprietary Architecture &bull; Venture BL-001</div>
       <div>Confidential Technical Whitepaper &bull; Issued {date_str}</div>
     </div>
 
@@ -623,7 +623,7 @@ Header: X-API-Key: org_client_live_key</code></pre>
 
 **Document ID:** NI-TR-2026-B01  
 **Issuing Authority:** Normative Intelligence Systems Group  
-**Lineage:** UC Berkeley EECS-2025-55 Commercialization  
+**Lineage:** Proprietary Enterprise Infrastructure  
 **Publication Date:** {date_str}  
 **Primary Author:** Bhaskar Pandey (Principal Architect)  
 **Status:** Certified Empirical Publication  

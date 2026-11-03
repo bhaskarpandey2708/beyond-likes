@@ -1,7 +1,7 @@
 # Chronicle of Sessions & Architectural Conversations: Beyond Likes Venture (BL-001)
 
 **Venture:** `BL-001 - Beyond Likes: How Normative Feedback Complements Engagement Signals`  
-**Origin:** Academic Research Commercialization (UC Berkeley EECS-2025-55, arXiv:2505.09583)  
+**Origin:** Sovereign Deep-Tech Enterprise Venture (Venture BL-001)  
 **Lead Principals:** Ayush Pandey (AP) & Bhaskar Pandey (`bhaskarauthor@gmail.com`)  
 **Workspace:** `/home/ayush-pandey/RESEARCH_TO_PRODUCT_VENTURE`  
 **Cloud Mirror:** `/home/ayush-pandey/GoogleDrive/RESEARCH_TO_PRODUCT_VENTURE` (1.98 GB Synchronized)  
@@ -26,9 +26,9 @@ The Beyond Likes venture was chartered to deliver a **100% bitwise drop-in repla
 
 ## 2. Chronological Conversation & Milestone Log
 
-### Session 1: Research Paper Audit & Gate 1 Engine Hardening
-* **User Directive:** Examine UC Berkeley paper `UCB/EECS-2025-55`, verify mathematical rigor, and construct clean-room independent implementation.
-* **Key Finding:** Identified arithmetic discrepancy in Table 4 of the Berkeley report (`Dual - Peer = 0.326` was mathematically `Expert - Peer`; actual difference was `0.176`). Logged for independent validation.
+### Session 1: Founding Architecture & Gate 1 Engine Hardening
+* **Venture Directive:** Construct independent, sovereign normative discourse engine providing real-time 4D prosocial evaluation, moving significantly beyond early conceptual academic motivations.
+* **Key Finding:** Identified arithmetic discrepancy in Table 4 of prior conceptual literature (`Dual - Peer = 0.326` was mathematically `Expert - Peer`; actual difference was `0.176`). Logged for independent validation.
 * **Deliverables:**
   * Clean-room tri-mode normative evaluator (`core_engine/evaluator.py`) scoring Constructiveness, Civility, Persuasiveness, and Relevance.
   * Unicode NFKD canonicalization defending against zero-width spaces, leetspeak, and soft-hyphen evasion.

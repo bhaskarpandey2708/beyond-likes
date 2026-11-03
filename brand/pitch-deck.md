@@ -1,7 +1,7 @@
 # Normative Intelligence — Master Pitch Deck & Presentation Guide
 
 **Company:** Normative Intelligence  
-**Pedigree:** UC Berkeley EECS-2025-55 Spinout  
+**Pedigree:** Proprietary Deep-Tech Venture  
 **Presentation Mode:** 12 Widescreen Slides (16:9)  
 **Interactive Viewer:** [https://beyond-likes-platform.onrender.com/deck](https://beyond-likes-platform.onrender.com/deck)  
 **Local File:** `brand/pitch-deck.html`  
@@ -12,7 +12,7 @@
 ## Slide 1: Title & Academic Pedigree
 * **Headline:** Normative Intelligence — The Drop-In Prosocial Infrastructure for Digital Discourse
 * **Subhead:** The 1:1 bitwise successor to Google Perspective API. Moving digital journalism and enterprise forums from binary censorship to normative epistemic intelligence.
-* **Speaker Notes:** "Good morning. Online publishers and digital communities are facing a dual crisis: an unprecedented moderation breakdown driven by cheap synthetic low-effort noise, and an immediate operational deadline: Google is permanently turning off the Perspective API on December 31, 2026. We are Normative Intelligence, commercialized out of UC Berkeley EECS research, and we provide a 1:1 bitwise drop-in replacement that takes 5 minutes to deploy and elevates discourse from punitive deletion to real-time prosocial guidance."
+* **Speaker Notes:** "Good morning. Online publishers and digital communities are facing a dual crisis: an unprecedented moderation breakdown driven by cheap synthetic low-effort noise, and an immediate operational deadline: Google is permanently turning off the Perspective API on December 31, 2026. We are Normative Intelligence, commercialized out of Proprietary Architecture research, and we provide a 1:1 bitwise drop-in replacement that takes 5 minutes to deploy and elevates discourse from punitive deletion to real-time prosocial guidance."
 
 ---
 
@@ -40,7 +40,7 @@
 
 ## Slide 4: The Core Solution (4D Normative Intelligence)
 * **Headline:** Normative 4D Intelligence: Prosocial Governance
-* **Subhead:** Instead of binary censorship, we evaluate discourse across four normative dimensions grounded in UC Berkeley communication science:
+* **Subhead:** Instead of binary censorship, we evaluate discourse across four normative dimensions grounded in Enterprise communication science:
   * **Constructiveness (35%):** Evidence substantiation, benchmark citations, constructive solutions.
   * **Civility (25%):** Mutual intellectual respect and tone calibration.
   * **Persuasiveness (20%):** Epistemic grounding, logical coherence, and rational argumentation.
@@ -101,7 +101,7 @@
 ---
 
 ## Slide 11: Academic Research Pedigree
-* **Rooted in UC Berkeley EECS-2025-55:**
+* **Rooted in Venture BL-001:**
   * +17.6% lift in empirical evidence citations.
   * -34.8% reduction in ad hominem thread derailment.
   * Full adherence to open standards (OpenAPI 3.0.3, W3C ActivityPub).

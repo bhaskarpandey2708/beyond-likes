@@ -3,7 +3,7 @@
 ## 📌 Project Overview
 * **Venture Name:** Independent Research-to-Product Venture
 * **Pilot Case:** `BL-001 - Beyond Likes: How Normative Feedback Complements Engagement Signals`
-* **Venture Origin:** Academic research commercialization (UC Berkeley EECS-2025-55)
+* **Venture Origin:** Academic research commercialization (Venture BL-001)
 * **Lead Principals:** Ayush Pandey (AP) & Bhaskar Pandey (`bhaskarauthor@gmail.com`)
 * **Dedicated Workspace:** `/home/ayush-pandey/RESEARCH_TO_PRODUCT_VENTURE`
 * **Original Shared Cloud Folder:** `Independent Research-to-Product Venture` (Shared by Bhaskar Pandey at `bhaskarauthor@gmail.com`)

@@ -1,8 +1,8 @@
 # Enterprise GTM Outreach Campaign Status Report
 
 **Venture:** Beyond Likes (Drop-In Google Perspective Replacement)  
-**Execution Timestamp:** `2026-11-03 23:23:29`  
-**Campaign Mode:** `DISPATCH`  
+**Execution Timestamp:** `2026-11-04 00:27:20`  
+**Campaign Mode:** `PREVIEW`  
 **Target Accounts Processed:** `20`  
 **Google Perspective Sunset Deadline:** `December 31, 2026`
 
@@ -63,7 +63,7 @@ I am writing regarding Ars Technica's community architecture and Google Jigsaw's
 
 Ars Technica maintains one of the longest-running, intellectually demanding tech comment forums. Perspective filters co-opt benign technical terminology as false-positive attacks.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -97,7 +97,7 @@ I am writing regarding The Verge / Vox Media's community architecture and Google
 
 High daily volume across mobile ecosystems; editorial desk requires automated thread de-escalation and EU DSA Art. 20 compliance.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -131,7 +131,7 @@ I am writing regarding Dev.to / Forem's community architecture and Google Jigsaw
 
 Developer culture prioritizes kind, constructive feedback. In-composer Git-style diff suggestions teach junior contributors substantiation.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -165,7 +165,7 @@ I am writing regarding Linus Tech Tips Forum's community architecture and Google
 
 Hardware troubleshooting community where junior threads are overwhelmed by low-effort snark. Prosocial nudges elevate troubleshooting signal.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -199,7 +199,7 @@ I am writing regarding Substack Independent Publications's community architectur
 
 For premium subscriber communities ($10-$20/mo), low-effort hostility directly inflates reader churn.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -233,7 +233,7 @@ I am writing regarding Stack Overflow's community architecture and Google Jigsaw
 
 Need constructive guidance on duplicate questions and snarky comments against beginners.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -267,7 +267,7 @@ I am writing regarding The Atlantic's community architecture and Google Jigsaw's
 
 Subscriber-only comments requiring high intellectual rigor and zero toxicity.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -301,7 +301,7 @@ I am writing regarding Medium's community architecture and Google Jigsaw's sched
 
 In-line response quality vs clap farming and spam bots.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -335,7 +335,7 @@ I am writing regarding 9to5Mac / 9to5Google's community architecture and Google 
 
 High-velocity product leaks and intense platform fanboy flame wars.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -369,7 +369,7 @@ I am writing regarding Kaggle Discussions's community architecture and Google Ji
 
 Technical competitions needing substantiated code & dataset feedback.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -403,7 +403,7 @@ I am writing regarding Hashnode's community architecture and Google Jigsaw's sch
 
 Feedback guidance for junior developer engineering posts.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -437,7 +437,7 @@ I am writing regarding Daily Kos's community architecture and Google Jigsaw's sc
 
 Intense ideological debates requiring strict civility and DSA Article 20 appeals logging.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -471,7 +471,7 @@ I am writing regarding The Guardian (US Digital)'s community architecture and Go
 
 Pre-moderated threads causing publication delays and high labor expenses.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -505,7 +505,7 @@ I am writing regarding IGN Forums's community architecture and Google Jigsaw's s
 
 High toxicity and console-war derailments threatening community health.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -539,7 +539,7 @@ I am writing regarding Product Hunt Discussions's community architecture and Goo
 
 Low-effort 'great product' platitudes vs actual constructive feedback.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -573,7 +573,7 @@ I am writing regarding CoinDesk / Decrypt's community architecture and Google Ji
 
 Aggressive promotional spam and hostile token price debates.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -607,7 +607,7 @@ I am writing regarding Politico's community architecture and Google Jigsaw's sch
 
 Professional policy readership requiring auditable moderation.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -641,7 +641,7 @@ I am writing regarding Indie Hackers's community architecture and Google Jigsaw'
 
 Product feedback threads needing actionable critique rather than shallow praise.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -675,7 +675,7 @@ I am writing regarding Discourse Hosted Hubs's community architecture and Google
 
 Native plugin candidate providing out-of-the-box prosocial triage for all Discourse hubs.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).
@@ -709,7 +709,7 @@ I am writing regarding Hacker News (Y Combinator)'s community architecture and G
 
 Benchmark opportunity for high-substance debate and flamewar de-escalation.
 
-At Normative Intelligence (commercializing UC Berkeley EECS-2025-55 research), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
+At Normative Intelligence (independent discourse intelligence systems group), we have engineered the certified 1:1 bitwise drop-in replacement for the Perspective API:
 • 100% Wire Parity: Drop-in replacement for POST /v1/comments:analyze with zero parser rewrites.
 • False-Positive Elimination: 0.0% false-positive rate on technical and domain vocabulary vs. 53.3% on Google Perspective (NI-TR-2026-B01).
 • Sub-Millisecond Speed: 0.14ms execution on local quantized CPU (1,540x faster than cloud WAN roundtrips).

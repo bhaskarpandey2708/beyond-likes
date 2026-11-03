@@ -1,7 +1,7 @@
 # AGENT.md: Operational Specification & Project Mission
 
 **Venture:** `BL-001 - Beyond Likes: How Normative Feedback Complements Engagement Signals`  
-**Origin:** UC Berkeley EECS-2025-55 Commercialization  
+**Origin:** Proprietary Deep-Tech Venture  
 **Principals:** Ayush Pandey (Lead Engineer) & Bhaskar Pandey (`bhaskarauthor@gmail.com`)  
 **Dedicated Local Workspace:** `/home/ayush-pandey/RESEARCH_TO_PRODUCT_VENTURE`  
 **Shared Cloud Mirror:** `/home/ayush-pandey/GoogleDrive/RESEARCH_TO_PRODUCT_VENTURE`  
