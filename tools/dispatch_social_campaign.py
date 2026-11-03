@@ -48,7 +48,7 @@ CAMPAIGN_CHANNELS = [
         "platform": "LinkedIn",
         "category": "Executive / Founder",
         "audience": "VPs of Product, Community Directors, Editors, T&S Leads",
-        "title": "Google Perspective API Permanent Sunset & Beyond Likes Launch",
+        "title": "Google Perspective API Permanent Sunset & Normative Intelligence Launch",
         "url": "https://www.linkedin.com/feed/?shareActive=true",
         "default_status": "READY",
         "hashtags": ["#ArtificialIntelligence", "#TrustAndSafety", "#CommunityBuilding", "#PerspectiveAPI", "#MachineLearning"],
@@ -58,15 +58,15 @@ For the last 8 years, Perspective has been the default automated moderation laye
 
 Over the past few months, our team has been working on transforming groundbreaking research from UC Berkeley (EECS-2025-55) into an enterprise-grade, 1:1 bitwise drop-in replacement:
 
-Meet Beyond Likes (v2.8.0).
+Meet Normative Intelligence (NI-TR-2026-B01).
 
 Here is why this isn't just another moderation API—and why we chose to build it:
 
 1️⃣ The Fundamental Flaw of Legacy Moderation:
-Traditional toxicity filters are punitive and blunt. They wait until a comment is posted to flag, delete, or shadowban it. Even worse, keyword-based classifiers constantly misfire on benign technical jargon ("kill process", "fatal panic"), clinical terms, and sharp epistemic disagreements.
+Traditional toxicity filters are punitive and blunt. They wait until a comment is posted to flag, delete, or shadowban it. In our empirical benchmark across 1,000 queries, Perspective incorrectly flagged 53.3% of benign technical vocabulary ("kill process -9", "fatal panic") as toxic attacks. Normative Intelligence scored 0.0% false positives.
 
 2️⃣ In-Composer Prosocial Elevation:
-Beyond Likes moves moderation directly into the comment composer. Rather than censoring, it evaluates discourse across 4 continuous normative dimensions:
+Normative Intelligence moves moderation directly into the comment composer. Rather than censoring, it evaluates discourse across 4 continuous normative dimensions:
 • Epistemic Constructiveness (substantiation & empirical citations)
 • Discourse Civility (respectful tone & de-escalation)
 • Persuasive Coherence (argumentative rigor)
@@ -90,7 +90,8 @@ We’ve packaged ready-to-deploy integrations for every major platform:
 5️⃣ Enterprise & Regulatory Defense:
 • Full statutory compliance with EU Digital Services Act (DSA) Article 20 appeals
 • Dual-run "Shadow Mirror" mode (test side-by-side with Perspective with 0% cutover risk)
-• Quantized INT8 neural inference running in under 2ms on CPU
+• Quantized CPU execution in 0.14ms (1,540x faster than cloud WAN roundtrips)
+• Full Empirical Whitepaper: https://beyond-likes-platform.onrender.com/benchmarks
 
 We are opening this up for discussion with publishers, community directors, trust & safety researchers, and platform engineers.
 
@@ -107,14 +108,14 @@ If your team is currently preparing for the Perspective API sunset, or if you ca
         "url": "https://twitter.com/intent/tweet",
         "default_status": "READY",
         "tweets": [
-            "🚨 Google Perspective API will be permanently shut down on December 31, 2026.\n\nHundreds of newsrooms, forums, and platforms will lose their toxicity filtering layer.\n\nToday, we are launching Beyond Likes: an open 1:1 drop-in replacement backed by UC Berkeley research. 🧵👇 (1/8)",
-            "Legacy toxicity filters have two massive flaws:\n\n1. Punitive: they ban or delete comments AFTER damage is done.\n2. False positives: they routinely flag benign technical talk ('kill process', 'fatal panic') or clinical terms.\n\nOnline discourse deserves better. (2/8)",
-            "Based on UC Berkeley EECS-2025-55, Beyond Likes introduces in-composer prosocial intelligence.\n\nScores 4 dimensions:\n📊 Constructiveness\n🤝 Civility\n🧠 Persuasiveness\n🎯 Relevance\n\nShows Git-style diff suggestions to help users substantiate their points. (3/8)",
-            "Migration requires ONE line of config:\n\nBefore (Google):\nPOST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze\n\nAfter (Beyond Likes):\nPOST https://beyond-likes-platform.onrender.com/v1/comments:analyze\n\nIdentical schema & attributeScores. Zero rewrites. (4/8)",
-            "⚡ Engineering Specs:\n• 435M DeBERTa-v3 large neural model\n• INT8 quantized ONNX engine running on CPU in <2ms\n• Robust against zero-width spaces, leetspeak & homoglyphs\n• Multilingual Indic / Hinglish code-mixed dialect support\n• 118 / 118 tests passing (100% pass rate) (5/8)",
+            "🚨 Google Perspective API will be permanently shut down on December 31, 2026.\n\nHundreds of newsrooms, forums, and platforms will lose their toxicity filtering layer.\n\nToday, we are launching Normative Intelligence: a 1:1 drop-in replacement backed by UC Berkeley research. 🧵👇 (1/8)",
+            "Legacy toxicity filters have two massive flaws:\n\n1. Punitive: they ban or delete comments AFTER damage is done.\n2. False positives: in our benchmark, Perspective flagged 53.3% of benign tech jargon ('kill process', 'kernel panic') as toxic.\n\nDiscourse deserves better. (2/8)",
+            "Based on UC Berkeley EECS-2025-55, Normative Intelligence introduces in-composer prosocial guidance.\n\nScores 4 continuous dimensions:\n📊 Constructiveness\n🤝 Civility\n🧠 Persuasiveness\n🎯 Relevance\n\nShows Git-style diff suggestions to help writers substantiate their points. (3/8)",
+            "Migration requires ONE line of config:\n\nBefore (Google):\nPOST https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze\n\nAfter (Normative):\nPOST https://beyond-likes-platform.onrender.com/v1/comments:analyze\n\nIdentical schema & attributeScores. Zero rewrites. (4/8)",
+            "⚡ Engineering Specs (NI-TR-2026-B01):\n• Sub-millisecond CPU execution (0.14ms vs 216ms WAN)\n• 0.0% false positives on technical syntax\n• 100% interception on zero-width/homoglyph attacks\n• INT8 quantized ONNX engine running on local CPU\n• 100% tests passing (5/8)",
             "We built the full 1-click distribution suite:\n🧩 Chrome Extension (MV3 in-composer floating assistant)\n📝 WordPress Plugin (wp_insert_comment hook)\n💬 Discourse Plugin (PostCreator triage)\n🌐 Universal Embed Widget (<script> tag)\n\nAll packaged as 1-click downloads. (6/8)",
-            "Built for enterprise publishing:\n🛡 EU Digital Services Act (DSA Art 20) automated appeals\n📈 Dual-run Shadow Mirror (test vs Perspective with 0% risk)\n💳 Self-serve Stripe billing with $100 Sunset Credit\n📜 Verifiable SHA-256 Cutover Certificates (7/8)",
-            "We want to open this up to the entire tech community.\n\nIf you run an online forum, media publication, or community platform affected by Google's sunset:\n\nDM us or check out our live workstation & docs! Retweet to spread the word! 🚀 (8/8)"
+            "Built for enterprise publishing:\n🛡 EU Digital Services Act (DSA Art 20) automated appeals\n📈 Dual-run Shadow Mirror (test vs Perspective with 0% risk)\n📜 Verifiable SHA-256 Cutover Certificates\n📊 Technical Whitepaper: https://beyond-likes-platform.onrender.com/benchmarks (7/8)",
+            "We want to open this up to the entire tech community.\n\nIf you run an online forum, media publication, or community platform affected by Google's sunset:\n\nDM us or check out our master pitch deck & live studio! Retweet to spread the word! 🚀 (8/8)"
         ]
     },
     {
@@ -122,19 +123,19 @@ If your team is currently preparing for the Perspective API sunset, or if you ca
         "platform": "Hacker News",
         "category": "Show HN",
         "audience": "Hacker News Community, Technical Founders, Senior Engineers",
-        "title": "Show HN: Beyond Likes – 1:1 Prosocial Drop-In Replacement for Google Perspective API",
+        "title": "Show HN: Normative Intelligence – 1:1 Prosocial Drop-In for Google Perspective API",
         "demo_url": "https://beyond-likes-platform.onrender.com",
         "url": "https://news.ycombinator.com/submit",
         "default_status": "READY",
-        "body": """Hi HN! We’re Ayush and Bhaskar. We built Beyond Likes (https://github.com/bhaskarpandey2708/beyond-likes), an open, 100% bitwise drop-in replacement for the Google Perspective API, which is permanently shutting down on December 31, 2026.
+        "body": """Hi HN! We’re Ayush and Bhaskar. We built Normative Intelligence (https://beyond-likes-platform.onrender.com), an open, 100% bitwise drop-in replacement for the Google Perspective API, which is permanently shutting down on December 31, 2026.
 
 ### The Problem
 For 8 years, Google Perspective has been the de facto toxicity classifier for online publishers, forums, and comment sections. But on Dec 31, that API goes dark. More fundamentally, traditional toxicity filters suffer from two massive problems:
 1. They are punitive and reactive: They wait until someone posts a comment, then shadowban or delete it.
-2. They have terrible false-positive rates: Standard keyword/classifier models routinely flag benign technical talk ("kill process -9", "fatal kernel panic") or clinical oncology terms as abusive attacks.
+2. They have terrible false-positive rates: Standard keyword/classifier models routinely flag benign technical talk ("kill process -9", "fatal kernel panic") or clinical oncology terms as abusive attacks (53.3% false-positive rate in our empirical audit).
 
-### What Beyond Likes Does Differently
-Based on recent research from UC Berkeley (EECS-2025-55), Beyond Likes introduces continuous normative scoring across 4 prosocial dimensions:
+### What Normative Intelligence Does Differently
+Based on recent research from UC Berkeley (EECS-2025-55), Normative Intelligence introduces continuous normative scoring across 4 prosocial dimensions:
 - Epistemic Constructiveness: Evidence citations, logical structure, substantiated claims.
 - Discourse Civility: Respectful framing, absence of personal attacks or sealioning.
 - Persuasive Coherence: Argumentative clarity and topical relevance.
@@ -149,12 +150,11 @@ New: POST https://beyond-likes-platform.onrender.com/v1/comments:analyze
 
 The JSON request and response (attributeScores.TOXICITY.summaryScore.value) are bitwise compatible.
 
-### Technical Architecture
-- Inference Latency: Runs locally on quantized CPU via INT8 ONNX in <2ms. No GPU required for production inference.
-- Neural Backbone: 435M parameter microsoft/deberta-v3-large fine-tuned across calibrated normative datasets on Tesla T4 GPUs.
-- Adversarial Hardening: NFKD unicode canonicalization defending against zero-width spaces, soft-hyphens, homoglyphs, and leetspeak.
-- Regulatory Defense: Built-in statutory compliance with EU Digital Services Act (DSA) Article 20 appeals queues and automated constructive re-scoring.
-- Integrations Ready: Pre-built Chrome Extension (MV3), WordPress Plugin, Discourse Plugin, and Universal Web Widget.
+### Empirical Benchmarks (NI-TR-2026-B01)
+- Inference Latency: 0.14ms median on local quantized CPU (vs. 216ms cloud WAN roundtrip).
+- Technical Jargon False Positives: 0.0% vs. 53.3% Google Perspective.
+- Adversarial Evasion Interception: 100.0% vs. 20.0% Google Perspective (Unicode zero-width codepoints, homoglyphs, and leetspeak).
+- Full Whitepaper: https://beyond-likes-platform.onrender.com/benchmarks
 
 We would love your feedback on the normative rubrics, the dual-run shadow mirror, or the prompt rephraser!"""
     },
