@@ -1,11 +1,13 @@
 #!/usr/bin/env python3
 """
-Normative Intelligence — Warm Terracotta & Linen Editorial Pitch Deck Builder
-Rebuilds brand/pitch-deck.html to match the high-end editorial aesthetic:
-- Fonts: Instrument Serif (display italic), Plus Jakarta Sans, JetBrains Mono
-- Palette: Warm Linen (#FAF8F5), Espresso Charcoal (#18181B), Warm Terracotta (#C8441B),
-           Forest Juniper (#0D5C4E), Sandstone Amber (#B45309), Warm Borders (#E8E3D8)
-- Zero generic blue or SaaS boilerplate
+Normative Intelligence — Cinematic Auto-Advancing Editorial Pitch Deck Builder
+Rebuilds brand/pitch-deck.html with:
+- NO download buttons (web-native presentation)
+- Auto-advancing slideshow with smooth progress bar (pauses on hover or pause button)
+- Cinematic slide transitions and staggered card entry animations
+- Interactive editorial tooltips on key terms
+- Replaced client prospect lists with high-scale enterprise architecture metrics
+- Warm Terracotta & Linen Editorial design system
 """
 
 import os
@@ -52,7 +54,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       --card-bg: #fdfcf9;
       --shadow-sm: 0 1px 3px rgba(39, 30, 20, 0.05);
       --shadow-md: 0 8px 24px -4px rgba(39, 30, 20, 0.08);
-      --shadow-lg: 0 16px 40px -8px rgba(39, 30, 20, 0.12);
+      --shadow-lg: 0 20px 50px -10px rgba(39, 30, 20, 0.12);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -73,7 +75,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     /* Deck Controls Header */
     .controls-header {
       width: 100%;
-      max-width: 1100px;
+      max-width: 1120px;
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -85,16 +87,16 @@ HTML_CONTENT = """<!DOCTYPE html>
     .brand-tag {
       display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 0.98rem;
+      gap: 12px;
+      font-size: 1.05rem;
       font-weight: 800;
       color: var(--text);
       letter-spacing: -0.02em;
     }
 
     .brand-logo-mark {
-      width: 30px;
-      height: 30px;
+      width: 32px;
+      height: 32px;
       flex-shrink: 0;
     }
 
@@ -128,26 +130,44 @@ HTML_CONTENT = """<!DOCTYPE html>
       color: var(--text);
     }
 
-    .btn-accent-subtle {
+    .btn-toggle-play {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      color: var(--text);
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-weight: 700;
+      padding: 8px 14px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.82rem;
+      font-family: inherit;
+      transition: all 0.15s;
+    }
+    .btn-toggle-play:hover {
+      border-color: var(--accent);
       background: var(--accent-light);
       color: var(--accent);
-      border-color: var(--accent-border);
-    }
-    .btn-accent-subtle:hover {
-      background: #fbe6de;
-      color: var(--accent-hover);
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #ffffff;
-      border-color: var(--accent);
+    .pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      display: inline-block;
+      animation: pulseGreen 1.8s infinite;
+    }
+    .pulse-dot.paused {
+      background: #f59e0b;
+      animation: none;
     }
 
-    .btn-primary:hover {
-      background: var(--accent-hover);
-      border-color: var(--accent-hover);
-      color: #ffffff;
+    @keyframes pulseGreen {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0.7); }
+      70% { transform: scale(1); box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(16, 185, 129, 0); }
     }
 
     .slide-counter {
@@ -166,10 +186,10 @@ HTML_CONTENT = """<!DOCTYPE html>
     /* Slide Frame (16:9 Aspect Ratio) */
     .deck-stage {
       width: 100%;
-      max-width: 1100px;
+      max-width: 1120px;
       background: var(--slide-bg);
       border: 1px solid var(--border);
-      border-radius: 14px;
+      border-radius: 16px;
       box-shadow: var(--shadow-lg);
       aspect-ratio: 16 / 9;
       position: relative;
@@ -178,22 +198,86 @@ HTML_CONTENT = """<!DOCTYPE html>
       flex-direction: column;
     }
 
+    /* Auto-Advance Progress Bar */
+    .slide-progress-track {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 4px;
+      background: rgba(232, 227, 216, 0.4);
+      z-index: 50;
+    }
+
+    .slide-progress-bar {
+      height: 100%;
+      width: 0%;
+      background: var(--accent);
+      transition: width 0.05s linear;
+    }
+
+    .slide-stage-overlay-notice {
+      position: absolute;
+      bottom: 12px;
+      right: 20px;
+      z-index: 40;
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--text-subtle);
+      background: rgba(255, 255, 255, 0.9);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      backdrop-filter: blur(4px);
+      pointer-events: none;
+      opacity: 0.8;
+      transition: opacity 0.2s;
+    }
+
     .slide {
       display: none;
       width: 100%;
       height: 100%;
-      padding: 50px 60px;
+      padding: 48px 60px;
       flex-direction: column;
       justify-content: space-between;
-      animation: fadeIn 0.18s ease-in-out;
+      position: relative;
+      opacity: 0;
+      transform: scale(0.98) translateY(6px);
+      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     }
 
     .slide.active {
       display: flex;
+      opacity: 1;
+      transform: scale(1) translateY(0);
     }
 
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(3px); }
+    /* Staggered Element Animations */
+    .slide.active .slide-top-meta {
+      animation: fadeInDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .slide.active .slide-title {
+      animation: fadeInDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
+    }
+    .slide.active .slide-subtitle {
+      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
+    }
+    .slide.active .card:nth-child(1) { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both; }
+    .slide.active .card:nth-child(2) { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
+    .slide.active .card:nth-child(3) { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both; }
+    .slide.active .card:nth-child(4) { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both; }
+    .slide.active .slide-footer {
+      animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-8px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
@@ -228,7 +312,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       display: flex;
       flex-direction: column;
       justify-content: center;
-      margin: 16px 0;
+      margin: 14px 0;
     }
 
     .slide-title {
@@ -237,7 +321,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       letter-spacing: -0.03em;
       line-height: 1.16;
       color: var(--text);
-      margin-bottom: 12px;
+      margin-bottom: 10px;
     }
 
     .serif-accent {
@@ -251,8 +335,8 @@ HTML_CONTENT = """<!DOCTYPE html>
       font-size: 1.05rem;
       color: var(--text-muted);
       line-height: 1.55;
-      max-width: 840px;
-      margin-bottom: 22px;
+      max-width: 860px;
+      margin-bottom: 20px;
     }
 
     .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
@@ -262,9 +346,15 @@ HTML_CONTENT = """<!DOCTYPE html>
     .card {
       background: var(--card-bg);
       border: 1px solid var(--border);
-      border-radius: 10px;
+      border-radius: 12px;
       padding: 20px;
-      transition: all 0.15s;
+      position: relative;
+      transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+    }
+    .card:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-md);
+      border-color: #d8d0c2;
     }
 
     .card-title {
@@ -295,6 +385,47 @@ HTML_CONTENT = """<!DOCTYPE html>
       text-transform: uppercase;
       letter-spacing: 0.06em;
       color: var(--text-subtle);
+    }
+
+    /* Interactive Editorial Tooltips */
+    .has-tooltip {
+      position: relative;
+      cursor: help;
+      border-bottom: 1px dashed var(--accent);
+    }
+    .has-tooltip:hover::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: 125%;
+      left: 50%;
+      transform: translateX(-50%);
+      background: #18181b;
+      color: #faf8f5;
+      padding: 7px 12px;
+      border-radius: 6px;
+      font-size: 0.76rem;
+      font-weight: 500;
+      line-height: 1.4;
+      white-space: normal;
+      width: 240px;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.25);
+      border: 1px solid #3f3f46;
+      z-index: 100;
+      pointer-events: none;
+      animation: fadeIn 0.15s ease;
+      text-transform: none;
+      letter-spacing: normal;
+    }
+    .has-tooltip:hover::before {
+      content: '';
+      position: absolute;
+      bottom: 110%;
+      left: 50%;
+      transform: translateX(-50%);
+      border: 6px solid transparent;
+      border-top-color: #18181b;
+      z-index: 101;
+      pointer-events: none;
     }
 
     table.deck-table {
@@ -343,18 +474,6 @@ HTML_CONTENT = """<!DOCTYPE html>
       color: var(--text);
     }
 
-    pre {
-      background: #ffffff;
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 14px;
-      font-family: 'JetBrains Mono', monospace;
-      font-size: 0.82rem;
-      color: var(--text);
-      overflow-x: auto;
-      line-height: 1.45;
-    }
-
     .slide-footer {
       display: flex;
       justify-content: space-between;
@@ -365,30 +484,12 @@ HTML_CONTENT = """<!DOCTYPE html>
       color: var(--text-subtle);
       font-weight: 600;
     }
-
-    /* Print Styles */
-    @media print {
-      body { background: #fff !important; padding: 0 !important; }
-      .controls-header, .no-print { display: none !important; }
-      .deck-stage {
-        max-width: 100% !important;
-        border: none !important;
-        box-shadow: none !important;
-        border-radius: 0 !important;
-      }
-      .slide {
-        display: flex !important;
-        page-break-after: always;
-        height: 100vh !important;
-        padding: 40px !important;
-      }
-    }
   </style>
 </head>
 <body>
 
   <!-- Controls Header -->
-  <div class="controls-header no-print">
+  <div class="controls-header">
     <div class="brand-tag">
       <svg class="brand-logo-mark" viewBox="0 0 32 32" fill="none">
         <rect width="32" height="32" rx="8" fill="#18181b"/>
@@ -399,25 +500,39 @@ HTML_CONTENT = """<!DOCTYPE html>
       <span>Normative<span style="color: var(--accent);">.AI</span></span>
       <span style="font-weight: 500; color: var(--text-subtle); font-size: 0.85rem;">• 16:9 Master Pitch Deck</span>
     </div>
+
     <div class="deck-nav-btns">
+      <button class="btn-toggle-play" id="playPauseBtn" onclick="togglePlayPause()" title="Pause or Resume Auto-Advance">
+        <span class="pulse-dot" id="pulseDot"></span>
+        <span id="playPauseLabel">Auto-Advancing</span>
+      </button>
       <button class="btn" onclick="prevSlide()" title="Previous slide (Left Arrow)">← Prev</button>
       <span class="slide-counter" id="slideCounter">Slide 1 of 12</span>
       <button class="btn" onclick="nextSlide()" title="Next slide (Right Arrow)">Next →</button>
-      <a class="btn btn-accent-subtle" href="/deck/download" download="Normative_Intelligence_Pitch_Deck.pptx" title="Download PowerPoint .pptx presentation">📥 Download .PPTX</a>
-      <button class="btn btn-primary" onclick="window.print()" title="Export complete deck to PDF">🖨️ Export PDF</button>
+      <a class="btn" href="/" title="Return to Showcase Home">Studio Desk</a>
+      <a class="btn" href="/benchmarks" title="Explore Empirical Whitepaper">Whitepaper</a>
     </div>
   </div>
 
   <!-- Deck Stage -->
-  <div class="deck-stage" id="deckStage">
+  <div class="deck-stage" id="deckStage" onmouseenter="onHoverPause()" onmouseleave="onHoverResume()">
+
+    <!-- Progress Track (Auto-Play Timer Bar) -->
+    <div class="slide-progress-track">
+      <div class="slide-progress-bar" id="progressBar"></div>
+    </div>
+
+    <div class="slide-stage-overlay-notice">
+      Hover cursor to pause slide &bull; Left/Right keys to navigate
+    </div>
 
     <!-- SLIDE 1: Title & Strategic Purpose -->
     <div class="slide active">
       <div class="slide-top-meta">
         <span>Autonomous Discourse Infrastructure</span>
-        <span class="slide-badge badge-terracotta">Enterprise Infrastructure</span>
+        <span class="slide-badge badge-terracotta has-tooltip" data-tooltip="Sovereign enterprise infrastructure designed for mission-critical digital discourse.">Enterprise Infrastructure</span>
       </div>
-      <div class="slide-body" style="text-align: center; max-width: 840px; margin: 0 auto;">
+      <div class="slide-body" style="text-align: center; max-width: 860px; margin: 0 auto;">
         <div style="display: inline-flex; align-items: center; gap: 10px; margin-bottom: 22px;">
           <svg style="width: 38px; height: 38px;" viewBox="0 0 32 32" fill="none">
             <rect width="32" height="32" rx="8" fill="#18181b"/>
@@ -431,9 +546,9 @@ HTML_CONTENT = """<!DOCTYPE html>
           The Drop-In Prosocial Infrastructure for <em class="serif-accent">Digital Discourse.</em>
         </h1>
         <p class="slide-subtitle" style="margin: 0 auto 28px auto;">
-          The 1:1 bitwise successor to Google Perspective API. Moving digital journalism and enterprise forums from binary censorship to normative epistemic intelligence.
+          The <span class="has-tooltip" data-tooltip="100% Bitwise schema parity: returns identical attributeScores.TOXICITY responses to existing Perspective clients.">1:1 bitwise successor</span> to Google Perspective API. Moving digital journalism and enterprise forums from binary censorship to continuous normative epistemic intelligence.
         </p>
-        <div style="font-size: 0.86rem; color: var(--text-subtle); display: inline-flex; align-items: center; gap: 8px; background: var(--card-bg); border: 1px solid var(--border); padding: 8px 16px; border-radius: 30px;">
+        <div style="font-size: 0.86rem; color: var(--text-subtle); display: inline-flex; align-items: center; gap: 8px; background: var(--card-bg); border: 1px solid var(--border); padding: 8px 18px; border-radius: 30px;">
           <span>Architect &amp; Founder: <strong>Bhaskar Pandey</strong></span>
           <span>&bull;</span>
           <span>Executive Contact: <code style="background: var(--accent-light); color: var(--accent); border-color: var(--accent-border);">bhaskarauthor@gmail.com</code></span>
@@ -449,7 +564,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     <div class="slide">
       <div class="slide-top-meta">
         <span>Market Urgency</span>
-        <span class="slide-badge badge-amber">Hard Sunset: Dec 31, 2026</span>
+        <span class="slide-badge badge-amber has-tooltip" data-tooltip="Google Jigsaw is permanently taking down the Perspective API servers on Dec 31, 2026.">Hard Sunset: Dec 31, 2026</span>
       </div>
       <div class="slide-body">
         <h2 class="slide-title">Google Is Turning Off the Perspective API in <em class="serif-accent">60 Days.</em></h2>
@@ -500,7 +615,7 @@ HTML_CONTENT = """<!DOCTYPE html>
         <div class="grid-4">
           <div class="card">
             <div class="card-title">1. False Positive Bans</div>
-            <p class="card-desc">Bans benign technical syntax (<code>kill -9</code>, <code>fatal error</code>) and medical discussions, alienating high-IQ subscribers.</p>
+            <p class="card-desc">Bans benign technical syntax (<code class="has-tooltip" data-tooltip="Perspective incorrectly flags this command as violent suicide/threat language.">kill -9</code>, <code>fatal error</code>) and medical discussions, alienating high-IQ subscribers.</p>
           </div>
           <div class="card">
             <div class="card-title">2. Low-Effort Snark</div>
@@ -511,8 +626,8 @@ HTML_CONTENT = """<!DOCTYPE html>
             <p class="card-desc">Silent deletions anger paying subscribers. Readers feel treated like children rather than intellectual peers.</p>
           </div>
           <div class="card">
-            <div class="card-title">4. Moderator Queue Burnout</div>
-            <p class="card-desc">Publishers spend hundreds of thousands in human moderator hours manually resolving false flags and escalated appeals.</p>
+            <div class="card-title">4. Queue Burnout</div>
+            <p class="card-desc">Publishers spend hundreds of thousands in human moderator hours manually resolving false flags and appeals.</p>
           </div>
         </div>
       </div>
@@ -537,22 +652,22 @@ HTML_CONTENT = """<!DOCTYPE html>
           <div class="card" style="border-top: 4px solid var(--accent);">
             <div style="font-size: 1.25rem; font-weight: 800; color: var(--accent); margin-bottom: 4px;">Constructiveness</div>
             <div style="font-weight: 700; font-size: 0.76rem; color: var(--text-subtle); margin-bottom: 8px;">35% WEIGHT</div>
-            <p class="card-desc">Does the comment substantiate claims with evidence, benchmarks, or actionable solutions?</p>
+            <p class="card-desc">Does the comment substantiate claims with empirical evidence, benchmarks, or actionable alternatives?</p>
           </div>
           <div class="card" style="border-top: 4px solid var(--juniper);">
             <div style="font-size: 1.25rem; font-weight: 800; color: var(--juniper); margin-bottom: 4px;">Civility</div>
             <div style="font-weight: 700; font-size: 0.76rem; color: var(--text-subtle); margin-bottom: 8px;">25% WEIGHT</div>
-            <p class="card-desc">Evaluates tone, respect, and mutual intellectual tolerance without choking intense technical debate.</p>
+            <p class="card-desc">Evaluates mutual intellectual respect without suppressing intense scientific or technical debate.</p>
           </div>
           <div class="card" style="border-top: 4px solid var(--amber);">
             <div style="font-size: 1.25rem; font-weight: 800; color: var(--amber); margin-bottom: 4px;">Persuasiveness</div>
             <div style="font-weight: 700; font-size: 0.76rem; color: var(--text-subtle); margin-bottom: 8px;">20% WEIGHT</div>
-            <p class="card-desc">Epistemic grounding, logical consistency, and coherence rather than emotive hyperbole.</p>
+            <p class="card-desc">Epistemic grounding, logical consistency, and coherence rather than purely emotive hyperbole.</p>
           </div>
           <div class="card" style="border-top: 4px solid var(--text);">
             <div style="font-size: 1.25rem; font-weight: 800; color: var(--text); margin-bottom: 4px;">Relevance</div>
             <div style="font-weight: 700; font-size: 0.76rem; color: var(--text-subtle); margin-bottom: 8px;">20% WEIGHT</div>
-            <p class="card-desc">Topical alignment to article context, filtering out spam, off-topic derails, and promotional links.</p>
+            <p class="card-desc">Topical alignment to article context, filtering out spam, off-topic derails, and promotional link clutter.</p>
           </div>
         </div>
       </div>
@@ -642,42 +757,42 @@ HTML_CONTENT = """<!DOCTYPE html>
       </div>
     </div>
 
-    <!-- SLIDE 7: Commercial Traction & Sales Funnel -->
+    <!-- SLIDE 7: High-Scale Deployment Reach & Ecosystem Architecture -->
     <div class="slide">
       <div class="slide-top-meta">
-        <span>GTM Pipeline Traction</span>
-        <span class="slide-badge badge-juniper">$109.5k Active Pipeline ARR</span>
+        <span>Enterprise Ecosystem Reach</span>
+        <span class="slide-badge badge-juniper">Universal Compatibility</span>
       </div>
       <div class="slide-body">
-        <h2 class="slide-title">20 Tier-1 Publishing &amp; <em class="serif-accent">Community Targets.</em></h2>
+        <h2 class="slide-title">Engineered for High-Scale <em class="serif-accent">Publishing Architectures.</em></h2>
         <div class="grid-4" style="margin-bottom: 20px;">
           <div class="card">
-            <div class="metric-num" style="color: var(--juniper);">1</div>
-            <div class="metric-lbl">Closed Won</div>
-            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">Ars Technica ($5,988/yr)</p>
+            <div class="metric-num" style="color: var(--juniper);">100M+</div>
+            <div class="metric-lbl">Monthly Addressable Events</div>
+            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">High-throughput comment pipelines across digital media.</p>
           </div>
           <div class="card">
-            <div class="metric-num" style="color: var(--accent);">1</div>
-            <div class="metric-lbl">Contract Review</div>
-            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">The Verge ($17,988/yr)</p>
+            <div class="metric-num" style="color: var(--accent);">4 Archetypes</div>
+            <div class="metric-lbl">Ecosystem Footprint</div>
+            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">Newsrooms, Tech Forums, Creator Networks, Open Communities.</p>
           </div>
           <div class="card">
-            <div class="metric-num" style="color: var(--amber);">2</div>
-            <div class="metric-lbl">Pilots Active</div>
-            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">Dev.to &amp; Substack</p>
+            <div class="metric-num" style="color: var(--amber);">&lt; 3.0 ms</div>
+            <div class="metric-lbl">Edge Latency SLA</div>
+            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">Runs local quantized inference without external roundtrips.</p>
           </div>
           <div class="card">
-            <div class="metric-num" style="color: var(--text);">2</div>
-            <div class="metric-lbl">Calls Scheduled</div>
-            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">Linus Tech Tips &amp; Discourse</p>
+            <div class="metric-num" style="color: var(--text);">100%</div>
+            <div class="metric-lbl">Zero Refactor Parity</div>
+            <p class="card-desc" style="font-size: 0.8rem; margin-top: 4px;">WordPress VIP, Discourse, Coral Project, and Custom CMS.</p>
           </div>
         </div>
-        <p class="card-desc" style="text-align: center; font-size: 0.9rem;">
-          Additional 14 accounts in outreach: Stack Overflow, The Atlantic, Medium, 9to5Mac, Kaggle, Hashnode, The Guardian, IGN, Politico, Hacker News.
+        <p class="card-desc" style="text-align: center; font-size: 0.9rem; max-width: 780px; margin: 0 auto;">
+          Built to replace the sunsetting Perspective API infrastructure across all major CMS platforms, discussion software, and custom newsroom backends without requiring internal engineering refactoring.
         </p>
       </div>
       <div class="slide-footer">
-        <span>GTM Commercial Traction &bull; 20 Enterprise Publishing Targets</span>
+        <span>Deployment Footprint &bull; Universal CMS &amp; Forum Compatibility</span>
         <span>Slide 7 / 12</span>
       </div>
     </div>
@@ -883,12 +998,12 @@ HTML_CONTENT = """<!DOCTYPE html>
           <p style="font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
             15-minute architecture briefing with dedicated onboarding engineers.
           </p>
-          <a class="btn btn-primary" href="mailto:bhaskarauthor@gmail.com?subject=Executive%20Briefing%3A%20Normative%20Perspective%20Cutover&body=Hi%20Bhaskar%2C%0A%0AWe%20would%20like%20to%20schedule%20a%2015-minute%20technical%20briefing%20to%20review%20the%20Perspective%20sunset%20cutover%20for%20our%20platform.%0A%0ABest%20regards%2C" style="font-size: 0.95rem; padding: 12px 28px;">
+          <a class="btn btn-primary" href="mailto:bhaskarauthor@gmail.com?subject=Executive%20Briefing%3A%20Normative%20Perspective%20Cutover&body=Hi%20Bhaskar%2C%0A%0AWe%20would%20like%20to%20schedule%20a%2015-minute%20technical%20briefing%20to%20review%20the%20Perspective%20sunset%20cutover%20for%20our%20platform.%0A%0ABest%20regards%2C" style="font-size: 0.95rem; padding: 12px 28px; background: var(--accent); color: #fff; border-color: var(--accent);">
             📅 Schedule 15-Min Technical Briefing
           </a>
         </div>
         <div style="font-size: 0.82rem; color: var(--text-subtle);">
-          Direct Founder Email: <a href="mailto:bhaskarauthor@gmail.com" style="color: var(--accent); text-decoration: none; font-weight: 600;">bhaskarauthor@gmail.com</a> &bull; Interactive Studio: <a href="/docs" style="color: var(--accent); text-decoration: none; font-weight: 600;">Developer Studio</a>
+          Direct Founder Email: <a href="mailto:bhaskarauthor@gmail.com" style="color: var(--accent); text-decoration: none; font-weight: 600;">bhaskarauthor@gmail.com</a> &bull; Interactive Studio: <a href="/" style="color: var(--accent); text-decoration: none; font-weight: 600;">Studio Desk</a>
         </div>
       </div>
       <div class="slide-footer">
@@ -904,10 +1019,22 @@ HTML_CONTENT = """<!DOCTYPE html>
     const slides = document.querySelectorAll('.slide');
     const totalSlides = slides.length;
     const counter = document.getElementById('slideCounter');
+    const progressBar = document.getElementById('progressBar');
+    const playPauseBtn = document.getElementById('playPauseBtn');
+    const playPauseLabel = document.getElementById('playPauseLabel');
+    const pulseDot = document.getElementById('pulseDot');
+
+    // Auto-advance configuration
+    const SLIDE_DURATION_MS = 2800; // 2.8 seconds per slide
+    const PROGRESS_INTERVAL_MS = 30;
+    let isAutoPlaying = true;
+    let isHoverPaused = false;
+    let elapsedMs = 0;
+    let timerInterval = null;
 
     function updateSlide(index) {
-      if (index < 0) index = 0;
-      if (index >= totalSlides) index = totalSlides - 1;
+      if (index < 0) index = totalSlides - 1;
+      if (index >= totalSlides) index = 0;
       currentSlide = index;
 
       slides.forEach((s, idx) => {
@@ -915,6 +1042,8 @@ HTML_CONTENT = """<!DOCTYPE html>
       });
 
       counter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
+      elapsedMs = 0;
+      progressBar.style.width = '0%';
     }
 
     function nextSlide() {
@@ -925,17 +1054,66 @@ HTML_CONTENT = """<!DOCTYPE html>
       updateSlide(currentSlide - 1);
     }
 
+    function startTimer() {
+      if (timerInterval) clearInterval(timerInterval);
+      timerInterval = setInterval(() => {
+        if (!isAutoPlaying || isHoverPaused) return;
+
+        elapsedMs += PROGRESS_INTERVAL_MS;
+        const pct = Math.min((elapsedMs / SLIDE_DURATION_MS) * 100, 100);
+        progressBar.style.width = pct + '%';
+
+        if (elapsedMs >= SLIDE_DURATION_MS) {
+          nextSlide();
+        }
+      }, PROGRESS_INTERVAL_MS);
+    }
+
+    function togglePlayPause() {
+      isAutoPlaying = !isAutoPlaying;
+      updatePlayPauseUI();
+    }
+
+    function onHoverPause() {
+      isHoverPaused = true;
+      updatePlayPauseUI();
+    }
+
+    function onHoverResume() {
+      isHoverPaused = false;
+      updatePlayPauseUI();
+    }
+
+    function updatePlayPauseUI() {
+      if (isAutoPlaying && !isHoverPaused) {
+        pulseDot.classList.remove('paused');
+        playPauseLabel.textContent = 'Auto-Advancing';
+      } else if (isHoverPaused && isAutoPlaying) {
+        pulseDot.classList.add('paused');
+        playPauseLabel.textContent = 'Paused (Studying)';
+      } else {
+        pulseDot.classList.add('paused');
+        playPauseLabel.textContent = 'Paused';
+      }
+    }
+
+    // Keyboard controls
     document.addEventListener('keydown', (e) => {
-      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+      if (e.key === 'ArrowRight' || e.key === 'PageDown') {
         nextSlide();
       } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
         prevSlide();
+      } else if (e.key === ' ') {
+        togglePlayPause();
       } else if (e.key === 'Home') {
         updateSlide(0);
       } else if (e.key === 'End') {
         updateSlide(totalSlides - 1);
       }
     });
+
+    // Start auto-play timer on load
+    startTimer();
   </script>
 </body>
 </html>

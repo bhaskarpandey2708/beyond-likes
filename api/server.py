@@ -70,6 +70,9 @@ class NormativeIntelligenceAPIHandler(BaseHTTPRequestHandler):
         self.send_response(status_code)
         self.send_header("Content-Type", "application/json; charset=utf-8")
         self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("Expires", "0")
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, x-api-key")
@@ -81,11 +84,32 @@ class NormativeIntelligenceAPIHandler(BaseHTTPRequestHandler):
         self.send_response(status_code)
         self.send_header("Content-Type", content_type)
         self.send_header("Content-Length", str(len(body)))
+        self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+        self.send_header("Pragma", "no-cache")
+        self.send_header("Expires", "0")
         self.send_header("Access-Control-Allow-Origin", "*")
         self.send_header("Access-Control-Allow-Methods", "GET, POST, DELETE, OPTIONS")
         self.send_header("Access-Control-Allow-Headers", "Content-Type, Authorization, x-api-key")
         self.end_headers()
         self.wfile.write(body)
+
+    def _send_file(self, file_path: str, content_type: str, attachment_name: str = None):
+        if os.path.exists(file_path):
+            with open(file_path, "rb") as f:
+                content = f.read()
+            self.send_response(200)
+            self.send_header("Content-Type", content_type)
+            self.send_header("Content-Length", str(len(content)))
+            self.send_header("Cache-Control", "no-cache, no-store, must-revalidate")
+            self.send_header("Pragma", "no-cache")
+            self.send_header("Expires", "0")
+            self.send_header("Access-Control-Allow-Origin", "*")
+            if attachment_name:
+                self.send_header("Content-Disposition", f'attachment; filename="{attachment_name}"')
+            self.end_headers()
+            self.wfile.write(content)
+        else:
+            self._send_json(404, {"error": f"File not found: {os.path.basename(file_path)}"})
 
     def _read_body_json(self) -> dict:
         content_len = int(self.headers.get("Content-Length", 0))
@@ -122,236 +146,73 @@ class NormativeIntelligenceAPIHandler(BaseHTTPRequestHandler):
 
         # 1. Root & Commercial Showcase
         if path in ["/", "/index.html", "/landing", "/landing/index.html", "/showcase"]:
-            landing_file = os.path.join(BASE_DIR, "landing", "index.html")
-            if os.path.exists(landing_file):
-                with open(landing_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Landing page not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "landing", "index.html"), "text/html; charset=utf-8")
+            return
 
         # 1a. Enterprise Studio Desk Workstation
         elif path in ["/studio", "/studio/", "/dashboard", "/dashboard/", "/desk", "/app", "/dashboard/index.html"]:
-            dashboard_file = os.path.join(BASE_DIR, "dashboard", "index.html")
-            if os.path.exists(dashboard_file):
-                with open(dashboard_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Studio dashboard not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "dashboard", "index.html"), "text/html; charset=utf-8")
+            return
 
         # 1b. Serve In-Composer Widget Demo Page
         elif path == "/widget/demo":
-            demo_file = os.path.join(BASE_DIR, "distribution", "widget", "demo.html")
-            if os.path.exists(demo_file):
-                with open(demo_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Widget demo not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "distribution", "widget", "demo.html"), "text/html; charset=utf-8")
+            return
 
         # 1c. Serve Embeddable Widget JavaScript
         elif path == "/widget/beyond-likes.js":
-            js_file = os.path.join(BASE_DIR, "distribution", "widget", "beyond-likes.js")
-            if os.path.exists(js_file):
-                with open(js_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "application/javascript; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Widget JS not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "distribution", "widget", "beyond-likes.js"), "application/javascript; charset=utf-8")
+            return
 
         # 1d. Serve Interactive API Docs
         elif path in ["/docs", "/docs/", "/docs/index.html"]:
-            docs_file = os.path.join(BASE_DIR, "docs", "index.html")
-            if os.path.exists(docs_file):
-                with open(docs_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Docs template not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "docs", "index.html"), "text/html; charset=utf-8")
+            return
 
         # 1e. Serve OpenAPI Specification (YAML and JSON)
         elif path in ["/docs/openapi.yaml", "/docs/openapi.yml"]:
-            yaml_file = os.path.join(BASE_DIR, "docs", "openapi.yaml")
-            if os.path.exists(yaml_file):
-                with open(yaml_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/yaml; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "OpenAPI spec not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "docs", "openapi.yaml"), "text/yaml; charset=utf-8")
+            return
 
         elif path == "/docs/openapi.json":
-            json_file = os.path.join(BASE_DIR, "docs", "openapi.json")
-            if os.path.exists(json_file):
-                with open(json_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "application/json; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "OpenAPI JSON spec not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "docs", "openapi.json"), "application/json; charset=utf-8")
+            return
 
         # 1f. Serve Interactive Startup Pitch Deck
         elif path in ["/deck", "/deck/", "/pitch", "/pitch/", "/pitch-deck", "/slides"]:
-            deck_file = os.path.join(BASE_DIR, "brand", "pitch-deck.html")
-            if os.path.exists(deck_file):
-                with open(deck_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Pitch deck template not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "brand", "pitch-deck.html"), "text/html; charset=utf-8")
+            return
 
         # 1g. Serve Native PowerPoint Pitch Deck Download
         elif path in ["/deck/download", "/pitch/download", "/brand/Normative_Intelligence_Pitch_Deck.pptx", "/brand/deck.pptx"]:
-            pptx_file = os.path.join(BASE_DIR, "brand", "Normative_Intelligence_Pitch_Deck.pptx")
-            if os.path.exists(pptx_file):
-                with open(pptx_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "application/vnd.openxmlformats-officedocument.presentationml.presentation")
-                self.send_header("Content-Disposition", 'attachment; filename="Normative_Intelligence_Pitch_Deck.pptx"')
-                self.send_header("Content-Length", str(len(content)))
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Pitch deck presentation file not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "brand", "Normative_Intelligence_Pitch_Deck.pptx"),
+                            "application/vnd.openxmlformats-officedocument.presentationml.presentation",
+                            "Normative_Intelligence_Pitch_Deck.pptx")
+            return
 
         # 1h. Serve Brand Identity & Visual Asset Kit
         elif path in ["/brand", "/brand/", "/brand-kit", "/brand/index.html"]:
-            brand_file = os.path.join(BASE_DIR, "brand", "index.html")
-            if os.path.exists(brand_file):
-                with open(brand_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Brand guide not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "brand", "index.html"), "text/html; charset=utf-8")
+            return
 
         # 1i. Serve Vector Logos
         elif path == "/brand/logo.svg":
-            logo_file = os.path.join(BASE_DIR, "brand", "logo.svg")
-            if os.path.exists(logo_file):
-                with open(logo_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "image/svg+xml; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Logo file not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "brand", "logo.svg"), "image/svg+xml; charset=utf-8")
+            return
 
         elif path == "/brand/logo-horizontal.svg":
-            logo_file = os.path.join(BASE_DIR, "brand", "logo-horizontal.svg")
-            if os.path.exists(logo_file):
-                with open(logo_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "image/svg+xml; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Horizontal logo file not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "brand", "logo-horizontal.svg"), "image/svg+xml; charset=utf-8")
+            return
 
         # 1j. Serve Empirical Benchmark Report & Technical Whitepaper
         elif path in ["/benchmarks", "/benchmarks/", "/whitepaper", "/whitepaper/", "/whitepaper.html"]:
-            paper_file = os.path.join(BASE_DIR, "benchmarks", "whitepaper.html")
-            if os.path.exists(paper_file):
-                with open(paper_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Benchmark whitepaper not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "benchmarks", "whitepaper.html"), "text/html; charset=utf-8")
+            return
 
         # 1k. Serve Raw Empirical Benchmark Results (JSON)
         elif path in ["/v1/benchmarks/results", "/benchmarks/results.json"]:
-            json_file = os.path.join(BASE_DIR, "benchmarks", "benchmark_results.json")
-            if os.path.exists(json_file):
-                with open(json_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "application/json; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.send_header("Access-Control-Allow-Origin", "*")
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Benchmark results JSON not found"})
-                return
+            self._send_file(os.path.join(BASE_DIR, "benchmarks", "benchmark_results.json"), "application/json; charset=utf-8")
+            return
 
         # 2. Health check
         elif path == "/v1/health":
