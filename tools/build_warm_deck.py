@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 """
-Normative Intelligence — Cinematic Auto-Advancing Editorial Pitch Deck Builder
+Normative Intelligence — Cinematic Fluid-Slide Pitch Deck Builder
 Rebuilds brand/pitch-deck.html with:
-- NO download buttons (web-native presentation)
-- Auto-advancing slideshow with smooth progress bar (pauses on hover or pause button)
-- Cinematic slide transitions and staggered card entry animations
-- Interactive editorial tooltips on key terms
-- Replaced client prospect lists with high-scale enterprise architecture metrics
+- Genuine fluid slide glide transitions (translateX with cubic-bezier easing and blur)
+- Generous, customizable pacing (default 6 seconds, adjustable)
+- Clean play/pause and manual navigation
+- Interactive hover tooltips
+- NO download clutter
 - Warm Terracotta & Linen Editorial design system
 """
 
@@ -70,6 +70,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       justify-content: center;
       padding: 24px;
       -webkit-font-smoothing: antialiased;
+      overflow-x: hidden;
     }
 
     /* Deck Controls Header */
@@ -103,16 +104,17 @@ HTML_CONTENT = """<!DOCTYPE html>
     .deck-nav-btns {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
+      flex-wrap: wrap;
     }
 
     .btn {
       background: #ffffff;
       color: var(--text);
       border: 1px solid var(--border);
-      padding: 8px 16px;
+      padding: 8px 15px;
       border-radius: 8px;
-      font-size: 0.85rem;
+      font-size: 0.84rem;
       font-weight: 600;
       cursor: pointer;
       display: inline-flex;
@@ -194,8 +196,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       aspect-ratio: 16 / 9;
       position: relative;
       overflow: hidden;
-      display: flex;
-      flex-direction: column;
+      display: block;
     }
 
     /* Auto-Advance Progress Bar */
@@ -205,7 +206,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       left: 0;
       width: 100%;
       height: 4px;
-      background: rgba(232, 227, 216, 0.4);
+      background: rgba(232, 227, 216, 0.5);
       z-index: 50;
     }
 
@@ -213,7 +214,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       height: 100%;
       width: 0%;
       background: var(--accent);
-      transition: width 0.05s linear;
+      transition: width 0.04s linear;
     }
 
     .slide-stage-overlay-notice {
@@ -224,61 +225,59 @@ HTML_CONTENT = """<!DOCTYPE html>
       font-size: 0.72rem;
       font-weight: 600;
       color: var(--text-subtle);
-      background: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.92);
       padding: 4px 10px;
       border-radius: 20px;
       border: 1px solid var(--border);
       backdrop-filter: blur(4px);
       pointer-events: none;
-      opacity: 0.8;
+      opacity: 0.85;
       transition: opacity 0.2s;
     }
 
+    /* REAL FLUID SLIDE TRANSITION (Glides with inertia) */
     .slide {
-      display: none;
+      position: absolute;
+      inset: 0;
       width: 100%;
       height: 100%;
       padding: 48px 60px;
+      display: flex;
       flex-direction: column;
       justify-content: space-between;
-      position: relative;
+      background: var(--slide-bg);
       opacity: 0;
-      transform: scale(0.98) translateY(6px);
-      transition: opacity 0.4s cubic-bezier(0.16, 1, 0.3, 1), transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateX(100%);
+      filter: blur(4px);
+      pointer-events: none;
+      transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1),
+                  opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1;
     }
 
     .slide.active {
-      display: flex;
       opacity: 1;
-      transform: scale(1) translateY(0);
+      transform: translateX(0);
+      filter: blur(0);
+      pointer-events: auto;
+      z-index: 2;
     }
 
-    /* Staggered Element Animations */
-    .slide.active .slide-top-meta {
-      animation: fadeInDown 0.35s cubic-bezier(0.16, 1, 0.3, 1) both;
-    }
-    .slide.active .slide-title {
-      animation: fadeInDown 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.05s both;
-    }
-    .slide.active .slide-subtitle {
-      animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.1s both;
-    }
-    .slide.active .card:nth-child(1) { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both; }
-    .slide.active .card:nth-child(2) { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.18s both; }
-    .slide.active .card:nth-child(3) { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both; }
-    .slide.active .card:nth-child(4) { animation: fadeInUp 0.4s cubic-bezier(0.16, 1, 0.3, 1) 0.30s both; }
-    .slide.active .slide-footer {
-      animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    .slide.slide-prev {
+      opacity: 0;
+      transform: translateX(-100%);
+      filter: blur(4px);
+      pointer-events: none;
+      z-index: 1;
     }
 
-    @keyframes fadeInDown {
-      from { opacity: 0; transform: translateY(-8px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeInUp {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
+    .slide.slide-next {
+      opacity: 0;
+      transform: translateX(100%);
+      filter: blur(4px);
+      pointer-events: none;
+      z-index: 1;
     }
 
     /* Slide Typography & Elements */
@@ -506,6 +505,7 @@ HTML_CONTENT = """<!DOCTYPE html>
         <span class="pulse-dot" id="pulseDot"></span>
         <span id="playPauseLabel">Auto-Advancing</span>
       </button>
+      <button class="btn" onclick="cyclePacing()" id="pacingBtn" title="Change presentation pace">⏱ 6s Pace</button>
       <button class="btn" onclick="prevSlide()" title="Previous slide (Left Arrow)">← Prev</button>
       <span class="slide-counter" id="slideCounter">Slide 1 of 12</span>
       <button class="btn" onclick="nextSlide()" title="Next slide (Right Arrow)">Next →</button>
@@ -561,7 +561,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 2: The Catalyst (Perspective Sunset) -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Market Urgency</span>
         <span class="slide-badge badge-amber has-tooltip" data-tooltip="Google Jigsaw is permanently taking down the Perspective API servers on Dec 31, 2026.">Hard Sunset: Dec 31, 2026</span>
@@ -602,7 +602,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 3: The Deeper Crisis (Binary Toxicity Failure) -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Structural Failure of Legacy Tools</span>
         <span class="slide-badge badge-terracotta">The Core Problem</span>
@@ -638,7 +638,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 4: The Solution (4D Normative Intelligence) -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Proprietary 4D Normative Rubric</span>
         <span class="slide-badge badge-juniper">The Solution</span>
@@ -678,7 +678,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 5: Technical Parity & Cutover Architecture -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Architecture &amp; Parity</span>
         <span class="slide-badge badge-terracotta">1:1 Drop-in Ready</span>
@@ -720,7 +720,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 6: Product Suite (In-Composer Nudge & Appeals) -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Full Ecosystem</span>
         <span class="slide-badge badge-juniper">Complete Enterprise Suite</span>
@@ -758,7 +758,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 7: High-Scale Deployment Reach & Ecosystem Architecture -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Enterprise Ecosystem Reach</span>
         <span class="slide-badge badge-juniper">Universal Compatibility</span>
@@ -798,7 +798,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 8: Business Model & Pricing Tiers -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Business Model</span>
         <span class="slide-badge badge-terracotta">Predictable B2B SaaS</span>
@@ -850,7 +850,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 9: Gross Margin & Infrastructure Economics -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Unit Economics</span>
         <span class="slide-badge badge-juniper">94% Gross Margin</span>
@@ -883,7 +883,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 10: Competitive Differentiation Matrix -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Competitive Landscape</span>
         <span class="slide-badge badge-terracotta">Unmatched Position</span>
@@ -946,7 +946,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 11: Architectural Pedigree -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Research Foundation</span>
         <span class="slide-badge badge-juniper">Architectural Pedigree</span>
@@ -981,7 +981,7 @@ HTML_CONTENT = """<!DOCTYPE html>
     </div>
 
     <!-- SLIDE 12: Executive Cutover Invitation & Call to Action -->
-    <div class="slide">
+    <div class="slide slide-next">
       <div class="slide-top-meta">
         <span>Next Steps</span>
         <span class="slide-badge badge-juniper">Activate 30-Day Sandbox</span>
@@ -1016,42 +1016,84 @@ HTML_CONTENT = """<!DOCTYPE html>
 
   <script>
     let currentSlide = 0;
-    const slides = document.querySelectorAll('.slide');
+    const slides = Array.from(document.querySelectorAll('.slide'));
     const totalSlides = slides.length;
     const counter = document.getElementById('slideCounter');
     const progressBar = document.getElementById('progressBar');
     const playPauseBtn = document.getElementById('playPauseBtn');
     const playPauseLabel = document.getElementById('playPauseLabel');
     const pulseDot = document.getElementById('pulseDot');
+    const pacingBtn = document.getElementById('pacingBtn');
 
-    // Auto-advance configuration
-    const SLIDE_DURATION_MS = 2800; // 2.8 seconds per slide
-    const PROGRESS_INTERVAL_MS = 30;
+    // Auto-advance configuration (Human-readable pacing)
+    const PACING_OPTIONS = [6000, 8000, 4000]; // 6s, 8s, 4s
+    let pacingIndex = 0;
+    let slideDurationMs = PACING_OPTIONS[pacingIndex];
+    const PROGRESS_INTERVAL_MS = 25;
     let isAutoPlaying = true;
     let isHoverPaused = false;
     let elapsedMs = 0;
     let timerInterval = null;
 
-    function updateSlide(index) {
-      if (index < 0) index = totalSlides - 1;
-      if (index >= totalSlides) index = 0;
-      currentSlide = index;
+    function cyclePacing() {
+      pacingIndex = (pacingIndex + 1) % PACING_OPTIONS.length;
+      slideDurationMs = PACING_OPTIONS[pacingIndex];
+      const sec = Math.round(slideDurationMs / 1000);
+      pacingBtn.textContent = `⏱ ${sec}s Pace`;
+      elapsedMs = 0;
+      progressBar.style.width = '0%';
+    }
 
-      slides.forEach((s, idx) => {
-        s.classList.toggle('active', idx === currentSlide);
-      });
+    // Initialize slide positions
+    slides.forEach((s, idx) => {
+      if (idx === 0) {
+        s.className = 'slide active';
+      } else {
+        s.className = 'slide slide-next';
+      }
+    });
 
+    function updateSlide(nextIndex, direction = 1) {
+      if (nextIndex < 0) nextIndex = totalSlides - 1;
+      if (nextIndex >= totalSlides) nextIndex = 0;
+      if (nextIndex === currentSlide) return;
+
+      const oldSlide = slides[currentSlide];
+      const newSlide = slides[nextIndex];
+
+      // Prepare target slide for incoming glide
+      if (direction >= 0) {
+        // Sliding forward: old slides out left, new slides in from right
+        newSlide.style.transition = 'none';
+        newSlide.className = 'slide slide-next';
+        void newSlide.offsetWidth; // Force reflow
+        newSlide.style.transition = '';
+
+        oldSlide.className = 'slide slide-prev';
+        newSlide.className = 'slide active';
+      } else {
+        // Sliding backward: old slides out right, new slides in from left
+        newSlide.style.transition = 'none';
+        newSlide.className = 'slide slide-prev';
+        void newSlide.offsetWidth; // Force reflow
+        newSlide.style.transition = '';
+
+        oldSlide.className = 'slide slide-next';
+        newSlide.className = 'slide active';
+      }
+
+      currentSlide = nextIndex;
       counter.textContent = `Slide ${currentSlide + 1} of ${totalSlides}`;
       elapsedMs = 0;
       progressBar.style.width = '0%';
     }
 
     function nextSlide() {
-      updateSlide(currentSlide + 1);
+      updateSlide(currentSlide + 1, 1);
     }
 
     function prevSlide() {
-      updateSlide(currentSlide - 1);
+      updateSlide(currentSlide - 1, -1);
     }
 
     function startTimer() {
@@ -1060,10 +1102,10 @@ HTML_CONTENT = """<!DOCTYPE html>
         if (!isAutoPlaying || isHoverPaused) return;
 
         elapsedMs += PROGRESS_INTERVAL_MS;
-        const pct = Math.min((elapsedMs / SLIDE_DURATION_MS) * 100, 100);
+        const pct = Math.min((elapsedMs / slideDurationMs) * 100, 100);
         progressBar.style.width = pct + '%';
 
-        if (elapsedMs >= SLIDE_DURATION_MS) {
+        if (elapsedMs >= slideDurationMs) {
           nextSlide();
         }
       }, PROGRESS_INTERVAL_MS);
@@ -1097,7 +1139,7 @@ HTML_CONTENT = """<!DOCTYPE html>
       }
     }
 
-    // Keyboard controls
+    // Keyboard navigation
     document.addEventListener('keydown', (e) => {
       if (e.key === 'ArrowRight' || e.key === 'PageDown') {
         nextSlide();
@@ -1106,9 +1148,9 @@ HTML_CONTENT = """<!DOCTYPE html>
       } else if (e.key === ' ') {
         togglePlayPause();
       } else if (e.key === 'Home') {
-        updateSlide(0);
+        updateSlide(0, -1);
       } else if (e.key === 'End') {
-        updateSlide(totalSlides - 1);
+        updateSlide(totalSlides - 1, 1);
       }
     });
 

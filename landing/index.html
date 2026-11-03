@@ -132,33 +132,7 @@
     }
     .announcement-link:hover { color: #ffffff; }
 
-    /* Theme Switcher in Top Bar */
-    .theme-picker {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      padding: 3px 8px;
-      border-radius: 20px;
-      font-size: 0.75rem;
-      margin-left: 16px;
-    }
-    .theme-chip {
-      background: transparent;
-      border: none;
-      color: #d6d3d1;
-      font-size: 0.74rem;
-      font-weight: 600;
-      cursor: pointer;
-      padding: 2px 6px;
-      border-radius: 12px;
-      transition: all 0.15s;
-    }
-    .theme-chip:hover { color: #ffffff; }
-    .theme-chip.active {
-      background: var(--primary);
-      color: #ffffff;
-    }
+
 
     /* Fixed Navigation Ribbon */
     .nav-wrapper {
@@ -1120,21 +1094,73 @@
       font-size: 0.82rem;
       color: #78716c;
     }
+  
+    /* Motion Transitions & Scroll Reveals */
+    .scroll-reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform;
+    }
+    .scroll-reveal.is-revealed {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Staggered Children Reveal */
+    .stagger-children > * {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .scroll-reveal.is-revealed.stagger-children > *,
+    .scroll-reveal.is-revealed .stagger-children > * {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .stagger-children > *:nth-child(1) { transition-delay: 0.08s; }
+    .stagger-children > *:nth-child(2) { transition-delay: 0.16s; }
+    .stagger-children > *:nth-child(3) { transition-delay: 0.24s; }
+    .stagger-children > *:nth-child(4) { transition-delay: 0.32s; }
+
+    /* Hero Load Entrance Cascades */
+    .hero-entrance-1 {
+      animation: heroEntranceDown 0.6s cubic-bezier(0.16, 1, 0.3, 1) both;
+    }
+    .hero-entrance-2 {
+      animation: heroEntranceUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.08s both;
+    }
+    .hero-entrance-3 {
+      animation: heroEntranceUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.16s both;
+    }
+    .hero-entrance-4 {
+      animation: heroEntranceUp 0.7s cubic-bezier(0.16, 1, 0.3, 1) 0.24s both;
+    }
+    .hero-entrance-5 {
+      animation: heroEntranceUp 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
+    }
+
+    @keyframes heroEntranceDown {
+      from { opacity: 0; transform: translateY(-16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes heroEntranceUp {
+      from { opacity: 0; transform: translateY(26px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
   </style>
 </head>
 <body id="page-body">
 
-  <!-- Top Announcement Strip with Live Theme Switcher -->
+  <!-- Top Announcement Strip -->
   <aside class="announcement-bar">
-    <span class="announcement-tag">Sunset Notice</span>
-    <span>Google is decommissioning Perspective API on <strong>December 31, 2026</strong>. 5-minute drop-in cutover.</span>
-    <a href="#migration" class="announcement-link">Cutover Guide &rarr;</a>
-
-    <div class="theme-picker">
-      <span style="color: #a8a29e; font-size: 0.72rem; margin-right: 4px;">Palette:</span>
-      <button class="theme-chip active" onclick="setPalette('terracotta')">Terracotta</button>
-      <button class="theme-chip" onclick="setPalette('amber')">Nordic Amber</button>
-      <button class="theme-chip" onclick="setPalette('juniper')">Forest Sage</button>
+    <div style="display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;">
+      <span class="announcement-tag">Sunset Notice</span>
+      <span>Google is decommissioning Perspective API on <strong>December 31, 2026</strong>. 5-minute drop-in cutover.</span>
+      <a href="#migration" class="announcement-link">Cutover Guide &rarr;</a>
     </div>
   </aside>
 
@@ -1169,21 +1195,21 @@
   <!-- Hero Space -->
   <section class="hero-space">
     <div class="container">
-      <div class="hero-badge-pill">
+      <div class="hero-badge-pill hero-entrance-1">
         <div class="pill-point"></div>
         <span>Certified 1:1 Successor to Google Perspective API</span>
       </div>
 
-      <h1 class="hero-headline">
+      <h1 class="hero-headline hero-entrance-2">
         Build civil, thriving communities<br>
         <em class="editorial-accent editorial-italic">without the toxic noise.</em>
       </h1>
 
-      <p class="hero-subtitle">
+      <p class="hero-subtitle hero-entrance-3">
         Traditional moderation tools blindly censor angry readers, creating ghost towns and PR headaches. Normative Intelligence helps your community self-correct in real time—elevating constructive debate, protecting your brand, and cutting moderation workloads by 35%.
       </p>
 
-      <div class="hero-ctas">
+      <div class="hero-ctas hero-entrance-4">
         <a href="#interactive-demo" class="btn-main">
           <span>Test Live Comparison Demo</span>
           <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
@@ -1200,7 +1226,7 @@
       </div>
 
       <!-- Human-Friendly Composer Mockup -->
-      <div class="hero-card-frame">
+      <div class="hero-card-frame hero-entrance-5">
         <div class="frame-topbar">
           <div class="window-dots">
             <div class="window-dot dot-accent"></div>
@@ -1242,7 +1268,7 @@
   </section>
 
   <!-- How It Works Section -->
-  <section class="section-block" id="how-it-works">
+  <section class="section-block scroll-reveal" id="how-it-works">
     <div class="container">
       <div class="section-title-center">
         <div class="section-kicker-tag">Simple &amp; Impactful</div>
@@ -1369,7 +1395,7 @@
   </section>
 
   <!-- Google Perspective Sunset Cutover Hub -->
-  <section class="section-block" id="migration">
+  <section class="section-block scroll-reveal" id="migration">
     <div class="container">
       <div class="migration-banner">
         <div class="migration-left">
@@ -1459,7 +1485,7 @@
         <p style="text-align: center; color: var(--text-muted); font-size: 0.95rem; max-width: 640px; margin: 0 auto 28px auto;">
           Drop-in wire compatibility with enterprise CMS platforms, discussion software, and custom newsroom microservices with zero schema rewrites.
         </p>
-        <div class="pubs-grid">
+        <div class="pubs-grid stagger-children">
           <div class="pub-item" style="cursor: default;">
             <div class="pub-item-name">WordPress VIP &amp; Enterprise</div>
             <div class="pub-item-vol">Native Webhook &amp; REST Plugin</div>
@@ -1486,7 +1512,7 @@
   </section>
 
   <!-- Pricing Section -->
-  <section class="section-block" id="pricing">
+  <section class="section-block scroll-reveal" id="pricing">
     <div class="container">
       <div class="section-title-center">
         <div class="section-kicker-tag">Simple, Predictable Plans</div>
@@ -1496,7 +1522,7 @@
         </p>
       </div>
 
-      <div class="pricing-cards-flex">
+      <div class="pricing-cards-flex stagger-children">
         <div class="price-box">
           <div class="price-box-title">Starter</div>
           <div class="price-box-amount">$99<span> / mo</span></div>
@@ -1610,19 +1636,7 @@
   </footer>
 
   <script>
-    // Live Palette Switcher
-    function setPalette(name) {
-      document.querySelectorAll('.theme-chip').forEach(c => c.classList.remove('active'));
-      event.target.classList.add('active');
 
-      const body = document.getElementById('page-body');
-      body.className = '';
-      if (name === 'amber') {
-        body.classList.add('theme-amber');
-      } else if (name === 'juniper') {
-        body.classList.add('theme-juniper');
-      }
-    }
 
     // Perspective Sunset Countdown (Dec 31, 2026)
     const sunsetTarget = new Date("2026-12-31T23:59:59Z").getTime();
@@ -1773,6 +1787,18 @@
     // Default Init
     document.getElementById('eval-textarea').value = TEST_CASES.technical.text;
     recalcValues();
+  
+    // Scroll Reveal Intersection Observer
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('is-revealed');
+        }
+      });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
+
   </script>
 </body>
 </html>
