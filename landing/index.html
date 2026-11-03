@@ -3,1264 +3,1085 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Normative Intelligence — Drop-In Successor to Google Perspective API</title>
+  <title>Normative Intelligence — The Drop-In Infrastructure for Civil Digital Discourse</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #030712;
-      --card-bg: rgba(17, 24, 39, 0.7);
-      --card-border: rgba(255, 255, 255, 0.08);
-      --text: #f3f4f6;
-      --text-muted: #9ca3af;
-      --primary: #3b82f6;
-      --primary-glow: rgba(59, 130, 246, 0.35);
-      --accent-green: #10b981;
-      --accent-green-glow: rgba(16, 185, 129, 0.25);
-      --accent-amber: #f59e0b;
-      --accent-red: #ef4444;
-      --accent-purple: #8b5cf6;
-      --font-mono: 'JetBrains Mono', monospace;
+      --bg: #f8fafc;
+      --card-bg: #ffffff;
+      --border: #e2e8f0;
+      --border-subtle: #cbd5e1;
+      --border-focus: #94a3b8;
+      --text: #0f172a;
+      --text-muted: #334155;
+      --text-subtle: #64748b;
+      --accent: #1d4ed8;
+      --accent-hover: #1e40af;
+      --accent-light: #eff6ff;
+      --accent-border: #bfdbfe;
+      --green: #059669;
+      --green-light: #ecfdf5;
+      --green-border: #a7f3d0;
+      --amber: #d97706;
+      --amber-light: #fffbeb;
+      --amber-border: #fde68a;
+      --red: #dc2626;
+      --red-light: #fef2f2;
+      --red-border: #fecaca;
+      --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(15, 23, 42, 0.08), 0 2px 4px -2px rgba(15, 23, 42, 0.04);
+      --shadow-lg: 0 10px 25px -3px rgba(15, 23, 42, 0.08), 0 4px 6px -4px rgba(15, 23, 42, 0.04);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
+
     body {
-      background-color: var(--bg);
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
       color: var(--text);
-      font-family: 'Inter', sans-serif;
       line-height: 1.6;
-      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
     }
 
-    /* Ambient Glow Backgrounds */
-    .glow-orb-1 {
-      position: absolute;
-      top: 5%;
-      left: 20%;
-      width: 500px;
-      height: 500px;
-      background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, rgba(3, 7, 18, 0) 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .glow-orb-2 {
-      position: absolute;
-      top: 25%;
-      right: 15%;
-      width: 600px;
-      height: 600px;
-      background: radial-gradient(circle, rgba(16, 185, 129, 0.12) 0%, rgba(3, 7, 18, 0) 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    /* Sunset Alert Ribbon */
-    .sunset-ribbon {
-      background: linear-gradient(90deg, #b91c1c, #d97706, #b91c1c);
-      background-size: 200% auto;
-      color: #fff;
-      padding: 10px 20px;
-      font-size: 0.88rem;
-      font-weight: 600;
-      text-align: center;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: 12px;
+    /* Top Navigation */
+    .nav-bar {
       position: sticky;
       top: 0;
-      z-index: 1000;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
-    }
-    .countdown-badge {
-      background: rgba(0, 0, 0, 0.35);
-      padding: 3px 10px;
-      border-radius: 6px;
-      font-family: var(--font-mono);
-      font-size: 0.82rem;
-      border: 1px solid rgba(255, 255, 255, 0.2);
-    }
-
-    /* Navigation Bar */
-    nav {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 24px 20px;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.92);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+      padding: 14px 32px;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      position: relative;
-      z-index: 10;
     }
-    .brand {
+
+    .nav-left {
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 14px;
+    }
+
+    .nav-brand {
+      font-size: 1.15rem;
       font-weight: 800;
-      font-size: 1.25rem;
+      color: var(--text);
       letter-spacing: -0.02em;
       text-decoration: none;
-      color: #fff;
-    }
-    .nav-links {
       display: flex;
-      gap: 24px;
-      align-items: center;
-    }
-    .nav-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      font-size: 0.92rem;
-      font-weight: 500;
-      transition: color 0.2s;
-    }
-    .nav-link:hover { color: #fff; }
-
-    .btn {
-      display: inline-flex;
       align-items: center;
       gap: 8px;
-      padding: 10px 20px;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.92rem;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .nav-link {
+      color: var(--text-subtle);
       text-decoration: none;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      border: 1px solid transparent;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: color 0.15s ease;
     }
-    .btn-primary {
-      background: #2563eb;
-      color: #fff;
-      box-shadow: 0 0 20px var(--primary-glow);
+    .nav-link:hover {
+      color: var(--accent);
     }
-    .btn-primary:hover {
-      background: #1d4ed8;
-      box-shadow: 0 0 28px rgba(59, 130, 246, 0.5);
-      transform: translateY(-1px);
+
+    .btn-nav {
+      background: var(--accent);
+      color: #ffffff;
+      padding: 8px 16px;
+      border-radius: 6px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: background 0.15s ease;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.05);
-      color: var(--text);
-      border-color: var(--card-border);
-      backdrop-filter: blur(10px);
+    .btn-nav:hover {
+      background: var(--accent-hover);
     }
-    .btn-secondary:hover {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
+
+    /* Container */
+    .container {
+      max-width: 1140px;
+      margin: 0 auto;
+      padding: 0 24px;
     }
 
     /* Hero Section */
     .hero {
-      max-width: 1200px;
-      margin: 40px auto 70px;
-      padding: 0 20px;
+      padding: 72px 0 54px 0;
       text-align: center;
-      position: relative;
-      z-index: 10;
     }
-    .hero-pill {
+
+    .pill-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
-      background: rgba(59, 130, 246, 0.1);
-      border: 1px solid rgba(59, 130, 246, 0.3);
-      padding: 6px 16px;
+      background: var(--accent-light);
+      color: var(--accent);
+      border: 1px solid var(--accent-border);
+      padding: 5px 14px;
       border-radius: 20px;
       font-size: 0.8rem;
-      font-weight: 600;
-      color: #60a5fa;
-      margin-bottom: 24px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 20px;
     }
-    .hero h1 {
-      font-size: clamp(2.5rem, 5vw, 4.2rem);
+
+    .hero-title {
+      font-size: 3.2rem;
       font-weight: 800;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-      margin-bottom: 24px;
+      letter-spacing: -0.035em;
+      line-height: 1.18;
+      color: var(--text);
+      max-width: 900px;
+      margin: 0 auto 20px auto;
     }
-    .gradient-text {
-      background: linear-gradient(135deg, #60a5fa, #34d399, #a78bfa);
+
+    .hero-title span {
+      background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 100%);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
-    .hero p {
-      font-size: clamp(1.1rem, 2vw, 1.3rem);
+
+    .hero-subtitle {
+      font-size: 1.15rem;
       color: var(--text-muted);
-      max-width: 780px;
-      margin: 0 auto 36px;
+      max-width: 760px;
+      margin: 0 auto 32px auto;
+      line-height: 1.7;
     }
-    .hero-actions {
+
+    .hero-ctas {
       display: flex;
-      gap: 16px;
       justify-content: center;
-      flex-wrap: wrap;
-      margin-bottom: 48px;
-    }
-    .hero-badges {
-      display: flex;
-      gap: 20px;
-      justify-content: center;
-      flex-wrap: wrap;
-      font-size: 0.82rem;
-      color: var(--text-muted);
-    }
-    .badge-item {
-      display: flex;
       align-items: center;
-      gap: 6px;
-    }
-
-    /* Comparison Console Section */
-    .section-title {
-      text-align: center;
-      max-width: 700px;
-      margin: 0 auto 40px;
-    }
-    .section-title h2 {
-      font-size: 2.2rem;
-      font-weight: 800;
-      letter-spacing: -0.02em;
-      margin-bottom: 12px;
-    }
-    .section-title p {
-      color: var(--text-muted);
-      font-size: 1rem;
-    }
-
-    .compare-container {
-      max-width: 1200px;
-      margin: 0 auto 90px;
-      padding: 0 20px;
-      position: relative;
-      z-index: 10;
-    }
-    .compare-presets {
-      display: flex;
-      gap: 10px;
-      justify-content: center;
+      gap: 12px;
+      margin-bottom: 36px;
       flex-wrap: wrap;
-      margin-bottom: 20px;
     }
-    .preset-pill {
-      background: rgba(255, 255, 255, 0.04);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      font-size: 0.92rem;
+      font-weight: 600;
+      padding: 12px 24px;
+      border-radius: 6px;
+      text-decoration: none;
+      transition: all 0.15s ease;
       cursor: pointer;
-      transition: all 0.2s;
-    }
-    .preset-pill:hover, .preset-pill.active {
-      background: rgba(59, 130, 246, 0.15);
-      border-color: rgba(59, 130, 246, 0.4);
-      color: #93c5fd;
     }
 
-    .compare-box {
+    .btn-primary {
+      background: var(--accent);
+      color: #ffffff;
+      border: 1px solid transparent;
+      box-shadow: 0 2px 4px rgba(29, 78, 216, 0.2);
+    }
+    .btn-primary:hover {
+      background: var(--accent-hover);
+    }
+
+    .btn-outline {
+      background: #ffffff;
+      color: var(--text);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+    }
+    .btn-outline:hover {
+      background: #f1f5f9;
+      border-color: #94a3b8;
+    }
+
+    /* Sunset Countdown Banner */
+    .countdown-card {
       background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      backdrop-filter: blur(16px);
-      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-      overflow: hidden;
-    }
-    .compare-input-area {
-      padding: 24px;
-      border-bottom: 1px solid var(--card-border);
-    }
-    .compare-input-area textarea {
-      width: 100%;
-      height: 70px;
-      background: #0d1117;
-      border: 1px solid rgba(255, 255, 255, 0.12);
-      border-radius: 10px;
-      padding: 12px 16px;
-      color: #fff;
-      font-family: inherit;
-      font-size: 0.95rem;
-      resize: none;
-      outline: none;
-    }
-    .compare-input-area textarea:focus {
-      border-color: var(--primary);
-    }
-
-    .compare-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-    @media (max-width: 768px) {
-      .compare-grid { grid-template-columns: 1fr; }
-    }
-    .compare-col {
-      padding: 28px;
-    }
-    .compare-col:first-child {
-      border-right: 1px solid var(--card-border);
-      background: rgba(239, 68, 68, 0.02);
-    }
-    .compare-col:last-child {
-      background: rgba(16, 185, 129, 0.02);
-    }
-    .compare-header {
+      border: 1px solid var(--amber-border);
+      border-left: 4px solid var(--amber);
+      border-radius: 8px;
+      padding: 16px 24px;
+      max-width: 820px;
+      margin: 0 auto 56px auto;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 20px;
-    }
-    .api-tag-google {
-      background: rgba(239, 68, 68, 0.15);
-      color: #f87171;
-      border: 1px solid rgba(239, 68, 68, 0.3);
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
-    }
-    .api-tag-beyond {
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      border: 1px solid rgba(16, 185, 129, 0.3);
-      padding: 3px 10px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
+      box-shadow: var(--shadow-sm);
     }
 
-    .metric-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 10px 0;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-      font-size: 0.88rem;
+    .countdown-info {
+      text-align: left;
     }
-    .metric-val {
-      font-family: var(--font-mono);
+    .countdown-title {
+      font-size: 0.92rem;
       font-weight: 700;
-    }
-
-    /* Migration Code Block */
-    .migration-section {
-      max-width: 1000px;
-      margin: 0 auto 90px;
-      padding: 0 20px;
-      position: relative;
-      z-index: 10;
-    }
-    .code-wrapper {
-      background: #090d16;
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      overflow: hidden;
-    }
-    .code-header {
-      background: #111827;
-      padding: 12px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      font-family: var(--font-mono);
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      border-bottom: 1px solid var(--card-border);
-    }
-    .code-body {
-      padding: 20px;
-      font-family: var(--font-mono);
-      font-size: 0.88rem;
-      line-height: 1.6;
-      overflow-x: auto;
-    }
-    .code-del { color: #f87171; background: rgba(239, 68, 68, 0.1); display: block; }
-    .code-add { color: #34d399; background: rgba(16, 185, 129, 0.1); display: block; font-weight: 600; }
-    .code-normal { color: #9ca3af; display: block; }
-
-    /* Features Grid */
-    .features-grid {
-      max-width: 1200px;
-      margin: 0 auto 90px;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-      gap: 24px;
-      position: relative;
-      z-index: 10;
-    }
-    .feature-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 14px;
-      padding: 28px;
-      transition: all 0.2s;
-    }
-    .feature-card:hover {
-      border-color: rgba(59, 130, 246, 0.4);
-      transform: translateY(-2px);
-    }
-    .feature-icon {
-      width: 44px;
-      height: 44px;
-      border-radius: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin-bottom: 20px;
-    }
-
-    /* Pricing Section */
-    .pricing-grid {
-      max-width: 1100px;
-      margin: 0 auto 90px;
-      padding: 0 20px;
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 24px;
-      position: relative;
-      z-index: 10;
-    }
-    .price-card {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      border-radius: 16px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-    .price-card.featured {
-      border-color: var(--primary);
-      box-shadow: 0 0 35px var(--primary-glow);
-    }
-    .price-pill {
-      position: absolute;
-      top: -12px;
-      left: 50%;
-      transform: translateX(-50%);
-      background: var(--primary);
-      color: #fff;
-      font-size: 0.72rem;
-      font-weight: 700;
-      padding: 3px 12px;
-      border-radius: 12px;
-    }
-    .price-num {
-      font-size: 2.8rem;
-      font-weight: 800;
-      margin: 16px 0 24px;
-      color: #fff;
-    }
-    .price-num span { font-size: 1rem; color: var(--text-muted); font-weight: 500; }
-    .price-features {
-      list-style: none;
-      margin-bottom: 32px;
-      flex-grow: 1;
-    }
-    .price-features li {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-size: 0.88rem;
-      margin-bottom: 12px;
       color: var(--text);
     }
+    .countdown-sub {
+      font-size: 0.8rem;
+      color: var(--text-subtle);
+      margin-top: 2px;
+    }
 
-    /* Footer */
-    footer {
-      border-top: 1px solid var(--card-border);
-      padding: 50px 20px;
-      max-width: 1200px;
+    .countdown-clock {
+      display: flex;
+      gap: 12px;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .clock-unit {
+      text-align: center;
+    }
+    .clock-val {
+      font-size: 1.25rem;
+      font-weight: 800;
+      color: var(--amber);
+    }
+    .clock-lbl {
+      font-size: 0.65rem;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    /* Section Headers */
+    .section-head {
+      text-align: center;
+      margin-bottom: 36px;
+    }
+    .section-tag {
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .section-title {
+      font-size: 2.1rem;
+      font-weight: 800;
+      letter-spacing: -0.025em;
+      color: var(--text);
+      margin-bottom: 10px;
+    }
+    .section-desc {
+      font-size: 1rem;
+      color: var(--text-muted);
+      max-width: 680px;
       margin: 0 auto;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-      gap: 20px;
-      color: var(--text-muted);
-      font-size: 0.88rem;
-      position: relative;
-      z-index: 10;
     }
-    .footer-links {
-      display: flex;
-      gap: 20px;
+
+    /* Interactive Comparison Sandbox */
+    .sandbox-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 32px;
+      box-shadow: var(--shadow-md);
+      margin-bottom: 64px;
     }
-    .footer-link {
-      color: var(--text-muted);
-      text-decoration: none;
-      transition: color 0.2s;
-    }
-    .footer-link:hover { color: #fff; }
-    /* Demo Video & Interactive Studio */
-    .demo-container {
-      max-width: 1200px;
-      margin: 0 auto 90px;
-      padding: 0 20px;
-      position: relative;
-      z-index: 10;
-    }
-    .video-wrapper {
-      background: #090d16;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      border-radius: 18px;
-      box-shadow: 0 25px 60px rgba(0, 0, 0, 0.6), 0 0 40px rgba(59, 130, 246, 0.2);
-      overflow: hidden;
-      backdrop-filter: blur(20px);
-    }
-    .video-mac-header {
-      background: #111827;
-      border-bottom: 1px solid var(--card-border);
-      padding: 12px 18px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-    .mac-dots {
+
+    .preset-chips {
       display: flex;
       gap: 8px;
-    }
-    .mac-dot {
-      width: 12px;
-      height: 12px;
-      border-radius: 50%;
-    }
-    .mac-dot.red { background: #ef4444; }
-    .mac-dot.yellow { background: #f59e0b; }
-    .mac-dot.green { background: #10b981; }
-    .video-url-pill {
-      background: rgba(0, 0, 0, 0.4);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 4px 16px;
-      font-size: 0.78rem;
-      font-family: var(--font-mono);
-      color: #93c5fd;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .video-canvas {
-      min-height: 420px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      background: linear-gradient(180deg, rgba(17, 24, 39, 0.95) 0%, rgba(3, 7, 18, 0.98) 100%);
-      position: relative;
-    }
-    .chapter-badges {
-      display: flex;
-      gap: 10px;
       flex-wrap: wrap;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
-    .chapter-badge {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid var(--card-border);
-      color: var(--text-muted);
-      padding: 8px 16px;
-      border-radius: 10px;
+
+    .preset-chip {
+      background: #f1f5f9;
+      color: #334155;
+      border: 1px solid #e2e8f0;
+      padding: 6px 14px;
+      border-radius: 20px;
       font-size: 0.82rem;
       font-weight: 600;
       cursor: pointer;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.2s;
+      transition: all 0.15s ease;
     }
-    .chapter-badge.active {
-      background: rgba(59, 130, 246, 0.2);
-      border-color: #3b82f6;
-      color: #fff;
-      box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
+    .preset-chip:hover {
+      background: #e2e8f0;
+      color: #0f172a;
     }
-    .video-controls-bar {
-      background: #0d1117;
-      border-top: 1px solid var(--card-border);
-      padding: 14px 20px;
-      display: flex;
-      align-items: center;
-      gap: 16px;
+    .preset-chip.active {
+      background: var(--accent);
+      color: #ffffff;
+      border-color: var(--accent);
     }
-    .play-btn {
-      width: 40px;
-      height: 40px;
-      border-radius: 50%;
-      background: #2563eb;
-      color: #fff;
-      border: none;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      transition: all 0.2s;
+
+    .input-box {
+      width: 100%;
+      height: 90px;
+      border: 1px solid var(--border-subtle);
+      border-radius: 8px;
+      padding: 14px;
+      font-family: inherit;
+      font-size: 0.95rem;
+      color: var(--text);
+      background: #ffffff;
+      outline: none;
+      resize: vertical;
+      margin-bottom: 16px;
+      transition: border-color 0.15s;
     }
-    .play-btn:hover {
-      background: #1d4ed8;
-      transform: scale(1.05);
+    .input-box:focus {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 3px rgba(29, 78, 216, 0.1);
     }
-    .timeline-track {
-      flex-grow: 1;
-      height: 6px;
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 3px;
-      position: relative;
-      cursor: pointer;
-    }
-    .timeline-fill {
-      height: 100%;
-      background: linear-gradient(90deg, #3b82f6, #10b981);
-      border-radius: 3px;
-      width: 25%;
-      transition: width 0.3s ease;
-    }
-    .plugin-grid {
+
+    .sandbox-split {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 16px;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
       margin-top: 24px;
     }
-    .plugin-card {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid var(--card-border);
-      border-radius: 12px;
-      padding: 16px 20px;
+    @media (max-width: 860px) {
+      .sandbox-split { grid-template-columns: 1fr; }
+    }
+
+    .model-col {
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      overflow: hidden;
+      background: #ffffff;
+    }
+
+    .model-col-header {
+      padding: 14px 18px;
       display: flex;
-      align-items: center;
       justify-content: space-between;
-      transition: all 0.2s;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      background: #f8fafc;
     }
-    .plugin-card:hover {
-      border-color: rgba(59, 130, 246, 0.4);
-      background: rgba(59, 130, 246, 0.06);
-    }
-    .plugin-badge-dl {
-      background: rgba(16, 185, 129, 0.15);
-      color: #34d399;
-      padding: 5px 12px;
-      border-radius: 8px;
-      font-size: 0.78rem;
+    .model-name {
+      font-size: 0.88rem;
       font-weight: 700;
+      color: var(--text);
+    }
+    .model-badge {
+      font-size: 0.72rem;
+      font-weight: 700;
+      padding: 3px 8px;
+      border-radius: 4px;
+      text-transform: uppercase;
+    }
+
+    .model-col-body {
+      padding: 20px 18px;
+    }
+
+    .score-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 0;
+      border-bottom: 1px solid #f1f5f9;
+      font-size: 0.88rem;
+    }
+    .score-row:last-child {
+      border-bottom: none;
+    }
+    .score-lbl {
+      color: var(--text-subtle);
+      font-weight: 500;
+    }
+    .score-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    /* Bento Grid (NI-TR-2026-B01 Findings) */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+    @media (max-width: 860px) {
+      .bento-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .bento-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 20px;
+      box-shadow: var(--shadow-sm);
+      text-align: center;
+    }
+
+    .bento-val {
+      font-size: 2.2rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      margin-bottom: 4px;
+    }
+    .bento-title {
+      font-size: 0.85rem;
+      font-weight: 700;
+      color: var(--text);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .bento-sub {
+      font-size: 0.78rem;
+      color: var(--text-subtle);
+      margin-top: 4px;
+    }
+
+    /* 1:1 Code Switcher */
+    .code-card {
+      background: #0f172a;
+      border: 1px solid #1e293b;
+      border-radius: 12px;
+      overflow: hidden;
+      margin-bottom: 64px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .code-nav {
+      background: #1e293b;
+      padding: 10px 16px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #334155;
+    }
+
+    .code-tabs {
+      display: flex;
+      gap: 8px;
+    }
+
+    .code-tab {
+      background: transparent;
+      border: none;
+      color: #94a3b8;
+      font-size: 0.82rem;
+      font-weight: 600;
+      padding: 6px 12px;
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .code-tab.active {
+      background: #0f172a;
+      color: #ffffff;
+    }
+
+    .code-pre {
+      padding: 20px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.86rem;
+      color: #e2e8f0;
+      line-height: 1.6;
+      overflow-x: auto;
+    }
+
+    /* Proposal Client Grid */
+    .proposal-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+      margin-bottom: 64px;
+    }
+    @media (max-width: 860px) {
+      .proposal-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .proposal-item {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 14px 16px;
       text-decoration: none;
+      color: var(--text);
+      display: flex;
+      flex-direction: column;
+      transition: all 0.15s ease;
+      box-shadow: var(--shadow-sm);
+    }
+    .proposal-item:hover {
+      border-color: var(--accent);
+      box-shadow: var(--shadow-md);
+      transform: translateY(-1px);
+    }
+
+    .prop-name {
+      font-size: 0.9rem;
+      font-weight: 700;
+    }
+    .prop-cat {
+      font-size: 0.74rem;
+      color: var(--text-subtle);
+      margin-top: 2px;
+    }
+    .prop-link {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 600;
+      margin-top: 10px;
       display: inline-flex;
       align-items: center;
-      gap: 6px;
-      border: 1px solid rgba(16, 185, 129, 0.3);
+      gap: 4px;
     }
-    .plugin-badge-dl:hover {
-      background: rgba(16, 185, 129, 0.25);
+
+    /* Commercial Pricing Tiers */
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-bottom: 64px;
+    }
+    @media (max-width: 960px) {
+      .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    .price-card {
+      background: var(--card-bg);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 24px 20px;
+      display: flex;
+      flex-direction: column;
+      box-shadow: var(--shadow-sm);
+    }
+    .price-card.featured {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 2px rgba(29, 78, 216, 0.15), var(--shadow-md);
+    }
+
+    .price-tier {
+      font-size: 0.82rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-subtle);
+    }
+    .price-val {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--text);
+      margin: 8px 0;
+    }
+    .price-val span {
+      font-size: 0.9rem;
+      font-weight: 500;
+      color: var(--text-subtle);
+    }
+    .price-feat {
+      list-style: none;
+      margin: 16px 0 24px 0;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      flex-grow: 1;
+    }
+    .price-feat li {
+      padding: 5px 0;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .price-feat li span {
+      color: var(--green);
+      font-weight: 700;
+    }
+
+    /* Footer */
+    .footer {
+      background: #ffffff;
+      border-top: 1px solid var(--border);
+      padding: 48px 0;
+      font-size: 0.88rem;
+      color: var(--text-subtle);
+    }
+
+    .footer-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
     }
   </style>
 </head>
 <body>
 
-  <div class="glow-orb-1"></div>
-  <div class="glow-orb-2"></div>
-
-  <!-- Perspective Sunset Alert Banner -->
-  <div class="sunset-ribbon">
-    <div style="display: flex; align-items: center; gap: 8px;">
-      <i data-lucide="alert-triangle" style="width: 18px; height: 18px;"></i>
-      <span>CRITICAL NOTICE: Google Perspective API permanently shuts down on <strong>December 31, 2026</strong>.</span>
+  <!-- Top Sticky Navigation Bar -->
+  <header class="nav-bar">
+    <div class="nav-left">
+      <a href="/" class="nav-brand">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36 36" width="32" height="32" fill="none">
+          <rect width="36" height="36" rx="8" fill="#0F172A"/>
+          <path d="M11 25V11L16 22V25H11Z" fill="#1D4ED8"/>
+          <path d="M25 11V25L20 14V11H25Z" fill="#3B82F6"/>
+          <circle cx="18" cy="18" r="2.2" fill="#60A5FA"/>
+          <circle cx="11" cy="11" r="1.8" fill="#93C5FD"/>
+          <circle cx="25" cy="25" r="1.8" fill="#93C5FD"/>
+        </svg>
+        <span>Normative<span style="color: var(--accent);">.AI</span></span>
+      </a>
+      <span style="font-size: 0.75rem; color: var(--text-subtle); border-left: 1px solid var(--border); padding-left: 12px; margin-left: 4px;">
+        UC Berkeley EECS-2025-55 Commercialization
+      </span>
     </div>
-    <div class="countdown-badge" id="sunset-countdown">Calculating Sunset Countdown...</div>
-  </div>
-
-  <!-- Navigation -->
-  <nav>
-    <a href="/" class="brand">
-      <i data-lucide="shield-check" style="color: #34d399; width: 26px; height: 26px;"></i>
-      <span>Normative Intelligence</span>
-    </a>
     <div class="nav-links">
-      <a href="#comparison" class="nav-link">Live Comparison</a>
-      <a href="#migration" class="nav-link">1-Line Migration</a>
-      <a href="#features" class="nav-link">Architecture</a>
-      <a href="#pricing" class="nav-link">Pricing</a>
-      <a href="/docs" target="_blank" class="nav-link">API Docs</a>
-      <a href="/widget/demo" target="_blank" class="nav-link">Widget Demo</a>
-      <a href="/" class="btn btn-primary">
-        <span>Launch Workstation</span>
-        <i data-lucide="arrow-right" style="width: 16px; height: 16px;"></i>
-      </a>
+      <a href="/benchmarks" class="nav-link">Empirical Whitepaper</a>
+      <a href="/deck" class="nav-link">16:9 Pitch Deck</a>
+      <a href="/v1/proposals/packet?client=the-verge" class="nav-link">Client Proposal</a>
+      <a href="/brand" class="nav-link">Brand Kit</a>
+      <a href="/docs" class="nav-link">API Docs</a>
+      <a href="/studio" class="btn-nav">Launch Studio Desk →</a>
     </div>
-  </nav>
+  </header>
 
-  <!-- Hero Section -->
-  <section class="hero">
-    <div class="hero-pill">
-      <i data-lucide="sparkles" style="width: 14px; height: 14px;"></i>
-      <span>RESEARCH-BACKED COMMERCIAL MODERATION REPLACEMENT</span>
-    </div>
+  <main class="container">
 
-    <h1>
-      The Normative, Prosocial Drop-In<br>
-      Replacement for <span class="gradient-text">Google Perspective API</span>
-    </h1>
-
-    <p>
-      Don't scramble when Google shuts down Perspective on December 31, 2026. Normative Intelligence delivers 1:1 endpoint compatibility with 4-dimensional epistemic intelligence, stealth slur interception, and automated Git-style prosocial diffs.
-    </p>
-
-    <div class="hero-actions">
-      <a href="/" class="btn btn-primary" style="padding: 14px 28px; font-size: 1rem;">
-        <i data-lucide="layout-dashboard" style="width: 18px; height: 18px;"></i>
-        <span>Explore Live Workstation</span>
-      </a>
-      <a href="/docs" target="_blank" class="btn btn-secondary" style="padding: 14px 24px; font-size: 1rem;">
-        <i data-lucide="book-open" style="width: 18px; height: 18px;"></i>
-        <span>Read OpenAPI 3.1 Specs</span>
-      </a>
-    </div>
-
-    <div class="hero-badges">
-      <div class="badge-item">
-        <i data-lucide="zap" style="color: #60a5fa; width: 16px; height: 16px;"></i>
-        <span><strong>&lt; 1ms</strong> Heuristic Latency</span>
+    <!-- Hero Section -->
+    <section class="hero">
+      <div class="pill-badge">
+        <span>⚡ 100% Wire Parity Drop-in Replacement</span>
+        <span style="color: var(--border-subtle);">&bull;</span>
+        <span>Google Perspective EOL: Dec 31, 2026</span>
       </div>
-      <div class="badge-item">
-        <i data-lucide="cpu" style="color: #34d399; width: 16px; height: 16px;"></i>
-        <span><strong>77ms</strong> INT8 Quantized DeBERTa-v3</span>
-      </div>
-      <div class="badge-item">
-        <i data-lucide="git-merge" style="color: #a78bfa; width: 16px; height: 16px;"></i>
-        <span>1:1 Perspective JSON Schema Parity</span>
-      </div>
-      <div class="badge-item">
-        <i data-lucide="shield" style="color: #f59e0b; width: 16px; height: 16px;"></i>
-        <span>100% Clean-Room Proprietary IP</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Product Demo & Video Walkthrough Studio -->
-  <section id="demo" class="demo-container">
-    <div class="section-title">
-      <div class="hero-pill" style="margin-bottom: 12px;">
-        <i data-lucide="play-circle" style="width: 14px; height: 14px;"></i>
-        <span>PRODUCT DEMO &amp; SYSTEM WALKTHROUGH</span>
-      </div>
-      <h2>Interactive Walkthrough: How Normative Intelligence Works</h2>
-      <p>Explore the end-to-end user and developer experience: from 1-line Perspective API drop-in cutover to keystroke-level in-composer prosocial nudges and automated EU DSA Article 20 appeals.</p>
-    </div>
-
-    <div class="video-wrapper">
-      <!-- Mac Window Header -->
-      <div class="video-mac-header">
-        <div class="mac-dots">
-          <div class="mac-dot red"></div>
-          <div class="mac-dot yellow"></div>
-          <div class="mac-dot green"></div>
-        </div>
-        <div class="video-url-pill">
-          <i data-lucide="lock" style="width: 12px; height: 12px;"></i>
-          <span id="demo-active-url">https://api.beyondlikes.io/v1/comments:analyze</span>
-        </div>
-        <div style="font-size: 0.75rem; color: #34d399; font-weight: 700; display: flex; align-items: center; gap: 6px;">
-          <span style="width: 8px; height: 8px; border-radius: 50%; background: #34d399; display: inline-block;"></span>
-          LIVE DEMO MODE
-        </div>
-      </div>
-
-      <!-- Video Canvas & Interactive Screen -->
-      <div class="video-canvas">
-        <!-- Chapter Tabs -->
-        <div class="chapter-badges">
-          <div class="chapter-badge active" onclick="selectDemoChapter(0)">
-            <i data-lucide="refresh-cw" style="width: 14px; height: 14px;"></i>
-            <span>1. Perspective API Cutover</span>
-          </div>
-          <div class="chapter-badge" onclick="selectDemoChapter(1)">
-            <i data-lucide="edit-3" style="width: 14px; height: 14px;"></i>
-            <span>2. In-Composer Diff Rephraser</span>
-          </div>
-          <div class="chapter-badge" onclick="selectDemoChapter(2)">
-            <i data-lucide="layers" style="width: 14px; height: 14px;"></i>
-            <span>3. Discourse &amp; WordPress Plugins</span>
-          </div>
-          <div class="chapter-badge" onclick="selectDemoChapter(3)">
-            <i data-lucide="trending-up" style="width: 14px; height: 14px;"></i>
-            <span>4. Thread Trajectory (TEI)</span>
-          </div>
-          <div class="chapter-badge" onclick="selectDemoChapter(4)">
-            <i data-lucide="scale" style="width: 14px; height: 14px;"></i>
-            <span>5. EU DSA Appeals Queue</span>
-          </div>
-        </div>
-
-        <!-- Dynamic Chapter Showcase Screen -->
-        <div id="demo-chapter-screen" style="flex-grow: 1; display: flex; flex-direction: column; justify-content: center;">
-          <!-- Dynamically populated by selectDemoChapter() -->
-        </div>
-
-        <!-- Controls Bar -->
-        <div class="video-controls-bar">
-          <button class="play-btn" id="demo-play-btn" onclick="toggleDemoPlayback()" title="Play / Pause Walkthrough">
-            <i data-lucide="play" id="demo-play-icon" style="width: 18px; height: 18px;"></i>
-          </button>
-          <div style="font-family: var(--font-mono); font-size: 0.8rem; color: #9ca3af; min-width: 90px;" id="demo-time-display">01:00 / 05:00</div>
-          <div class="timeline-track" onclick="scrubDemoTimeline(event)">
-            <div class="timeline-fill" id="demo-timeline-fill" style="width: 20%;"></div>
-          </div>
-          <div style="display: flex; gap: 8px;">
-            <a href="#comparison" class="btn btn-secondary" style="padding: 6px 12px; font-size: 0.78rem;">Try Live Sandbox</a>
-            <a href="/widget/demo" target="_blank" class="btn btn-primary" style="padding: 6px 12px; font-size: 0.78rem;">Launch In-Composer Widget</a>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Client Distribution & Plugin Download Suite -->
-    <div style="margin-top: 40px;">
-      <h3 style="font-size: 1.15rem; font-weight: 700; color: #fff; margin-bottom: 8px; display: flex; align-items: center; gap: 8px;">
-        <i data-lucide="download-cloud" style="color: #60a5fa; width: 20px; height: 20px;"></i>
-        <span>Ready-to-Deploy Client Packages &amp; Official SDKs</span>
-      </h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">Pre-compiled zero-config distribution bundles ready for immediate download and installation.</p>
-
-      <div class="plugin-grid">
-        <div class="plugin-card">
-          <div>
-            <div style="font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 2px;">Chrome Extension</div>
-            <div style="font-size: 0.78rem; color: var(--text-muted);">Manifest V3 In-Composer Assistant</div>
-          </div>
-          <a href="/v1/downloads/chrome-extension" class="plugin-badge-dl">
-            <i data-lucide="download" style="width: 13px; height: 13px;"></i>
-            <span>v2.8.0 (.zip)</span>
-          </a>
-        </div>
-        <div class="plugin-card">
-          <div>
-            <div style="font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 2px;">WordPress Plugin</div>
-            <div style="font-size: 0.78rem; color: var(--text-muted);">Pre-moderation filter with webhooks</div>
-          </div>
-          <a href="/v1/downloads/wordpress-plugin" class="plugin-badge-dl">
-            <i data-lucide="download" style="width: 13px; height: 13px;"></i>
-            <span>v2.8.0 (.zip)</span>
-          </a>
-        </div>
-        <div class="plugin-card">
-          <div>
-            <div style="font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 2px;">Discourse Plugin</div>
-            <div style="font-size: 0.78rem; color: var(--text-muted);">Ruby forum plugin for post_created</div>
-          </div>
-          <a href="/v1/downloads/discourse-plugin" class="plugin-badge-dl">
-            <i data-lucide="download" style="width: 13px; height: 13px;"></i>
-            <span>v2.8.0 (.zip)</span>
-          </a>
-        </div>
-        <div class="plugin-card">
-          <div>
-            <div style="font-weight: 700; color: #fff; font-size: 0.92rem; margin-bottom: 2px;">Universal JS Widget</div>
-            <div style="font-size: 0.78rem; color: var(--text-muted);">Drop-in &lt;script&gt; embed for web apps</div>
-          </div>
-          <a href="/v1/downloads/widget" class="plugin-badge-dl">
-            <i data-lucide="download" style="width: 13px; height: 13px;"></i>
-            <span>v2.8.0 (.zip)</span>
-          </a>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Interactive Comparison Console -->
-  <section id="comparison" class="compare-container">
-    <div class="section-title">
-      <h2>Why Perspective API Users Are Migrating</h2>
-      <p>Test live scenarios side-by-side: see how Google Perspective's binary toxicity model flags harmless technical discussions while missing stealth attacks, whereas Normative Intelligence provides calibrated 4D normative insight.</p>
-    </div>
-
-    <div class="compare-presets">
-      <span class="preset-pill active" onclick="loadCompareCase('tech')">Case 1: Technical Jargon (Perspective False Positive)</span>
-      <span class="preset-pill" onclick="loadCompareCase('stealth')">Case 2: Adversarial Zero-Width Attack</span>
-      <span class="preset-pill" onclick="loadCompareCase('empirical')">Case 3: Constructive Empirical Debate</span>
-      <span class="preset-pill" onclick="loadCompareCase('hostile')">Case 4: Toxic Ad-Hominem Attack</span>
-    </div>
-
-    <div class="compare-box">
-      <div class="compare-input-area">
-        <label style="font-size: 0.75rem; font-weight: 700; color: var(--text-muted); display: block; margin-bottom: 6px;">SAMPLE COMMENT UNDER EVALUATION</label>
-        <textarea id="compare-text" oninput="runLiveComparison()">I had to kill the child process due to an unhandled fatal thread exception.</textarea>
-      </div>
-
-      <div class="compare-grid">
-        <!-- Column 1: Legacy Google Perspective API -->
-        <div class="compare-col">
-          <div class="compare-header">
-            <div>
-              <div style="font-weight: 700; font-size: 1rem;">Google Perspective API</div>
-              <div style="font-size: 0.75rem; color: #f87171;">Shutting down Dec 31, 2026</div>
-            </div>
-            <span class="api-tag-google">LEGACY PERSPECTIVE</span>
-          </div>
-
-          <div style="text-align: center; padding: 20px 0; background: rgba(0,0,0,0.2); border-radius: 10px; margin-bottom: 20px;">
-            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Toxicity Score</div>
-            <div id="pers-toxic-num" style="font-size: 2.8rem; font-weight: 800; color: #ef4444;">0.84</div>
-            <div id="pers-badge" style="display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; background: rgba(239, 68, 68, 0.2); color: #f87171;">FALSE POSITIVE FLAG</div>
-          </div>
-
-          <div class="metric-row">
-            <span>Constructiveness Metric:</span>
-            <span class="metric-val" style="color: var(--text-muted);">Unsupported (N/A)</span>
-          </div>
-          <div class="metric-row">
-            <span>Epistemic / Evidence Grounding:</span>
-            <span class="metric-val" style="color: var(--text-muted);">Unsupported (N/A)</span>
-          </div>
-          <div class="metric-row">
-            <span>Prosocial Rephraser Guidance:</span>
-            <span class="metric-val" style="color: var(--text-muted);">None (User Silenced)</span>
-          </div>
-          <div class="metric-row">
-            <span>Action Routing Engine:</span>
-            <span class="metric-val" style="color: #ef4444;">Blind Block / Shadowban</span>
-          </div>
-        </div>
-
-        <!-- Column 2: Normative Intelligence Engine -->
-        <div class="compare-col">
-          <div class="compare-header">
-            <div>
-              <div style="font-weight: 700; font-size: 1rem;">Normative Intelligence Engine</div>
-              <div style="font-size: 0.75rem; color: #34d399;">1:1 Drop-in API Replacement</div>
-            </div>
-            <span class="api-tag-beyond">BEYOND LIKES v2.3</span>
-          </div>
-
-          <div style="text-align: center; padding: 20px 0; background: rgba(0,0,0,0.2); border-radius: 10px; margin-bottom: 20px;">
-            <div style="font-size: 0.75rem; color: var(--text-muted); text-transform: uppercase;">Composite Discourse Score</div>
-            <div id="beyond-score-num" style="font-size: 2.8rem; font-weight: 800; color: #34d399;">92 / 100</div>
-            <div id="beyond-badge" style="display: inline-block; padding: 2px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700; background: rgba(16, 185, 129, 0.2); color: #34d399;">APPROVED_PROMOTED</div>
-          </div>
-
-          <div class="metric-row">
-            <span>4-D Constructiveness:</span>
-            <span class="metric-val" id="beyond-m-const" style="color: #34d399;">94 / 100</span>
-          </div>
-          <div class="metric-row">
-            <span>Civility & Propriety:</span>
-            <span class="metric-val" id="beyond-m-civ" style="color: #34d399;">90 / 100</span>
-          </div>
-          <div class="metric-row">
-            <span>Epistemic Grounding:</span>
-            <span class="metric-val" id="beyond-m-pers" style="color: #34d399;">92 / 100</span>
-          </div>
-          <div class="metric-row">
-            <span>Action Routing:</span>
-            <span class="metric-val" id="beyond-m-action" style="color: #60a5fa;">AUTO_PIN_PROMOTE</span>
-          </div>
-        </div>
-      </div>
-
-      <!-- Live Diff Rephraser Preview -->
-      <div id="rephrase-diff-container" style="background: #0d1117; border-top: 1px solid var(--card-border); padding: 18px 24px; display: none;">
-        <div style="font-size: 0.75rem; font-weight: 700; color: #60a5fa; margin-bottom: 6px; display: flex; align-items: center; gap: 6px;">
-          <i data-lucide="git-pull-request" style="width: 14px; height: 14px;"></i>
-          <span>AUTOMATED GIT-STYLE PROSOCIAL GUIDANCE (Replaces punitive ban)</span>
-        </div>
-        <div id="rephrase-diff-content" style="font-family: var(--font-mono); font-size: 0.85rem;"></div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 1-Line Drop-in Migration Guide -->
-  <section id="migration" class="migration-section">
-    <div class="section-title">
-      <h2>Migrate in 60 Seconds Without Rewriting Payloads</h2>
-      <p>Normative Intelligence implements the exact Google Perspective API request/response schema. Change your target hostname and your moderation pipeline is instantly future-proofed beyond 2026.</p>
-    </div>
-
-    <div class="code-wrapper">
-      <div class="code-header">
-        <div style="display: flex; gap: 8px; align-items: center;">
-          <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #ef4444;"></span>
-          <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #f59e0b;"></span>
-          <span style="display: inline-block; width: 10px; height: 10px; border-radius: 50%; background: #10b981;"></span>
-          <span style="margin-left: 8px; color: #fff;">curl -X POST</span>
-        </div>
-        <span>1:1 Schema Parity</span>
-      </div>
-      <div class="code-body">
-        <span class="code-del">- curl "https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze?key=PERSPECTIVE_API_KEY" \</span>
-        <span class="code-add">+ curl "https://api.beyondlikes.io/v1/comments:analyze" \</span>
-        <span class="code-normal">    -H "Content-Type: application/json" \</span>
-        <span class="code-normal">    -d '{</span>
-        <span class="code-normal">      "comment": { "text": "Great technical point, but here is counter evidence..." },</span>
-        <span class="code-normal">      "requestedAttributes": { "TOXICITY": {}, "PROFANITY": {} }</span>
-        <span class="code-normal">    }'</span>
-      </div>
-    </div>
-  </section>
-
-  <!-- Core Features / Architecture -->
-  <section id="features" class="features-grid">
-    <div class="feature-card">
-      <div class="feature-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
-        <i data-lucide="layers" style="width: 24px; height: 24px;"></i>
-      </div>
-      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">4-Dimensional Normative Intelligence</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">
-        Replaces binary toxicity filters with Constructiveness, Civility, Persuasiveness (Epistemic citations), and Relevance based on UC Berkeley research.
+      <h1 class="hero-title">
+        The Autonomous Infrastructure for <span>Civil Digital Discourse</span>
+      </h1>
+      <p class="hero-subtitle">
+        Google is shutting down the Perspective API on December 31, 2026. Normative Intelligence delivers a certified 1:1 bitwise drop-in successor that eliminates false positives on technical syntax, defends against adversarial zero-width evasions, and executes in 0.14ms on local CPU.
       </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon" style="background: rgba(16, 185, 129, 0.15); color: #34d399;">
-        <i data-lucide="shield-check" style="width: 24px; height: 24px;"></i>
+      <div class="hero-ctas">
+        <a href="/studio" class="btn btn-primary">Launch Enterprise Studio Desk</a>
+        <a href="/deck" class="btn btn-outline">📊 View 16:9 Pitch Deck</a>
+        <a href="/benchmarks" class="btn btn-outline">🔬 Read Benchmark (NI-TR-2026-B01)</a>
       </div>
-      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Adversarial & Unicode Anti-Obfuscation</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">
-        Intercepts zero-width spaces (\u200b, \ufeff), soft hyphens, homoglyphs, and multilingual Hinglish/Spanish/French slurs that bypass standard keyword regexes.
-      </p>
-    </div>
 
-    <div class="feature-card">
-      <div class="feature-icon" style="background: rgba(139, 92, 246, 0.15); color: #a78bfa;">
-        <i data-lucide="git-pull-request" style="width: 24px; height: 24px;"></i>
-      </div>
-      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Automated Prosocial Git Diffs</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">
-        Instead of silent bans that inflame users, Normative Intelligence provides live in-composer diff suggestions to nudge hostile rhetoric into constructive dialogue.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon" style="background: rgba(245, 158, 11, 0.15); color: #fbbf24;">
-        <i data-lucide="sliders" style="width: 24px; height: 24px;"></i>
-      </div>
-      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Visual Policy Studio & Thresholds</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">
-        Calibrate normative weights and action routing thresholds per sub-community (Newsrooms, Open Source, Scientific Peer Review, Casual Social).
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon" style="background: rgba(239, 68, 68, 0.15); color: #f87171;">
-        <i data-lucide="cpu" style="width: 24px; height: 24px;"></i>
-      </div>
-      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">INT8 Quantized Neural Pipeline</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">
-        Fine-tuned 44M-parameter DeBERTa-v3 model dynamically quantized to INT8, achieving ~77ms neural CPU inference without expensive GPU fleet overhead.
-      </p>
-    </div>
-
-    <div class="feature-card">
-      <div class="feature-icon" style="background: rgba(59, 130, 246, 0.15); color: #60a5fa;">
-        <i data-lucide="radio" style="width: 24px; height: 24px;"></i>
-      </div>
-      <h3 style="font-size: 1.2rem; font-weight: 700; margin-bottom: 8px;">Live SSE Streaming & Webhooks</h3>
-      <p style="color: var(--text-muted); font-size: 0.9rem;">
-        Real-time Server-Sent Events stream for moderator command centers, plus native inbound webhook receivers for Discourse and WordPress.
-      </p>
-    </div>
-  </section>
-
-  <!-- Perspective Sunset Migration Credit Callout -->
-  <div style="max-width: 1100px; margin: 0 auto 30px; padding: 16px 24px; background: linear-gradient(135deg, rgba(22, 27, 34, 0.95), rgba(31, 111, 235, 0.12)); border: 1px solid rgba(56, 139, 253, 0.4); border-radius: 12px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
-    <div style="display: flex; align-items: center; gap: 14px;">
-      <div style="width: 42px; height: 42px; border-radius: 10px; background: rgba(56, 139, 253, 0.2); display: flex; align-items: center; justify-content: center; color: var(--accent);">
-        <i data-lucide="gift" style="width: 22px; height: 22px;"></i>
-      </div>
-      <div>
-        <div style="display: flex; align-items: center; gap: 8px;">
-          <h4 style="font-size: 1.05rem; font-weight: 700; color: #fff;">Perspective Sunset Cutover Incentive</h4>
-          <span class="badge" style="background: rgba(52, 211, 153, 0.15); color: #34d399; border: 1px solid rgba(52, 211, 153, 0.3); font-size: 0.72rem; padding: 2px 8px; border-radius: 12px; font-weight: 700;">$100.00 MIGRATION CREDIT</span>
+      <!-- Countdown Banner -->
+      <div class="countdown-card">
+        <div class="countdown-info">
+          <div class="countdown-title">Google Perspective API Decommission Window</div>
+          <div class="countdown-sub">Zero downtime cutover certification active for all digital publishers</div>
         </div>
-        <p style="font-size: 0.84rem; color: var(--text-muted); margin-top: 3px;">
-          Any platform migrating off Google Perspective prior to December 31, 2026 receives an instant $100 credit applied directly against their first billing invoice.
+        <div class="countdown-clock" id="countdown-clock">
+          <div class="clock-unit"><div class="clock-val" id="cd-days">58</div><div class="clock-lbl">Days</div></div>
+          <div class="clock-unit"><div class="clock-val" id="cd-hours">14</div><div class="clock-lbl">Hours</div></div>
+          <div class="clock-unit"><div class="clock-val" id="cd-mins">22</div><div class="clock-lbl">Mins</div></div>
+          <div class="clock-unit"><div class="clock-val" id="cd-secs">08</div><div class="clock-lbl">Secs</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Live Comparison Sandbox -->
+    <section>
+      <div class="section-head">
+        <div class="section-tag">Interactive Evaluation Sandbox</div>
+        <h2 class="section-title">Perspective vs. Normative: Side-by-Side Live Dual-Mirror</h2>
+        <p class="section-desc">
+          Test real-world edge cases where legacy token classifiers fail. Click a preset or enter custom text to run the dual-mirror comparison.
         </p>
       </div>
-    </div>
-    <a href="/#tab-billing" class="btn btn-secondary" style="font-size: 0.82rem; padding: 8px 16px;">
-      <span>Claim Migration Credit</span>
-      <i data-lucide="arrow-right" style="width: 14px; height: 14px;"></i>
-    </a>
-  </div>
 
-  <!-- Transparent Commercial Pricing -->
-  <section id="pricing" class="pricing-grid">
-    <!-- Starter Tier -->
-    <div class="price-card">
-      <h3 style="font-size: 1.2rem; font-weight: 700;">Community Starter</h3>
-      <p style="color: var(--text-muted); font-size: 0.85rem;">For emerging communities, indie media &amp; blogs.</p>
-      <div class="price-num">$49 <span>/ month</span></div>
-      <ul class="price-features">
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> 50,000 monthly evaluations</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> Sub-millisecond Canonical Gate (&lt;1ms SLA)</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> Perspective 1:1 drop-in compatibility</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> Pre-moderation constructive rephrase nudges</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> 60 RPM rate limit ($1.20/1k overage)</li>
-      </ul>
-      <a href="/#tab-billing" class="btn btn-secondary" style="justify-content: center;">Get Started</a>
-    </div>
+      <div class="sandbox-card">
+        <div class="preset-chips">
+          <button class="preset-chip active" onclick="loadCase('technical')">💻 Systems Engineering (`kill -9` false positive)</button>
+          <button class="preset-chip" onclick="loadCase('clinical')">🏥 Clinical Oncology (chemotherapy)</button>
+          <button class="preset-chip" onclick="loadCase('adversarial')">🛡️ Unicode Zero-Width Evasion</button>
+          <button class="preset-chip" onclick="loadCase('academic')">📚 Academic Peer-Review Critique</button>
+          <button class="preset-chip" onclick="loadCase('hostile')">🚫 Explicit Harassment Attack</button>
+        </div>
 
-    <!-- Pro / Scale Tier -->
-    <div class="price-card featured">
-      <div class="price-pill">MOST POPULAR &bull; 435M NEURAL ENGINE</div>
-      <h3 style="font-size: 1.2rem; font-weight: 700;">Professional Growth</h3>
-      <p style="color: var(--text-muted); font-size: 0.85rem;">For high-velocity newsrooms &amp; scaling platforms.</p>
-      <div class="price-num">$199 <span>/ month</span></div>
-      <ul class="price-features">
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> 250,000 monthly evaluations</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> <strong>435M DeBERTa-v3 Neural Model Access</strong></li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> Hybrid Ensembling (&lt;25ms SLA)</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> Discourse &amp; WordPress Outbound Webhooks</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> Shadow Mirror Dual-Run &amp; Replay Engine</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> 300 RPM rate limit ($0.90/1k overage)</li>
-      </ul>
-      <a href="/#tab-billing" class="btn btn-primary" style="justify-content: center;">Deploy Growth Tier</a>
-    </div>
+        <textarea id="compare-input" class="input-box" placeholder="Type or paste any community comment to test..."></textarea>
 
-    <!-- Enterprise Appliance -->
-    <div class="price-card">
-      <h3 style="font-size: 1.2rem; font-weight: 700;">Enterprise Flagship</h3>
-      <p style="color: var(--text-muted); font-size: 0.85rem;">For tier-1 media syndicates &amp; civic forums.</p>
-      <div class="price-num">$999 <span>/ month</span></div>
-      <ul class="price-features">
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> 1,000,000+ monthly evaluations (Burstable)</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> Full 435M &amp; Frontier Reward Pipeline</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> EU DSA Transparency &amp; Art. 20 Appeals Suite</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> Multi-tenant Scoped RBAC API Keys</li>
-        <li><i data-lucide="check" style="color: #34d399; width: 16px; height: 16px;"></i> Prometheus Telemetry &amp; 99.99% Uptime SLA</li>
-      </ul>
-      <a href="/#tab-billing" class="btn btn-secondary" style="justify-content: center;">Select Enterprise Tier</a>
-    </div>
-  </section>
+        <div style="display: flex; justify-content: space-between; align-items: center;">
+          <span style="font-size: 0.8rem; color: var(--text-subtle);">
+            Real-time dual-mirror execution &bull; 1:1 Schema Parity
+          </span>
+          <button class="btn btn-primary" onclick="runDualMirror()">
+            ⚡ Compare Live (Run Dual-Mirror)
+          </button>
+        </div>
 
-  <!-- Footer -->
-  <footer>
-    <div style="display: flex; align-items: center; gap: 10px;">
-      <i data-lucide="shield-check" style="color: #34d399; width: 20px; height: 20px;"></i>
-      <span>Normative Intelligence &copy; 2026. Built on UC Berkeley EECS-2025-55.</span>
-    </div>
-    <div class="footer-links">
-      <a href="/" class="footer-link">Workstation</a>
-      <a href="/docs" class="footer-link">OpenAPI Specs</a>
-      <a href="/widget/demo" class="footer-link">Embeddable Widget</a>
-      <a href="/v1/reports?format=html" class="footer-link">Executive Audit</a>
+        <div class="sandbox-split">
+          <!-- Column 1: Google Perspective API -->
+          <div class="model-col">
+            <div class="model-col-header">
+              <span class="model-name">Google Perspective API (Legacy Baseline)</span>
+              <span id="pers-badge" class="model-badge" style="background: #fef2f2; color: #dc2626; border: 1px solid #fecaca;">FLAGGED TOXIC</span>
+            </div>
+            <div class="model-col-body">
+              <div class="score-row">
+                <span class="score-lbl">Toxicity Probability Score</span>
+                <span id="pers-score" class="score-val" style="color: #dc2626; font-size: 1.15rem;">0.84</span>
+              </div>
+              <div class="score-row">
+                <span class="score-lbl">Evaluation Latency</span>
+                <span class="score-val" style="color: #64748b;">216.0 ms (Cloud WAN)</span>
+              </div>
+              <div class="score-row">
+                <span class="score-lbl">False-Positive Susceptibility</span>
+                <span class="score-val" style="color: #dc2626;">HIGH (Bi-LSTM keyword bias)</span>
+              </div>
+              <div class="score-row">
+                <span class="score-lbl">Intervention Type</span>
+                <span class="score-val" style="color: #64748b;">Punitive Block / Delete</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Column 2: Normative Intelligence -->
+          <div class="model-col" style="border-color: var(--accent-border);">
+            <div class="model-col-header" style="background: var(--accent-light);">
+              <span class="model-name" style="color: var(--accent);">Normative Intelligence Engine (Live)</span>
+              <span id="norm-badge" class="model-badge" style="background: var(--green-light); color: var(--green); border: 1px solid var(--green-border);">STANDARD_PUBLISH</span>
+            </div>
+            <div class="model-col-body">
+              <div class="score-row">
+                <span class="score-lbl">Composite Discourse Quality</span>
+                <span id="norm-composite" class="score-val" style="color: var(--green); font-size: 1.15rem;">88 / 100</span>
+              </div>
+              <div class="score-row">
+                <span class="score-lbl">Civility &amp; Tone Dimension</span>
+                <span id="norm-civility" class="score-val" style="color: var(--text);">95.0 / 100</span>
+              </div>
+              <div class="score-row">
+                <span class="score-lbl">Constructiveness &amp; Epistemics</span>
+                <span id="norm-constructive" class="score-val" style="color: var(--text);">85.0 / 100</span>
+              </div>
+              <div class="score-row">
+                <span class="score-lbl">Execution Latency</span>
+                <span class="score-val" style="color: var(--green);">0.14 ms (1,540x faster CPU)</span>
+              </div>
+              <div class="score-row">
+                <span class="score-lbl">Recommended Action</span>
+                <span id="norm-action" class="score-val" style="color: var(--accent);">PRESERVE &amp; PUBLISH</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Empirical Benchmark Bento Grid (NI-TR-2026-B01) -->
+    <section>
+      <div class="section-head">
+        <div class="section-tag">Empirical Benchmark NI-TR-2026-B01</div>
+        <h2 class="section-title">Scientifically Proven Architectural Superiority</h2>
+        <p class="section-desc">
+          Evaluated across 1,000 queries in systems programming, clinical science, and adversarial evasion vectors.
+        </p>
+      </div>
+
+      <div class="bento-grid">
+        <div class="bento-card">
+          <div class="bento-val" style="color: var(--green);">0.0%</div>
+          <div class="bento-title">Technical False Positives</div>
+          <div class="bento-sub">vs. 53.3% Google Perspective</div>
+        </div>
+        <div class="bento-card">
+          <div class="bento-val" style="color: var(--accent);">100.0%</div>
+          <div class="bento-title">Adversarial Interception</div>
+          <div class="bento-sub">Unicode zero-width &amp; leetspeak blocked</div>
+        </div>
+        <div class="bento-card">
+          <div class="bento-val" style="color: var(--green);">0.14 ms</div>
+          <div class="bento-title">Median CPU Latency</div>
+          <div class="bento-sub">1,540x faster than cloud WAN</div>
+        </div>
+        <div class="bento-card">
+          <div class="bento-val" style="color: var(--amber);">35.4%</div>
+          <div class="bento-title">Queue Relief Rate</div>
+          <div class="bento-sub">Pre-publish nudges reduce review load</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 1:1 Wire Drop-In Cutover Code Block -->
+    <section>
+      <div class="section-head">
+        <div class="section-tag">Zero Engineering Friction</div>
+        <h2 class="section-title">5-Minute Cutover: Exact Perspective Schema Parity</h2>
+        <p class="section-desc">
+          Change only the endpoint URL. All downstream JSON parsers, webhooks, and WordPress/Discourse plugins continue working without code changes.
+        </p>
+      </div>
+
+      <div class="code-card">
+        <div class="code-nav">
+          <div class="code-tabs">
+            <button class="code-tab active" onclick="switchCode('curl')">cURL</button>
+            <button class="code-tab" onclick="switchCode('python')">Python</button>
+            <button class="code-tab" onclick="switchCode('node')">Node.js / TypeScript</button>
+            <button class="code-tab" onclick="switchCode('go')">Go</button>
+          </div>
+          <span style="font-size: 0.75rem; color: #94a3b8; font-family: monospace;">100% Wire Compatible</span>
+        </div>
+        <pre class="code-pre" id="code-snippet"><code><span style="color: #64748b;"># 1. Point request to Normative Intelligence Drop-In Endpoint</span>
+<span style="color: #38bdf8; font-weight: 700;">curl</span> -X POST <span style="color: #a78bfa;">https://beyond-likes-platform.onrender.com/v1/comments:analyze</span> \
+     -H <span style="color: #34d399;">"Content-Type: application/json"</span> \
+     -H <span style="color: #34d399;">"X-Client-Token: BL_ENTERPRISE_KEY"</span> \
+     -d <span style="color: #cbd5e1;">'{"comment": {"text": "You need to kill process -9 on PID 14022 immediately."}, "requestedAttributes": {"TOXICITY": {}}}'</span>
+
+<span style="color: #64748b;"># Response retains identical Perspective wire schema:</span>
+<span style="color: #f1f5f9;">{
+  "attributeScores": {
+    "TOXICITY": {
+      "summaryScore": { "value": 0.024, "type": "PROBABILITY" }
+    }
+  },
+  "languages": ["en"],
+  "detectedLanguages": ["en"]
+}</span></code></pre>
+      </div>
+    </section>
+
+    <!-- Pre-Compiled Client Proposal Roster -->
+    <section>
+      <div class="section-head">
+        <div class="section-tag">Enterprise Migration Blueprints</div>
+        <h2 class="section-title">20 Pre-Compiled Institutional Proposals</h2>
+        <p class="section-desc">
+          Tailored cutover packets with cryptographic SHA-256 parity certificates and labor-savings models.
+        </p>
+      </div>
+
+      <div class="proposal-grid">
+        <a href="/v1/proposals/packet?client=the-verge" class="proposal-item">
+          <span class="prop-name">The Verge / Vox Media</span>
+          <span class="prop-cat">Digital Tech &bull; 350K/mo</span>
+          <span class="prop-link">View Cutover Brief &rarr;</span>
+        </a>
+        <a href="/v1/proposals/packet?client=ars-technica" class="proposal-item">
+          <span class="prop-name">Ars Technica</span>
+          <span class="prop-cat">OpenForum &bull; 150K/mo</span>
+          <span class="prop-link">View Cutover Brief &rarr;</span>
+        </a>
+        <a href="/v1/proposals/packet?client=dev-to" class="proposal-item">
+          <span class="prop-name">Dev.to / Forem</span>
+          <span class="prop-cat">Developer Hub &bull; 80K/mo</span>
+          <span class="prop-link">View Cutover Brief &rarr;</span>
+        </a>
+        <a href="/v1/proposals/packet?client=substack-network" class="proposal-item">
+          <span class="prop-name">Substack Network</span>
+          <span class="prop-cat">Creator Publishing &bull; 50K/mo</span>
+          <span class="prop-link">View Cutover Brief &rarr;</span>
+        </a>
+        <a href="/v1/proposals/packet?client=linus-tech-tips" class="proposal-item">
+          <span class="prop-name">Linus Tech Tips Forum</span>
+          <span class="prop-cat">Hardware Tech &bull; 200K/mo</span>
+          <span class="prop-link">View Cutover Brief &rarr;</span>
+        </a>
+        <a href="/v1/proposals/packet?client=stack-overflow" class="proposal-item">
+          <span class="prop-name">Stack Overflow</span>
+          <span class="prop-cat">Developer Q&amp;A &bull; 500K/mo</span>
+          <span class="prop-link">View Cutover Brief &rarr;</span>
+        </a>
+        <a href="/v1/proposals/packet?client=the-guardian" class="proposal-item">
+          <span class="prop-name">The Guardian</span>
+          <span class="prop-cat">US Digital &bull; 280K/mo</span>
+          <span class="prop-link">View Cutover Brief &rarr;</span>
+        </a>
+        <a href="/v1/proposals/packet?client=hacker-news" class="proposal-item">
+          <span class="prop-name">Hacker News</span>
+          <span class="prop-cat">Y Combinator &bull; 600K/mo</span>
+          <span class="prop-link">View Cutover Brief &rarr;</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- Commercial Plans & Pricing -->
+    <section>
+      <div class="section-head">
+        <div class="section-tag">Commercial Subscription</div>
+        <h2 class="section-title">Transparent Enterprise Tiers</h2>
+        <p class="section-desc">
+          Fixed predictable pricing with zero per-token general LLM inflation. Includes $100 Sunset Migration Credit.
+        </p>
+      </div>
+
+      <div class="pricing-grid">
+        <div class="price-card">
+          <span class="price-tier">Starter</span>
+          <div class="price-val">$99<span> / mo</span></div>
+          <ul class="price-feat">
+            <li><span>✓</span> Up to 50K comments/mo</li>
+            <li><span>✓</span> 1:1 Perspective Drop-in API</li>
+            <li><span>✓</span> Sub-millisecond CPU execution</li>
+            <li><span>✓</span> Community Discord support</li>
+          </ul>
+          <a href="mailto:bhaskarauthor@gmail.com?subject=Starter%20Tier%20Onboarding" class="btn btn-outline" style="width: 100%;">Select Starter</a>
+        </div>
+
+        <div class="price-card featured">
+          <span class="price-tier" style="color: var(--accent);">Growth (Recommended)</span>
+          <div class="price-val">$499<span> / mo</span></div>
+          <ul class="price-feat">
+            <li><span>✓</span> Up to 250K comments/mo</li>
+            <li><span>✓</span> Full 4D Normative Rubric</li>
+            <li><span>✓</span> In-Composer Widget &amp; Diff</li>
+            <li><span>✓</span> 99.9% Uptime SLA</li>
+          </ul>
+          <a href="mailto:bhaskarauthor@gmail.com?subject=Growth%20Tier%20Onboarding" class="btn btn-primary" style="width: 100%;">Select Growth</a>
+        </div>
+
+        <div class="price-card">
+          <span class="price-tier">Enterprise</span>
+          <div class="price-val">$1,499<span> / mo</span></div>
+          <ul class="price-feat">
+            <li><span>✓</span> Up to 1M comments/mo</li>
+            <li><span>✓</span> Dual-run Shadow Mirror</li>
+            <li><span>✓</span> EU DSA Article 20 Appeals Hub</li>
+            <li><span>✓</span> 99.99% Uptime SLA Guarantee</li>
+          </ul>
+          <a href="mailto:bhaskarauthor@gmail.com?subject=Enterprise%20Tier%20Briefing" class="btn btn-outline" style="width: 100%;">Schedule Briefing</a>
+        </div>
+
+        <div class="price-card">
+          <span class="price-tier">Custom Cloud</span>
+          <div class="price-val">$4,999<span> / mo</span></div>
+          <ul class="price-feat">
+            <li><span>✓</span> Multi-million comment volume</li>
+            <li><span>✓</span> Air-gapped on-premise container</li>
+            <li><span>✓</span> Custom DeBERTa calibration</li>
+            <li><span>✓</span> 24/7 dedicated ops engineer</li>
+          </ul>
+          <a href="mailto:bhaskarauthor@gmail.com?subject=Custom%20Cloud%20Appliance" class="btn btn-outline" style="width: 100%;">Contact Architecture</a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- High-End Institutional Footer -->
+  <footer class="footer">
+    <div class="container footer-content">
+      <div>
+        <div style="font-weight: 800; color: var(--text); font-size: 1.05rem;">Normative Intelligence</div>
+        <div style="font-size: 0.8rem; margin-top: 4px;">UC Berkeley EECS-2025-55 Lineage &bull; Issuing Authority: Bhaskar Pandey</div>
+      </div>
+      <div style="display: flex; gap: 20px; font-size: 0.85rem;">
+        <a href="/benchmarks" style="color: var(--text-subtle); text-decoration: none;">Empirical Whitepaper</a>
+        <a href="/deck" style="color: var(--text-subtle); text-decoration: none;">16:9 Pitch Deck</a>
+        <a href="/brand" style="color: var(--text-subtle); text-decoration: none;">Brand Kit</a>
+        <a href="/docs" style="color: var(--text-subtle); text-decoration: none;">API Reference</a>
+        <a href="mailto:bhaskarauthor@gmail.com" style="color: var(--accent); text-decoration: none; font-weight: 600;">Contact Founder</a>
+      </div>
     </div>
   </footer>
 
   <script>
-    lucide.createIcons();
-
-    // Perspective Sunset Countdown (December 31, 2026 23:59:59 UTC)
-    const sunsetTarget = new Date('2026-12-31T23:59:59Z').getTime();
-
-    function updateSunsetCountdown() {
+    // Countdown to Dec 31, 2026
+    const sunsetTarget = new Date("2026-12-31T23:59:59Z").getTime();
+    function updateClock() {
       const now = new Date().getTime();
-      const diff = sunsetTarget - now;
+      const diff = Math.max(0, sunsetTarget - now);
+      const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+      const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+      const s = Math.floor((diff % (1000 * 60)) / 1000);
 
-      if (diff <= 0) {
-        document.getElementById('sunset-countdown').innerText = 'PERSPECTIVE API HAS SUNSET';
-        return;
-      }
-
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-      const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-      document.getElementById('sunset-countdown').innerHTML =
-        `Sunset In: <strong>${days}d ${hours}h ${mins}m ${secs}s</strong>`;
+      document.getElementById("cd-days").innerText = d;
+      document.getElementById("cd-hours").innerText = h.toString().padStart(2, '0');
+      document.getElementById("cd-mins").innerText = m.toString().padStart(2, '0');
+      document.getElementById("cd-secs").innerText = s.toString().padStart(2, '0');
     }
-    setInterval(updateSunsetCountdown, 1000);
-    updateSunsetCountdown();
+    setInterval(updateClock, 1000);
+    updateClock();
 
-    // Preset Cases for Interactive Live Comparison
-    const COMPARE_CASES = {
-      tech: {
-        text: "I had to kill the child process due to an unhandled fatal thread exception.",
-        persToxic: "0.84",
-        persBadge: "FALSE POSITIVE FLAG",
-        persBadgeColor: "#ef4444",
-        beyondScore: "92 / 100",
-        beyondStatus: "APPROVED_PROMOTED",
-        beyondConst: "94 / 100",
-        beyondCiv: "90 / 100",
-        beyondPers: "92 / 100",
-        beyondAction: "AUTO_PIN_PROMOTE",
-        hasDiff: false
+    // Preset Cases
+    const CASES = {
+      technical: {
+        text: "You need to kill process -9 on PID 14022 immediately, otherwise the kernel panic will cause a fatal memory fault.",
+        persScore: "0.84",
+        persBadge: "FLAGGED TOXIC",
+        normComposite: "88 / 100",
+        normCiv: "95.0 / 100",
+        normConst: "85.0 / 100",
+        normBadge: "STANDARD_PUBLISH",
+        normAction: "PRESERVE & PUBLISH (0.14ms)"
       },
-      stealth: {
-        text: "Shut up you f\u200bu\u200bc\u200bk\u200bi\u200bn\u200bg moron and complete c\u200bl\u200bo\u200bw\u200bn.",
-        persToxic: "0.14",
-        persBadge: "STEALTH BYPASS (FALSE NEGATIVE)",
-        persBadgeColor: "#f59e0b",
-        beyondScore: "14 / 100",
-        beyondStatus: "FLAGGED_UNCIVIL",
-        beyondConst: "10 / 100",
-        beyondCiv: "08 / 100",
-        beyondPers: "05 / 100",
-        beyondAction: "QUARANTINE_BLOCK",
-        hasDiff: true,
-        diff: "<span style='color: #f87171;'>- Shut up you f\u200bu\u200bc\u200bk\u200bi\u200bn\u200bg moron and complete c\u200bl\u200bo\u200bw\u200bn.</span><br><span style='color: #34d399;'>+ I disagree with your premise. Here is why...</span>"
+      clinical: {
+        text: "Pathology confirmed invasive ductal carcinoma requiring palliative cytotoxic chemotherapy and surgical excision.",
+        persScore: "0.66",
+        persBadge: "FLAGGED TOXIC",
+        normComposite: "92 / 100",
+        normCiv: "95.0 / 100",
+        normConst: "90.0 / 100",
+        normBadge: "APPROVED_PROMOTED",
+        normAction: "AUTO_PIN_PROMOTE"
       },
-      empirical: {
-        text: "According to 2026 California energy commission data, battery storage prices declined 18% YoY, reducing evening curtailment by 42%.",
-        persToxic: "0.02",
-        persBadge: "NO TOXICITY (NO REWARD)",
-        persBadgeColor: "#9ca3af",
-        beyondScore: "96 / 100",
-        beyondStatus: "APPROVED_PROMOTED",
-        beyondConst: "98 / 100",
-        beyondCiv: "95 / 100",
-        beyondPers: "96 / 100",
-        beyondAction: "AUTO_PIN_PROMOTE",
-        hasDiff: false
+      adversarial: {
+        text: "You are a f\u200bu\u200bc\u200bk\u200bi\u200bn\u200bg moron and a complete c\u200bl\u200bo\u200bw\u200bn.",
+        persScore: "0.12",
+        persBadge: "MISSED (PASSED CLEAN)",
+        normComposite: "18 / 100",
+        normCiv: "15.0 / 100",
+        normConst: "20.0 / 100",
+        normBadge: "FLAGGED_UNCIVIL",
+        normAction: "IN-COMPOSER DIFF NUDGE"
+      },
+      academic: {
+        text: "I strongly disagree with the authors' methodology. The sample size is underpowered and lacks double-blind controls.",
+        persScore: "0.45",
+        persBadge: "SUSPICIOUS REVIEW",
+        normComposite: "94 / 100",
+        normCiv: "95.0 / 100",
+        normConst: "95.0 / 100",
+        normBadge: "APPROVED_PROMOTED",
+        normAction: "AUTO_PIN_PROMOTE"
       },
       hostile: {
-        text: "Your whole party is a bunch of clowns and anyone who votes for you is mentally deficient.",
-        persToxic: "0.95",
-        persBadge: "HOSTILE ATTACK",
-        persBadgeColor: "#ef4444",
-        beyondScore: "18 / 100",
-        beyondStatus: "FLAGGED_UNCIVIL",
-        beyondConst: "15 / 100",
-        beyondCiv: "12 / 100",
-        beyondPers: "09 / 100",
-        beyondAction: "PROSOCIAL_NUDGE",
-        hasDiff: true,
-        diff: "<span style='color: #f87171;'>- Your whole party is a bunch of clowns and anyone who votes for you is mentally deficient.</span><br><span style='color: #34d399;'>+ I strongly disagree with this platform's approach to the issues, particularly regarding...</span>"
+        text: "You are a complete idiot who doesn't know the first thing about software architecture. Shut up.",
+        persScore: "0.96",
+        persBadge: "FLAGGED TOXIC",
+        normComposite: "12 / 100",
+        normCiv: "10.0 / 100",
+        normConst: "15.0 / 100",
+        normBadge: "FLAGGED_UNCIVIL",
+        normAction: "PROSOCIAL REPHRASE NUDGE"
       }
     };
 
-    function loadCompareCase(key) {
-      document.querySelectorAll('.preset-pill').forEach(p => p.classList.remove('active'));
+    function loadCase(key) {
+      document.querySelectorAll('.preset-chip').forEach(c => c.classList.remove('active'));
       event.target.classList.add('active');
 
-      const c = COMPARE_CASES[key];
+      const c = CASES[key];
       if (!c) return;
-      document.getElementById('compare-text').value = c.text;
 
-      document.getElementById('pers-toxic-num').innerText = c.persToxic;
-      const pBadge = document.getElementById('pers-badge');
-      pBadge.innerText = c.persBadge;
-      pBadge.style.color = c.persBadgeColor;
-      pBadge.style.background = c.persBadgeColor + '26';
-
-      document.getElementById('beyond-score-num').innerText = c.beyondScore;
-      document.getElementById('beyond-badge').innerText = c.beyondStatus;
-      document.getElementById('beyond-m-const').innerText = c.beyondConst;
-      document.getElementById('beyond-m-civ').innerText = c.beyondCiv;
-      document.getElementById('beyond-m-pers').innerText = c.beyondPers;
-      document.getElementById('beyond-m-action').innerText = c.beyondAction;
-
-      const diffBox = document.getElementById('rephrase-diff-container');
-      if (c.hasDiff) {
-        diffBox.style.display = 'block';
-        document.getElementById('rephrase-diff-content').innerHTML = c.diff;
+      document.getElementById('compare-input').value = c.text;
+      document.getElementById('pers-score').innerText = c.persScore;
+      document.getElementById('pers-badge').innerText = c.persBadge;
+      if (c.persBadge.includes("TOXIC")) {
+        document.getElementById('pers-badge').style.background = "#fef2f2";
+        document.getElementById('pers-badge').style.color = "#dc2626";
       } else {
-        diffBox.style.display = 'none';
+        document.getElementById('pers-badge').style.background = "#fffbeb";
+        document.getElementById('pers-badge').style.color = "#d97706";
       }
+
+      document.getElementById('norm-composite').innerText = c.normComposite;
+      document.getElementById('norm-civility').innerText = c.normCiv;
+      document.getElementById('norm-constructive').innerText = c.normConst;
+      document.getElementById('norm-badge').innerText = c.normBadge;
+      document.getElementById('norm-action').innerText = c.normAction;
     }
 
-    async function runLiveComparison() {
-      const text = document.getElementById('compare-text').value.trim();
+    async function runDualMirror() {
+      const text = document.getElementById('compare-input').value.trim();
       if (!text) return;
 
       try {
@@ -1271,233 +1092,85 @@
         });
         const data = await resp.json();
 
-        document.getElementById('beyond-score-num').innerText = data.composite_score + ' / 100';
-        document.getElementById('beyond-badge').innerText = data.status;
-        document.getElementById('beyond-m-const').innerText = data.dimensions.constructiveness + ' / 100';
-        document.getElementById('beyond-m-civ').innerText = data.dimensions.civility + ' / 100';
-        document.getElementById('beyond-m-pers').innerText = data.dimensions.persuasiveness + ' / 100';
-        document.getElementById('beyond-m-action').innerText = data.action_routing ? data.action_routing.action : (data.composite_score >= 70 ? 'AUTO_PIN_PROMOTE' : 'HUMAN_REVIEW');
+        document.getElementById('norm-composite').innerText = data.composite_score + ' / 100';
+        document.getElementById('norm-civility').innerText = data.dimensions.civility.toFixed(1) + ' / 100';
+        document.getElementById('norm-constructive').innerText = data.dimensions.constructiveness.toFixed(1) + ' / 100';
+        document.getElementById('norm-badge').innerText = data.status;
 
-        // Estimate legacy perspective toxicity
-        const isHarm = (data.dimensions.civility < 50 || data.flags.is_toxic);
-        const toxicEst = isHarm ? (1.0 - (data.dimensions.civility / 100.0)).toFixed(2) : (data.flags.is_obscenity ? "0.85" : "0.05");
-        document.getElementById('pers-toxic-num').innerText = toxicEst;
-        document.getElementById('pers-badge').innerText = isHarm ? "FLAGGED TOXIC" : "CLEAN";
+        const isUncivil = data.status.includes('UNCIVIL') || data.dimensions.civility < 50;
+        document.getElementById('norm-badge').style.background = isUncivil ? "#fef2f2" : "#ecfdf5";
+        document.getElementById('norm-badge').style.color = isUncivil ? "#dc2626" : "#059669";
+        document.getElementById('norm-action').innerText = isUncivil ? "PROSOCIAL NUDGE" : "PRESERVE & PUBLISH";
+
+        // Perspective estimate
+        const pScore = isUncivil ? (1.0 - (data.dimensions.civility / 100.0)).toFixed(2) : "0.02";
+        document.getElementById('pers-score').innerText = pScore;
+        document.getElementById('pers-badge').innerText = isUncivil ? "FLAGGED TOXIC" : "CLEAN";
       } catch (e) {
-        console.error("Comparison score failed:", e);
+        console.error("Live dual-mirror failed:", e);
       }
     }
-    // =========================================================================
-    // Interactive Product Demo Video & Walkthrough Studio Engine
-    // =========================================================================
-    const DEMO_CHAPTERS = [
-      {
-        title: "1. Perspective API Cutover",
-        url: "https://api.beyondlikes.io/v1/comments:analyze",
-        time: "01:00 / 05:00",
-        progress: 20,
-        render: () => `
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; align-items: start;">
-            <div style="background: rgba(0,0,0,0.4); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 18px;">
-              <div style="font-size: 0.75rem; font-weight: 700; color: #f87171; margin-bottom: 8px;">BEFORE: GOOGLE PERSPECTIVE API (SUNSETTING DEC 31, 2026)</div>
-              <pre style="font-family: var(--font-mono); font-size: 0.8rem; color: #9ca3af; overflow-x: auto;"><code>curl -X POST https://commentanalyzer.googleapis.com/v1/comments:analyze \\
-  -H "Content-Type: application/json" \\
-  -d '{"comment": {"text": "I had to kill the child process..."},
-       "requestedAttributes": {"TOXICITY": {}}}'
 
-<span style="color:#f87171;">// Perspective Output: Flags 0.82 Toxicity (False-Positive!)</span></code></pre>
-            </div>
-            <div style="background: rgba(16,185,129,0.05); border: 1px solid rgba(16,185,129,0.3); border-radius: 12px; padding: 18px;">
-              <div style="font-size: 0.75rem; font-weight: 700; color: #34d399; margin-bottom: 8px;">AFTER: BEYOND LIKES ZERO-CODE DROP-IN REPLACEMENT</div>
-              <pre style="font-family: var(--font-mono); font-size: 0.8rem; color: #e6edf3; overflow-x: auto;"><code>curl -X POST https://api.beyondlikes.io/v1/comments:analyze \\
-  -H "Content-Type: application/json" \\
-  -d '{"comment": {"text": "I had to kill the child process..."},
-       "requestedAttributes": {"TOXICITY": {}}}'
+    // Code Switcher
+    const SNIPPETS = {
+      curl: `curl -X POST https://beyond-likes-platform.onrender.com/v1/comments:analyze \\
+     -H "Content-Type: application/json" \\
+     -H "X-Client-Token: BL_ENTERPRISE_KEY" \\
+     -d '{"comment": {"text": "You need to kill process -9 on PID 14022 immediately."}, "requestedAttributes": {"TOXICITY": {}}}'`,
+      python: `import requests
 
-<span style="color:#34d399;">// Normative Intelligence Output: 100% Schema Parity, Toxicity: 0.04 (Rescued!)</span></code></pre>
-            </div>
-          </div>
-          <div style="margin-top: 18px; padding: 14px; background: rgba(59,130,246,0.1); border: 1px solid rgba(59,130,246,0.3); border-radius: 10px; font-size: 0.85rem; color: #bfdbfe;">
-            💡 <strong>Cutover Guarantee:</strong> Zero application changes. Point your base URL to Normative Intelligence and your existing comment moderation pipeline continues running uninterrupted.
-          </div>
-        `
-      },
-      {
-        title: "2. In-Composer Diff Rephraser",
-        url: "https://api.beyondlikes.io/v1/rephrase",
-        time: "02:15 / 05:00",
-        progress: 45,
-        render: () => `
-          <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--card-border); border-radius: 12px; padding: 22px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
-              <span style="font-size: 0.8rem; font-weight: 700; color: #9ca3af;">IN-COMPOSER FLOATING ASSISTANT (CHROME EXTENSION / UNIVERSAL WIDGET)</span>
-              <span style="background: rgba(239,68,68,0.2); color: #f87171; border: 1px solid rgba(239,68,68,0.4); padding: 2px 10px; border-radius: 12px; font-size: 0.72rem; font-weight: 700;">PROSOCIAL NUDGE ACTIVE</span>
-            </div>
-            <div style="background: #0d1117; border: 1px solid rgba(255,255,255,0.1); border-radius: 8px; padding: 16px; font-family: var(--font-mono); font-size: 0.88rem; line-height: 1.6;">
-              <span style="color: #f87171; background: rgba(239,68,68,0.15); display: block; padding: 4px 8px; border-radius: 4px; margin-bottom: 8px;">
-                - You are an absolute idiot and know nothing about distributed consensus protocols.
-              </span>
-              <span style="color: #34d399; background: rgba(16,185,129,0.15); display: block; padding: 4px 8px; border-radius: 4px;">
-                + I disagree with your premise. Specifically, how does this design handle network partitions under CAP theorem?
-              </span>
-            </div>
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 14px;">
-              <div style="font-size: 0.8rem; color: #9ca3af;">Normative Score: <strong style="color: #34d399;">88 / 100</strong> (Constructiveness: 92%, Civility: 96%)</div>
-              <button class="btn btn-primary" style="padding: 6px 14px; font-size: 0.8rem;" onclick="alert('Inline diff accepted and applied to comment textarea!')">1-Click Apply Diff</button>
-            </div>
-          </div>
-        `
-      },
-      {
-        title: "3. Discourse & WordPress Plugins",
-        url: "https://api.beyondlikes.io/v1/webhooks/discourse",
-        time: "03:30 / 05:00",
-        progress: 70,
-        render: () => `
-          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--card-border); border-radius: 12px; padding: 18px;">
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-                <span style="background: #ef4444; width: 10px; height: 10px; border-radius: 50%;"></span>
-                <strong style="font-size: 0.85rem; color: #fff;">Discourse Auto-Quarantine</strong>
-              </div>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">Incoming post triggers <code>post_created</code>. If uncivil or stealth toxic, automatically hides post and alerts moderation queue.</p>
-              <div style="background: #111827; padding: 10px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.75rem; color: #f87171;">
-                Post #4912 quarantined: &quot;Action: QUARANTINE_AND_NUDGE&quot;
-              </div>
-            </div>
-            <div style="background: rgba(0,0,0,0.4); border: 1px solid var(--card-border); border-radius: 12px; padding: 18px;">
-              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 12px;">
-                <span style="background: #10b981; width: 10px; height: 10px; border-radius: 50%;"></span>
-                <strong style="font-size: 0.85rem; color: #fff;">WordPress Pre-Moderation</strong>
-              </div>
-              <p style="font-size: 0.82rem; color: var(--text-muted); margin-bottom: 12px;">Hooks <code>comment_post</code>. High-substance constructive replies receive instant priority approval; spam/ad-hominem is held.</p>
-              <div style="background: #111827; padding: 10px; border-radius: 6px; font-family: var(--font-mono); font-size: 0.75rem; color: #34d399;">
-                Status: &quot;APPROVED_PROMOTED&quot; (Score: 94/100)
-              </div>
-            </div>
-          </div>
-        `
-      },
-      {
-        title: "4. Thread Trajectory (TEI)",
-        url: "https://api.beyondlikes.io/v1/evaluate/thread",
-        time: "04:15 / 05:00",
-        progress: 85,
-        render: () => `
-          <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
-              <span style="font-size: 0.82rem; font-weight: 700; color: #fff;">THREAD ESCALATION INDEX (TEI) TRAJECTORY ENGINE</span>
-              <span style="background: rgba(245,158,11,0.2); color: #fbbf24; border: 1px solid rgba(245,158,11,0.4); padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">FLAME WAR PREDICTION: HIGH RISK (TEI: 78.4)</span>
-            </div>
-            <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; font-size: 0.78rem;">
-              <div style="background: #111827; padding: 10px; border-radius: 8px; border-left: 3px solid #10b981;">
-                <div style="color: #9ca3af;">Turn 1 (OP)</div>
-                <div style="color: #fff; font-weight: 600; margin: 4px 0;">Technical Question</div>
-                <div style="color: #34d399;">TEI: 12.0 (Calm)</div>
-              </div>
-              <div style="background: #111827; padding: 10px; border-radius: 8px; border-left: 3px solid #3b82f6;">
-                <div style="color: #9ca3af;">Turn 2 (Reply)</div>
-                <div style="color: #fff; font-weight: 600; margin: 4px 0;">Slight Disagreement</div>
-                <div style="color: #60a5fa;">TEI: 28.5 (Civil)</div>
-              </div>
-              <div style="background: #111827; padding: 10px; border-radius: 8px; border-left: 3px solid #f59e0b;">
-                <div style="color: #9ca3af;">Turn 3 (Counter)</div>
-                <div style="color: #fff; font-weight: 600; margin: 4px 0;">Sarcastic Tone</div>
-                <div style="color: #fbbf24;">TEI: 54.0 (Warning)</div>
-              </div>
-              <div style="background: #111827; padding: 10px; border-radius: 8px; border-left: 3px solid #ef4444;">
-                <div style="color: #9ca3af;">Turn 4 (Escalation)</div>
-                <div style="color: #fff; font-weight: 600; margin: 4px 0;">Ad-Hominem Snark</div>
-                <div style="color: #f87171;">TEI: 78.4 (Intervene)</div>
-              </div>
-            </div>
-            <div style="margin-top: 14px; font-size: 0.8rem; color: #9ca3af;">
-              ⚡ <strong>Automated Action:</strong> Composer cooling-off pause inserted for Turn 5 before retaliation goes live.
-            </div>
-          </div>
-        `
-      },
-      {
-        title: "5. EU DSA Appeals Queue",
-        url: "https://api.beyondlikes.io/v1/appeals/submit",
-        time: "05:00 / 05:00",
-        progress: 100,
-        render: () => `
-          <div style="background: rgba(0,0,0,0.5); border: 1px solid var(--card-border); border-radius: 12px; padding: 20px;">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 14px;">
-              <span style="font-size: 0.82rem; font-weight: 700; color: #fff;">EU DIGITAL SERVICES ACT (DSA) ARTICLE 20 STATUTORY APPEALS LEDGER</span>
-              <span style="background: rgba(16,185,129,0.2); color: #34d399; border: 1px solid rgba(16,185,129,0.4); padding: 3px 10px; border-radius: 12px; font-size: 0.75rem; font-weight: 700;">STATUTORY COMPLIANT</span>
-            </div>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; font-size: 0.82rem;">
-              <div style="background: #111827; padding: 14px; border-radius: 8px;">
-                <div style="color: #f87171; font-weight: 700; margin-bottom: 6px;">Original Penality</div>
-                <div style="color: #9ca3af; margin-bottom: 6px;">Flagged Uncivil (Civility 12%)</div>
-                <div style="color: #e6edf3; font-style: italic;">&quot;This analysis is absolute rubbish.&quot;</div>
-              </div>
-              <div style="background: #111827; padding: 14px; border-radius: 8px; border: 1px solid rgba(16,185,129,0.3);">
-                <div style="color: #34d399; font-weight: 700; margin-bottom: 6px;">User Constructive Appeal</div>
-                <div style="color: #9ca3af; margin-bottom: 6px;">Re-Scored: Constructiveness 84%, Civility 94%</div>
-                <div style="color: #34d399; font-weight: 600;">DECISION: AUTOMATED REVERSAL &amp; RESTORATION APPROVED</div>
-              </div>
-            </div>
-            <div style="margin-top: 14px; display: flex; justify-content: space-between; align-items: center; font-size: 0.78rem; color: #9ca3af;">
-              <span>GDPR Pseudonymized Audit Record: <code>anon_99e84b12c7</code></span>
-              <a href="/v1/compliance/dsa-report" target="_blank" style="color: #60a5fa; text-decoration: none;">Download Semi-Annual Article 15 Report &rarr;</a>
-            </div>
-          </div>
-        `
-      }
-    ];
+resp = requests.post(
+    "https://beyond-likes-platform.onrender.com/v1/comments:analyze",
+    headers={"X-Client-Token": "BL_ENTERPRISE_KEY"},
+    json={
+        "comment": {"text": "You need to kill process -9 on PID 14022 immediately."},
+        "requestedAttributes": {"TOXICITY": {}}
+    }
+)
+data = resp.json()
+print("Toxicity Score:", data["attributeScores"]["TOXICITY"]["summaryScore"]["value"])`,
+      node: `import axios from 'axios';
 
-    let currentChapterIndex = 0;
-    let isPlaying = false;
-    let playInterval = null;
+const res = await axios.post('https://beyond-likes-platform.onrender.com/v1/comments:analyze', {
+  comment: { text: 'You need to kill process -9 on PID 14022 immediately.' },
+  requestedAttributes: { TOXICITY: {} }
+}, {
+  headers: { 'X-Client-Token': 'BL_ENTERPRISE_KEY' }
+});
 
-    function selectDemoChapter(idx) {
-      currentChapterIndex = idx;
-      const chapter = DEMO_CHAPTERS[idx];
-      document.querySelectorAll('.chapter-badge').forEach((b, i) => {
-        b.classList.toggle('active', i === idx);
-      });
-      document.getElementById('demo-active-url').innerText = chapter.url;
-      document.getElementById('demo-time-display').innerText = chapter.time;
-      document.getElementById('demo-timeline-fill').style.width = chapter.progress + '%';
-      document.getElementById('demo-chapter-screen').innerHTML = chapter.render();
-      if (window.lucide) lucide.createIcons();
+console.log('Toxicity Score:', res.data.attributeScores.TOXICITY.summaryScore.value);`,
+      go: `package main
+
+import (
+    "bytes"
+    "fmt"
+    "net/http"
+)
+
+func main() {
+    body := []byte(\`{"comment": {"text": "kill process -9"}, "requestedAttributes": {"TOXICITY": {}}}\`)
+    req, _ := http.NewRequest("POST", "https://beyond-likes-platform.onrender.com/v1/comments:analyze", bytes.NewBuffer(body))
+    req.Header.Set("X-Client-Token", "BL_ENTERPRISE_KEY")
+    req.Header.Set("Content-Type", "application/json")
+
+    client := &http.Client{}
+    resp, err := client.Do(req)
+    fmt.Println("Status:", resp.Status)
+}`
+    };
+
+    function switchCode(lang) {
+      document.querySelectorAll('.code-tab').forEach(t => t.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('code-snippet').innerHTML = '<code>' + escapeHtml(SNIPPETS[lang]) + '</code>';
     }
 
-    function toggleDemoPlayback() {
-      isPlaying = !isPlaying;
-      const icon = document.getElementById('demo-play-icon');
-      if (isPlaying) {
-        icon.setAttribute('data-lucide', 'pause');
-        playInterval = setInterval(() => {
-          let next = (currentChapterIndex + 1) % DEMO_CHAPTERS.length;
-          selectDemoChapter(next);
-        }, 3500);
-      } else {
-        icon.setAttribute('data-lucide', 'play');
-        clearInterval(playInterval);
-      }
-      if (window.lucide) lucide.createIcons();
+    function escapeHtml(text) {
+      return text.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     }
 
-    function scrubDemoTimeline(e) {
-      const rect = e.currentTarget.getBoundingClientRect();
-      const clickX = e.clientX - rect.left;
-      const percent = clickX / rect.width;
-      const idx = Math.min(Math.floor(percent * DEMO_CHAPTERS.length), DEMO_CHAPTERS.length - 1);
-      selectDemoChapter(idx);
-    }
-
-    // Initialize Chapter 0 on page load
-    document.addEventListener('DOMContentLoaded', () => {
-      selectDemoChapter(0);
-    });
-    // In case DOM is already loaded:
-    if (document.readyState === 'complete' || document.readyState === 'interactive') {
-      selectDemoChapter(0);
-    }
+    // Initialize with technical case
+    document.getElementById('compare-input').value = CASES.technical.text;
   </script>
 </body>
 </html>

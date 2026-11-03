@@ -120,24 +120,8 @@ class NormativeIntelligenceAPIHandler(BaseHTTPRequestHandler):
         path = parsed.path
         query = urllib.parse.parse_qs(parsed.query)
 
-        # 1. Root: Serve Dashboard
-        if path == "/" or path == "/index.html":
-            dashboard_file = os.path.join(BASE_DIR, "dashboard", "index.html")
-            if os.path.exists(dashboard_file):
-                with open(dashboard_file, "rb") as f:
-                    content = f.read()
-                self.send_response(200)
-                self.send_header("Content-Type", "text/html; charset=utf-8")
-                self.send_header("Content-Length", str(len(content)))
-                self.end_headers()
-                self.wfile.write(content)
-                return
-            else:
-                self._send_json(404, {"error": "Dashboard template not found"})
-                return
-
-        # 1a. Commercial Landing Page Showcase
-        elif path == "/landing" or path == "/landing/index.html":
+        # 1. Root & Commercial Showcase
+        if path in ["/", "/index.html", "/landing", "/landing/index.html", "/showcase"]:
             landing_file = os.path.join(BASE_DIR, "landing", "index.html")
             if os.path.exists(landing_file):
                 with open(landing_file, "rb") as f:
@@ -150,6 +134,22 @@ class NormativeIntelligenceAPIHandler(BaseHTTPRequestHandler):
                 return
             else:
                 self._send_json(404, {"error": "Landing page not found"})
+                return
+
+        # 1a. Enterprise Studio Desk Workstation
+        elif path in ["/studio", "/studio/", "/dashboard", "/dashboard/", "/desk", "/app", "/dashboard/index.html"]:
+            dashboard_file = os.path.join(BASE_DIR, "dashboard", "index.html")
+            if os.path.exists(dashboard_file):
+                with open(dashboard_file, "rb") as f:
+                    content = f.read()
+                self.send_response(200)
+                self.send_header("Content-Type", "text/html; charset=utf-8")
+                self.send_header("Content-Length", str(len(content)))
+                self.end_headers()
+                self.wfile.write(content)
+                return
+            else:
+                self._send_json(404, {"error": "Studio dashboard not found"})
                 return
 
         # 1b. Serve In-Composer Widget Demo Page
