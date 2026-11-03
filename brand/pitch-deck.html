@@ -1080,6 +1080,10 @@
       updateSlide(currentSlide - 1, -1);
     }
 
+    function goToSlide(idx) {
+      updateSlide(idx, idx > currentSlide ? 1 : -1);
+    }
+
     function startTimer() {
       if (timerInterval) clearInterval(timerInterval);
       timerInterval = setInterval(() => {
