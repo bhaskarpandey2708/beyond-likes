@@ -5,50 +5,64 @@ This document contains publication-ready announcement posts for the launch of **
 
 ---
 
-## 1. LinkedIn: Comprehensive Executive Post (Long-Form)
-- **Character Count:** 2,199 characters (well within LinkedIn's 3,000-character ceiling; optimal sweet spot for engagement: 1,800–2,400 chars)
-- **Word Count:** 318 words
-- **Target Audience:** CTOs, Heads of Product, Newsroom Editors-in-Chief, Trust & Safety Leaders, Engineering VPs
-- **Recommended Asset Attachment:** Attach `brand/Normative_Intelligence_Demo_Walkthrough.mp4` natively for maximum algorithmic reach.
+## 1. LinkedIn: Flagship Launch Post (Curated for Maximum Organic Reach)
+- **Character Count:** 2,420 characters (Optimal sweet spot for LinkedIn dwell-time: 1,800–2,600 chars; well under the 3,000-char limit)
+- **Target Audience:** CTOs, Heads of Product, Newsroom Editors-in-Chief, Trust & Safety Leads, Engineering VPs
+- **Video Attachment:** Attach `brand/Normative_Intelligence_Demo_Walkthrough.mp4` natively with `brand/demo_video_poster.jpg` as the thumbnail.
 
 ```text
 Google is permanently shutting down the Perspective API on December 31, 2026.
 
-For a decade, digital journalism, enterprise forums, and online communities relied on binary keyword toxicity filters. But binary filters broke the open web:
+For a decade, digital journalism, enterprise forums, and newsrooms relied on binary toxicity filters. But keyword bans broke the open web:
 
-❌ Running 'kill -9 $(pgrep nginx)' gets auto-banned as violent harassment.
-❌ Medical debates on terminal illness get censored as 'toxic content'.
-❌ Meanwhile, bad-faith cynicism, dogwhistles, and coordinated deflection sail right through unchecked.
+❌ Typing 'kill -9 $(pgrep nginx)' gets auto-banned as violent harassment.
+❌ Medical debates on oncology get censored as 'toxic content'.
+❌ Meanwhile, bad-faith cynicism, deflection, and dogwhistles sail right through unchecked.
 
-The result? Thriving reader communities became ghost towns, and moderation teams burned out under an endless backlog of appeals.
+The result? Thriving reader communities became ghost towns, while moderation teams burned out under an endless backlog of false-positive appeals.
+
+Engineering leaders evaluating replacements immediately ask:
+"Can't we just use Google Gemini on Vertex AI or the OpenAI Moderation API?"
+
+We ran the empirical and financial benchmarks:
+1. Prohibitive Unit Economics: Evaluating 10M comments/month on Gemini Pro costs $29,750/month ($357,000/year). Normative runs on local quantized CPU at $185/month—a 95%+ cost reduction with zero token inflation risk.
+2. The "Broadness" Fallacy: OpenAI's Moderation API is purely a binary legal liability filter (hate/violence). It cannot evaluate constructiveness, passes bad-faith cynicism, and offers zero pre-submission in-composer guidance.
+3. Latency Barrier: Cloud LLM WAN round-trips take 400ms–1,500ms (unusable for keystroke coaching). Normative runs in 1.76 milliseconds.
 
 Today, we are introducing what we’re giving to the world:
 Normative Intelligence — The 1:1 Bitwise Successor to Google Perspective API.
 
-Instead of punitive post-hoc censorship, Normative Intelligence introduces a continuous 4-dimensional epistemic rubric:
-1. Constructiveness (35%): Rewards empirical data, verifiable citations, and actionable solutions.
-2. Civility (25%): Protects respectful discourse without suppressing fierce intellectual disagreement.
-3. Persuasiveness (20%): Evaluates logical epistemic consistency.
-4. Context Relevance (20%): Eliminates off-topic spam and deflection.
+Instead of punitive post-hoc censorship, Normative introduces a continuous 4D epistemic rubric:
+• Constructiveness (35%): Rewards empirical data, citations, and actionable solutions.
+• Civility (25%): Distinguishes ferocious intellectual debate from ad-hominem vitriol.
+• Persuasiveness (20%): Evaluates logical validity and epistemic backing.
+• Relevance (20%): Eliminates off-topic spam and bad-faith whataboutism.
 
-The 'Aha!' Moment: In-Composer Prosocial Coaching.
-Traditional tools wait for readers to hit submit, and then ban them. Normative Intelligence intervenes in real time inside the comment box. When an author drafts a cynical insult, our engine renders an inline git-style diff, coaching them to support their critique with empirical evidence.
+The "Aha!" Moment: Real-Time In-Composer Diff Coaching.
+Traditional tools wait for readers to submit, then ban them. Normative intervenes while the author types. If a reader drafts a cynical insult, the engine renders an inline git-style diff, coaching them to support their critique with empirical evidence before publishing.
 Result: 35% reduction in moderator escalations.
 
-Empirical Benchmarks:
+Empirical Proof:
 ⚡ 99.2% ROC-AUC vs Perspective’s 74.8%
 ⚡ 87.2% reduction in false-positive bans on technical and medical vocabulary
-⚡ 1.76 ms local CPU latency (zero cloud WAN delay)
+⚡ 1.76 ms local CPU latency
+⚡ 100% wire drop-in schema parity on attributeScores.TOXICITY (Zero platform code changes for WordPress VIP, Discourse, Coral Project, and Forem).
 
-Engineering Cutover:
-100% wire drop-in schema parity on attributeScores.TOXICITY. Zero lines of platform code changes. Ready for WordPress VIP, Discourse, Coral Project, and custom newsroom architectures.
+Watch our 2-minute architectural demo video below.
 
-Watch the 2-minute walkthrough video and read our empirical whitepaper:
-🔗 https://normative-intelligence.onrender.com/video
+(Links to live sandbox, empirical whitepaper, and cutover guide are in the first comment 👇)
 
-Online discourse doesn’t have to be a toxic liability. It can be an institutional asset.
+#AI #MachineLearning #ContentModeration #DigitalPublishing #SoftwareEngineering #TechLeadership #OpenSource #DataSovereignty
+```
 
-#AI #MachineLearning #ContentModeration #DigitalPublishing #SoftwareEngineering #OpenSource #TechLeadership #OnlineSafety
+### Pinned First Comment (To Keep Post Free of External Links):
+```text
+Explore the live platform, empirical benchmarks, and cutover guides:
+🔗 Live Commercial Showcase & Sandbox: https://beyond-likes-platform.onrender.com
+📊 Empirical Accuracy Whitepaper: https://beyond-likes-platform.onrender.com/benchmarks
+💡 Architectural Evaluation (Why Not Gemini or OpenAI?): https://beyond-likes-platform.onrender.com/comparison
+🖥️ 16:9 Master Investor & Board Pitch Deck: https://beyond-likes-platform.onrender.com/deck
+💻 Open Source GitHub Repository: https://github.com/bhaskarpandey2708/beyond-likes
 ```
 
 ---
