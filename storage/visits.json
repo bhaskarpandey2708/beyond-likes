@@ -76,5 +76,57 @@
     "time_spent": 1,
     "action": "initial_visit",
     "interests": []
+  },
+  {
+    "id": "visit_1793769174008",
+    "timestamp": "2026-11-04T05:12:54.013899Z",
+    "ip": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+    "page": "/",
+    "referrer": "direct",
+    "country": "India",
+    "country_code": "IN",
+    "time_spent": 1,
+    "action": "initial_visit",
+    "interests": []
+  },
+  {
+    "id": "visit_1793769248330",
+    "timestamp": "2026-11-04T05:14:08.331721Z",
+    "ip": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+    "page": "/studio",
+    "referrer": "direct",
+    "country": "India",
+    "country_code": "IN",
+    "time_spent": 1,
+    "action": "initial_visit",
+    "interests": []
+  },
+  {
+    "id": "visit_1793769293965",
+    "timestamp": "2026-11-04T05:14:53.966756Z",
+    "ip": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+    "page": "/benchmarks",
+    "referrer": "direct",
+    "country": "India",
+    "country_code": "IN",
+    "time_spent": 0,
+    "action": "initial_visit",
+    "interests": []
+  },
+  {
+    "id": "visit_1793769322061",
+    "timestamp": "2026-11-04T05:15:22.062557Z",
+    "ip": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+    "page": "/deck",
+    "referrer": "direct",
+    "country": "India",
+    "country_code": "IN",
+    "time_spent": 2,
+    "action": "initial_visit",
+    "interests": []
   }
 ]

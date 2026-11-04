@@ -58,5 +58,35 @@
     "ip": "127.0.0.1",
     "user_agent": "Python-urllib/3.9",
     "referrer": ""
+  },
+  {
+    "id": "lead_1793769420125",
+    "timestamp": "2026-11-04T05:17:00.125818Z",
+    "name": "Inclusive Verification Lead",
+    "email": "verification@domain.com",
+    "phone": "+1 415-555-0100",
+    "country": "United States",
+    "country_code": "US",
+    "interest": "Google Perspective API Migration (Urgent Cutover)",
+    "page": "/",
+    "time_on_site_seconds": 60,
+    "ip": "127.0.0.1",
+    "user_agent": "Python-urllib/3.9",
+    "referrer": ""
+  },
+  {
+    "id": "lead_1793770688819",
+    "timestamp": "2026-11-04T05:38:08.820148Z",
+    "name": "Inclusive Verification Lead",
+    "email": "verification@domain.com",
+    "phone": "+1 415-555-0100",
+    "country": "United States",
+    "country_code": "US",
+    "interest": "Google Perspective API Migration (Urgent Cutover)",
+    "page": "/",
+    "time_on_site_seconds": 60,
+    "ip": "127.0.0.1",
+    "user_agent": "Python-urllib/3.9",
+    "referrer": ""
   }
 ]

@@ -40,6 +40,30 @@
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
+    html { scroll-behavior: smooth; }
+
+    /* Reading Scroll Progress Bar */
+    .scroll-progress-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--accent) 0%, var(--juniper) 100%);
+      z-index: 9999;
+      box-shadow: 0 0 10px rgba(200, 68, 27, 0.4);
+      transition: width 0.05s ease-out;
+    }
+
+    .card-comparison, .chart-wrapper, .table-container {
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .card-comparison:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-md);
+      border-color: var(--accent);
+    }
+
     body {
       font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: var(--bg);
@@ -383,6 +407,9 @@
 </head>
 <body>
 
+  <!-- Reading Scroll Progress Bar -->
+  <div class="scroll-progress-line" id="scrollProgress"></div>
+
   <article class="paper-container">
 
     <!-- Paper Header -->
@@ -635,5 +662,15 @@ const PERSPECTIVE_URL = "https://normative-intelligence.onrender.com/v1/comments
 
   </article>
 
+  <script>
+    window.addEventListener('scroll', () => {
+      const scrollH = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollH > 0 ? (window.scrollY / scrollH) * 100 : 0;
+      const prog = document.getElementById('scrollProgress');
+      if (prog) prog.style.width = progress + '%';
+    }, { passive: true });
+  </script>
+  <!-- 1-Minute Lead Capture Engine -->
+  <script src="/widget/lead_capture.js" defer></script>
 </body>
 </html>

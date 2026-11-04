@@ -1095,35 +1095,205 @@
       color: #78716c;
     }
   
+    /* Smooth Scroll Physics */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Reading Scroll Progress Bar */
+    .scroll-progress-line {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary) 0%, #e06d44 50%, var(--juniper) 100%);
+      z-index: 9999;
+      box-shadow: 0 0 10px rgba(200, 68, 27, 0.5);
+      transition: width 0.05s ease-out;
+    }
+
+    /* Navbar Scrolled Glassmorphism State */
+    .nav-wrapper {
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .nav-wrapper.nav-scrolled {
+      background: rgba(250, 248, 245, 0.94) !important;
+      backdrop-filter: blur(20px) saturate(180%);
+      -webkit-backdrop-filter: blur(20px) saturate(180%);
+      box-shadow: 0 10px 30px -8px rgba(24, 24, 27, 0.08), 0 1px 0 rgba(232, 227, 216, 0.8);
+      padding: 6px 0;
+    }
+
     /* Motion Transitions & Scroll Reveals */
     .scroll-reveal {
       opacity: 0;
-      transform: translateY(32px);
+      transform: translateY(32px) scale(0.985);
+      filter: blur(4px);
       transition: opacity 0.8s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-      will-change: opacity, transform;
+                  transform 0.8s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+      will-change: opacity, transform, filter;
     }
     .scroll-reveal.is-revealed {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
 
-    /* Staggered Children Reveal */
+    /* Universal Staggered Children Reveal */
     .stagger-children > * {
       opacity: 0;
-      transform: translateY(20px);
-      transition: opacity 0.65s cubic-bezier(0.16, 1, 0.3, 1),
-                  transform 0.65s cubic-bezier(0.16, 1, 0.3, 1);
+      transform: translateY(24px) scale(0.98);
+      filter: blur(3px);
+      transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  transform 0.7s cubic-bezier(0.16, 1, 0.3, 1),
+                  filter 0.7s cubic-bezier(0.16, 1, 0.3, 1);
     }
     .scroll-reveal.is-revealed.stagger-children > *,
-    .scroll-reveal.is-revealed .stagger-children > * {
+    .scroll-reveal.is-revealed .stagger-children > *,
+    .is-revealed.stagger-children > *,
+    .is-revealed .stagger-children > * {
       opacity: 1;
-      transform: translateY(0);
+      transform: translateY(0) scale(1);
+      filter: blur(0);
     }
-    .stagger-children > *:nth-child(1) { transition-delay: 0.08s; }
-    .stagger-children > *:nth-child(2) { transition-delay: 0.16s; }
-    .stagger-children > *:nth-child(3) { transition-delay: 0.24s; }
-    .stagger-children > *:nth-child(4) { transition-delay: 0.32s; }
+    .stagger-children > *:nth-child(1) { transition-delay: 0.06s; }
+    .stagger-children > *:nth-child(2) { transition-delay: 0.14s; }
+    .stagger-children > *:nth-child(3) { transition-delay: 0.22s; }
+    .stagger-children > *:nth-child(4) { transition-delay: 0.30s; }
+    .stagger-children > *:nth-child(5) { transition-delay: 0.38s; }
+    .stagger-children > *:nth-child(6) { transition-delay: 0.46s; }
+
+    /* Enhanced Card Hover & Tactile Elevations */
+    .pillar-card, .price-box, .eval-box, .pub-item-card, .metric-pod, .calculator-frame, .hero-card-frame {
+      transition: all 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+      position: relative;
+    }
+    .pillar-card:hover {
+      transform: translateY(-6px) scale(1.01);
+      box-shadow: 0 20px 40px -12px rgba(24, 24, 27, 0.1), 0 0 0 1px var(--primary-border);
+    }
+    .price-box:hover {
+      transform: translateY(-8px);
+      box-shadow: 0 24px 50px -15px rgba(200, 68, 27, 0.15);
+    }
+    .pub-item-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 16px 36px -10px rgba(13, 92, 78, 0.12);
+      border-color: var(--juniper);
+    }
+    .metric-pod:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 24px -6px rgba(24, 24, 27, 0.08);
+    }
+
+    /* Tactile Button Dynamics & Shimmer Effects */
+    .btn-main, .btn-primary, .btn-nav-primary, .btn-run-eval, .btn-apply-guidance, .btn-price-select, .btn-secondary, .btn-nav-deck {
+      position: relative;
+      overflow: hidden;
+      transition: all 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .btn-main:hover, .btn-primary:hover, .btn-nav-primary:hover, .btn-run-eval:hover, .btn-apply-guidance:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px -4px var(--primary-glow);
+    }
+    .btn-main:active, .btn-primary:active, .btn-nav-primary:active, .btn-run-eval:active, .btn-apply-guidance:active {
+      transform: scale(0.96) translateY(0);
+    }
+
+    /* Button Shimmer Sweep Effect */
+    .btn-main::after, .btn-nav-primary::after, .btn-run-eval::after {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -60%;
+      width: 40%;
+      height: 200%;
+      background: linear-gradient(
+        90deg,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.28) 50%,
+        rgba(255, 255, 255, 0) 100%
+      );
+      transform: rotate(25deg);
+      transition: all 0.75s ease;
+      pointer-events: none;
+    }
+    .btn-main:hover::after, .btn-nav-primary:hover::after, .btn-run-eval:hover::after {
+      left: 140%;
+    }
+
+    /* Preset Buttons Bouncy Tactile */
+    .preset-btn {
+      transition: all 0.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .preset-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(24, 24, 27, 0.06);
+    }
+    .preset-btn:active {
+      transform: scale(0.95);
+    }
+    .preset-btn.active {
+      animation: pillActivePop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+      box-shadow: 0 4px 14px var(--primary-glow);
+    }
+    @keyframes pillActivePop {
+      0% { transform: scale(0.92); }
+      60% { transform: scale(1.04); }
+      100% { transform: scale(1); }
+    }
+
+    /* Evaluation Result Box Animations */
+    .eval-box {
+      transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .eval-box.flash-result {
+      animation: resultFlash 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    @keyframes resultFlash {
+      0% { transform: scale(0.97); }
+      50% { transform: scale(1.015); box-shadow: 0 0 30px var(--primary-glow); }
+      100% { transform: scale(1); }
+    }
+
+    .badge-status {
+      transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .badge-status.pop-anim {
+      animation: badgePop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    @keyframes badgePop {
+      0% { transform: scale(0.7); opacity: 0; }
+      70% { transform: scale(1.12); }
+      100% { transform: scale(1); opacity: 1; }
+    }
+
+    /* Pulsing Beacon & Clock Transitions */
+    .pulse-beacon {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: #ff5252;
+      display: inline-block;
+      animation: sunsetPulse 1.8s infinite;
+    }
+    @keyframes sunsetPulse {
+      0% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 82, 82, 0.7); }
+      70% { transform: scale(1.1); box-shadow: 0 0 0 8px rgba(255, 82, 82, 0); }
+      100% { transform: scale(0.95); box-shadow: 0 0 0 0 rgba(255, 82, 82, 0); }
+    }
+
+    /* Loading Spinner for Live Evaluation */
+    .spin-icon {
+      display: inline-block;
+      animation: spinAnim 1s linear infinite;
+    }
+    @keyframes spinAnim {
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
+    }
 
     /* Hero Load Entrance Cascades */
     .hero-entrance-1 {
@@ -1155,10 +1325,13 @@
 </head>
 <body id="page-body">
 
+  <!-- Reading Scroll Progress Bar -->
+  <div class="scroll-progress-line" id="scrollProgress"></div>
+
   <!-- Top Announcement Strip -->
   <aside class="announcement-bar">
     <div style="display: inline-flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: center;">
-      <span class="announcement-tag">Sunset Notice</span>
+      <span class="announcement-tag"><span class="pulse-beacon" style="margin-right: 4px;"></span> Sunset Notice</span>
       <span>Google is decommissioning Perspective API on <strong>December 31, 2026</strong>. 5-minute drop-in cutover.</span>
       <a href="#migration" class="announcement-link">Cutover Guide &rarr;</a>
     </div>
@@ -1262,7 +1435,7 @@
             </div>
             <div class="guidance-actions">
               <span class="guidance-caption">Converts personal attacks into substantive critique before publication.</span>
-              <button class="btn-apply-guidance" onclick="alert('In production, this automatically replaces the text with the constructive critique!')">
+              <button class="btn-apply-guidance" onclick="applyHeroGuidance()">
                 Use Constructive Phrasing &rarr;
               </button>
             </div>
@@ -1312,7 +1485,7 @@
   </section>
 
   <!-- Interactive Live Comparison Sandbox -->
-  <section class="section-block" id="interactive-demo" style="background: var(--bg-subtle);">
+  <section class="section-block scroll-reveal" id="interactive-demo" style="background: var(--bg-subtle);">
     <div class="container">
       <div class="section-title-center">
         <div class="section-kicker-tag">Side-By-Side Comparison</div>
@@ -1529,7 +1702,7 @@
   </section>
 
   <!-- ROI & Labor Savings Calculator -->
-  <section class="section-block" id="calculator" style="background: var(--bg-subtle);">
+  <section class="section-block scroll-reveal" id="calculator" style="background: var(--bg-subtle);">
     <div class="container">
       <div class="section-title-center">
         <div class="section-kicker-tag">Editorial Economics</div>
@@ -1546,7 +1719,7 @@
         </div>
         <input type="range" min="10000" max="2000000" step="10000" value="350000" class="slider-range" id="volume-range-slider" oninput="recalcValues()">
 
-        <div class="calc-metrics-row">
+        <div class="calc-metrics-row stagger-children">
           <div class="metric-pod">
             <div class="metric-pod-num" style="color: var(--juniper);" id="calc-savings">$38,640</div>
             <div class="metric-pod-lbl">Net Annual Savings</div>
@@ -1567,7 +1740,7 @@
       </div>
 
       <!-- Universal Architecture & CMS Ecosystem Compatibility -->
-      <div style="margin-top: 56px;">
+      <div style="margin-top: 56px;" class="scroll-reveal">
         <h3 style="font-size: 1.3rem; font-weight: 800; color: var(--text-main); text-align: center; margin-bottom: 8px;">
           Seamless Deployment Across Modern Publishing Ecosystems
         </h3>
@@ -1729,6 +1902,7 @@
 
     // Perspective Sunset Countdown (Dec 31, 2026)
     const sunsetTarget = new Date("2026-12-31T23:59:59Z").getTime();
+    let lastSec = null;
     function tickClock() {
       const now = new Date().getTime();
       const diff = Math.max(0, sunsetTarget - now);
@@ -1740,7 +1914,15 @@
       document.getElementById("cd-days").innerText = d;
       document.getElementById("cd-hours").innerText = h.toString().padStart(2, '0');
       document.getElementById("cd-mins").innerText = m.toString().padStart(2, '0');
-      document.getElementById("cd-secs").innerText = s.toString().padStart(2, '0');
+      
+      const secEl = document.getElementById("cd-secs");
+      if (secEl && lastSec !== s) {
+        secEl.innerText = s.toString().padStart(2, '0');
+        secEl.classList.remove('digit-tick');
+        void secEl.offsetWidth;
+        secEl.classList.add('digit-tick');
+        lastSec = s;
+      }
     }
     setInterval(tickClock, 1000);
     tickClock();
@@ -1751,12 +1933,12 @@
         text: "You need to kill process -9 on PID 14022 immediately, otherwise the kernel panic will cause a fatal memory fault.",
         perspVerdict: "FLAGGED TOXIC",
         perspClass: "danger",
-        perspScore: "0.84",
+        perspScore: 0.84,
         perspExplain: "❌ <strong>False Positive:</strong> Legacy Bi-LSTM triggers purely on words like 'kill' and 'panic', blindly punishing harmless technical software troubleshooting.",
         normVerdict: "APPROVED & PUBLISHED",
-        normScore: "88 / 100",
-        normCiv: "95.0%",
-        normConst: "85.0%",
+        normScore: 88,
+        normCiv: 95.0,
+        normConst: 85.0,
         normAction: "PRESERVE & PUBLISH",
         normExplain: "✅ <strong>Context Aware:</strong> Accurately recognizes technical command syntax. Zero false alarms; discussion remains open and valuable."
       },
@@ -1764,12 +1946,12 @@
         text: "I strongly disagree with this policy proposal. The fiscal deficit numbers in paragraph 4 don't align with the state treasury audit.",
         perspVerdict: "FLAGGED SUSPICIOUS",
         perspClass: "danger",
-        perspScore: "0.52",
+        perspScore: 0.52,
         perspExplain: "⚠️ <strong>Chilling Effect:</strong> Legacy sentiment models often penalize vigorous disagreement, suppressing thoughtful political engagement.",
         normVerdict: "HIGH QUALITY & PROMOTED",
-        normScore: "94 / 100",
-        normCiv: "96.0%",
-        normConst: "92.0%",
+        normScore: 94,
+        normCiv: 96.0,
+        normConst: 92.0,
         normAction: "AUTO-PIN / HIGHLIGHT",
         normExplain: "✅ <strong>Constructive Debate:</strong> Substantive critique with specific evidentiary citation. Celebrated and highlighted for readers."
       },
@@ -1777,12 +1959,12 @@
         text: "The patient was diagnosed with aggressive ductal carcinoma and underwent cytotoxic chemotherapy with palliative support.",
         perspVerdict: "FLAGGED TOXIC",
         perspClass: "danger",
-        perspScore: "0.66",
+        perspScore: 0.66,
         perspExplain: "❌ <strong>Medical Censorship:</strong> Perspective confuses clinical pathology terminology ('cytotoxic', 'carcinoma') with harmful content.",
         normVerdict: "APPROVED & PUBLISHED",
-        normScore: "92 / 100",
-        normCiv: "98.0%",
-        normConst: "90.0%",
+        normScore: 92,
+        normCiv: 98.0,
+        normConst: 90.0,
         normAction: "PRESERVE & PUBLISH",
         normExplain: "✅ <strong>Domain Accuracy:</strong> Medical and healthcare discourse is correctly recognized and allowed without censorship."
       },
@@ -1790,16 +1972,88 @@
         text: "You are an absolute idiot who doesn't know anything about journalism. Shut up and get off this platform.",
         perspVerdict: "FLAGGED TOXIC",
         perspClass: "danger",
-        perspScore: "0.96",
+        perspScore: 0.96,
         perspExplain: "❌ <strong>Punitive Banishment:</strong> Comment is deleted or user is banned, sparking outrage, user churn, and counter-attacks.",
         normVerdict: "PROSOCIAL REPHRASE NUDGE",
-        normScore: "14 / 100",
-        normCiv: "10.0%",
-        normConst: "15.0%",
+        normScore: 14,
+        normCiv: 10.0,
+        normConst: 15.0,
         normAction: "PROSOCIAL DIFF NUDGE",
         normExplain: "🔄 <strong>Educational Intervention:</strong> The composer prompts the user with a constructive alternative, de-escalating hostility in real time."
       }
     };
+
+    // Numeric Count-Up Animation Helper
+    function animateNumber(element, start, end, duration = 650, prefix = '', suffix = '', decimals = 0) {
+      if (!element) return;
+      const startTime = performance.now();
+      function update(currentTime) {
+        const elapsed = currentTime - startTime;
+        const progress = Math.min(elapsed / duration, 1);
+        const easeProgress = 1 - Math.pow(1 - progress, 3);
+        const currentVal = start + (end - start) * easeProgress;
+        
+        if (decimals > 0) {
+          element.innerText = prefix + currentVal.toFixed(decimals) + suffix;
+        } else {
+          element.innerText = prefix + Math.round(currentVal).toLocaleString() + suffix;
+        }
+        
+        if (progress < 1) {
+          requestAnimationFrame(update);
+        }
+      }
+      requestAnimationFrame(update);
+    }
+
+    // Hero Interactive Composer Guidance Application (Live Diff Morph)
+    function applyHeroGuidance() {
+      const commentText = document.querySelector('.user-comment-text');
+      const btn = document.querySelector('.btn-apply-guidance');
+      const statusBadge = document.querySelector('.frame-topbar span:last-child');
+      const guidanceBox = document.querySelector('.guidance-box');
+
+      if (!btn || !commentText) return;
+
+      if (btn.dataset.applied === 'true') {
+        // Revert to raw draft
+        commentText.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+        commentText.style.opacity = '0';
+        commentText.style.transform = 'translateY(-4px)';
+        setTimeout(() => {
+          commentText.innerText = '"I\'ve read through the proposals and this whole article is completely idiotic. The author doesn\'t understand basic economics."';
+          commentText.style.color = 'var(--text-main)';
+          commentText.style.opacity = '1';
+          commentText.style.transform = 'translateY(0)';
+          statusBadge.innerHTML = '● Engine Active';
+          statusBadge.style.color = 'var(--juniper)';
+          btn.innerText = 'Use Constructive Phrasing →';
+          btn.style.background = 'var(--primary)';
+          btn.dataset.applied = 'false';
+        }, 200);
+      } else {
+        // Morph to Constructive Phrasing with animation
+        commentText.style.transition = 'opacity 0.2s ease, transform 0.2s ease';
+        commentText.style.opacity = '0';
+        commentText.style.transform = 'translateY(4px)';
+        setTimeout(() => {
+          commentText.innerText = '"I strongly disagree with this analysis—the conclusions overlook the latest labor cost indices and fiscal data."';
+          commentText.style.color = 'var(--juniper)';
+          commentText.style.opacity = '1';
+          commentText.style.transform = 'translateY(0)';
+          statusBadge.innerHTML = '✓ Epistemically Grounded (+35% Lift)';
+          statusBadge.style.color = '#10b981';
+          btn.innerText = '✓ Applied! (Click to Revert)';
+          btn.style.background = '#0d5c4e';
+          btn.dataset.applied = 'true';
+          if (guidanceBox) {
+            guidanceBox.classList.remove('flash-result');
+            void guidanceBox.offsetWidth;
+            guidanceBox.classList.add('flash-result');
+          }
+        }, 200);
+      }
+    }
 
     function selectCase(key) {
       document.querySelectorAll('.preset-btn').forEach(b => b.classList.remove('active'));
@@ -1809,22 +2063,42 @@
       if (!data) return;
 
       document.getElementById('eval-textarea').value = data.text;
-      document.getElementById('badge-persp').innerText = data.perspVerdict;
-      document.getElementById('badge-persp').className = 'badge-status ' + data.perspClass;
-      document.getElementById('score-persp').innerText = data.perspScore;
-      document.getElementById('diag-persp').innerHTML = data.perspExplain;
+      
+      // Trigger flash animations on result pods
+      document.querySelectorAll('.eval-box').forEach(b => {
+        b.classList.remove('flash-result');
+        void b.offsetWidth;
+        b.classList.add('flash-result');
+      });
 
-      document.getElementById('badge-norm').innerText = data.normVerdict;
-      document.getElementById('score-norm').innerText = data.normScore;
-      document.getElementById('civ-norm').innerText = data.normCiv;
-      document.getElementById('const-norm').innerText = data.normConst;
+      // Animate badges
+      const bPersp = document.getElementById('badge-persp');
+      bPersp.innerText = data.perspVerdict;
+      bPersp.className = 'badge-status ' + data.perspClass + ' pop-anim';
+
+      const bNorm = document.getElementById('badge-norm');
+      bNorm.innerText = data.normVerdict;
+      bNorm.className = 'badge-status ' + (data.normScore < 50 ? 'danger' : 'success') + ' pop-anim';
+
+      // Animate scores smoothly
+      animateNumber(document.getElementById('score-persp'), 0, data.perspScore, 500, '', '', 2);
+      animateNumber(document.getElementById('score-norm'), 0, data.normScore, 500, '', ' / 100');
+      animateNumber(document.getElementById('civ-norm'), 0, data.normCiv, 500, '', '%', 1);
+      animateNumber(document.getElementById('const-norm'), 0, data.normConst, 500, '', '%', 1);
+
       document.getElementById('action-norm').innerText = data.normAction;
+      document.getElementById('diag-persp').innerHTML = data.perspExplain;
       document.getElementById('diag-norm').innerHTML = data.normExplain;
     }
 
     async function executeEvalTest() {
       const text = document.getElementById('eval-textarea').value.trim();
       if (!text) return;
+
+      const btn = document.querySelector('.btn-run-eval');
+      const originalHtml = btn.innerHTML;
+      btn.innerHTML = `<span class="spin-icon">⚙</span> <span>Analyzing Epistemic Vectors...</span>`;
+      btn.disabled = true;
 
       try {
         const resp = await fetch('/v1/score', {
@@ -1834,30 +2108,66 @@
         });
         const d = await resp.json();
 
-        document.getElementById('score-norm').innerText = d.composite_score + ' / 100';
-        document.getElementById('civ-norm').innerText = d.dimensions.civility.toFixed(1) + '%';
-        document.getElementById('const-norm').innerText = d.dimensions.constructiveness.toFixed(1) + '%';
-        
+        // Flash evaluation pods
+        document.querySelectorAll('.eval-box').forEach(b => {
+          b.classList.remove('flash-result');
+          void b.offsetWidth;
+          b.classList.add('flash-result');
+        });
+
         const isUncivil = d.dimensions.civility < 50 || d.status.includes('UNCIVIL');
-        document.getElementById('badge-norm').innerText = isUncivil ? "PROSOCIAL NUDGE REQUIRED" : "APPROVED & PUBLISHED";
-        document.getElementById('badge-norm').className = 'badge-status ' + (isUncivil ? 'danger' : 'success');
+        
+        // Count-up animations for numbers
+        animateNumber(document.getElementById('score-norm'), 0, d.composite_score, 600, '', ' / 100');
+        animateNumber(document.getElementById('civ-norm'), 0, d.dimensions.civility, 600, '', '%', 1);
+        animateNumber(document.getElementById('const-norm'), 0, d.dimensions.constructiveness, 600, '', '%', 1);
+        
+        const bNorm = document.getElementById('badge-norm');
+        bNorm.innerText = isUncivil ? "PROSOCIAL NUDGE REQUIRED" : "APPROVED & PUBLISHED";
+        bNorm.className = 'badge-status ' + (isUncivil ? 'danger' : 'success') + ' pop-anim';
+        
         document.getElementById('action-norm').innerText = isUncivil ? "PROSOCIAL DIFF NUDGE" : "PRESERVE & PUBLISH";
         document.getElementById('diag-norm').innerHTML = isUncivil
           ? "🔄 <strong>Educational Nudge:</strong> User is gently prompted to reframe insults into constructive debate."
           : "✅ <strong>Civil Contribution:</strong> Evaluated as constructive discourse; published instantly.";
 
-        const pScore = isUncivil ? (1.0 - (d.dimensions.civility / 100.0)).toFixed(2) : "0.02";
-        document.getElementById('score-persp').innerText = pScore;
-        document.getElementById('badge-persp').innerText = isUncivil ? "FLAGGED TOXIC" : "CLEAN";
-        document.getElementById('badge-persp').className = 'badge-status ' + (isUncivil ? 'danger' : 'success');
+        const pScore = isUncivil ? (1.0 - (d.dimensions.civility / 100.0)) : 0.02;
+        animateNumber(document.getElementById('score-persp'), 0, pScore, 500, '', '', 2);
+        
+        const bPersp = document.getElementById('badge-persp');
+        bPersp.innerText = isUncivil ? "FLAGGED TOXIC" : "CLEAN";
+        bPersp.className = 'badge-status ' + (isUncivil ? 'danger' : 'success') + ' pop-anim';
       } catch (e) {
         console.error("Live test failed:", e);
+      } finally {
+        setTimeout(() => {
+          btn.innerHTML = originalHtml;
+          btn.disabled = false;
+        }, 350);
       }
     }
 
-    // Dynamic ROI Calculator
+    // Dynamic Fluid ROI Calculator (Lerp Interpolation)
+    let currentVol = 350000;
+    let targetVol = 350000;
+    let isRecalcRunning = false;
+
     function recalcValues() {
-      const vol = parseInt(document.getElementById('volume-range-slider').value);
+      targetVol = parseInt(document.getElementById('volume-range-slider').value);
+      if (!isRecalcRunning) {
+        isRecalcRunning = true;
+        lerpRecalc();
+      }
+    }
+
+    function lerpRecalc() {
+      currentVol += (targetVol - currentVol) * 0.3;
+      if (Math.abs(targetVol - currentVol) < 500) {
+        currentVol = targetVol;
+        isRecalcRunning = false;
+      }
+
+      const vol = Math.round(currentVol);
       document.getElementById('calc-vol-text').innerText = vol.toLocaleString();
 
       const costPerComment = 0.012;
@@ -1871,22 +2181,43 @@
       document.getElementById('calc-hours').innerText = monthlyHours.toLocaleString() + ' hrs';
       document.getElementById('calc-roi').innerText = roiPercent + '%';
       document.getElementById('calc-payback').innerText = paybackDays + ' Days';
+
+      if (isRecalcRunning) {
+        requestAnimationFrame(lerpRecalc);
+      }
     }
 
     // Default Init
     document.getElementById('eval-textarea').value = TEST_CASES.technical.text;
     recalcValues();
   
-    // Scroll Reveal Intersection Observer
+    // Reading Progress Bar & Scrolled Navigation State Listener
+    window.addEventListener('scroll', () => {
+      const scrollH = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = scrollH > 0 ? (window.scrollY / scrollH) * 100 : 0;
+      const progLine = document.getElementById('scrollProgress');
+      if (progLine) progLine.style.width = progress + '%';
+
+      const nav = document.querySelector('.nav-wrapper');
+      if (nav) {
+        if (window.scrollY > 30) {
+          nav.classList.add('nav-scrolled');
+        } else {
+          nav.classList.remove('nav-scrolled');
+        }
+      }
+    }, { passive: true });
+
+    // Universal Scroll Reveal Intersection Observer with Staggering
     const revealObserver = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
           entry.target.classList.add('is-revealed');
         }
       });
-    }, { threshold: 0.1 });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
 
-    document.querySelectorAll('.scroll-reveal').forEach(el => revealObserver.observe(el));
+    document.querySelectorAll('.scroll-reveal, .hero-card-frame, .calculator-frame').forEach(el => revealObserver.observe(el));
 
   </script>
   <!-- 1-Minute Visitor Telemetry & Lead Capture Engine -->
