@@ -8,6 +8,7 @@ import json
 import time
 import queue
 import urllib.parse
+from datetime import datetime
 from http.server import ThreadingHTTPServer, BaseHTTPRequestHandler
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -162,6 +163,35 @@ class NormativeIntelligenceAPIHandler(BaseHTTPRequestHandler):
         # 1c. Serve Embeddable Widget JavaScript
         elif path == "/widget/beyond-likes.js":
             self._send_file(os.path.join(BASE_DIR, "distribution", "widget", "beyond-likes.js"), "application/javascript; charset=utf-8")
+            return
+
+        elif path in ["/widget/lead_capture.js", "/lead_capture.js"]:
+            self._send_file(os.path.join(BASE_DIR, "distribution", "widget", "lead_capture.js"), "application/javascript; charset=utf-8")
+            return
+
+        # 1m. Serve Leads & Visitor Telemetry Ingestion API (GET)
+        elif path == "/v1/leads":
+            leads_file = os.path.join(BASE_DIR, "storage", "leads.json")
+            leads = []
+            if os.path.exists(leads_file):
+                try:
+                    with open(leads_file, "r", encoding="utf-8") as f:
+                        leads = json.load(f)
+                except Exception:
+                    pass
+            self._send_json(200, {"total_leads": len(leads), "leads": leads})
+            return
+
+        elif path == "/v1/telemetry/visits":
+            visits_file = os.path.join(BASE_DIR, "storage", "visits.json")
+            visits = []
+            if os.path.exists(visits_file):
+                try:
+                    with open(visits_file, "r", encoding="utf-8") as f:
+                        visits = json.load(f)
+                except Exception:
+                    pass
+            self._send_json(200, {"total_visits": len(visits), "recent_visits": visits[-100:]})
             return
 
         # 1d. Serve Interactive API Docs
@@ -694,8 +724,92 @@ class NormativeIntelligenceAPIHandler(BaseHTTPRequestHandler):
 
         client_id = client_meta["client_name"] if client_meta else "anonymous"
 
+        # 0a. Visitor Engagement Telemetry Ping
+        if path == "/v1/telemetry/visit":
+            visit_record = {
+                "id": f"visit_{int(time.time() * 1000)}",
+                "timestamp": datetime.utcnow().isoformat() + "Z",
+                "ip": self.client_address[0] if hasattr(self, 'client_address') else "127.0.0.1",
+                "user_agent": self.headers.get("User-Agent", ""),
+                "page": body.get("page", "/"),
+                "referrer": body.get("referrer", ""),
+                "country": body.get("country", "Unknown"),
+                "country_code": body.get("country_code", ""),
+                "time_spent": body.get("time_spent", 0),
+                "action": body.get("action", "ping"),
+                "interests": body.get("interests", [])
+            }
+            storage_dir = os.path.join(BASE_DIR, "storage")
+            os.makedirs(storage_dir, exist_ok=True)
+            visits_file = os.path.join(storage_dir, "visits.json")
+            try:
+                visits = []
+                if os.path.exists(visits_file):
+                    with open(visits_file, "r", encoding="utf-8") as f:
+                        visits = json.load(f)
+                visits.append(visit_record)
+                if len(visits) > 5000:
+                    visits = visits[-5000:]
+                with open(visits_file, "w", encoding="utf-8") as f:
+                    json.dump(visits, f, indent=2)
+            except Exception:
+                pass
+            self._send_json(200, {"status": "SUCCESS", "recorded": True})
+            return
+
+        # 0b. Enterprise Lead Capture Ingestion
+        elif path == "/v1/leads":
+            name = body.get("name", "").strip()
+            email = body.get("email", "").strip()
+            phone = body.get("phone", "").strip()
+            country = body.get("country", "").strip()
+            country_code = body.get("country_code", "").strip()
+            interest = body.get("interest", "Perspective EOL Migration").strip()
+
+            if not email or "@" not in email:
+                self._send_json(400, {"error": "A valid email address is required."})
+                return
+
+            lead_record = {
+                "id": f"lead_{int(time.time() * 1000)}",
+                "timestamp": datetime.utcnow().isoformat() + "Z",
+                "name": name or "Executive Lead",
+                "email": email,
+                "phone": phone,
+                "country": country,
+                "country_code": country_code,
+                "interest": interest,
+                "page": body.get("page", "/"),
+                "time_on_site_seconds": body.get("time_on_site", 60),
+                "ip": self.client_address[0] if hasattr(self, 'client_address') else "127.0.0.1",
+                "user_agent": self.headers.get("User-Agent", ""),
+                "referrer": body.get("referrer", "")
+            }
+
+            storage_dir = os.path.join(BASE_DIR, "storage")
+            os.makedirs(storage_dir, exist_ok=True)
+            leads_file = os.path.join(storage_dir, "leads.json")
+            try:
+                leads = []
+                if os.path.exists(leads_file):
+                    with open(leads_file, "r", encoding="utf-8") as f:
+                        leads = json.load(f)
+                leads.append(lead_record)
+                with open(leads_file, "w", encoding="utf-8") as f:
+                    json.dump(leads, f, indent=2)
+            except Exception:
+                pass
+
+            self._send_json(200, {
+                "status": "SUCCESS",
+                "message": "Migration assessment requested successfully.",
+                "lead_id": lead_record["id"],
+                "packet_url": "/docs"
+            })
+            return
+
         # 1. Primary Scoring Endpoint
-        if path == "/v1/score":
+        elif path == "/v1/score":
             text = body.get("text", "")
             context = body.get("context", "")
             policy = body.get("policy", "newsroom")

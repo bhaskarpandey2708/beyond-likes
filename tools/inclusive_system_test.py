@@ -206,6 +206,7 @@ assets = [
     ("brand/Normative_Intelligence_Pitch_Deck.pptx", "PowerPoint Presentation Binary"),
     ("brand/Normative_Intelligence_Demo_Walkthrough.mp4", "Broadcast Demo Video 1080p MP4"),
     ("brand/demo_video_poster.jpg", "Demo Video Poster Thumbnail JPEG"),
+    ("distribution/widget/lead_capture.js", "Lead Capture & Telemetry Script"),
     ("docs/openapi.json", "OpenAPI JSON Specification"),
     ("docs/openapi.yaml", "OpenAPI YAML Specification")
 ]
@@ -216,6 +217,46 @@ for rel_path, label in assets:
     exists = os.path.exists(full_path)
     size = os.path.getsize(full_path) if exists else 0
     log_test(f"Asset: {label} ({rel_path})", exists and size > 500, f"[{size:,} bytes]")
+
+# ------------------------------------------------------------------------------
+# TEST GROUP 7: Visitor Telemetry & Lead Capture Ingestion
+# ------------------------------------------------------------------------------
+print("\n[GROUP 7] Visitor Telemetry & 1-Minute Lead Capture Engine")
+try:
+    lead_payload = {
+        "name": "Inclusive Verification Lead",
+        "email": "verification@domain.com",
+        "phone": "+1 415-555-0100",
+        "country": "United States",
+        "country_code": "US",
+        "interest": "Google Perspective API Migration (Urgent Cutover)"
+    }
+    t0 = time.time()
+    req = urllib.request.Request(
+        f"{BASE_URL}/v1/leads",
+        data=json.dumps(lead_payload).encode("utf-8"),
+        headers={"Content-Type": "application/json"}
+    )
+    with urllib.request.urlopen(req, timeout=5) as res:
+        t1 = time.time()
+        data = json.loads(res.read().decode("utf-8"))
+        log_test(
+            "Lead Capture Submission (/v1/leads)",
+            res.status == 200 and data.get("status") == "SUCCESS",
+            f"[Lead ID: {data.get('lead_id')}, Latency: {(t1-t0)*1000:.1f}ms]"
+        )
+
+    # Verify retrieval
+    with urllib.request.urlopen(f"{BASE_URL}/v1/leads", timeout=5) as res:
+        data = json.loads(res.read().decode("utf-8"))
+        total = data.get("total_leads", 0)
+        log_test(
+            "Lead Ingestion Retrieval (/v1/leads)",
+            res.status == 200 and total > 0,
+            f"[Total Captured Leads: {total}]"
+        )
+except Exception as e:
+    log_test("Visitor Telemetry & Lead Capture", False, str(e))
 
 print("\n" + "=" * 70)
 print(f"📊 TEST SUMMARY: {PASS_COUNT} PASSED, {FAIL_COUNT} FAILED")
