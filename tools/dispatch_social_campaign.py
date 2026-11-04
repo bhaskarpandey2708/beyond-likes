@@ -189,7 +189,7 @@ We modeled this as a multi-task continuous regression problem across 4 normative
 - 10/10 Edge Cases Passing: Zero false positives on clinical oncology, distributed microgrids, or peer-review language that trips legacy Perspective.
 - Multilingual Support: Evaluates romanized Indic and Hinglish code-mixed dialects without degradation.
 
-Full open-source repo, ONNX export pipeline, and benchmark harness: https://github.com/bhaskarpandey2708/beyond-likes
+Full proprietary platform, ONNX runtime engine, and benchmark harness: https://beyond-likes-platform.onrender.com
 Benchmark Report: NI-TR-2026-B01"""
     },
     {
@@ -203,7 +203,7 @@ Benchmark Report: NI-TR-2026-B01"""
         "default_status": "READY",
         "body": """If your platform or forum relies on Google Perspective for comment moderation, you've probably seen the sunset notice: the API shuts down permanently on December 31, 2026.
 
-Instead of writing a completely new integration or migrating to closed proprietary moderation vendors, we built Beyond Likes—an open-source engine designed as a strict 1:1 bitwise drop-in replacement.
+Instead of writing a completely new integration or relying on expensive cloud LLMs, we built Normative Intelligence—a high-performance sovereign engine designed as a strict 1:1 bitwise drop-in replacement.
 
 Key engineering decisions:
 1. Drop-In Ingestion: Drop-in URL replacement for `POST /v1/comments:analyze`. The JSON response retains exact `attributeScores.TOXICITY` schema.
@@ -211,7 +211,7 @@ Key engineering decisions:
 3. Sub-2ms CPU Execution: 435M parameter DeBERTa backbone quantized to INT8 ONNX, allowing publishers to run locally without expensive GPU clusters.
 4. Pre-Compiled Integrations: Manifest V3 Chrome Extension, WordPress wp_insert_comment hook plugin, and Discourse Ruby plugin.
 
-Code, Docker images, and benchmarks: https://github.com/bhaskarpandey2708/beyond-likes"""
+Code, Docker images, and benchmarks: https://beyond-likes-platform.onrender.com"""
     },
     {
         "id": "reddit_webdev",
@@ -228,7 +228,7 @@ With Google Perspective API shutting down this December, comment sections are ab
 
 1. Zero-dependency Vanilla JS Embed:
 ```html
-<script src="https://cdn.beyondlikes.io/v1/widget.js" 
+<script src="https://beyond-likes-platform.onrender.com/widget/beyond-likes.js" 
         data-api-endpoint="https://beyond-likes-platform.onrender.com/v1" 
         data-theme="dark" 
         data-selector="textarea.comment-box"></script>
@@ -236,9 +236,9 @@ With Google Perspective API shutting down this December, comment sections are ab
 Attaches an accessible floating badge, scores constructiveness in real time, and renders Git-style inline diff suggestions if a comment is hostile or low-effort.
 
 2. Chrome Extension (Manifest V3): Works out of the box across YouTube, Reddit, Hacker News, and Substack comment fields.
-3. Open plugins for WordPress and Discourse.
+3. Turnkey plugins for WordPress and Discourse.
 
-Feedback on the UX and bundle footprint is very welcome! Live demo & source: https://github.com/bhaskarpandey2708/beyond-likes"""
+Feedback on the UX and bundle footprint is very welcome! Live demo & benchmarks: https://beyond-likes-platform.onrender.com"""
     },
     {
         "id": "reddit_selfhosted",
@@ -253,19 +253,19 @@ Feedback on the UX and bundle footprint is very welcome! Live demo & source: htt
 
 When Google shuts down Perspective API on Dec 31, 2026, many communities will be pushed toward proprietary cloud SaaS filters. We wanted a completely private, air-gapped solution.
 
-Beyond Likes is packaged as a single Docker container:
+Normative Intelligence is packaged as a single Docker container:
 ```bash
 docker run -d -p 8888:8888 \
   -e QUANTIZATION=INT8 \
   -e PERSPECTIVE_PARITY=true \
-  beyondlikes/server:2.8.0
+  normative/server:2.8.0
 ```
 - Consumes ~790MB RAM
 - Runs on standard Intel/AMD CPU (no CUDA/GPU required)
 - Full 1:1 Perspective JSON endpoint compatibility
 - 0 telemetry or external cloud pings
 
-Check it out on GitHub: https://github.com/bhaskarpandey2708/beyond-likes"""
+Request enterprise container access & live demo: https://beyond-likes-platform.onrender.com"""
     },
     {
         "id": "product_hunt",

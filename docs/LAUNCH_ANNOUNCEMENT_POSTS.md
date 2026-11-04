@@ -52,7 +52,7 @@ Watch our 2-minute architectural demo video below.
 
 (Links to live sandbox, empirical whitepaper, and cutover guide are in the first comment 👇)
 
-#AI #MachineLearning #ContentModeration #DigitalPublishing #SoftwareEngineering #TechLeadership #OpenSource #DataSovereignty
+#AI #MachineLearning #ContentModeration #DigitalPublishing #SoftwareEngineering #TechLeadership #DataSovereignty #EnterpriseAI
 ```
 
 ### Pinned First Comment (To Keep Post Free of External Links):
@@ -62,7 +62,7 @@ Explore the live platform, empirical benchmarks, and cutover guides:
 📊 Empirical Accuracy Whitepaper: https://beyond-likes-platform.onrender.com/benchmarks
 💡 Architectural Evaluation (Why Not Gemini or OpenAI?): https://beyond-likes-platform.onrender.com/comparison
 🖥️ 16:9 Master Investor & Board Pitch Deck: https://beyond-likes-platform.onrender.com/deck
-💻 Open Source GitHub Repository: https://github.com/bhaskarpandey2708/beyond-likes
+💼 Enterprise Migration Consultation: https://beyond-likes-platform.onrender.com/#migration
 ```
 
 ---
@@ -177,4 +177,4 @@ https://normative-intelligence.onrender.com/video
 | **Optimal Posting Window** | Tuesday – Thursday between 8:00 AM – 10:30 AM EST | Monday – Wednesday at 9:00 AM EST or 1:00 PM EST |
 | **Media Asset** | Upload `Normative_Intelligence_Demo_Walkthrough.mp4` directly as native video. Native video receives **3.2x higher algorithm impressions** than raw links. | Attach the 2m 20s MP4 directly to Tweet 1. |
 | **First Comment Strategy** | Pin the direct link to the Whitepaper (`/benchmarks`) and GitHub repository in the first comment. | Post the thread continuously within 60 seconds of Tweet 1. |
-| **Hashtags** | Use 3 to 5 targeted tags: `#AI #ContentModeration #DigitalPublishing #SoftwareEngineering`. Avoid hashtag stuffing. | Use `#AI #Tech #OpenSource` sparingly in Tweet 5 only. |
+| **Hashtags** | Use 3 to 5 targeted tags: `#AI #ContentModeration #DigitalPublishing #SoftwareEngineering`. Avoid hashtag stuffing. | Use `#AI #Tech #Enterprise` sparingly in Tweet 5 only. |
