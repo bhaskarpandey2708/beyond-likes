@@ -3,13 +3,13 @@
 Normative Intelligence — Master Storyboard Video Producer (Aligned Cut)
 Features:
   - Deep, subtle, articulate male neural voice (Kokoro TTS / bm_george with broadcast mastering EQ)
-  - Explicit Visual Sync: Act 1 frames the exact 'MANDATORY INDUSTRY MIGRATION: Google Perspective API Shuts Down on December 31, 2026' card (#migration)
-  - Act 2 frames the live 'kill -9' false-positive comparison (#interactive-demo)
-  - Act 3 dedicated showcase website walkthrough (Universal CMS Ecosystem cards & migration architecture)
-  - Act 4 live Discourse Studio (/studio) with 4D bars and in-composer git-style diff coach
-  - Act 5 1:1 Perspective JSON wire format inspector
-  - Act 6 empirical whitepaper (/benchmarks) SVG curves and interactive sandbox
-  - Act 7 autonomous 16:9 pitch deck (/deck) fluid slides
+  - Explicit Visual Sync: Scene 1 frames the exact 'MANDATORY INDUSTRY MIGRATION: Google Perspective API Shuts Down on December 31, 2026' card (#migration)
+  - Scene 2 frames the live 'kill -9' false-positive comparison (#interactive-demo)
+  - Scene 3 dedicated showcase website walkthrough (Universal CMS Ecosystem cards & migration architecture)
+  - Scene 4 live Discourse Studio (/studio) with 4D bars and in-composer git-style diff coach
+  - Scene 5 1:1 Perspective JSON wire format inspector
+  - Scene 6 empirical whitepaper (/benchmarks) SVG curves and interactive sandbox
+  - Scene 7 autonomous 16:9 pitch deck (/deck) fluid slides
   - 1.52x responsive zoom eliminating side whitespace, with floating Director HUD
 """
 
@@ -30,7 +30,7 @@ TEMP_DIR = Path("/tmp/normative_demo_aligned")
 STORYBOARD = [
     {
         "id": "scene1",
-        "act_num": "ACT 1 • THE CATALYST",
+        "badge": "MIGRATION DEADLINE",
         "hud_title": "Google Perspective API Hard Sunset: Dec 31, 2026",
         "hud_desc": "Thousands of digital newsrooms and platforms face an immediate shutdown.",
         "hud_color": "#C8441B",
@@ -43,7 +43,7 @@ STORYBOARD = [
     },
     {
         "id": "scene2",
-        "act_num": "ACT 2 • THE CORE PROBLEM",
+        "badge": "FALSE-POSITIVE TRAP",
         "hud_title": "Why Binary Filtering Failed Online Discourse",
         "hud_desc": "Benign commands like 'kill -9' get banned as toxic violence.",
         "hud_color": "#C8441B",
@@ -56,8 +56,8 @@ STORYBOARD = [
     },
     {
         "id": "scene3",
-        "act_num": "ACT 3 • PLATFORM SHOWCASE",
-        "hud_title": "Dedicated Showcase Website Walkthrough",
+        "badge": "CMS ECOSYSTEM",
+        "hud_title": "Universal CMS & Newsroom Integrations",
         "hud_desc": "Universal drop-in compatibility across WordPress VIP, Discourse, Coral & Forem.",
         "hud_color": "#0D5C4E",
         "text": (
@@ -69,7 +69,7 @@ STORYBOARD = [
     },
     {
         "id": "scene4",
-        "act_num": "ACT 4 • THE AHA MOMENT",
+        "badge": "IN-COMPOSER COACH",
         "hud_title": "Live Discourse Studio & In-Composer Coach",
         "hud_desc": "4D continuous rubric & real-time Git-style diff coaching before posting.",
         "hud_color": "#C8441B",
@@ -82,7 +82,7 @@ STORYBOARD = [
     },
     {
         "id": "scene5",
-        "act_num": "ACT 5 • TURNKEY PARITY",
+        "badge": "1:1 WIRE PARITY",
         "hud_title": "100% Wire Parity with Google Perspective",
         "hud_desc": "Identical attributeScores.TOXICITY schema. Zero platform code changes.",
         "hud_color": "#0D5C4E",
@@ -94,7 +94,7 @@ STORYBOARD = [
     },
     {
         "id": "scene6",
-        "act_num": "ACT 6 • EMPIRICAL PROOF",
+        "badge": "EMPIRICAL BENCHMARKS",
         "hud_title": "99.2% ROC-AUC & 1.76ms Local CPU Latency",
         "hud_desc": "87.2% reduction in false positives across technical, medical & academic discourse.",
         "hud_color": "#D97706",
@@ -107,7 +107,7 @@ STORYBOARD = [
     },
     {
         "id": "scene7",
-        "act_num": "ACT 7 • THE FUTURE",
+        "badge": "ENTERPRISE CUTOVER",
         "hud_title": "Sovereign Epistemic Infrastructure for Civil Discourse",
         "hud_desc": "Deploy on-premise or managed cloud. Secure your Perspective EOL cutover today.",
         "hud_color": "#0D5C4E",
@@ -163,7 +163,7 @@ sf.write('{wav_raw}', np.concatenate(chunks), 24000)
         dur = float(json.loads(probe)["format"]["duration"])
         scene["duration"] = dur
         total_duration += dur + scene["post_pause"]
-        print(f"  🔊 {scene['act_num']}: {dur:.2f}s (+ {scene['post_pause']}s pause)")
+        print(f"  🔊 {scene['badge']}: {dur:.2f}s (+ {scene['post_pause']}s pause)")
         audio_files.append((wav_mastered, scene["post_pause"]))
 
     concat_list = TEMP_DIR / "concat_list.txt"
@@ -312,7 +312,7 @@ def inject_director_tools(page):
                 `;
                 hud.innerHTML = `
                     <div style="display: flex; align-items: center; gap: 16px;">
-                        <span id="hud-badge" style="background: ${accentColor}; color: #ffffff; padding: 6px 14px; border-radius: 6px; font-weight: 800; font-size: 13px; letter-spacing: 0.06em; font-family: 'JetBrains Mono', monospace; text-transform: uppercase;">ACT</span>
+                        <span id="hud-badge" style="background: ${accentColor}; color: #ffffff; padding: 6px 14px; border-radius: 6px; font-weight: 800; font-size: 13px; letter-spacing: 0.06em; font-family: 'JetBrains Mono', monospace; text-transform: uppercase;">NORMATIVE</span>
                         <span id="hud-title" style="font-weight: 700; font-size: 18px; color: #FAF8F5;">Title</span>
                     </div>
                     <div id="hud-desc" style="font-size: 15px; color: #D4D4D8; font-weight: 500;">Description</div>
@@ -327,10 +327,10 @@ def inject_director_tools(page):
         };
     }""")
 
-def update_hud(page, act_num, title, desc, color):
+def update_hud(page, badge, title, desc, color):
     escaped_title = title.replace("'", "\\'")
     escaped_desc = desc.replace("'", "\\'")
-    page.evaluate(f"if (typeof window.setHUD === 'function') window.setHUD('{act_num}', '{escaped_title}', '{escaped_desc}', '{color}');")
+    page.evaluate(f"if (typeof window.setHUD === 'function') window.setHUD('{badge}', '{escaped_title}', '{escaped_desc}', '{color}');")
 
 def choreograph_synchronized_video(video_dir: Path):
     from playwright.sync_api import sync_playwright
@@ -367,7 +367,7 @@ def choreograph_synchronized_video(video_dir: Path):
         print("▶️ Recording Scene 1: MANDATORY INDUSTRY MIGRATION Banner (#migration)...")
         page.goto("http://localhost:8888/", wait_until="domcontentloaded")
         inject_director_tools(page)
-        update_hud(page, STORYBOARD[0]["act_num"], STORYBOARD[0]["hud_title"], STORYBOARD[0]["hud_desc"], STORYBOARD[0]["hud_color"])
+        update_hud(page, STORYBOARD[0]["badge"], STORYBOARD[0]["hud_title"], STORYBOARD[0]["hud_desc"], STORYBOARD[0]["hud_color"])
         
         # Center directly on the MANDATORY INDUSTRY MIGRATION banner card (#migration)
         page.evaluate("""() => {
@@ -387,7 +387,7 @@ def choreograph_synchronized_video(video_dir: Path):
         # Duration: ~21.9s
         # =============================================================
         print("▶️ Recording Scene 2: Live Problem Statement & False Positive Card (#interactive-demo)...")
-        update_hud(page, STORYBOARD[1]["act_num"], STORYBOARD[1]["hud_title"], STORYBOARD[1]["hud_desc"], STORYBOARD[1]["hud_color"])
+        update_hud(page, STORYBOARD[1]["badge"], STORYBOARD[1]["hud_title"], STORYBOARD[1]["hud_desc"], STORYBOARD[1]["hud_color"])
         
         # Scroll to the live comparison sandbox
         page.evaluate("""() => {
@@ -408,7 +408,7 @@ def choreograph_synchronized_video(video_dir: Path):
         # Duration: ~24.5s
         # =============================================================
         print("▶️ Recording Scene 3: Dedicated Showcase Website Walkthrough (CMS Compatibility)...")
-        update_hud(page, STORYBOARD[2]["act_num"], STORYBOARD[2]["hud_title"], STORYBOARD[2]["hud_desc"], STORYBOARD[2]["hud_color"])
+        update_hud(page, STORYBOARD[2]["badge"], STORYBOARD[2]["hud_title"], STORYBOARD[2]["hud_desc"], STORYBOARD[2]["hud_color"])
         
         # Scroll to the Universal CMS Ecosystem grid (WordPress VIP, Discourse, Coral, Forem)
         page.evaluate("""() => {
@@ -431,7 +431,7 @@ def choreograph_synchronized_video(video_dir: Path):
         print("▶️ Recording Scene 4: Live Discourse Studio Desk & Git-Style Diff Coach (/studio)...")
         page.goto("http://localhost:8888/studio", wait_until="domcontentloaded")
         inject_director_tools(page)
-        update_hud(page, STORYBOARD[3]["act_num"], STORYBOARD[3]["hud_title"], STORYBOARD[3]["hud_desc"], STORYBOARD[3]["hud_color"])
+        update_hud(page, STORYBOARD[3]["badge"], STORYBOARD[3]["hud_title"], STORYBOARD[3]["hud_desc"], STORYBOARD[3]["hud_color"])
         
         # Empirical Debate scenario -> 4D bars animate
         page.evaluate("if (typeof selectScenario === 'function') selectScenario(0);")
@@ -454,7 +454,7 @@ def choreograph_synchronized_video(video_dir: Path):
         # Duration: ~19.8s
         # =============================================================
         print("▶️ Recording Scene 5: 1:1 Perspective JSON Wire Schema Inspector...")
-        update_hud(page, STORYBOARD[4]["act_num"], STORYBOARD[4]["hud_title"], STORYBOARD[4]["hud_desc"], STORYBOARD[4]["hud_color"])
+        update_hud(page, STORYBOARD[4]["badge"], STORYBOARD[4]["hud_title"], STORYBOARD[4]["hud_desc"], STORYBOARD[4]["hud_color"])
         
         # Scroll to perspective wire parity inspector
         page.evaluate("window.scrollTo({ top: 760, behavior: 'smooth' });")
@@ -470,7 +470,7 @@ def choreograph_synchronized_video(video_dir: Path):
         print("▶️ Recording Scene 6: Empirical Research Whitepaper & SVG Curves (/benchmarks)...")
         page.goto("http://localhost:8888/benchmarks", wait_until="domcontentloaded")
         inject_director_tools(page)
-        update_hud(page, STORYBOARD[5]["act_num"], STORYBOARD[5]["hud_title"], STORYBOARD[5]["hud_desc"], STORYBOARD[5]["hud_color"])
+        update_hud(page, STORYBOARD[5]["badge"], STORYBOARD[5]["hud_title"], STORYBOARD[5]["hud_desc"], STORYBOARD[5]["hud_color"])
         
         # Focus on Figure 1: ROC-AUC 99.2% Curve
         page.evaluate("window.scrollTo({ top: 400, behavior: 'smooth' });")
@@ -495,7 +495,7 @@ def choreograph_synchronized_video(video_dir: Path):
         print("▶️ Recording Scene 7: Autonomous Master Pitch Deck (/deck)...")
         page.goto("http://localhost:8888/deck", wait_until="domcontentloaded")
         inject_director_tools(page)
-        update_hud(page, STORYBOARD[6]["act_num"], STORYBOARD[6]["hud_title"], STORYBOARD[6]["hud_desc"], STORYBOARD[6]["hud_color"])
+        update_hud(page, STORYBOARD[6]["badge"], STORYBOARD[6]["hud_title"], STORYBOARD[6]["hud_desc"], STORYBOARD[6]["hud_color"])
         
         # Slide 1: Drop-In Infrastructure
         time.sleep(4.0)
