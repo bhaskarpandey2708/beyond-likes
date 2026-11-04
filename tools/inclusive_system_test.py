@@ -46,6 +46,7 @@ surfaces = [
     ("/benchmarks", "Empirical Research Whitepaper"),
     ("/docs", "Developer API Studio"),
     ("/brand", "Brand Identity & Video Hub"),
+    ("/comparison", "Architectural Comparison Report"),
     ("/v1/health", "System Health Check")
 ]
 
@@ -206,6 +207,8 @@ assets = [
     ("brand/Normative_Intelligence_Pitch_Deck.pptx", "PowerPoint Presentation Binary"),
     ("brand/Normative_Intelligence_Demo_Walkthrough.mp4", "Broadcast Demo Video 1080p MP4"),
     ("brand/demo_video_poster.jpg", "Demo Video Poster Thumbnail JPEG"),
+    ("docs/why-not-gemini.html", "Architectural Comparison HTML"),
+    ("docs/WHY_NOT_GEMINI_VERTEX_OR_OPENAI.md", "Architectural Comparison Markdown"),
     ("distribution/widget/lead_capture.js", "Lead Capture & Telemetry Script"),
     ("docs/openapi.json", "OpenAPI JSON Specification"),
     ("docs/openapi.yaml", "OpenAPI YAML Specification")

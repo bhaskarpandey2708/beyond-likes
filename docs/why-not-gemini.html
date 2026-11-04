@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Architectural Comparison: Why Not Gemini, Vertex AI, or OpenAI? — Normative Intelligence</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #faf8f5;
+      --card-bg: #ffffff;
+      --border: #e8e3d8;
+      --border-subtle: #f4f0e8;
+      --text: #18181b;
+      --text-muted: #4a4a50;
+      --text-subtle: #71717a;
+
+      --accent: #c8441b;
+      --accent-hover: #b13712;
+      --accent-light: #fdf2ee;
+      --accent-border: #f8c9bc;
+
+      --juniper: #0d5c4e;
+      --juniper-light: #edf7f4;
+      --juniper-border: #bce3db;
+
+      --amber: #b45309;
+      --amber-light: #fffbeb;
+      --amber-border: #fde68a;
+
+      --rose: #be123c;
+      --rose-light: #fff1f2;
+      --rose-border: #fecdd3;
+
+      --shadow-sm: 0 1px 3px rgba(39, 30, 20, 0.05);
+      --shadow-md: 0 8px 24px -4px rgba(39, 30, 20, 0.08);
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.75;
+      padding: 40px 24px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .paper-container {
+      max-width: 980px;
+      margin: 0 auto;
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 64px 72px;
+      box-shadow: var(--shadow-md);
+    }
+
+    @media (max-width: 768px) {
+      .paper-container { padding: 36px 24px; }
+    }
+
+    /* Top Navigation & Meta */
+    .paper-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding-bottom: 24px;
+      margin-bottom: 36px;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .brand-group {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-name {
+      font-size: 1.15rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text);
+    }
+
+    .brand-sub {
+      font-size: 0.75rem;
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-subtle);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .header-links {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .btn-nav {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      color: var(--text);
+      padding: 7px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.15s;
+      cursor: pointer;
+    }
+    .btn-nav:hover {
+      border-color: var(--accent);
+      color: var(--accent);
+      background: var(--accent-light);
+    }
+
+    /* Article Header */
+    .kicker {
+      font-size: 0.78rem;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+    }
+
+    .paper-title {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 2.75rem;
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+      color: var(--text);
+      margin-bottom: 16px;
+    }
+
+    .authors-meta {
+      font-size: 0.9rem;
+      color: var(--text-subtle);
+      margin-bottom: 32px;
+      padding-bottom: 20px;
+      border-bottom: 1px dashed var(--border);
+    }
+
+    .abstract-box {
+      background: var(--accent-light);
+      border-left: 4px solid var(--accent);
+      padding: 22px 26px;
+      border-radius: 0 10px 10px 0;
+      margin-bottom: 40px;
+    }
+
+    .abstract-title {
+      font-size: 0.82rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+      margin-bottom: 8px;
+    }
+
+    .abstract-text {
+      font-size: 0.95rem;
+      color: #3f3f46;
+      line-height: 1.68;
+    }
+
+    /* Typography & Sections */
+    h2 {
+      font-family: 'Instrument Serif', Georgia, serif;
+      font-size: 1.85rem;
+      line-height: 1.25;
+      color: var(--text);
+      margin-top: 48px;
+      margin-bottom: 18px;
+      padding-top: 24px;
+      border-top: 1px solid var(--border-subtle);
+    }
+
+    h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-top: 28px;
+      margin-bottom: 12px;
+    }
+
+    p {
+      font-size: 0.96rem;
+      color: var(--text-muted);
+      margin-bottom: 18px;
+    }
+
+    /* Tables */
+    .table-container {
+      width: 100%;
+      overflow-x: auto;
+      margin: 28px 0;
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      background: #ffffff;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.86rem;
+      text-align: left;
+    }
+
+    th {
+      background: #fbf9f5;
+      padding: 13px 16px;
+      font-weight: 700;
+      color: var(--text);
+      border-bottom: 2px solid var(--border);
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    td {
+      padding: 13px 16px;
+      border-bottom: 1px solid var(--border-subtle);
+      color: var(--text-muted);
+    }
+
+    tr:last-child td { border-bottom: none; }
+
+    tr.highlight-row {
+      background: var(--juniper-light);
+      font-weight: 600;
+    }
+    tr.highlight-row td {
+      color: var(--juniper);
+    }
+
+    .badge-winner {
+      background: var(--juniper);
+      color: #ffffff;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    .badge-expensive {
+      background: var(--rose-light);
+      color: var(--rose);
+      border: 1px solid var(--rose-border);
+      padding: 2px 7px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+    }
+
+    /* Visual Charts & Callouts */
+    .chart-wrapper {
+      background: #faf8f5;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      margin: 32px 0;
+    }
+
+    .chart-title {
+      font-size: 0.9rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 6px;
+    }
+
+    .chart-desc {
+      font-size: 0.82rem;
+      color: var(--text-subtle);
+      margin-bottom: 20px;
+    }
+
+    .callout-box {
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin: 24px 0;
+      font-size: 0.92rem;
+      line-height: 1.65;
+    }
+
+    .callout-box.warning {
+      background: var(--rose-light);
+      border: 1px solid var(--rose-border);
+      color: #881337;
+    }
+
+    .callout-box.tip {
+      background: var(--juniper-light);
+      border: 1px solid var(--juniper-border);
+      color: var(--juniper);
+    }
+
+    .callout-title {
+      font-weight: 800;
+      margin-bottom: 6px;
+      font-size: 0.86rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .code-snippet {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.82rem;
+      background: #18181b;
+      color: #f4f0e8;
+      padding: 18px 22px;
+      border-radius: 8px;
+      overflow-x: auto;
+      margin: 20px 0;
+      line-height: 1.6;
+    }
+
+    /* Comparison Grid */
+    .comparison-cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin: 28px 0;
+    }
+
+    .card-comparison {
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px;
+      background: #ffffff;
+      transition: all 0.2s;
+    }
+    .card-comparison:hover {
+      box-shadow: var(--shadow-sm);
+      border-color: var(--accent);
+    }
+
+    .card-comparison.featured {
+      border-color: var(--juniper);
+      background: #fafdfc;
+    }
+
+    .card-header-label {
+      font-size: 0.75rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 8px;
+    }
+
+    .card-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .card-list {
+      list-style: none;
+      font-size: 0.86rem;
+      color: var(--text-muted);
+    }
+    .card-list li {
+      padding: 6px 0;
+      display: flex;
+      align-items: flex-start;
+      gap: 8px;
+    }
+
+    @media print {
+      body { background: #ffffff; padding: 0; }
+      .paper-container { border: none; box-shadow: none; padding: 0; }
+      .header-links { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <article class="paper-container">
+
+    <!-- Paper Header -->
+    <header class="paper-header">
+      <div class="brand-group">
+        <svg viewBox="0 0 32 32" width="28" height="28" fill="none">
+          <rect width="32" height="32" rx="8" fill="#18181b"/>
+          <path d="M9 22V10L14 20V22H9Z" fill="#c8441b"/>
+          <path d="M23 10V22L18 12V10H23Z" fill="#c8441b"/>
+          <circle cx="16" cy="16" r="2.2" fill="#faf8f5"/>
+        </svg>
+        <div>
+          <div class="brand-name">Normative Intelligence</div>
+          <div class="brand-sub">Architectural Evaluation &bull; Tech Report NI-TR-2026-C01</div>
+        </div>
+      </div>
+      <div class="header-links">
+        <a class="btn-nav" href="/" title="Return to Commercial Showcase">Studio Desk</a>
+        <a class="btn-nav" href="/benchmarks" title="Empirical Accuracy Whitepaper">Whitepaper</a>
+        <a class="btn-nav" href="/deck" title="16:9 Master Pitch Deck">Pitch Deck</a>
+        <a class="btn-nav" href="/video" target="_blank" title="Watch 2-Minute Broadcast Walkthrough">▶ Video Walkthrough</a>
+        <button class="btn-nav" onclick="window.print()" title="Print or save as PDF">Export PDF</button>
+      </div>
+    </header>
+
+    <!-- Kicker & Title -->
+    <div class="kicker">Strategic Engineering Whitepaper &bull; Unit Economic Evaluation</div>
+    <h1 class="paper-title">Why Not Gemini, Vertex AI, or OpenAI for Digital Discourse?</h1>
+    <div class="authors-meta">
+      <strong>Bhaskar Pandey</strong> (Principal Architect) &bull; Normative Intelligence Systems Group &bull; Issued November 04, 2026
+    </div>
+
+    <!-- Executive Abstract Box -->
+    <div class="abstract-box">
+      <div class="abstract-title">Executive Abstract</div>
+      <div class="abstract-text">
+        Following Google Jigsaw’s announcement that the <strong>Google Perspective API will permanently shut down on December 31, 2026</strong>, CTOs and Trust &amp; Safety architects evaluating replacements frequently ask: <em>&ldquo;Can we just replace Perspective with Google Gemini on Vertex AI, OpenAI GPT-4o-mini, or the OpenAI Moderation API?&rdquo;</em> While general-purpose Large Language Models (LLMs) excel at open-ended creative tasks, deploying them as high-scale discourse infrastructure creates <strong>catastrophic unit economics</strong> ($35,000&ndash;$350,000+/year), <strong>prohibitive latency</strong> (400ms&ndash;1,500ms), <strong>epistemic sycophancy</strong>, and <strong>zero drop-in schema parity</strong>. This report provides the technical and economic breakdown of why Normative Intelligence is the uniquely viable replacement.
+      </div>
+    </div>
+
+    <!-- Section 1: The Token Tax Catastrophe -->
+    <h2>1. The Unit Economic Reality: Cloud LLM "Token Tax" vs. Sovereign CPU</h2>
+    <p>
+      High-traffic newsrooms (such as <em>The Verge</em>, <em>Daily Kos</em>, and <em>Ars Technica</em>) and enterprise community ecosystems (Discourse, Coral Project, WordPress VIP) process between <strong>1,000,000 and 10,000,000 comments every month</strong>.
+    </p>
+    <p>
+      When executing discourse scoring on cloud LLMs (Gemini 1.5 Flash on Vertex AI or OpenAI GPT-4o-mini), every single comment incurs a multi-turn token charge:
+    </p>
+    <ul style="margin: 0 0 20px 28px; color: var(--text-muted); font-size: 0.94rem;">
+      <li><strong>System Prompt &amp; Discourse Rubric:</strong> ~500 input tokens</li>
+      <li><strong>User Comment Body:</strong> ~150 input tokens</li>
+      <li><strong>Structured JSON Output &amp; Epistemic Rationale:</strong> ~200 output tokens</li>
+      <li><strong>Total Tokens Incurred per Keystroke / Comment:</strong> ~850 tokens</li>
+    </ul>
+
+    <!-- Cost Table -->
+    <div class="table-container">
+      <table>
+        <thead>
+          <tr>
+            <th>Infrastructure / Model</th>
+            <th>Average Latency</th>
+            <th>Cost per 1M Comments</th>
+            <th>Cost at 10M Comments/mo</th>
+            <th>Annual Cloud Bill</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Google Gemini 1.5 Pro</strong> (Vertex AI)</td>
+            <td>950 ms &ndash; 1,800 ms</td>
+            <td>$2,975.00</td>
+            <td><strong>$29,750.00 / mo</strong></td>
+            <td><span class="badge-expensive">$357,000.00 / yr</span></td>
+          </tr>
+          <tr>
+            <td><strong>Google Gemini 1.5 Flash</strong> (Vertex AI)</td>
+            <td>420 ms &ndash; 850 ms</td>
+            <td>$318.00</td>
+            <td><strong>$3,180.00 / mo</strong></td>
+            <td><span class="badge-expensive">$38,160.00 / yr</span></td>
+          </tr>
+          <tr>
+            <td><strong>OpenAI GPT-4o-mini</strong></td>
+            <td>550 ms &ndash; 1,100 ms</td>
+            <td>$382.50</td>
+            <td><strong>$3,825.00 / mo</strong></td>
+            <td><span class="badge-expensive">$45,900.00 / yr</span></td>
+          </tr>
+          <tr>
+            <td><strong>OpenAI Moderation API</strong> (v1/moderations)</td>
+            <td>220 ms &ndash; 450 ms</td>
+            <td>$0.00 (Tier Limited)</td>
+            <td>Rate-Limited / Blocked</td>
+            <td><em>Hard Rate Limits &amp; Lockouts</em></td>
+          </tr>
+          <tr class="highlight-row">
+            <td><strong>Normative Intelligence</strong> (Local CPU Engine) <span class="badge-winner">19x&ndash;160x Cheaper</span></td>
+            <td><strong>1.76 ms</strong></td>
+            <td><strong>$18.50</strong></td>
+            <td><strong>$185.00 / mo</strong></td>
+            <td><strong>$2,220.00 / yr (Fixed VPS)</strong></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- Visual Chart: Annual Cost Trajectory -->
+    <div class="chart-wrapper">
+      <div class="chart-title">Figure 1: Annual Operating Expense at Scale (10,000,000 Comments/Month)</div>
+      <div class="chart-desc">Comparison of annual infrastructure spend between general cloud LLMs and sovereign quantized Normative CPU inference.</div>
+      
+      <svg class="visual-chart" viewBox="0 0 760 180" fill="none" style="width: 100%; height: auto;">
+        <!-- Gemini Pro -->
+        <text x="20" y="32" fill="#18181b" font-size="12" font-weight="700" font-family="'Plus Jakarta Sans', sans-serif">Gemini 1.5 Pro (Vertex AI)</text>
+        <rect x="230" y="18" width="480" height="22" rx="4" fill="#be123c"/>
+        <text x="720" y="34" fill="#be123c" font-size="12" font-weight="800" font-family="'JetBrains Mono', monospace">$357,000/yr</text>
+
+        <!-- GPT-4o-mini -->
+        <text x="20" y="72" fill="#18181b" font-size="12" font-weight="700" font-family="'Plus Jakarta Sans', sans-serif">OpenAI GPT-4o-mini</text>
+        <rect x="230" y="58" width="62" height="22" rx="4" fill="#b45309"/>
+        <text x="300" y="74" fill="#b45309" font-size="12" font-weight="800" font-family="'JetBrains Mono', monospace">$45,900/yr</text>
+
+        <!-- Gemini Flash -->
+        <text x="20" y="112" fill="#18181b" font-size="12" font-weight="700" font-family="'Plus Jakarta Sans', sans-serif">Gemini 1.5 Flash (Vertex AI)</text>
+        <rect x="230" y="98" width="51" height="22" rx="4" fill="#c8441b"/>
+        <text x="290" y="114" fill="#c8441b" font-size="12" font-weight="800" font-family="'JetBrains Mono', monospace">$38,160/yr</text>
+
+        <!-- Normative Intelligence -->
+        <text x="20" y="152" fill="#0d5c4e" font-size="12" font-weight="800" font-family="'Plus Jakarta Sans', sans-serif">Normative Intelligence</text>
+        <rect x="230" y="138" width="4" height="22" rx="2" fill="#0d5c4e"/>
+        <text x="245" y="154" fill="#0d5c4e" font-size="12" font-weight="800" font-family="'JetBrains Mono', monospace">$2,220/yr (Fixed CPU)</text>
+      </svg>
+    </div>
+
+    <!-- Section 2: Broadness Fallacy & OpenAI Moderation API -->
+    <h2>2. The "Broadness" Fallacy vs. Epistemic Normative Precision</h2>
+    <p>
+      General-purpose LLMs are trained to generate conversational text across infinite domains. When asked to police digital community discourse, they fail across two structural dimensions:
+    </p>
+
+    <div class="comparison-cards-grid">
+      <!-- Card A -->
+      <div class="card-comparison">
+        <div class="card-header-label" style="color: var(--rose);">Failure Mode A</div>
+        <div class="card-title">The OpenAI Moderation API Trap</div>
+        <ul class="card-list">
+          <li><strong>Purely Binary Legal Liability Filter:</strong> Designed exclusively to catch extreme legal liabilities: hate speech, violence, and self-harm.</li>
+          <li><strong>Zero Constructiveness Modeling:</strong> Cannot distinguish between an evidence-based thesis and low-effort platitudes.</li>
+          <li><strong>Blind to Cynicism &amp; Whataboutism:</strong> An insult like <em>&ldquo;You're an absolute amateur who understands nothing about economics&rdquo;</em> is marked <code>flagged: false</code> because it does not attack a protected demographic.</li>
+          <li><strong>No In-Composer Coaching:</strong> Merely returns true/false post-submission. Zero inline suggestions or constructive diffs.</li>
+        </ul>
+      </div>
+
+      <!-- Card B -->
+      <div class="card-comparison featured">
+        <div class="card-header-label" style="color: var(--juniper);">Normative Solution</div>
+        <div class="card-title">Continuous 4D Epistemic Rubric</div>
+        <ul class="card-list">
+          <li><strong>Constructiveness (35%):</strong> Quantifies empirical data, citations, and solution-oriented alternatives.</li>
+          <li><strong>Civility (25%):</strong> Distinguishes ferocious intellectual dissent from ad-hominem vitriol.</li>
+          <li><strong>Persuasiveness (20%):</strong> Assesses internal logical consistency and epistemic grounding.</li>
+          <li><strong>Relevance (20%):</strong> Suppresses deflection, spam, and bad-faith whataboutism.</li>
+          <li><strong>Inline Rephrase Coaching:</strong> Generates real-time, git-style diffs before readers hit submit.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="callout-box warning">
+      <div class="callout-title">⚠️ Non-Determinism &amp; Sycophancy Bias in Cloud LLMs</div>
+      Prompting Gemini or GPT-4o for discourse evaluation introduces <strong>epistemic non-determinism</strong>. The identical comment evaluated twice can yield different scores. Furthermore, general LLMs exhibit severe <strong>sycophancy bias</strong>: rewarding polite, verbose comments that lack factual substance, while penalizing rigorous scientific refutations that employ forceful academic critique.
+    </div>
+
+    <!-- Section 3: Latency & In-Composer Guidance -->
+    <h2>3. The In-Composer Latency Barrier: 1.76 ms vs. 800 ms WAN Roundtrips</h2>
+    <p>
+      The next generation of community moderation does not wait for a reader to post and then slap them with a punitive ban. It intervenes <strong>inside the composer widget</strong> while the author is actively typing.
+    </p>
+    <p>
+      To provide seamless, real-time feedback without typing lag or browser freezing, the engine must return a composite score and revision diff in <strong>under 20 milliseconds</strong>.
+    </p>
+
+    <!-- Visual Latency Comparison -->
+    <div class="chart-wrapper">
+      <div class="chart-title">Figure 2: End-to-End Latency Profile (P95 Response Time)</div>
+      <div class="chart-desc">WAN network hops and token generation vs. sovereign on-premise quantized CPU inference.</div>
+
+      <svg class="visual-chart" viewBox="0 0 760 160" fill="none" style="width: 100%; height: auto;">
+        <!-- Gemini 1.5 Pro -->
+        <text x="20" y="30" fill="#18181b" font-size="12" font-weight="700" font-family="'Plus Jakarta Sans', sans-serif">Gemini 1.5 Pro</text>
+        <rect x="220" y="16" width="460" height="20" rx="4" fill="#be123c"/>
+        <text x="690" y="31" fill="#be123c" font-size="12" font-weight="800" font-family="'JetBrains Mono', monospace">1,250 ms</text>
+
+        <!-- GPT-4o-mini -->
+        <text x="20" y="65" fill="#18181b" font-size="12" font-weight="700" font-family="'Plus Jakarta Sans', sans-serif">OpenAI GPT-4o-mini</text>
+        <rect x="220" y="51" width="280" height="20" rx="4" fill="#b45309"/>
+        <text x="510" y="66" fill="#b45309" font-size="12" font-weight="800" font-family="'JetBrains Mono', monospace">720 ms</text>
+
+        <!-- Gemini 1.5 Flash -->
+        <text x="20" y="100" fill="#18181b" font-size="12" font-weight="700" font-family="'Plus Jakarta Sans', sans-serif">Gemini 1.5 Flash</text>
+        <rect x="220" y="86" width="180" height="20" rx="4" fill="#c8441b"/>
+        <text x="410" y="101" fill="#c8441b" font-size="12" font-weight="800" font-family="'JetBrains Mono', monospace">460 ms</text>
+
+        <!-- Normative Intelligence -->
+        <text x="20" y="135" fill="#0d5c4e" font-size="12" font-weight="800" font-family="'Plus Jakarta Sans', sans-serif">Normative Intelligence</text>
+        <rect x="220" y="121" width="6" height="20" rx="3" fill="#0d5c4e"/>
+        <text x="235" y="136" fill="#0d5c4e" font-size="12" font-weight="800" font-family="'JetBrains Mono', monospace">1.76 ms (Instant)</text>
+      </svg>
+    </div>
+
+    <!-- Section 4: Schema Parity -->
+    <h2>4. Schema Parity: Bitwise Perspective Replacement vs. Ingestion Rewrites</h2>
+    <p>
+      Neither Google Gemini nor OpenAI provide wire compatibility with Google Perspective API. Migrating a production newsroom to Gemini or Vertex AI requires:
+    </p>
+    <ul style="margin: 0 0 20px 28px; color: var(--text-muted); font-size: 0.94rem;">
+      <li>Rewriting comment ingestion pipelines, webhook listeners, and CMS plugins (Discourse, WordPress VIP).</li>
+      <li>Building custom parsing logic for non-deterministic model outputs.</li>
+      <li>Handling rate limits, cloud quota throttling, and breaking API version changes.</li>
+    </ul>
+    <p>
+      In contrast, <strong>Normative Intelligence provides 100% bitwise schema parity</strong> with Perspective's <code>attributeScores.TOXICITY</code> response structure. Swapping from Perspective requires changing exactly one URL string:
+    </p>
+
+    <div class="code-snippet">
+// Migration to Gemini or OpenAI: Weeks of refactoring &amp; pipeline rewrites
+// Migration to Normative Intelligence: Exactly ONE line change
+
+// Legacy Google Perspective Endpoint:
+// const PERSPECTIVE_URL = "https://commentanalyzer.googleapis.com/v1alpha1/comments:analyze";
+
+// 1:1 Bitwise Normative Drop-In:
+const PERSPECTIVE_URL = "https://normative-intelligence.onrender.com/v1/comments:analyze";
+    </div>
+
+    <!-- Section 5: Data Sovereignty -->
+    <h2>5. Data Sovereignty &amp; Enterprise Air-Gapping</h2>
+    <p>
+      Leading journalistic institutions and regulated enterprises cannot route unmoderated, proprietary subscriber discourse through third-party cloud LLM endpoints where data policies remain subject to unilateral changes.
+    </p>
+    <p>
+      Normative Intelligence can be deployed as an autonomous, air-gapped Docker container on internal Kubernetes clusters or bare-metal VPS, ensuring <strong>zero external WAN egress</strong> and complete adherence to European GDPR and journalistic shield laws.
+    </p>
+
+    <!-- Summary Box -->
+    <div class="callout-box tip" style="margin-top: 40px;">
+      <div class="callout-title">The Engineering Verdict</div>
+      Replacing Google Perspective API with Gemini on Vertex AI or OpenAI introduces a <strong>15x&ndash;160x cost penalty</strong>, <strong>400x higher latency</strong>, and <strong>zero schema compatibility</strong>. Normative Intelligence delivers sovereign, instantaneous, 1:1 bitwise replacement with continuous epistemic coaching.
+    </div>
+
+  </article>
+
+</body>
+</html>

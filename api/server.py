@@ -199,6 +199,11 @@ class NormativeIntelligenceAPIHandler(BaseHTTPRequestHandler):
             self._send_file(os.path.join(BASE_DIR, "docs", "index.html"), "text/html; charset=utf-8")
             return
 
+        # 1d-2. Serve Architectural Comparison (Why Not Gemini, Vertex AI, or OpenAI?)
+        elif path in ["/comparison", "/comparison/", "/docs/why-not-gemini", "/why-not-gemini", "/docs/comparison"]:
+            self._send_file(os.path.join(BASE_DIR, "docs", "why-not-gemini.html"), "text/html; charset=utf-8")
+            return
+
         # 1e. Serve OpenAPI Specification (YAML and JSON)
         elif path in ["/docs/openapi.yaml", "/docs/openapi.yml"]:
             self._send_file(os.path.join(BASE_DIR, "docs", "openapi.yaml"), "text/yaml; charset=utf-8")

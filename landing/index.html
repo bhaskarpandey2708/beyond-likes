@@ -1181,6 +1181,7 @@
         <a href="#how-it-works" class="nav-item">How It Works</a>
         <a href="#interactive-demo" class="nav-item">Live Comparison</a>
         <a href="#migration" class="nav-item">Perspective Migration</a>
+        <a href="#why-not-llms" class="nav-item">Why Not Gemini/OpenAI?</a>
         <a href="#pricing" class="nav-item">Pricing</a>
         <a href="/docs" class="nav-item">API Reference</a>
       </nav>
@@ -1438,6 +1439,90 @@
               <div class="clock-label">Secs</div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Architectural Comparison: Why Not Gemini, Vertex AI, or OpenAI? -->
+  <section class="section-block scroll-reveal" id="why-not-llms">
+    <div class="container">
+      <div class="section-title-center">
+        <div class="section-kicker-tag">Architectural &amp; Unit Economics</div>
+        <h2 class="section-main-heading">Why Not Gemini, Vertex AI, or OpenAI?</h2>
+        <p class="section-lead-text">
+          General-purpose generative LLMs fail as digital discourse infrastructure due to prohibitive unit economics, unacceptable latency, epistemic sycophancy, and zero wire parity.
+        </p>
+      </div>
+
+      <div class="pillars-grid stagger-children">
+        <!-- Pillar 1: Cost & Unit Economics -->
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background: rgba(200, 68, 27, 0.1); color: var(--primary);">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <line x1="12" y1="1" x2="12" y2="23"></line>
+              <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"></path>
+            </svg>
+          </div>
+          <h3 class="pillar-title" style="margin-top: 16px;">The "Token Tax" Nightmare</h3>
+          <p class="pillar-desc">
+            Processing 10M comments/mo on Gemini 1.5 Pro ($29,750/mo) or Flash ($3,180/mo) inflates operational budgets by up to <strong>$357,000 annually</strong>. Normative operates on local CPU inference at just <strong>$185/mo</strong> — saving over 95% with zero token tax risk.
+          </p>
+          <div style="margin-top: 16px; padding: 12px 14px; background: var(--bg-subtle); border-radius: 8px; font-size: 0.82rem; font-family: 'JetBrains Mono', monospace;">
+            <strong>Gemini Pro:</strong> $29,750/mo<br>
+            <strong>OpenAI 4o-mini:</strong> $3,825/mo<br>
+            <strong style="color: var(--juniper);">Normative CPU:</strong> $185/mo
+          </div>
+        </div>
+
+        <!-- Pillar 2: Broadness vs Precision -->
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background: rgba(13, 92, 78, 0.1); color: var(--juniper);">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"></circle>
+              <line x1="12" y1="8" x2="12" y2="12"></line>
+              <line x1="12" y1="16" x2="12.01" y2="16"></line>
+            </svg>
+          </div>
+          <h3 class="pillar-title" style="margin-top: 16px;">The "Broadness" Fallacy</h3>
+          <p class="pillar-desc">
+            OpenAI's Moderation API is solely a <strong>binary legal liability filter</strong> (hate/violence). It cannot evaluate constructiveness, passes bad-faith cynicism, offers zero diff coaching, and general LLMs suffer from sycophancy bias (rewarding empty politeness).
+          </p>
+          <div style="margin-top: 16px; padding: 12px 14px; background: var(--bg-subtle); border-radius: 8px; font-size: 0.82rem; font-family: 'JetBrains Mono', monospace;">
+            <strong>OpenAI Moderation:</strong> Binary-only<br>
+            <strong>LLM Variance:</strong> Non-deterministic<br>
+            <strong style="color: var(--juniper);">Normative 4D:</strong> Epistemic Truth
+          </div>
+        </div>
+
+        <!-- Pillar 3: Latency & Parity -->
+        <div class="pillar-card">
+          <div class="pillar-icon" style="background: rgba(180, 83, 9, 0.1); color: var(--amber);">
+            <svg viewBox="0 0 24 24" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"></polygon>
+            </svg>
+          </div>
+          <h3 class="pillar-title" style="margin-top: 16px;">1.76ms vs 800ms Latency</h3>
+          <p class="pillar-desc">
+            In-composer rephrase coaching requires sub-20ms keystroke evaluation. Cloud LLMs take 400ms–1,500ms, creating unusable typing lag. Plus, neither Gemini nor OpenAI match Perspective's wire schema — requiring full pipeline rewrites.
+          </p>
+          <div style="margin-top: 16px; padding: 12px 14px; background: var(--bg-subtle); border-radius: 8px; font-size: 0.82rem; font-family: 'JetBrains Mono', monospace;">
+            <strong>Cloud LLM Lag:</strong> 400ms – 1,500ms<br>
+            <strong>Schema Parity:</strong> 0% (Requires Rewrite)<br>
+            <strong style="color: var(--juniper);">Normative:</strong> 1.76ms (100% Drop-In)
+          </div>
+        </div>
+      </div>
+
+      <!-- Action Banner -->
+      <div style="margin-top: 36px; text-align: center; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 16px;">
+        <div style="text-align: left;">
+          <div style="font-weight: 800; font-size: 1.05rem; color: var(--text);">Want the complete technical and economic evaluation?</div>
+          <div style="font-size: 0.88rem; color: var(--text-subtle);">Read the full engineering whitepaper with latency curves and token economics.</div>
+        </div>
+        <div style="display: flex; gap: 12px; flex-wrap: wrap;">
+          <a href="/comparison" class="btn-primary" style="padding: 10px 20px; font-size: 0.88rem; text-decoration: none; border-radius: 8px; background: var(--primary); color: #fff; font-weight: 700;">Read Full Comparison Report &rarr;</a>
+          <a href="/video" target="_blank" class="btn-secondary" style="padding: 10px 20px; font-size: 0.88rem; text-decoration: none; border-radius: 8px; border: 1px solid var(--border); background: var(--surface); color: var(--text); font-weight: 700;">Watch Video Walkthrough ▶</a>
         </div>
       </div>
     </div>

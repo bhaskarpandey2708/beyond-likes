@@ -1,12 +1,16 @@
 #!/usr/bin/env python3
 """
-Normative Intelligence — High-Impact Storyboard Demo Video Generator
+Normative Intelligence — Master Storyboard Video Producer (Aligned Cut)
 Features:
   - Deep, subtle, articulate male neural voice (Kokoro TTS / bm_george with broadcast mastering EQ)
-  - Zero side margins: Page zoom 1.55x + 98% width expansion for crystal-clear readability on mobile/social
-  - Exact beat-by-beat voice & visual synchronization across 7 storyboard acts
-  - Dynamic Director HUD overlays rendered natively with frosted-glass typography
-  - High-definition 1080p H.264 High Profile / AAC broadcast export
+  - Explicit Visual Sync: Act 1 frames the exact 'MANDATORY INDUSTRY MIGRATION: Google Perspective API Shuts Down on December 31, 2026' card (#migration)
+  - Act 2 frames the live 'kill -9' false-positive comparison (#interactive-demo)
+  - Act 3 dedicated showcase website walkthrough (Universal CMS Ecosystem cards & migration architecture)
+  - Act 4 live Discourse Studio (/studio) with 4D bars and in-composer git-style diff coach
+  - Act 5 1:1 Perspective JSON wire format inspector
+  - Act 6 empirical whitepaper (/benchmarks) SVG curves and interactive sandbox
+  - Act 7 autonomous 16:9 pitch deck (/deck) fluid slides
+  - 1.52x responsive zoom eliminating side whitespace, with floating Director HUD
 """
 
 import os
@@ -21,7 +25,7 @@ WORKSPACE_DIR = Path("/tmp/beyond-likes-git")
 OUTPUT_DIR = WORKSPACE_DIR / "brand"
 GDRIVE_DIR = Path("/Users/bhaskarpandey/Library/CloudStorage/GoogleDrive-bhaskarauthor@gmail.com/My Drive/Independent Research-to-Product Venture/01 - Venture Projects/BL-001 - Beyond Likes/03 - Historical Beyond Likes Prototype and Code/brand")
 CHROME_PATH = "/Users/bhaskarpandey/Library/Caches/ms-playwright/chromium-1223/chrome-mac-arm64/Google Chrome for Testing.app/Contents/MacOS/Google Chrome for Testing"
-TEMP_DIR = Path("/tmp/normative_demo_build_v2")
+TEMP_DIR = Path("/tmp/normative_demo_aligned")
 
 STORYBOARD = [
     {
@@ -52,27 +56,27 @@ STORYBOARD = [
     },
     {
         "id": "scene3",
-        "act_num": "ACT 3 • THE ARCHITECTURE",
-        "hud_title": "4D Continuous Epistemic Normative Rubric",
-        "hud_desc": "Constructiveness (35%), Civility (25%), Persuasiveness (20%), Relevance (20%).",
+        "act_num": "ACT 3 • PLATFORM SHOWCASE",
+        "hud_title": "Dedicated Showcase Website Walkthrough",
+        "hud_desc": "Universal drop-in compatibility across WordPress VIP, Discourse, Coral & Forem.",
         "hud_color": "#0D5C4E",
         "text": (
-            "Normative Intelligence introduces a radically superior paradigm. "
-            "Instead of punitive binary bans, our continuous four-dimensional rubric evaluates Constructiveness, Civility, "
-            "Persuasiveness, and Context Relevance. We elevate substantive discourse rather than censoring dissent."
+            "This is Normative Intelligence. Our commercial showcase website details the sovereign architecture replacing Perspective. "
+            "Designed for high-scale publishing, our engine delivers universal, drop-in compatibility across WordPress VIP, Discourse, "
+            "Coral Project, and Forem, with zero disruption to existing editorial workflows."
         ),
         "post_pause": 1.2
     },
     {
         "id": "scene4",
         "act_num": "ACT 4 • THE AHA MOMENT",
-        "hud_title": "In-Composer Pre-Submission Guidance",
-        "hud_desc": "Real-time Git-style diff guides readers to reframe insults before posting.",
+        "hud_title": "Live Discourse Studio & In-Composer Coach",
+        "hud_desc": "4D continuous rubric & real-time Git-style diff coaching before posting.",
         "hud_color": "#C8441B",
         "text": (
-            "The real breakthrough happens before submission. When a reader drafts a cynical insult, "
-            "the in-composer coach intervenes in real time, rendering an inline git-style diff that guides the author to support "
-            "their critique with empirical evidence, cutting moderator appeals by 35 percent."
+            "Here in the Discourse Studio Desk, our continuous four-dimensional rubric evaluates Constructiveness, Civility, "
+            "Persuasiveness, and Relevance. When a reader drafts a cynical insult, the in-composer coach renders an inline git-style diff "
+            "in real time, teaching them to reframe their critique with empirical evidence before submitting."
         ),
         "post_pause": 1.2
     },
@@ -127,7 +131,6 @@ def synthesize_male_narration():
         wav_raw = TEMP_DIR / f"{scene['id']}_raw.wav"
         wav_mastered = TEMP_DIR / f"{scene['id']}_mastered.wav"
 
-        # Check if already generated in cache
         cached_wav = Path(f"/tmp/kokoro_scenes/{scene['id']}.wav")
         if cached_wav.exists():
             shutil.copy2(cached_wav, wav_raw)
@@ -144,11 +147,8 @@ sf.write('{wav_raw}', np.concatenate(chunks), 24000)
 """
             subprocess.run([kokoro_py, "-c", code], check=True)
 
-        # Apply Broadcast Mastering Audio Chain:
-        # 1. Warm low-end presence boost (110Hz +3.5dB) for deep subtle resonance
-        # 2. Presence contour (3.2kHz +1.2dB) for crystalline diction
-        # 3. High-frequency smoothing filter
-        # 4. ITU-R BS.1770 broadcast loudness normalization (-16 LUFS)
+        # Broadcast Mastering Audio Chain:
+        # Warm bass boost at 110Hz (+3.8dB), gentle 3.2kHz presence (+1.2dB), smoothing lowpass, -16 LUFS loudnorm
         audio_filter = "equalizer=f=110:width_type=o:width=1.5:g=3.8,equalizer=f=3200:width_type=o:width=1.0:g=1.2,lowpass=f=9500,loudnorm=I=-16:TP=-1.5:LRA=11"
         subprocess.run([
             "/opt/homebrew/bin/ffmpeg", "-y", "-i", str(wav_raw),
@@ -166,7 +166,6 @@ sf.write('{wav_raw}', np.concatenate(chunks), 24000)
         print(f"  🔊 {scene['act_num']}: {dur:.2f}s (+ {scene['post_pause']}s pause)")
         audio_files.append((wav_mastered, scene["post_pause"]))
 
-    # Assemble master concatenated audio track with silence padding
     concat_list = TEMP_DIR / "concat_list.txt"
     with open(concat_list, "w") as f:
         # 0.8s leading silence
@@ -198,9 +197,13 @@ sf.write('{wav_raw}', np.concatenate(chunks), 24000)
     return master_audio, final_audio_duration
 
 def inject_director_tools(page):
-    """Injects responsive wide-canvas zoom and the Director HUD overlay."""
     page.evaluate("""() => {
-        // 1. Expand layout and eliminate side whitespace
+        // Prevent lead capture popup from obscuring video walkthrough
+        try {
+            localStorage.setItem('normative_lead_status', JSON.stringify({ submitted: true, timestamp: Date.now() }));
+        } catch(e) {}
+
+        // Expand layout and eliminate side whitespace
         const style = document.createElement('style');
         style.id = 'demo-cinematic-styles';
         style.textContent = `
@@ -225,6 +228,25 @@ def inject_director_tools(page):
             .hero-proof-strip {
                 font-size: 1.05rem !important;
                 gap: 28px !important;
+            }
+            .migration-banner {
+                padding: 36px 40px !important;
+                border: 2px solid #C8441B !important;
+                background: #FFFFFF !important;
+                box-shadow: 0 12px 36px rgba(200, 68, 27, 0.12) !important;
+            }
+            .migration-pill {
+                font-size: 0.95rem !important;
+                padding: 6px 16px !important;
+            }
+            .migration-title {
+                font-size: 2.35rem !important;
+                line-height: 1.2 !important;
+                color: #C8441B !important;
+            }
+            .migration-desc {
+                font-size: 1.25rem !important;
+                line-height: 1.6 !important;
             }
             .studio-card {
                 padding: 24px !important;
@@ -264,7 +286,6 @@ def inject_director_tools(page):
         `;
         document.head.appendChild(style);
 
-        // 2. Inject floating Director HUD Overlay
         window.setHUD = function(badgeText, titleText, descText, accentColor = '#C8441B') {
             let hud = document.getElementById('demo-director-hud');
             if (!hud) {
@@ -313,7 +334,8 @@ def update_hud(page, act_num, title, desc, color):
 
 def choreograph_synchronized_video(video_dir: Path):
     from playwright.sync_api import sync_playwright
-    print("🎬 Launching Chromium at 1920x1080 with 1.55x zoom and Director HUD...")
+    print("🎬 Launching Chromium at 1920x1080 with 1.52x zoom and exact visual-to-audio sync...")
+    shutil.rmtree(video_dir, ignore_errors=True)
     video_dir.mkdir(parents=True, exist_ok=True)
 
     with sync_playwright() as p:
@@ -339,108 +361,123 @@ def choreograph_synchronized_video(video_dir: Path):
         time.sleep(0.8)
 
         # =============================================================
-        # SCENE 1: THE DISCOURSE CLIFF (Perspective EOL Sunset)
+        # SCENE 1: THE DISCOURSE CLIFF (Explicit Mandatory Migration Banner)
         # Duration: ~20.9s
         # =============================================================
-        print("▶️ Recording Scene 1: Perspective EOL Sunset...")
-        page.goto("http://localhost:8888/", wait_until="networkidle")
+        print("▶️ Recording Scene 1: MANDATORY INDUSTRY MIGRATION Banner (#migration)...")
+        page.goto("http://localhost:8888/", wait_until="domcontentloaded")
         inject_director_tools(page)
         update_hud(page, STORYBOARD[0]["act_num"], STORYBOARD[0]["hud_title"], STORYBOARD[0]["hud_desc"], STORYBOARD[0]["hud_color"])
         
-        # Center tight on the hero & perspective sunset banner
-        page.evaluate("window.scrollTo({ top: 40, behavior: 'smooth' });")
-        time.sleep(5.0)
-
-        # Pulse scroll through the hero narrative
-        page.evaluate("window.scrollTo({ top: 180, behavior: 'smooth' });")
-        time.sleep(5.0)
-        page.evaluate("window.scrollTo({ top: 380, behavior: 'smooth' });")
+        # Center directly on the MANDATORY INDUSTRY MIGRATION banner card (#migration)
+        page.evaluate("""() => {
+            const el = document.getElementById('migration');
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }""")
         time.sleep(6.0)
-        time.sleep(4.9)
+
+        # Subtle camera drift over the cutover checklist
+        page.evaluate("window.scrollBy({ top: 90, behavior: 'smooth' });")
+        time.sleep(7.0)
+        page.evaluate("window.scrollBy({ top: -40, behavior: 'smooth' });")
+        time.sleep(7.9)
 
         # =============================================================
-        # SCENE 2: WHY BINARY FILTERING FAILED (False Positives)
+        # SCENE 2: WHY BINARY FILTERING FAILED (The 'kill -9' Comparison)
         # Duration: ~21.9s
         # =============================================================
-        print("▶️ Recording Scene 2: The Core Problem — Binary False Positives...")
+        print("▶️ Recording Scene 2: Live Problem Statement & False Positive Card (#interactive-demo)...")
         update_hud(page, STORYBOARD[1]["act_num"], STORYBOARD[1]["hud_title"], STORYBOARD[1]["hud_desc"], STORYBOARD[1]["hud_color"])
         
-        # Scroll to the live problem statement & comparison
-        page.evaluate("window.scrollTo({ top: 720, behavior: 'smooth' });")
-        time.sleep(5.5)
-        page.evaluate("window.scrollTo({ top: 1100, behavior: 'smooth' });")
-        time.sleep(6.0)
-        page.evaluate("window.scrollTo({ top: 1450, behavior: 'smooth' });")
-        time.sleep(6.0)
-        time.sleep(4.4)
+        # Scroll to the live comparison sandbox
+        page.evaluate("""() => {
+            const el = document.getElementById('interactive-demo');
+            if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            if (typeof setTestCase === 'function') setTestCase('technical');
+        }""")
+        time.sleep(6.5)
+
+        # Highlight Perspective False Positive vs Normative Approval
+        page.evaluate("window.scrollBy({ top: 120, behavior: 'smooth' });")
+        time.sleep(7.5)
+        page.evaluate("window.scrollBy({ top: 80, behavior: 'smooth' });")
+        time.sleep(7.9)
 
         # =============================================================
-        # SCENE 3: THE 4D CONTINUOUS NORMATIVE RUBRIC (/studio)
-        # Duration: ~21.5s
+        # SCENE 3: DEDICATED SHOWCASE WEBSITE WALKTHROUGH (CMS Ecosystem)
+        # Duration: ~24.5s
         # =============================================================
-        print("▶️ Recording Scene 3: The 4D Continuous Normative Rubric (/studio)...")
-        page.goto("http://localhost:8888/studio", wait_until="networkidle")
-        inject_director_tools(page)
+        print("▶️ Recording Scene 3: Dedicated Showcase Website Walkthrough (CMS Compatibility)...")
         update_hud(page, STORYBOARD[2]["act_num"], STORYBOARD[2]["hud_title"], STORYBOARD[2]["hud_desc"], STORYBOARD[2]["hud_color"])
         
-        # Focus on Empirical Debate & 4D Progress bars
-        page.evaluate("if (typeof selectScenario === 'function') selectScenario(0);")
+        # Scroll to the Universal CMS Ecosystem grid (WordPress VIP, Discourse, Coral, Forem)
+        page.evaluate("""() => {
+            const grid = document.querySelector('.pubs-grid');
+            if (grid) grid.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }""")
+        time.sleep(6.5)
+
+        # Smooth glide over the 4 platform architecture cards
+        page.evaluate("window.scrollBy({ top: 180, behavior: 'smooth' });")
+        time.sleep(6.5)
+        page.evaluate("window.scrollBy({ top: 220, behavior: 'smooth' });")
+        time.sleep(6.5)
         time.sleep(5.0)
-        page.evaluate("window.scrollTo({ top: 120, behavior: 'smooth' });")
-        time.sleep(6.0)
-        page.evaluate("window.scrollTo({ top: 220, behavior: 'smooth' });")
-        time.sleep(6.0)
-        time.sleep(4.5)
 
         # =============================================================
-        # SCENE 4: IN-COMPOSER PROSOCIAL COACHING (The "Aha!" Moment)
-        # Duration: ~22.0s
+        # SCENE 4: LIVE DISCOURSE STUDIO & IN-COMPOSER COACH (/studio)
+        # Duration: ~24.3s
         # =============================================================
-        print("▶️ Recording Scene 4: In-Composer Prosocial Diff Coaching...")
+        print("▶️ Recording Scene 4: Live Discourse Studio Desk & Git-Style Diff Coach (/studio)...")
+        page.goto("http://localhost:8888/studio", wait_until="domcontentloaded")
+        inject_director_tools(page)
         update_hud(page, STORYBOARD[3]["act_num"], STORYBOARD[3]["hud_title"], STORYBOARD[3]["hud_desc"], STORYBOARD[3]["hud_color"])
         
-        # Select Hostile Harassment -> shows live diff coaching!
+        # Empirical Debate scenario -> 4D bars animate
+        page.evaluate("if (typeof selectScenario === 'function') selectScenario(0);")
+        time.sleep(5.0)
+
+        # Hostile Harassment scenario -> civility drops & inline git diff coach appears!
         page.evaluate("if (typeof selectScenario === 'function') selectScenario(2);")
-        time.sleep(5.5)
+        time.sleep(5.0)
 
         # Scroll directly into the Prosocial In-Composer Coach diff card
         page.evaluate("window.scrollTo({ top: 380, behavior: 'smooth' });")
-        time.sleep(6.0)
+        time.sleep(7.0)
 
-        # Select Technical CLI Syntax (kill -9 $(pgrep nginx)) to prove false-positive prevention
+        # Technical CLI Syntax scenario (kill -9) -> 100% false positive prevention
         page.evaluate("if (typeof selectScenario === 'function') selectScenario(3);")
-        time.sleep(6.0)
-        time.sleep(4.5)
+        time.sleep(7.3)
 
         # =============================================================
         # SCENE 5: 1:1 WIRE DROP-IN PARITY (Zero Code Changes)
         # Duration: ~19.8s
         # =============================================================
-        print("▶️ Recording Scene 5: 100% Bitwise Perspective Wire Parity...")
+        print("▶️ Recording Scene 5: 1:1 Perspective JSON Wire Schema Inspector...")
         update_hud(page, STORYBOARD[4]["act_num"], STORYBOARD[4]["hud_title"], STORYBOARD[4]["hud_desc"], STORYBOARD[4]["hud_color"])
         
-        # Scroll to perspective wire inspector & ecosystem cards
-        page.evaluate("window.scrollTo({ top: 680, behavior: 'smooth' });")
-        time.sleep(6.5)
-        page.evaluate("window.scrollTo({ top: 920, behavior: 'smooth' });")
+        # Scroll to perspective wire parity inspector
+        page.evaluate("window.scrollTo({ top: 760, behavior: 'smooth' });")
         time.sleep(7.0)
-        time.sleep(6.3)
+        page.evaluate("window.scrollTo({ top: 960, behavior: 'smooth' });")
+        time.sleep(7.0)
+        time.sleep(5.8)
 
         # =============================================================
         # SCENE 6: RIGOROUS EMPIRICAL EVALUATION (/benchmarks)
         # Duration: ~23.9s
         # =============================================================
-        print("▶️ Recording Scene 6: Empirical Whitepaper & SVG Visualizations (/benchmarks)...")
-        page.goto("http://localhost:8888/benchmarks", wait_until="networkidle")
+        print("▶️ Recording Scene 6: Empirical Research Whitepaper & SVG Curves (/benchmarks)...")
+        page.goto("http://localhost:8888/benchmarks", wait_until="domcontentloaded")
         inject_director_tools(page)
         update_hud(page, STORYBOARD[5]["act_num"], STORYBOARD[5]["hud_title"], STORYBOARD[5]["hud_desc"], STORYBOARD[5]["hud_color"])
         
         # Focus on Figure 1: ROC-AUC 99.2% Curve
-        page.evaluate("window.scrollTo({ top: 380, behavior: 'smooth' });")
+        page.evaluate("window.scrollTo({ top: 400, behavior: 'smooth' });")
         time.sleep(6.0)
 
-        # Scroll to Figure 2: False Positive Reduction
-        page.evaluate("window.scrollTo({ top: 920, behavior: 'smooth' });")
+        # Scroll to Figure 2: False Positive Reduction by Domain
+        page.evaluate("window.scrollTo({ top: 960, behavior: 'smooth' });")
         time.sleep(6.0)
 
         # Click interactive syntax chip in benchmark sandbox
@@ -448,27 +485,26 @@ def choreograph_synchronized_video(video_dir: Path):
         time.sleep(4.0)
 
         # Scroll to Figure 3: 1.76ms CPU Latency Distribution
-        page.evaluate("window.scrollTo({ top: 1480, behavior: 'smooth' });")
-        time.sleep(6.0)
-        time.sleep(1.9)
+        page.evaluate("window.scrollTo({ top: 1520, behavior: 'smooth' });")
+        time.sleep(7.9)
 
         # =============================================================
-        # SCENE 7: AUTONOMOUS PITCH DECK & SOVEREIGN FUTURE (/deck)
+        # SCENE 7: AUTONOMOUS PITCH DECK & ENTERPRISE READINESS (/deck)
         # Duration: ~17.9s
         # =============================================================
         print("▶️ Recording Scene 7: Autonomous Master Pitch Deck (/deck)...")
-        page.goto("http://localhost:8888/deck", wait_until="networkidle")
+        page.goto("http://localhost:8888/deck", wait_until="domcontentloaded")
         inject_director_tools(page)
         update_hud(page, STORYBOARD[6]["act_num"], STORYBOARD[6]["hud_title"], STORYBOARD[6]["hud_desc"], STORYBOARD[6]["hud_color"])
         
         # Slide 1: Drop-In Infrastructure
         time.sleep(4.0)
 
-        # Advance to Slide 4: Quantized CPU Engine vs Cloud LLM Inflation
+        # Fluid transition to Slide 4: Quantized CPU Engine vs Cloud LLM Inflation
         page.evaluate("if (typeof goToSlide === 'function') goToSlide(3); else if (typeof nextSlide === 'function') { nextSlide(); nextSlide(); nextSlide(); }")
         time.sleep(5.0)
 
-        # Advance to Slide 12: Activate 30-Day Sandbox
+        # Fluid transition to Slide 12: Activate 30-Day Sandbox
         page.evaluate("if (typeof goToSlide === 'function') goToSlide(11); else if (typeof prevSlide === 'function') prevSlide();")
         time.sleep(5.0)
 
@@ -505,11 +541,11 @@ def multiplex_broadcast_video(recorded_webm: Path, master_audio: Path, target_mp
     ]
     subprocess.run(cmd, check=True)
 
-    # Generate thumbnail poster frame at 14s
+    # Generate thumbnail poster frame at 10s (centered on MANDATORY INDUSTRY MIGRATION banner)
     poster_jpg = target_mp4.parent / "demo_video_poster.jpg"
     subprocess.run([
         "/opt/homebrew/bin/ffmpeg", "-y",
-        "-ss", "00:00:16",
+        "-ss", "00:00:10",
         "-i", str(target_mp4),
         "-frames:v", "1",
         "-q:v", "2",
@@ -520,7 +556,6 @@ def multiplex_broadcast_video(recorded_webm: Path, master_audio: Path, target_mp
     print(f"✨ Master Video Created: {target_mp4} ({file_size_mb:.2f} MB)")
     print(f"🖼️ Poster Thumbnail Created: {poster_jpg}")
 
-    # Mirror to Google Drive workspace directory
     try:
         GDRIVE_DIR.mkdir(parents=True, exist_ok=True)
         gdrive_target = GDRIVE_DIR / target_mp4.name
@@ -535,14 +570,14 @@ def multiplex_broadcast_video(recorded_webm: Path, master_audio: Path, target_mp
 
 def main():
     print("=" * 70)
-    print("🎥 NORMATIVE INTELLIGENCE — STORYBOARD DEMO WALKTHROUGH PRODUCER")
-    print("   Deep Male Narration • Zero Side Margins • Full Screen 1080p")
+    print("🎥 NORMATIVE INTELLIGENCE — MASTER STORYBOARD DEMO PRODUCER")
+    print("   Visual-to-Audio Sync • Mandatory Migration Banner • Deep Male Voice")
     print("=" * 70)
 
-    # Step 1: Synthesize deep, subtle male voiceover
+    # Step 1: Synthesize narration
     master_audio, audio_duration = synthesize_male_narration()
 
-    # Step 2: Record synchronized browser choreography with Director HUD & Zoom
+    # Step 2: Record synchronized browser choreography
     playwright_video_dir = TEMP_DIR / "playwright_recordings"
     recorded_webm = choreograph_synchronized_video(playwright_video_dir)
 
@@ -551,7 +586,7 @@ def main():
     multiplex_broadcast_video(recorded_webm, master_audio, final_mp4)
 
     print("\n" + "=" * 70)
-    print("🎉 HIGH-IMPACT DEMO VIDEO PRODUCTION COMPLETE")
+    print("🎉 ALIGNED DEMO VIDEO PRODUCTION COMPLETE")
     print(f"Output File: {final_mp4}")
     print("=" * 70)
 

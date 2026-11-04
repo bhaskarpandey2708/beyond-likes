@@ -1,0 +1,80 @@
+[
+  {
+    "id": "visit_1793766824941",
+    "timestamp": "2026-11-04T04:33:44.942709Z",
+    "ip": "127.0.0.1",
+    "user_agent": "curl/8.7.1",
+    "page": "/",
+    "referrer": "",
+    "country": "United States",
+    "country_code": "US",
+    "time_spent": 0,
+    "action": "test",
+    "interests": []
+  },
+  {
+    "id": "visit_1793767695589",
+    "timestamp": "2026-11-04T04:48:15.589981Z",
+    "ip": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+    "page": "/",
+    "referrer": "direct",
+    "country": "India",
+    "country_code": "IN",
+    "time_spent": 1,
+    "action": "initial_visit",
+    "interests": []
+  },
+  {
+    "id": "visit_1793767845791",
+    "timestamp": "2026-11-04T04:50:45.791743Z",
+    "ip": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+    "page": "/",
+    "referrer": "direct",
+    "country": "India",
+    "country_code": "IN",
+    "time_spent": 1,
+    "action": "initial_visit",
+    "interests": []
+  },
+  {
+    "id": "visit_1793767916106",
+    "timestamp": "2026-11-04T04:51:56.106800Z",
+    "ip": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+    "page": "/studio",
+    "referrer": "direct",
+    "country": "India",
+    "country_code": "IN",
+    "time_spent": 1,
+    "action": "initial_visit",
+    "interests": []
+  },
+  {
+    "id": "visit_1793767960787",
+    "timestamp": "2026-11-04T04:52:40.788097Z",
+    "ip": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+    "page": "/benchmarks",
+    "referrer": "direct",
+    "country": "India",
+    "country_code": "IN",
+    "time_spent": 1,
+    "action": "initial_visit",
+    "interests": []
+  },
+  {
+    "id": "visit_1793767985750",
+    "timestamp": "2026-11-04T04:53:05.750374Z",
+    "ip": "127.0.0.1",
+    "user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/148.0.0.0 Safari/537.36",
+    "page": "/deck",
+    "referrer": "direct",
+    "country": "India",
+    "country_code": "IN",
+    "time_spent": 1,
+    "action": "initial_visit",
+    "interests": []
+  }
+]
